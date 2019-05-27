@@ -1,5 +1,0 @@
-class RenderData
-{
-    SourceElement:string ="";
-    
-}
