@@ -88,7 +88,7 @@ function selectConversationalObject(event:Event)
     if (event.currentTarget)
     {        
         let element:HTMLElement = <HTMLElement>event.currentTarget;
-        let flowId:string = <string>element.getAttribute("flowId");
+        let flowId:string = <string>element.getAttribute(Attributes.FlowId);
         let flowName:string = App.GetApp().Instance.GetFlowName(flowId);
         App.GetApp().Instance.SelectConversationalObject(flowName);
     }

@@ -1,4 +1,0 @@
-enum ComponentElements
-{
-    FlowElement
-}

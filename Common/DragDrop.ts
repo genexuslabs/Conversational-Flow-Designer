@@ -9,29 +9,29 @@ function allowDrop(ev : DragEvent) {
         {                
             let target:HTMLElement = <HTMLElement>ev.target;;
             if (target != sourceElement){
-                if (target.getAttribute("elementType") == "flow")
+                if (target.getAttribute(Attributes.ElementType) == AttributeValues.Flow)
                 {
                     if (target.nextElementSibling)
                     {
-                        target.nextElementSibling.className = "DisplayMove";
+                        target.nextElementSibling.className = StyleClasses.DisplayMove;
                     }
                     if (target.previousElementSibling)
                     {
-                        target.previousElementSibling.className = "DisplayMove";
+                        target.previousElementSibling.className = StyleClasses.DisplayMove;
                     }
 
                     App.GetApp().Instance.Flows.forEach(function(flow){
-                        if (flow.Id != target.getAttribute("flowId")){
-                            let up:HTMLElement= <HTMLElement>document.getElementById(`GXUp_${flow.Id}`);
-                            up.className = "HiddenMove";
+                        if (flow.Id != target.getAttribute(Attributes.FlowId)){
+                            let up:HTMLElement= <HTMLElement>document.getElementById(`${DragDropHelpers.UpPrefix}${flow.Id}`);
+                            up.className = StyleClasses.HiddenMove;
 
-                            let down:HTMLElement= <HTMLElement>document.getElementById(`GXDown_${flow.Id}`);
-                            down.className = "HiddenMove";
+                            let down:HTMLElement= <HTMLElement>document.getElementById(`${DragDropHelpers.DownPrefix}${flow.Id}`);
+                            down.className = StyleClasses.HiddenMove;
                         }
                     });
                 }
                 
-                ev.dataTransfer.dropEffect = "none";
+                ev.dataTransfer.dropEffect = DragDropHelpers.NoneEffect;
             }            
         }        
     }        
@@ -44,7 +44,7 @@ function drag(ev : DragEvent)
         let target:HTMLElement = <HTMLElement>ev.target;
         sourceElement = target;
         target.style.opacity = "1.0";
-        let flowId:string = <string> target.getAttribute("flowId");
+        let flowId:string = <string> target.getAttribute(Attributes.FlowId);
         ev.dataTransfer.setData("text", flowId);
         dragStartPosition = ev.clientY;
     }
@@ -59,11 +59,11 @@ function drop(ev : DragEvent)
         let element:HTMLElement = <HTMLElement>document.getElementById(sourceId);
         let target:HTMLElement = <HTMLElement>ev.target
 
-        let flowId:string = <string>target.getAttribute("flowId");
+        let flowId:string = <string>target.getAttribute(Attributes.FlowId);
         let targetElement = <HTMLElement>document.getElementById(flowId);        
 
         let moveType:MoveType = MoveType.Up;
-        if (target.getAttribute("moveType") == "Down"){
+        if (target.getAttribute(Attributes.MoveType) == DragDropHelpers.MoveDown){
             moveType = MoveType.Down;
             targetElement.after(element);
         }            
@@ -73,12 +73,10 @@ function drop(ev : DragEvent)
         let sourceName:string = App.GetApp().Instance.GetFlowName(element.id);
         let targetName:string = App.GetApp().Instance.GetFlowName(flowId);  
         
-        let up:HTMLElement= <HTMLElement>document.getElementById(`GXUp_${flowId}`);
-        let down:HTMLElement= <HTMLElement>document.getElementById(`GXDown_${flowId}`);
-        up.className = down.className = "HiddenMove";        
+        let up:HTMLElement= <HTMLElement>document.getElementById(`${DragDropHelpers.UpPrefix}${flowId}`);
+        let down:HTMLElement= <HTMLElement>document.getElementById(`${DragDropHelpers.DownPrefix}${flowId}`);
+        up.className = down.className = StyleClasses.HiddenMove;        
         App.GetApp().Instance.MoveFlows(sourceName, targetName, moveType);
-
-        console.warn(`Moving ${sourceName}. MoveType: ${moveType.toString()}`)
     }  
 }
 
@@ -92,12 +90,12 @@ function setMoveActive(ev: DragEvent)
     ev.preventDefault();
 
     if (ev.dataTransfer)
-            ev.dataTransfer.dropEffect = "move";
+            ev.dataTransfer.dropEffect = DragDropHelpers.MoveEffect;
 
     if (ev.target)
     {
         let target:HTMLElement = <HTMLElement>ev.target;
-        target.className = "MoveElementActive";        
+        target.className = StyleClasses.MoveElementActive;        
     }
 }
 
@@ -108,25 +106,23 @@ function unSetMoveActive(ev: DragEvent)
     if (ev.target)
     {
         let target:HTMLElement = <HTMLElement>ev.target;
-        target.className = "MoveElement";        
+        target.className = StyleClasses.MoveElement;
     }
 }
 
 function hideMoveOptions(ev: DragEvent)
 {
     ev.preventDefault();
-
-
 }
 
 window.ondragend = function(ev:DragEvent)
 {
     App.GetApp().Instance.Flows.forEach(function(flow){
-        let up:HTMLElement= <HTMLElement>document.getElementById(`GXUp_${flow.Id}`);
-        up.className = "HiddenMove";
+        let up:HTMLElement= <HTMLElement>document.getElementById(`${DragDropHelpers.UpPrefix}${flow.Id}`);
+        up.className = StyleClasses.HiddenMove;
 
-        let down:HTMLElement= <HTMLElement>document.getElementById(`GXDown_${flow.Id}`);
-        down.className = "HiddenMove";
+        let down:HTMLElement= <HTMLElement>document.getElementById(`${DragDropHelpers.DownPrefix}${flow.Id}`);
+        down.className = StyleClasses.HiddenMove;
     });
 }
 

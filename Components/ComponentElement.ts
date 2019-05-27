@@ -12,3 +12,8 @@ class ComponentElement
         return this.Name.replace(" ", "").replace(" ", "");
     }
 }
+
+enum ComponentElements
+{
+    FlowElement
+}

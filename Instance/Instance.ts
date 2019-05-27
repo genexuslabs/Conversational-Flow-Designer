@@ -73,13 +73,11 @@ class Instance
     }
 
     public ModifyFlowName(flowName: string, value: string) {
-        console.log(`${flowName} to ${value}`);
         this.Flows.forEach(function(element)
         {            
             if (flowName == element.Name)
             {        
                 element.Name = value;
-                console.warn(`${flowName} warning test`);
                 if (window.external.ModifyFlowName)
                 {
                     window.external.ModifyFlowName(flowName, value);
