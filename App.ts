@@ -2,7 +2,7 @@ class App
 {    
     public Instance:Instance;
     private static m_App:App;
-
+    //Dummy commit
     public static GetApp():App
     {
         if (this.m_App == null)
