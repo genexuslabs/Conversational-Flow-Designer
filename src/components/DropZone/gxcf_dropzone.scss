@@ -1,0 +1,26 @@
+.HideZone
+{
+    display: none;
+}
+.ShowZone
+{
+    display: block;
+    text-align: center;
+    color:  #007ec1;
+    width: 8%;
+    margin:auto;
+    padding-left: 100px;
+    padding-right: 100px;
+}
+.ActiveDropZone
+{
+    color: white;
+    background-color: #007ec1;
+    padding-left: 100px;
+    padding-right: 100px;
+    border-radius: 14px; 
+    display: block;
+    text-align: center;   
+    width: 8%; 
+    margin:auto;   
+}

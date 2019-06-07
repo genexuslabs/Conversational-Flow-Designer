@@ -1,0 +1,13 @@
+{
+  "name": "GXCF_Library",
+  "short_name": "GXCF_Library",
+  "start_url": "/",
+  "display": "standalone",
+  "icons": [{
+    "src": "assets/icon/icon.ico",
+    "sizes": "64x64",
+    "type": "image/png"
+  }],
+  "background_color": "#16161d",
+  "theme_color": "#16161d"
+}
