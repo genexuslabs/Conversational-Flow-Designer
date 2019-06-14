@@ -82,7 +82,7 @@ private addFlow =
     this.Initialize();    
 
     return (
-      <div>
+      <div class="MainTable">
         <div id={Controls.FlowsContainer}>
           {this.RenderizeFlows()}
         </div>      
