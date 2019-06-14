@@ -42,6 +42,7 @@ export namespace Components {
     'summaryid': string;
     'summaryvalue': string;
   }
+  interface GxcfWelcome {}
 }
 
 declare global {
@@ -100,6 +101,12 @@ declare global {
     prototype: HTMLGxcfSummarytitleElement;
     new (): HTMLGxcfSummarytitleElement;
   };
+
+  interface HTMLGxcfWelcomeElement extends Components.GxcfWelcome, HTMLStencilElement {}
+  var HTMLGxcfWelcomeElement: {
+    prototype: HTMLGxcfWelcomeElement;
+    new (): HTMLGxcfWelcomeElement;
+  };
   interface HTMLElementTagNameMap {
     'gxcf-conversationaldesigner': HTMLGxcfConversationaldesignerElement;
     'gxcf-downarrow': HTMLGxcfDownarrowElement;
@@ -110,6 +117,7 @@ declare global {
     'gxcf-select': HTMLGxcfSelectElement;
     'gxcf-summarydescription': HTMLGxcfSummarydescriptionElement;
     'gxcf-summarytitle': HTMLGxcfSummarytitleElement;
+    'gxcf-welcome': HTMLGxcfWelcomeElement;
   }
 }
 
@@ -153,6 +161,9 @@ declare namespace LocalJSX {
     'summaryid'?: string;
     'summaryvalue'?: string;
   }
+  interface GxcfWelcome extends JSXBase.HTMLAttributes<HTMLGxcfWelcomeElement> {
+    'onOpenEditor'?: (event: CustomEvent<any>) => void;
+  }
 
   interface IntrinsicElements {
     'gxcf-conversationaldesigner': GxcfConversationaldesigner;
@@ -164,6 +175,7 @@ declare namespace LocalJSX {
     'gxcf-select': GxcfSelect;
     'gxcf-summarydescription': GxcfSummarydescription;
     'gxcf-summarytitle': GxcfSummarytitle;
+    'gxcf-welcome': GxcfWelcome;
   }
 }
 
