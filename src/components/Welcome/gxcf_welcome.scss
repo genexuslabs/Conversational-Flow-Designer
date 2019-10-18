@@ -1,5 +1,4 @@
 .Welcome {
-  width: 40%;
   margin-top: 10%;
   margin-left: auto;
   margin-right: auto;
@@ -18,6 +17,9 @@
     text-align: left;
     font-weight: 400;
     color: $text-color;
+    width:40%;
+    margin-left:auto;
+    margin-right:auto;
 }
   
 a {
