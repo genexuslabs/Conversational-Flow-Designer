@@ -3,9 +3,40 @@
     font-size: 11px;
     color: $action-font-color;
     text-decoration: underline;
+    text-align: right;
 }
 
 .Hint:hover
 {
     cursor: help;
+}
+
+.ShowHint
+{
+    background-color: $element-background-color;
+    border-style: solid;
+    border-radius: 5px;
+    border-width: 1px;
+    padding: 0px 5px 0px 5px;
+    float: right;
+    z-index: -1;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;
+}
+
+.HintTitle
+{
+    color: $title-color;
+    font-size: 14px;
+}
+
+.HintDescription
+{
+    color: $action-font-color;
+    font-size: 12px;
+}
+
+.CloseHint
+{
+    float:right;
 }

@@ -3,13 +3,18 @@
     background-color: $element-background-color;
     border-radius: 4px;
     display:block;
-    //margin: 20px 0px 20px 0px;
-    padding: 12px 22px 12px 22px;
-    margin:auto;
+    margin: 20px 0px 20px 0px;
+    padding: 12px 0px 12px 0px;
     margin-top: 20px;
     margin-bottom: 20px;
-    width: 91%;
     height: 5%;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s
+}
+
+.FullFlowContent
+{
+    margin: 0px 22px 0px 22px;
 }
 
 .Separator

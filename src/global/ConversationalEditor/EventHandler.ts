@@ -46,11 +46,18 @@ export class EventHandler
 
     public static EditTrigger(index:number, value:string, flow:FlowElement):void
     {
-        console.log("Edit index: "+index);
-        console.log("Edit value: "+value);
-        console.log("Flow value: "+flow.Name);
         flow.SetTrigger(index, value);
+        this.SetTriggers(flow);           
+    }
 
+    public static DeleteTrigger(index:number, flow:FlowElement):void
+    {
+        flow.TriggerMessages.splice(index, 1);
+        this.SetTriggers(flow);           
+    }
+
+    private static SetTriggers(flow:FlowElement)
+    {
         if (window.external.SetTriggers)
         {
             let messages:string = "";
@@ -60,7 +67,7 @@ export class EventHandler
             });
             console.log("Call external");
             window.external.SetTriggers(flow.Name, messages);
-        }            
+        }  
     }
 
     public static OnFlowDragStart:Function = (customEvent:CustomEvent)=>

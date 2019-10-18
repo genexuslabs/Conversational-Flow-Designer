@@ -48,9 +48,6 @@ export namespace Components {
     'selectcaption': string;
     'selectid': string;
   }
-  interface GxcfShowhint {
-    'hintId': string;
-  }
   interface GxcfSummarydescription {
     'descriptionid': string;
     'descriptionvalue': string;
@@ -128,12 +125,6 @@ declare global {
     new (): HTMLGxcfSelectElement;
   };
 
-  interface HTMLGxcfShowhintElement extends Components.GxcfShowhint, HTMLStencilElement {}
-  const HTMLGxcfShowhintElement: {
-    prototype: HTMLGxcfShowhintElement;
-    new (): HTMLGxcfShowhintElement;
-  };
-
   interface HTMLGxcfSummarydescriptionElement extends Components.GxcfSummarydescription, HTMLStencilElement {}
   const HTMLGxcfSummarydescriptionElement: {
     prototype: HTMLGxcfSummarydescriptionElement;
@@ -168,7 +159,6 @@ declare global {
     'gxcf-hint': HTMLGxcfHintElement;
     'gxcf-pluselement': HTMLGxcfPluselementElement;
     'gxcf-select': HTMLGxcfSelectElement;
-    'gxcf-showhint': HTMLGxcfShowhintElement;
     'gxcf-summarydescription': HTMLGxcfSummarydescriptionElement;
     'gxcf-summarytitle': HTMLGxcfSummarytitleElement;
     'gxcf-uparrow': HTMLGxcfUparrowElement;
@@ -218,16 +208,13 @@ declare namespace LocalJSX {
   interface GxcfHint {
     'hintDescription'?: string;
     'hintId'?: string;
+    'onHideHint'?: (event: CustomEvent<any>) => void;
     'onShowHint'?: (event: CustomEvent<any>) => void;
   }
   interface GxcfPluselement {}
   interface GxcfSelect {
     'selectcaption'?: string;
     'selectid'?: string;
-  }
-  interface GxcfShowhint {
-    'hintId'?: string;
-    'onShowHint'?: (event: CustomEvent<any>) => void;
   }
   interface GxcfSummarydescription {
     'descriptionid'?: string;
@@ -257,7 +244,6 @@ declare namespace LocalJSX {
     'gxcf-hint': GxcfHint;
     'gxcf-pluselement': GxcfPluselement;
     'gxcf-select': GxcfSelect;
-    'gxcf-showhint': GxcfShowhint;
     'gxcf-summarydescription': GxcfSummarydescription;
     'gxcf-summarytitle': GxcfSummarytitle;
     'gxcf-uparrow': GxcfUparrow;
@@ -281,7 +267,6 @@ declare module "@stencil/core" {
       'gxcf-hint': LocalJSX.GxcfHint & JSXBase.HTMLAttributes<HTMLGxcfHintElement>;
       'gxcf-pluselement': LocalJSX.GxcfPluselement & JSXBase.HTMLAttributes<HTMLGxcfPluselementElement>;
       'gxcf-select': LocalJSX.GxcfSelect & JSXBase.HTMLAttributes<HTMLGxcfSelectElement>;
-      'gxcf-showhint': LocalJSX.GxcfShowhint & JSXBase.HTMLAttributes<HTMLGxcfShowhintElement>;
       'gxcf-summarydescription': LocalJSX.GxcfSummarydescription & JSXBase.HTMLAttributes<HTMLGxcfSummarydescriptionElement>;
       'gxcf-summarytitle': LocalJSX.GxcfSummarytitle & JSXBase.HTMLAttributes<HTMLGxcfSummarytitleElement>;
       'gxcf-uparrow': LocalJSX.GxcfUparrow & JSXBase.HTMLAttributes<HTMLGxcfUparrowElement>;

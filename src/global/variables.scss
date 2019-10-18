@@ -10,3 +10,12 @@ $trash-image: url("/assets/images/trash.png");
 $small-icon-size: 16px;
 $separator-line-color: #979797;
 
+@-webkit-keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+  
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity:1 ;}
+}

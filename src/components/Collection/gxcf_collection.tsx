@@ -26,6 +26,9 @@ export class GXCF_Collection {
     @Event() deleteItem:EventEmitter;
     DeleteItem(event)
     {
+        let element:HTMLDivElement = event.srcElement as HTMLDivElement;
+        this.setCurrentIndex(element);
+        this.collection.splice(this.currentItemIndex, 1);
         this.deleteItem.emit(event);
     }
 
@@ -34,11 +37,16 @@ export class GXCF_Collection {
     {          
         console.log(event.srcElement)  
         let element:HTMLInputElement = event.srcElement as HTMLInputElement;
-        this.currentItemIndex = parseInt(element.getAttribute("data-item-index"));
+        this.setCurrentIndex(element);
         this.currentItemValue = element.value;
-        console.log("TIndex: "+this.currentItemIndex);
         console.log("TValue: "+this.currentItemValue);  
         this.editItem.emit(event);               
+    }
+
+    setCurrentIndex(element:any)
+    {
+        this.currentItemIndex = parseInt(element.getAttribute("data-item-index"));
+        console.log("TIndex: "+this.currentItemIndex);
     }
 
     private AddItemElement = 
@@ -56,7 +64,7 @@ export class GXCF_Collection {
             renderedItems.push(            
                 <div class="Item">
                     <input data-item-index={index} class="ItemInput" type="text" value={items[index]} onChange={ (event) => this.EditItem(event) }></input>
-                    <div class="Trash"></div>
+                    <div data-item-index={index} class="Trash" onClick={ (event) => this.DeleteItem(event)}></div>
                 </div>
             );
         }
