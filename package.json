@@ -17,12 +17,13 @@
     "test.watch": "stencil test --spec --e2e --watchAll"
   },
   "dependencies": {
-    "@stencil/core": "one",
-    "@stencil/router": "one"
+    "@stencil/core": "^1.7.2",
+    "@stencil/router": "^1.0.1",
+    "chokidar": "^3.2.2"
   },
   "devDependencies": {
-    "@stencil/sass": "^0.2.1",
-    "@types/jest": "23.3.14",
+    "@stencil/sass": "^1.1.0",
+    "@types/jest": "24.0.18",
     "workbox-build": "4.3.1"
   },
   "repository": {
@@ -37,9 +38,9 @@
   "homepage": "https://github.com/genexuslabs/Conversational-Flow-Designer#readme",
   "jest": {
     "transform": {
-      "^.+\\.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
+      "^.+//.(ts|tsx)$": "<rootDir>/node_modules/@stencil/core/testing/jest.preprocessor.js"
     },
-    "testRegex": "(/__tests__/.*|\\.(test|spec))\\.(tsx?|jsx?)$",
+    "testRegex": "(/__tests__/.*|//.(test|spec))//.(tsx?|jsx?)$",
     "moduleFileExtensions": [
       "ts",
       "tsx",

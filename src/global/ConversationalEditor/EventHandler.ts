@@ -1,46 +1,67 @@
 import { App } from "./App.js";
 import { FlowElement } from "./instanceDefinition/Elements/FlowElement.js";
-import { GXCF_DropZone } from "../DropZone/gxcf_dropzone.js";
+import { GXCF_DropZone } from "../../components/DropZone/gxcf_dropzone.js";
 import { DragDropHelpers, MoveType, Controls, ComponentsAttributes } from "./helpers/Helpers.js";
 
 export var sourceId:string="";
 
 export class EventHandler
 {
-    public static SummaryFlowExpand: Function = (customEvent:CustomEvent)=>
-    {
-        let event:MouseEvent = <MouseEvent>EventHandler.GetEvent(customEvent);
-        let eventElement:HTMLElement = EventHandler.GetTargetElement(event);
-        if (eventElement)
-            console.log("Id: "+eventElement.id);        
-    }
-
     private static GetFlowId(element:HTMLElement):string
     {
-        while (element.parentElement != null && !element.hasAttribute(ComponentsAttributes.FlowId))
+        let moveNext:boolean = true;
+        while (element.parentElement != null && moveNext)
+        {
             element = element.parentElement;
-        
+            if (element.hasAttribute(ComponentsAttributes.FlowId))
+                moveNext = false;
+        }
+            
         if (element.hasAttribute(ComponentsAttributes.FlowId))
             return element.getAttribute(ComponentsAttributes.FlowId);
         
         return "";
     }
 
-    public static SelectConversationalObject:Function = (customEvent:CustomEvent)=>
+    public static async SelectConversationalObject(customEvent:CustomEvent):Promise<FlowElement>
     {
         let event:MouseEvent = <MouseEvent>EventHandler.GetEvent(customEvent);
         let eventElement:HTMLElement = EventHandler.GetTargetElement(event);
         if (eventElement)
             console.log("Select conversational object for: "+eventElement.id);  
         
+        let flow:FlowElement = null;
+
         if (window.external.SelectConversationalObject)
         {            
             let flowId:string = EventHandler.GetFlowId(eventElement);
-            let flowName:string = App.GetApp().Instance.GetFlowName(flowId);
-            console.log("Flow: "+flowName);
-            window.external.SelectConversationalObject(flowName);          
+            let flowName:string = App.GetApp().Instance.GetFlowName(flowId);            
+            await window.external.SelectConversationalObject(flowName).then(newCO => 
+            {
+                flow = App.GetApp().Instance.SetConversationalObjectForFlow(flowName, newCO);
+            });                      
         }
+        return flow;
     }    
+
+    public static EditTrigger(index:number, value:string, flow:FlowElement):void
+    {
+        console.log("Edit index: "+index);
+        console.log("Edit value: "+value);
+        console.log("Flow value: "+flow.Name);
+        flow.SetTrigger(index, value);
+
+        if (window.external.SetTriggers)
+        {
+            let messages:string = "";
+            console.log(flow.TriggerMessages)
+            flow.TriggerMessages.forEach(function(msg){
+                messages += msg+";";
+            });
+            console.log("Call external");
+            window.external.SetTriggers(flow.Name, messages);
+        }            
+    }
 
     public static OnFlowDragStart:Function = (customEvent:CustomEvent)=>
     {
@@ -211,12 +232,16 @@ export class EventHandler
         {
             let element:HTMLInputElement = <HTMLInputElement>event.currentTarget;
             let parent:HTMLElement = element;
-            let flowId:string = EventHandler.GetFlowIdforSummaryElements(parent);
-    
+            let flowId:string = EventHandler.GetFlowId(parent);
+            
             let flowName:string = App.GetApp().Instance.GetFlowName(flowId);
             if (element.value)
             {
                 App.GetApp().Instance.ModifyFlowName(flowName, element.value);
+                if (window.external.ModifyFlowName)
+                {
+                    window.external.ModifyFlowName(flowName, element.value);
+                }
             }        
         }       
     }
@@ -227,12 +252,18 @@ export class EventHandler
         {
             let element:HTMLInputElement = <HTMLInputElement>event.currentTarget;
             let parent:HTMLElement = element;
-            let flowId:string = EventHandler.GetFlowIdforSummaryElements(parent);
+            let flowId:string = EventHandler.GetFlowId(parent);
     
             let flowName:string = App.GetApp().Instance.GetFlowName(flowId);
             if (element.value)
             {
                 App.GetApp().Instance.ModifyFlowTriggerSummary(flowName, element.value);
+                if (window.external.ModifyFirstTriggerMessage)
+                {
+                    console.log("FlowName: "+flowName);
+                    console.log("Value: "+element.value);
+                    window.external.ModifyFirstTriggerMessage(flowName, element.value);
+                }
             }        
         }       
     }

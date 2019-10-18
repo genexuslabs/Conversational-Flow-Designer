@@ -1,8 +1,9 @@
 import { MoveType } from "../helpers/Helpers.js";
 import { FlowElement } from "./Elements/FlowElement.js";
+import { App } from "../App.js";
 
 export class Instance
-{                    
+{                      
     public Flows:FlowElement[] = [];
 
     //Initialize
@@ -12,8 +13,29 @@ export class Instance
     }
 
     private Initialize():void
-    {
-        this.LoadDummy();        
+    {        
+        if (window.external.GXIDE){
+            if (window.external.GetInstance)
+            {
+                window.external.GetInstance().then(result => {
+                    console.log("Promise Result: "+result)
+                    let jsonInstance = JSON.parse(result);
+                    this.InitializeInstance(jsonInstance);
+                });
+                //console.log("Test: "+test);
+                //console.log(test);
+                
+            }
+            /*let jsonInstance:string = window.external.InitializeInstance();
+            console.log("Instance client side: ");
+            console.log(jsonInstance)*/
+           // this.InitializeInstance(jsonInstance);
+           
+        }
+        else
+        {
+            this.LoadDummy();        
+        }            
     }
 
     private LoadDummy():void{
@@ -31,22 +53,19 @@ export class Instance
         flow3.TriggerMessages[0] = "testingC"
         flow3.ConversationalObject = "TestCTransaction"
         this.Flows[2] = flow3;
-
-        //this.RenderizeFlows();
         console.log(this.Flows);
     }
 
-    public InitializeInstance(instance: JSON) {
+    public InitializeInstance(jsonInstance:JSON) {
         let index:number = 0;
-        console.log(JSON.stringify(instance));
-        instance.Flows.forEach(function(initializeFlow){                
-            let flow:FlowElement = new FlowElement(initializeFlow.Name)               
-            flow.ConversationalObject = initializeFlow.ConversationalObjectName;          
+        jsonInstance.Flows.forEach(function(initializeFlow){ 
+            let flow:FlowElement = new FlowElement(initializeFlow.Name)   
+            flow.ConversationalObject = initializeFlow.ConversationalObjectName;  
             flow.TriggerMessages = initializeFlow.Triggers;                        
-            //App.GetApp().Instance.Flows[index] = flow;                        
-            console.log(index);
+            App.GetApp().Instance.AddFlow(flow); 
             index++;            
         });
+        console.log("Instance flows: "+App.GetApp().Instance.Flows.length.toString());
     } 
 
     //Instance behavior                   
@@ -65,15 +84,30 @@ export class Instance
 
     public GetFlowName(id:string):string
     {
+        console.log("Search Id: "+id);
         let elementName:string = "";
         this.Flows.forEach(function(element)
-        {            
+        {    
+            console.log("FlowsIds: "+element.Id)        
             if (id == element.Id)
             {      
                 elementName = element.Name;
             }
         });
         return elementName;
+    }
+
+    public GetFlowById(id:string):FlowElement
+    {
+        this.Flows.forEach(function(element)
+        {    
+            console.log("FlowsIds: "+element.Id)        
+            if (id == element.Id)
+            {      
+                return element;
+            }
+        });
+        return null;
     }
 
     public ModifyFlowName(flowName: string, value: string) {
@@ -159,22 +193,27 @@ export class Instance
         }
     } 
 
-    public SetConversationalObject(flowName: string, conversationalObject: string) {
+    public SetConversationalObjectForFlow(flowName: string, conversationalObject: string):FlowElement {
+        console.log("Set: "+conversationalObject);
+        console.log("Name: "+flowName)
+        let retElement:FlowElement;
         this.Flows.forEach(function(element){
-            if (element.Name == flowName){
+            if (element.Name == flowName){                
                 element.ConversationalObject = conversationalObject;
-              //  FlowRender.RefreshConversationalObject(element);
+                console.log("Saved: "+element.ConversationalObject);
+                retElement = element;
             }
         });
+        return retElement;
     }  
 
     public AddFlow(flow: FlowElement):void
     {
         this.Flows[this.Flows.length] = flow;
-    }  
+    } 
 }
 
-export interface JSON{
+export interface JSON  {
     Provider:string;
     Flows:JSON[];
     Name:string;

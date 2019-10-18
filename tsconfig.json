@@ -15,7 +15,7 @@
       "module": "esnext",
       "resolveJsonModule": true,
       "target": "es2017",
-      "noUnusedLocals": true,
+      "noUnusedLocals": false,
       "noUnusedParameters": true,
       "jsx": "react",
       "jsxFactory": "h"

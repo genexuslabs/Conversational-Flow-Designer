@@ -2,8 +2,11 @@
 {
     font-style: italic;
     font-size: 18px;
+    font-weight: 400;
+    text-align: left;
     clear: both;
-    background-color: whitesmoke;
+    background-color: $element-background-color;
     border:none;
     display:block;
+    width: 59%;
 }

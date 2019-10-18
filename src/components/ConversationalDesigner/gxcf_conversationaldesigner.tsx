@@ -1,8 +1,8 @@
 import { Component, h, Listen, State } from "@stencil/core";
-import { App } from "../ConversationalEditor/App";
-import { EventHandler } from "../ConversationalEditor/EventHandler";
-import { FlowElement } from "../ConversationalEditor/instanceDefinition/Elements/FlowElement";
-import { Controls } from "../ConversationalEditor/helpers/Helpers";
+import { App } from "../../global/ConversationalEditor/App";
+import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
+import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
+import { Controls } from "../../global/ConversationalEditor/helpers/Helpers";
 
 @Component({
   tag: "gxcf-conversationaldesigner",
@@ -10,18 +10,6 @@ import { Controls } from "../ConversationalEditor/helpers/Helpers";
   shadow: false
 })
 export class GXCF_ConversationalDesginer {
-
-@Listen('onExpandFlow')
-HandleExpandFlow(event:CustomEvent)
-{
-  EventHandler.SummaryFlowExpand(event)    
-}
-
-@Listen('selectConversationalObject')
-HandleSelectConversationalObject(event:CustomEvent)
-{
-  EventHandler.SelectConversationalObject(event)   
-}
 
 @Listen('onFlowDragStart')
 HandleOnFlowDragStart(event:CustomEvent)
@@ -53,16 +41,9 @@ HandleOnDragLeaveDropZone(event:CustomEvent)
   EventHandler.OnLeaveDropZone(event);
 }
 
-@Listen('changingFlowName')
-HandleChangingFlowName(event:CustomEvent)
-{
-  console.log(event);
-}
-
-@Listen('changingFlowTriggerSummary')
-HandleChangingFlowTriggerSummary(event:CustomEvent)
-{
-  console.log(event);
+@Listen('openEditor')
+HandleOpenEditor(){
+  this.openEditor = true;
 }
 
 HandleAddFlowElement()
@@ -72,6 +53,7 @@ HandleAddFlowElement()
 }
 
 @State() flows:FlowElement[];
+@State() openEditor:boolean;
 
 private addFlow = 
   <div id="AddFlowElement" class="AddFlow" onClick={ () => this.HandleAddFlowElement() }>
@@ -79,8 +61,14 @@ private addFlow =
   </div>;
 
   render() {
-    this.Initialize();    
-
+    this.Initialize();
+    console.log("Post initialize");
+    
+    if (!this.openEditor && App.GetApp().InstanceIsEmpty())
+    {
+      return (<gxcf-welcome></gxcf-welcome>)
+    }
+          
     return (
       <div class="MainTable">
         <div id={Controls.FlowsContainer}>
@@ -94,15 +82,9 @@ private addFlow =
   private RenderizeFlows():any[]{
     let flows:any[] = [];
     
-    App.GetApp().Instance.Flows.forEach(function(flowElement){      
+    App.GetApp().Instance.Flows.forEach(function(flowElement){            
       console.log(flowElement);
-      flows.push(
-      <gxcf-flow         
-        flow = {flowElement}     
-        flowRenderType="summary"
-        showDropZone={false}   
-      >        
-      </gxcf-flow>)
+      flows.push(<gxcf-flow flow = {flowElement} showDropZone={false}></gxcf-flow>);
     });
     return flows;
   }
@@ -141,7 +123,6 @@ private addFlow =
     window.ondragend = function(event:DragEvent){
       EventHandler.DisableDropZones(event);
     }
-
     App.GetApp()    
   }   
 }

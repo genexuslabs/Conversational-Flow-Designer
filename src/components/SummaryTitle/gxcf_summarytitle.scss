@@ -1,9 +1,12 @@
 .SummaryTitle
 {
-    color: #585858;
-    font-size: 12px;
+    color: $title-color;
+    background-color: $element-background-color;
+    font-size: 14px;
+    font-weight: 400;
     margin-bottom: 10px;
     float: left;
     border: none;
-    background-color: whitesmoke;
+    text-align: left;
+    width: 62%;
 }

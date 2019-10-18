@@ -1,0 +1,11 @@
+.Hint
+{
+    font-size: 11px;
+    color: $action-font-color;
+    text-decoration: underline;
+}
+
+.Hint:hover
+{
+    cursor: help;
+}

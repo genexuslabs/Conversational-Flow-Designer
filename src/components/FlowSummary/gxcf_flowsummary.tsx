@@ -1,5 +1,8 @@
-import { Component, Prop, Event, EventEmitter, h } from "@stencil/core";
-import { FlowElement } from "../ConversationalEditor/instanceDefinition/Elements/FlowElement";
+import { Component, Prop, Event, EventEmitter, h, State, Listen } from "@stencil/core";
+import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
+import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
+import { RenderingOptions } from "../../global/ConversationalEditor/helpers/Helpers";
+
 
 @Component({
   tag: "gxcf-flowsummary",
@@ -8,9 +11,12 @@ import { FlowElement } from "../ConversationalEditor/instanceDefinition/Elements
 })
 export class GXCF_FlowSummary {
   @Prop() flow: FlowElement;
+  @State() flowState: FlowElement;
 
   @Event() onExpandFlow: EventEmitter;
   TriggerOnExpandFlow(event){
+    this.flow.RenderType = RenderingOptions.Full;
+    console.log("New Rendering type: "+this.flow.RenderType);
     this.onExpandFlow.emit(event);
   }
 
@@ -27,6 +33,16 @@ export class GXCF_FlowSummary {
   @Event() onDragOverFlow: EventEmitter;
   TriggerOnDragOverFlow(event){
     this.onDragOverFlow.emit(event);
+  }
+
+  @Listen('selectConversationalObject')
+  HandleSelectConversationalObject(event:CustomEvent)
+  {
+    console.log(event.isTrusted.valueOf());
+    EventHandler.SelectConversationalObject(event).then( retFlow => {
+      this.flow = retFlow;
+      this.flowState = retFlow;
+    });
   }
 
   get SummaryId():string
@@ -53,7 +69,7 @@ export class GXCF_FlowSummary {
     return (
     <div id={this.flow.Id} data-elementType="flow" class="FlowSummary" draggable onDragStart={ (event) => this.TriggerOnFlowDragStart(event) } onDragOver={ (event) => this.TriggerOnDragOverFlow(event) }>
         <gxcf-summarytitle summaryid={this.SummaryId} summaryvalue={this.flow.Name}></gxcf-summarytitle>
-        <gxcf-downarrow arrowid={this.ArrowId} onClick={ (event) => this.TriggerOnExpandFlow(event)}></gxcf-downarrow>
+        <gxcf-downarrow arrowid={this.ArrowId} onClick={ (event) => this.TriggerOnExpandFlow(event)} class="FlowDownArrow"></gxcf-downarrow>
         <gxcf-select selectid={this.SelectId} selectcaption={this.flow.GetSummaryConversationalObject()} onClick={ (event) => this.TriggerSelectConversationalObject(event)}></gxcf-select>
         <gxcf-summarydescription descriptionid={this.DescriptionId} descriptionvalue={this.flow.GetSummaryTriggerMessage()}></gxcf-summarydescription>
     </div>

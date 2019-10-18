@@ -17,4 +17,9 @@ export class App
     {   
         this.Instance = new Instance();
     }
+
+    public InstanceIsEmpty():boolean
+    {
+        return this.Instance.Flows.length == 0;
+    }
 }

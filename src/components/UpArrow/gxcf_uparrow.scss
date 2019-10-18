@@ -1,14 +1,14 @@
-.DownArrow
+.UpArrow
 {
     width: 0; 
     height: 0; 
     border-left: 7.5px solid transparent;
     border-right: 7.5px solid transparent;  
-    border-top: 12px solid $selection-color;
+    border-bottom: 12px solid $selection-color;
     margin: 5px 0px 0px 5px;
 }
 
-.DownArrow:hover
+.UpArrow:hover
 {
     cursor: pointer;
 }

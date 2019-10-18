@@ -1,9 +1,12 @@
+import { RenderingOptions } from "../../helpers/Helpers";
+
 export class FlowElement
-{    
+{        
     public Name:string = "";
     public ConversationalObject:string = "";
     public TriggerMessages:string[] = [];    
     public Id:string = "";    
+    public RenderType:RenderingOptions = RenderingOptions.Summary;
 
     constructor(name:string)
     {        
@@ -32,5 +35,11 @@ export class FlowElement
             return this.ConversationalObject.toUpperCase();
         }
         return "NONE";
-    }            
+    }   
+    
+    public SetTrigger(index: number, newValue: string):void
+    {
+        if (this.TriggerMessages.length >= index)
+            this.TriggerMessages[index] = newValue;
+    }         
 }

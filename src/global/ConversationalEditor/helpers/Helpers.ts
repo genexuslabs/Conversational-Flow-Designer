@@ -49,3 +49,29 @@ export enum RenderingOptions
     Tall,
     Full
 }
+
+export class HintId
+{
+    public static TriggerMessages:string = "TriggerMessages";
+}
+
+export class PropertiesDefinition
+{
+    public static readonly TriggerMessagesTitle:string = "Trigger Messages";
+    public static readonly TriggerMessagesDescription:string = "Specifies the trigger messages for this flow. You can type multiple messages using the ';' delimiter";
+
+    public static GetTitle(hintId:HintId):string
+    {
+        if (hintId == HintId.TriggerMessages)
+            return this.TriggerMessagesTitle;
+        return "";
+    }
+
+    public static GetDescription(hintId:HintId):string
+    {
+        if (hintId == HintId.TriggerMessages)
+            return this.TriggerMessagesDescription;
+        return "";
+    }
+
+}

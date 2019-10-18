@@ -21,7 +21,7 @@
       body{
         background-color: whitesmoke;
       }
-      .MainTable
+      .Main
       {
           width: 55%;
           margin: auto;
@@ -38,17 +38,13 @@
         clear:both;
         color: #585858;
       }
-      details:hover
-      {
-        color:teal; 
-      }
-      h1
+      .H1Library
       {
         color: #585858;
       }
   </style>
-  <div class="MainTable">
-    <h1>GXCF_Library</h1>
+  <div class="Main">
+    <h1 class="H1Library">GXCF_Library</h1>
     <details><summary>gxcf-select</summary>
       <gxcf-select selectid="aa" selectcaption="Component!!!"></gxcf-select>
     </details>
@@ -60,6 +56,9 @@
     </details>
     <details><summary>gxcf-downarrow</summary>
       <gxcf-downarrow descriptionid="aa" descriptionvalue="test description!"></gxcf-downarrow>
+    </details>
+    <details><summary>gxcf-uparrow</summary>
+      <gxcf-uparrow descriptionid="aa" descriptionvalue="test description!"></gxcf-uparrow>
     </details>
     <details><summary>gxcf-dropzone</summary>
       <gxcf-dropzone movetype="Down" show=true></gxcf-dropzone>
@@ -79,7 +78,13 @@
     <details><summary>gxcf-welcome</summary>
       <gxcf-welcome></gxcf-welcome>
     </details>
+    <details><summary>gxcf-hint</summary>
+      <gxcf-hint></gxcf-hint>
+    </details>
+    <details><summary>gxcf-collection</summary>
+      <gxcf-collection></gxcf-collection>
+    </details>
   </div>  
-  <a href="layout.html">Start Editor</a>
+  <a href="welcome.html">Start Editor</a>
 </body>
 </html>

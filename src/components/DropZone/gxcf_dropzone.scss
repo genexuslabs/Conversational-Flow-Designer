@@ -6,7 +6,7 @@
 {
     display: block;
     text-align: center;
-    color:  #007ec1;
+    color:  $selection-color;
     width: 8%;
     margin:auto;
     padding-left: 100px;
@@ -14,8 +14,8 @@
 }
 .ActiveDropZone
 {
-    color: white;
-    background-color: #007ec1;
+    color: $selection-font-color;
+    background-color:$selection-color;
     padding-left: 100px;
     padding-right: 100px;
     border-radius: 14px; 

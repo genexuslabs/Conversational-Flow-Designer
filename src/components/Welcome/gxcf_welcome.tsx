@@ -17,8 +17,8 @@ export class GXCF_Welcome {
     return (
         <div id="Welcome" class="Welcome">
             <p class="Title">GeneXus Chatbot Generator</p>
-            <p class="Intro">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.</p>
-            <a onClick={ (event) => { this.OpenEditor(event) } }>START HERE CREATING YOUR FIRST FLOW</a>
+            <p class="Intro">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            <a onClick={ (event) => { this.OpenEditor(event) } } class="Start">START HERE CREATING YOUR FIRST FLOW</a>
         </div>
     );
   }

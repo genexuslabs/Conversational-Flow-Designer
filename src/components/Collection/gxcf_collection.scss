@@ -1,0 +1,64 @@
+.AddItem
+{
+    color: $inelement-select-color;    
+    background-color: $background-color;
+    display: block;
+    border-radius: 2px;
+    font-size: 18px;
+    clear:both;
+    width: 100%;
+    margin-top: 10px;
+    padding: 8px 5px 8px 5px;
+}
+
+.AddItem
+{
+    cursor: pointer;
+}
+
+.ItemInput
+{
+    border-color: $background-color;
+    border-style: solid; 
+    font-size: 18px;
+    width: 92%;
+    font-style: italic;
+    padding-left: 5px;
+}
+
+.Item
+{
+    border-radius: 2px;
+    background-color: $element-background-color;
+    margin-bottom: 5px;
+}
+
+.Collection
+{
+    background-color: $element-background-color;
+    overflow-y:auto;
+    overflow-x: hidden;
+    max-height: 200px;
+    width: 100%;
+}
+
+.Trash
+{
+    display:block;
+    float:right;
+    padding: $small-icon-size;
+    background-image: $trash-image;
+}
+
+.CollectionHeader
+{
+    color: $title-color;
+    font-size: 14px;
+    float:left;  
+    clear:left; 
+}
+
+.TriggersHint
+{
+    float: right;
+}
