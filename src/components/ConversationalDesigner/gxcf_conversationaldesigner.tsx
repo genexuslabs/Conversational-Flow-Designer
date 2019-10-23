@@ -71,7 +71,7 @@ private addFlow =
           
     return (
       <div class="MainTable">
-        <div id={Controls.FlowsContainer}>
+        <div id={Controls.FlowsContainer} class="FlowsContainer">
           {this.RenderizeFlows()}
         </div>      
         {this.addFlow}

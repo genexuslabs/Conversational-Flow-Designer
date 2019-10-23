@@ -18,3 +18,10 @@ body
     font-size: 17px;
     font-weight: 400;
 }
+
+.FlowsContainer
+{
+    overflow-y:auto;
+    overflow-x: hidden;
+    max-height: 90vh;
+}
