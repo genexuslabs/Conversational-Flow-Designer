@@ -38,7 +38,8 @@ export class EventHandler
             let flowName:string = App.GetApp().Instance.GetFlowName(flowId);            
             await window.external.SelectConversationalObject(flowName).then(newCO => 
             {
-                flow = App.GetApp().Instance.SetConversationalObjectForFlow(flowName, newCO);
+                if (newCO != "")
+                    flow = App.GetApp().Instance.SetConversationalObjectForFlow(flowName, newCO);
             });                      
         }
         return flow;
