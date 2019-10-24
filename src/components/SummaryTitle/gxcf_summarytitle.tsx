@@ -9,7 +9,8 @@ import { EventEmitter } from "@stencil/router/dist/types/stencil.core";
 export class GXCF_SummaryTitle {
   @Prop() summaryid: string;
   @Prop() summaryvalue: string;
-  
+  @Prop() classType: string;
+  public readonly DefaultClassType = "SummaryTitle";
   @Event() changingFlowName:EventEmitter;
   ChangingFlowName(event)
   {
@@ -17,8 +18,10 @@ export class GXCF_SummaryTitle {
   }
 
   render() {
+    if (this.classType == "")
+      this.classType = this.DefaultClassType;
     return (
-        <input id={this.summaryid} type="text" class="SummaryTitle" value={this.summaryvalue} onChange={ (event) => this.ChangingFlowName(event) }/>
+        <input id={this.summaryid} type="text" class={this.classType} value={this.summaryvalue} onChange={ (event) => this.ChangingFlowName(event) }/>
     );
   }
 }

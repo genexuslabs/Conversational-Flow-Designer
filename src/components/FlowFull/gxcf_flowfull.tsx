@@ -61,7 +61,7 @@ export class GXCF_FlowFull {
         return (
         <div id={this.flow.Id} data-elementType="flow" class="FlowFull">
             <div class="FullFlowContent">
-                <gxcf-summarytitle summaryid={this.SummaryId} summaryvalue={this.flow.Name} class="FlowTitle"></gxcf-summarytitle>            
+                <gxcf-summarytitle summaryid={this.SummaryId} summaryvalue={this.flow.Name} classType="FullTitle"></gxcf-summarytitle>            
                 <gxcf-uparrow arrowid={this.ArrowId} onClick={ (event) => this.TriggerOnCollapseFlow(event)} class="FlowUpArrow"></gxcf-uparrow>
                 <gxcf-collection collection={ this.flow.TriggerMessages } collectionHeader={this.CollectionHeader} collectionHintId={HintId.TriggerMessages} collectionHintDescription="What's a trigger message?"></gxcf-collection>
             </div>

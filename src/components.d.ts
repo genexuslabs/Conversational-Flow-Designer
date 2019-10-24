@@ -53,6 +53,7 @@ export namespace Components {
     'descriptionvalue': string;
   }
   interface GxcfSummarytitle {
+    'classType': string;
     'summaryid': string;
     'summaryvalue': string;
   }
@@ -222,6 +223,7 @@ declare namespace LocalJSX {
     'onChangingFlowTriggerSummary'?: (event: CustomEvent<any>) => void;
   }
   interface GxcfSummarytitle {
+    'classType'?: string;
     'onChangingFlowName'?: (event: CustomEvent<any>) => void;
     'summaryid'?: string;
     'summaryvalue'?: string;

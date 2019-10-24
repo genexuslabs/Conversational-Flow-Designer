@@ -10,3 +10,18 @@
     text-align: left;
     width: 62%;
 }
+
+.FullTitle
+{
+    color: $title-color;
+    background-color: $element-background-color;
+    font-size: 14px;
+    font-weight: 400;
+    margin-bottom: 10px;
+    float: left;
+    border: none;
+    text-align: left;
+    width: 62%;
+    font-weight: 600;
+    font-size: 24px;
+}

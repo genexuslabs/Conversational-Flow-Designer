@@ -68,7 +68,7 @@ export class GXCF_FlowSummary {
   render() {
     return (
     <div id={this.flow.Id} data-elementType="flow" class="FlowSummary" draggable onDragStart={ (event) => this.TriggerOnFlowDragStart(event) } onDragOver={ (event) => this.TriggerOnDragOverFlow(event) }>
-        <gxcf-summarytitle summaryid={this.SummaryId} summaryvalue={this.flow.Name}></gxcf-summarytitle>
+        <gxcf-summarytitle summaryid={this.SummaryId} summaryvalue={this.flow.Name} classType="SummaryTitle"></gxcf-summarytitle>
         <gxcf-downarrow arrowid={this.ArrowId} onClick={ (event) => this.TriggerOnExpandFlow(event)} class="FlowDownArrow"></gxcf-downarrow>
         <gxcf-select selectid={this.SelectId} selectcaption={this.flow.GetSummaryConversationalObject()} onClick={ (event) => this.TriggerSelectConversationalObject(event)}></gxcf-select>
         <gxcf-summarydescription descriptionid={this.DescriptionId} descriptionvalue={this.flow.GetSummaryTriggerMessage()}></gxcf-summarydescription>
