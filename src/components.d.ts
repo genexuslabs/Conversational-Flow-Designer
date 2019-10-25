@@ -80,103 +80,103 @@ declare global {
 
 
   interface HTMLGxcfCollapsedresponseElement extends Components.GxcfCollapsedresponse, HTMLStencilElement {}
-  const HTMLGxcfCollapsedresponseElement: {
+  var HTMLGxcfCollapsedresponseElement: {
     prototype: HTMLGxcfCollapsedresponseElement;
     new (): HTMLGxcfCollapsedresponseElement;
   };
 
   interface HTMLGxcfCollapseduserinputElement extends Components.GxcfCollapseduserinput, HTMLStencilElement {}
-  const HTMLGxcfCollapseduserinputElement: {
+  var HTMLGxcfCollapseduserinputElement: {
     prototype: HTMLGxcfCollapseduserinputElement;
     new (): HTMLGxcfCollapseduserinputElement;
   };
 
   interface HTMLGxcfCollectionElement extends Components.GxcfCollection, HTMLStencilElement {}
-  const HTMLGxcfCollectionElement: {
+  var HTMLGxcfCollectionElement: {
     prototype: HTMLGxcfCollectionElement;
     new (): HTMLGxcfCollectionElement;
   };
 
   interface HTMLGxcfConversationaldesignerElement extends Components.GxcfConversationaldesigner, HTMLStencilElement {}
-  const HTMLGxcfConversationaldesignerElement: {
+  var HTMLGxcfConversationaldesignerElement: {
     prototype: HTMLGxcfConversationaldesignerElement;
     new (): HTMLGxcfConversationaldesignerElement;
   };
 
   interface HTMLGxcfConversationalobjectElement extends Components.GxcfConversationalobject, HTMLStencilElement {}
-  const HTMLGxcfConversationalobjectElement: {
+  var HTMLGxcfConversationalobjectElement: {
     prototype: HTMLGxcfConversationalobjectElement;
     new (): HTMLGxcfConversationalobjectElement;
   };
 
   interface HTMLGxcfDownarrowElement extends Components.GxcfDownarrow, HTMLStencilElement {}
-  const HTMLGxcfDownarrowElement: {
+  var HTMLGxcfDownarrowElement: {
     prototype: HTMLGxcfDownarrowElement;
     new (): HTMLGxcfDownarrowElement;
   };
 
   interface HTMLGxcfDropzoneElement extends Components.GxcfDropzone, HTMLStencilElement {}
-  const HTMLGxcfDropzoneElement: {
+  var HTMLGxcfDropzoneElement: {
     prototype: HTMLGxcfDropzoneElement;
     new (): HTMLGxcfDropzoneElement;
   };
 
   interface HTMLGxcfFlowElement extends Components.GxcfFlow, HTMLStencilElement {}
-  const HTMLGxcfFlowElement: {
+  var HTMLGxcfFlowElement: {
     prototype: HTMLGxcfFlowElement;
     new (): HTMLGxcfFlowElement;
   };
 
   interface HTMLGxcfFlowfullElement extends Components.GxcfFlowfull, HTMLStencilElement {}
-  const HTMLGxcfFlowfullElement: {
+  var HTMLGxcfFlowfullElement: {
     prototype: HTMLGxcfFlowfullElement;
     new (): HTMLGxcfFlowfullElement;
   };
 
   interface HTMLGxcfFlowsummaryElement extends Components.GxcfFlowsummary, HTMLStencilElement {}
-  const HTMLGxcfFlowsummaryElement: {
+  var HTMLGxcfFlowsummaryElement: {
     prototype: HTMLGxcfFlowsummaryElement;
     new (): HTMLGxcfFlowsummaryElement;
   };
 
   interface HTMLGxcfHintElement extends Components.GxcfHint, HTMLStencilElement {}
-  const HTMLGxcfHintElement: {
+  var HTMLGxcfHintElement: {
     prototype: HTMLGxcfHintElement;
     new (): HTMLGxcfHintElement;
   };
 
   interface HTMLGxcfPluselementElement extends Components.GxcfPluselement, HTMLStencilElement {}
-  const HTMLGxcfPluselementElement: {
+  var HTMLGxcfPluselementElement: {
     prototype: HTMLGxcfPluselementElement;
     new (): HTMLGxcfPluselementElement;
   };
 
   interface HTMLGxcfSelectElement extends Components.GxcfSelect, HTMLStencilElement {}
-  const HTMLGxcfSelectElement: {
+  var HTMLGxcfSelectElement: {
     prototype: HTMLGxcfSelectElement;
     new (): HTMLGxcfSelectElement;
   };
 
   interface HTMLGxcfSummarydescriptionElement extends Components.GxcfSummarydescription, HTMLStencilElement {}
-  const HTMLGxcfSummarydescriptionElement: {
+  var HTMLGxcfSummarydescriptionElement: {
     prototype: HTMLGxcfSummarydescriptionElement;
     new (): HTMLGxcfSummarydescriptionElement;
   };
 
   interface HTMLGxcfSummarytitleElement extends Components.GxcfSummarytitle, HTMLStencilElement {}
-  const HTMLGxcfSummarytitleElement: {
+  var HTMLGxcfSummarytitleElement: {
     prototype: HTMLGxcfSummarytitleElement;
     new (): HTMLGxcfSummarytitleElement;
   };
 
   interface HTMLGxcfUparrowElement extends Components.GxcfUparrow, HTMLStencilElement {}
-  const HTMLGxcfUparrowElement: {
+  var HTMLGxcfUparrowElement: {
     prototype: HTMLGxcfUparrowElement;
     new (): HTMLGxcfUparrowElement;
   };
 
   interface HTMLGxcfWelcomeElement extends Components.GxcfWelcome, HTMLStencilElement {}
-  const HTMLGxcfWelcomeElement: {
+  var HTMLGxcfWelcomeElement: {
     prototype: HTMLGxcfWelcomeElement;
     new (): HTMLGxcfWelcomeElement;
   };
