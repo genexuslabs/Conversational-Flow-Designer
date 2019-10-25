@@ -9,7 +9,6 @@ export class GXCF_Collection {
     @Prop() collection: string[];
     @Prop() collectionHeader: string;
     @Prop() collectionHintId: string;
-    @Prop() collectionHintDescription: string;
     @Prop() currentItemIndex: number;
     @Prop() currentItemValue: string;
     @State() refresh: boolean = true;
@@ -80,9 +79,11 @@ export class GXCF_Collection {
         }
         return (
             <div class="Collection">
-                <span class="CollectionHeader">{this.collectionHeader}</span>
-                <gxcf-hint hintId={this.collectionHintId} hintDescription={this.collectionHintDescription} class="TriggersHint"/>
-                { this.RenderizeItems(this.collection) }
+                <div class="CollectionContainer">
+                    <span class="CollectionHeader">{this.collectionHeader}</span>
+                    <gxcf-hint hintId={this.collectionHintId} class="Hint"/>
+                    { this.RenderizeItems(this.collection) }
+                </div>                
                 { this.AddItemElement }
             </div>            
         );

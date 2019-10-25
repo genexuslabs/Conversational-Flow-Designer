@@ -8,7 +8,6 @@ import { PropertiesDefinition } from "../../global/ConversationalEditor/helpers/
 })
 export class GXCF_Hint {
   @Prop() hintId: string;
-  @Prop() hintDescription: string;
   @State() refresh = true;
 
   @Event() showHint:EventEmitter;
@@ -34,7 +33,7 @@ export class GXCF_Hint {
                     <p class="HintDescription">{PropertiesDefinition.GetDescription(this.hintId)}</p> 
                   </div>;
 
-  private Hint = <p class="Hint" onClick={ (event) => this.ShowHint(event) } >{this.hintDescription}</p>;
+  private Hint = <span class="Hint" onClick={ (event) => this.ShowHint(event) } >{PropertiesDefinition.GetLabel(this.hintId)}</span>;
 
   render() {
     if (this.ShouldShow)
