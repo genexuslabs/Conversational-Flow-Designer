@@ -1,6 +1,8 @@
 import { MoveType } from "../helpers/Helpers.js";
 import { FlowElement } from "./Elements/FlowElement.js";
 import { App } from "../App.js";
+import { UserInputElement } from "./Elements/UserInputElement.js";
+import { ResponseElement } from "./Elements/ResponseElement.js";
 
 export class Instance
 {                      
@@ -42,6 +44,10 @@ export class Instance
         let flow:FlowElement = new FlowElement("TestA");
         flow.TriggerMessages[0] = "testing"
         flow.ConversationalObject = "TestAProcedure"
+        let userInput:UserInputElement = new UserInputElement("Test", false, ["Test message"], [], "Test1", "VarChar", 0, false, false, "", "","");
+        flow.AddUserInput(userInput);
+        let response:ResponseElement = new ResponseElement("Test", ["Test"], "Test", "", "", "", "");
+        flow.AddResponse(response);
         this.Flows[0] = flow;
 
         let flow2:FlowElement = new FlowElement("TestB");
@@ -57,13 +63,26 @@ export class Instance
     }
 
     public InitializeInstance(jsonInstance:JSON) {
-        let index:number = 0;
-        jsonInstance.Flows.forEach(function(initializeFlow){ 
+        jsonInstance.Flows.forEach(function(initializeFlow)
+        { 
             let flow:FlowElement = new FlowElement(initializeFlow.Name)   
             flow.ConversationalObject = initializeFlow.ConversationalObjectName;  
-            flow.TriggerMessages = initializeFlow.Triggers;                        
+            flow.TriggerMessages = initializeFlow.Triggers; 
+                                  
+            initializeFlow.Fields.forEach(function(field)
+            {
+                let userInput:UserInputElement = new UserInputElement(field.Variable, field.IsCollection, field.RequiredMessages, field.ErrorMessages, field.Entity, field.DataType, field.TryLimit, field.AskAgain, field.CleanInContext, field.ValidationProcedure, field.Required, field.RequiredCondition);
+                flow.AddUserInput(userInput);
+            });
+            initializeFlow.View.Templates.forEach(function(template)
+            {
+                console.log(JSON.stringify(template)); 
+                let response:ResponseElement = new ResponseElement(template.Style, template.Format, template.ComponentType, template.WebComponent, template.SDComponent, template.Condition, template.RedirectTo);
+                flow.AddResponse(response);
+            });
+            console.log("Set flow")
+
             App.GetApp().Instance.AddFlow(flow); 
-            index++;            
         });
         console.log("Instance flows: "+App.GetApp().Instance.Flows.length.toString());
     } 
@@ -219,4 +238,27 @@ export interface JSON  {
     Name:string;
     Triggers:string[];
     ConversationalObjectName:string;
+    Fields:JSON[];
+    Redirections: JSON[],
+    IsCollection:boolean;
+    RequiredMessages: string[];
+    ErrorMessages: string[];
+    Entity: string;
+    DataType: string;
+    TryLimit: number;
+    AskAgain: boolean;
+    CleanInContext: boolean;
+    ValidationProcedure: string;
+    Required: string;
+    RequiredCondition: string;
+    Variable: string;
+    Style:string;
+    Format:string[];
+    ComponentType:string;
+    WebComponent:string;
+    SDComponent:string;
+    Condition:string;
+    RedirectTo:string;
+    View:JSON;
+    Templates:JSON[];
 }

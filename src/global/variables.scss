@@ -4,11 +4,17 @@ $text-color: #000000;
 $title-color: #4A4A4A;
 $background-color: white;
 $element-background-color: #F5F5F5;
+$flow-element-background-color: #EEEEEE;
+$flow-element-border-color: #9B9B9B;
 $inelement-select-color: #D8D8D8;
 $action-font-color:#9B9B9B;
 $trash-image: url("/assets/images/trash.png");
 $small-icon-size: 16px;
 $separator-line-color: #979797;
+$add-element-background-color: white;
+$add-element-font-color: #D8D8D8;
+$conversational-object-background-color: #D8D8D8;
+$conversational-object-select-color: white;
 
 @-webkit-keyframes fadeIn {
     from {opacity: 0;}

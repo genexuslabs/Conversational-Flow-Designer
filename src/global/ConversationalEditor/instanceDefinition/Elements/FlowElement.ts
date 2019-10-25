@@ -1,4 +1,6 @@
 import { RenderingOptions } from "../../helpers/Helpers";
+import { UserInputElement} from "./UserInputElement";
+import { ResponseElement } from "./ResponseElement";
 
 export class FlowElement
 {        
@@ -7,11 +9,15 @@ export class FlowElement
     public TriggerMessages:string[] = [];    
     public Id:string = "";    
     public RenderType:RenderingOptions = RenderingOptions.Summary;
+    public UserInputs: UserInputElement[];
+    public Responses: ResponseElement[];
 
     constructor(name:string)
     {        
        this.Name = name;
        this.Id = `GXCF_Id${this.FormatName()}`;
+       this.UserInputs = new Array<UserInputElement>();
+       this.Responses = new Array<ResponseElement>();
     }
 
     public FormatName():string
@@ -42,4 +48,14 @@ export class FlowElement
         if (this.TriggerMessages.length >= index)
             this.TriggerMessages[index] = newValue;
     }         
+
+    public AddUserInput(userInput:UserInputElement)
+    {
+        this.UserInputs.push(userInput);
+    }
+
+    public AddResponse(response:ResponseElement)
+    {
+        this.Responses.push(response);
+    }
 }

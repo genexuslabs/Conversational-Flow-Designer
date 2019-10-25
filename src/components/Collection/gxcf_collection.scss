@@ -14,6 +14,8 @@
 .AddItem
 {
     cursor: pointer;
+    font-size: 16px;
+    border-radius: 2px;
 }
 
 .ItemInput
@@ -36,10 +38,31 @@
 .Collection
 {
     background-color: $element-background-color;
+}
+
+.CollectionContainer
+{
     overflow-y:auto;
     overflow-x: hidden;
     max-height: 200px;
     width: 100%;
+}
+
+.CollectionContainer::-webkit-scrollbar
+{
+    width: 5px;
+}
+
+.CollectionContainer::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px $element-background-color; 
+    box-shadow: inset 0 0 6px $element-background-color;
+    border-radius: 5px;
+}
+
+.CollectionContainer::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px $selection-color; 
+    box-shadow: inset 0 0 6px $selection-color;
 }
 
 .Trash
@@ -56,9 +79,11 @@
     font-size: 14px;
     float:left;  
     clear:left; 
+    margin-bottom: 15px;
+    font-weight: 400;
 }
 
-.TriggersHint
+.Hint
 {
     float: right;
 }

@@ -2,7 +2,6 @@ import { Component, Prop, h, EventEmitter, Event, State, Listen } from "@stencil
 import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
 import { RenderingOptions, HintId } from "../../global/ConversationalEditor/helpers/Helpers";
 import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
-import { GXCF_Collection } from "../Collection/gxcf_collection";
 
 @Component({
   tag: "gxcf-flowfull",
@@ -57,15 +56,60 @@ export class GXCF_FlowFull {
         return `Sample trigger messages (${this.flow.TriggerMessages.length.toString()})`;
     }
 
+    private RenderizeUserInputs():any[]{
+        let userInputs:any[] = [];
+        this.flow.UserInputs.forEach(function(userInput){
+            userInputs.push(
+                <gxcf-collapseduserinput userInput={userInput}></gxcf-collapseduserinput>
+            );
+        });
+        return userInputs;
+    } 
+
+    private RenderizeResponse():any[]
+    {
+        let responses:any[] = []
+        this.flow.Responses.forEach(function(response){
+            responses.push(
+                <gxcf-collapsedresponse response={response}></gxcf-collapsedresponse>
+            );
+        });
+        return responses;
+    }
+
     render() {
         return (
         <div id={this.flow.Id} data-elementType="flow" class="FlowFull">
             <div class="FullFlowContent">
                 <gxcf-summarytitle summaryid={this.SummaryId} summaryvalue={this.flow.Name} classType="FullTitle"></gxcf-summarytitle>            
                 <gxcf-uparrow arrowid={this.ArrowId} onClick={ (event) => this.TriggerOnCollapseFlow(event)} class="FlowUpArrow"></gxcf-uparrow>
-                <gxcf-collection collection={ this.flow.TriggerMessages } collectionHeader={this.CollectionHeader} collectionHintId={HintId.TriggerMessages} collectionHintDescription="What's a trigger message?"></gxcf-collection>
+                <gxcf-collection collection={ this.flow.TriggerMessages } collectionHeader={this.CollectionHeader} collectionHintId={HintId.TriggerMessages}></gxcf-collection>                
             </div>
             <hr class="Separator"></hr>
+            <div class="FullFlowContentUserInputs">
+                <div class="ElementsHeader">
+                    <span class="LeftTab">User Inputs ({this.flow.UserInputs.length})</span>
+                    <gxcf-hint hintId={HintId.UserInput} class="Hint"/>
+                </div>
+                { this.RenderizeUserInputs() }
+                <div class="AddFlowElement LeftTab">
+                    <gxcf-pluselement></gxcf-pluselement>
+                    <span class="AddElementText">Add another user input request</span>
+                </div>
+            </div>
+            <hr class="Separator"></hr>
+            <div class="FullFlowContent">
+                <div class="ElementsHeader">
+                    <span>Responses ({this.flow.UserInputs.length})</span>
+                    <gxcf-hint hintId={ HintId.Responses } class="Hint"/>
+                </div>
+                { this.RenderizeResponse() }
+                <div class="AddFlowElement">
+                    <gxcf-pluselement></gxcf-pluselement>
+                    <span class="AddElementText">Add another possible response</span>
+                </div>
+            </div>
+            <gxcf-conversationalobject conversationalObject={this.flow.ConversationalObject}></gxcf-conversationalobject>
         </div>
         );
       }
