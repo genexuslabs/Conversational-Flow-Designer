@@ -8,19 +8,33 @@
 
 import { HTMLStencilElement, JSXBase } from '@stencil/core/internal';
 import {
+  ResponseElement,
+} from './global/ConversationalEditor/instanceDefinition/Elements/ResponseElement';
+import {
+  UserInputElement,
+} from './global/ConversationalEditor/instanceDefinition/Elements/UserInputElement';
+import {
   FlowElement,
 } from './global/ConversationalEditor/instanceDefinition/Elements/FlowElement';
 
 export namespace Components {
+  interface GxcfCollapsedresponse {
+    'response': ResponseElement;
+  }
+  interface GxcfCollapseduserinput {
+    'userInput': UserInputElement;
+  }
   interface GxcfCollection {
     'collection': string[];
     'collectionHeader': string;
-    'collectionHintDescription': string;
     'collectionHintId': string;
     'currentItemIndex': number;
     'currentItemValue': string;
   }
   interface GxcfConversationaldesigner {}
+  interface GxcfConversationalobject {
+    'conversationalObject': string;
+  }
   interface GxcfDownarrow {
     'arrowid': string;
   }
@@ -40,7 +54,6 @@ export namespace Components {
     'flow': FlowElement;
   }
   interface GxcfHint {
-    'hintDescription': string;
     'hintId': string;
   }
   interface GxcfPluselement {}
@@ -66,6 +79,18 @@ export namespace Components {
 declare global {
 
 
+  interface HTMLGxcfCollapsedresponseElement extends Components.GxcfCollapsedresponse, HTMLStencilElement {}
+  const HTMLGxcfCollapsedresponseElement: {
+    prototype: HTMLGxcfCollapsedresponseElement;
+    new (): HTMLGxcfCollapsedresponseElement;
+  };
+
+  interface HTMLGxcfCollapseduserinputElement extends Components.GxcfCollapseduserinput, HTMLStencilElement {}
+  const HTMLGxcfCollapseduserinputElement: {
+    prototype: HTMLGxcfCollapseduserinputElement;
+    new (): HTMLGxcfCollapseduserinputElement;
+  };
+
   interface HTMLGxcfCollectionElement extends Components.GxcfCollection, HTMLStencilElement {}
   const HTMLGxcfCollectionElement: {
     prototype: HTMLGxcfCollectionElement;
@@ -76,6 +101,12 @@ declare global {
   const HTMLGxcfConversationaldesignerElement: {
     prototype: HTMLGxcfConversationaldesignerElement;
     new (): HTMLGxcfConversationaldesignerElement;
+  };
+
+  interface HTMLGxcfConversationalobjectElement extends Components.GxcfConversationalobject, HTMLStencilElement {}
+  const HTMLGxcfConversationalobjectElement: {
+    prototype: HTMLGxcfConversationalobjectElement;
+    new (): HTMLGxcfConversationalobjectElement;
   };
 
   interface HTMLGxcfDownarrowElement extends Components.GxcfDownarrow, HTMLStencilElement {}
@@ -150,8 +181,11 @@ declare global {
     new (): HTMLGxcfWelcomeElement;
   };
   interface HTMLElementTagNameMap {
+    'gxcf-collapsedresponse': HTMLGxcfCollapsedresponseElement;
+    'gxcf-collapseduserinput': HTMLGxcfCollapseduserinputElement;
     'gxcf-collection': HTMLGxcfCollectionElement;
     'gxcf-conversationaldesigner': HTMLGxcfConversationaldesignerElement;
+    'gxcf-conversationalobject': HTMLGxcfConversationalobjectElement;
     'gxcf-downarrow': HTMLGxcfDownarrowElement;
     'gxcf-dropzone': HTMLGxcfDropzoneElement;
     'gxcf-flow': HTMLGxcfFlowElement;
@@ -168,10 +202,15 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface GxcfCollapsedresponse {
+    'response'?: ResponseElement;
+  }
+  interface GxcfCollapseduserinput {
+    'userInput'?: UserInputElement;
+  }
   interface GxcfCollection {
     'collection'?: string[];
     'collectionHeader'?: string;
-    'collectionHintDescription'?: string;
     'collectionHintId'?: string;
     'currentItemIndex'?: number;
     'currentItemValue'?: string;
@@ -180,6 +219,9 @@ declare namespace LocalJSX {
     'onEditItem'?: (event: CustomEvent<any>) => void;
   }
   interface GxcfConversationaldesigner {}
+  interface GxcfConversationalobject {
+    'conversationalObject'?: string;
+  }
   interface GxcfDownarrow {
     'arrowid'?: string;
   }
@@ -207,7 +249,6 @@ declare namespace LocalJSX {
     'onSelectConversationalObject'?: (event: CustomEvent<any>) => void;
   }
   interface GxcfHint {
-    'hintDescription'?: string;
     'hintId'?: string;
     'onHideHint'?: (event: CustomEvent<any>) => void;
     'onShowHint'?: (event: CustomEvent<any>) => void;
@@ -236,8 +277,11 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'gxcf-collapsedresponse': GxcfCollapsedresponse;
+    'gxcf-collapseduserinput': GxcfCollapseduserinput;
     'gxcf-collection': GxcfCollection;
     'gxcf-conversationaldesigner': GxcfConversationaldesigner;
+    'gxcf-conversationalobject': GxcfConversationalobject;
     'gxcf-downarrow': GxcfDownarrow;
     'gxcf-dropzone': GxcfDropzone;
     'gxcf-flow': GxcfFlow;
@@ -259,8 +303,11 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'gxcf-collapsedresponse': LocalJSX.GxcfCollapsedresponse & JSXBase.HTMLAttributes<HTMLGxcfCollapsedresponseElement>;
+      'gxcf-collapseduserinput': LocalJSX.GxcfCollapseduserinput & JSXBase.HTMLAttributes<HTMLGxcfCollapseduserinputElement>;
       'gxcf-collection': LocalJSX.GxcfCollection & JSXBase.HTMLAttributes<HTMLGxcfCollectionElement>;
       'gxcf-conversationaldesigner': LocalJSX.GxcfConversationaldesigner & JSXBase.HTMLAttributes<HTMLGxcfConversationaldesignerElement>;
+      'gxcf-conversationalobject': LocalJSX.GxcfConversationalobject & JSXBase.HTMLAttributes<HTMLGxcfConversationalobjectElement>;
       'gxcf-downarrow': LocalJSX.GxcfDownarrow & JSXBase.HTMLAttributes<HTMLGxcfDownarrowElement>;
       'gxcf-dropzone': LocalJSX.GxcfDropzone & JSXBase.HTMLAttributes<HTMLGxcfDropzoneElement>;
       'gxcf-flow': LocalJSX.GxcfFlow & JSXBase.HTMLAttributes<HTMLGxcfFlowElement>;
