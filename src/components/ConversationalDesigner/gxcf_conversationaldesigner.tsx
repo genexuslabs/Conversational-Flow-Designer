@@ -100,6 +100,16 @@ private addFlow =
         mainLogConsole.apply(console, [message]);
     }
 
+    var mainInfoConsole = console.info;
+    console.info = function(message) 
+    {
+        if (window.external.Log)
+        {
+            window.external.Log(message);
+        }        
+        mainInfoConsole.apply(console, [message]);
+    }
+
     var mainErrorConsole = console.error;
     console.error = function(message)
     {
@@ -109,8 +119,8 @@ private addFlow =
         }
         mainErrorConsole.apply(console, [message]);
     }
-
-    var mainWarnConsole = console.warn
+    
+    var mainWarnConsole = console.warn;
     console.warn = function(message)
     {
         if (window.external.LogWarning)
@@ -119,6 +129,16 @@ private addFlow =
         }
         mainWarnConsole.apply(console, [message]);
     }    
+
+    var mainExcepetionConsole = console.exception;
+    console.exception = function(message)
+    {
+      if (window.external.LogError)
+        {
+            window.external.LogError(message);
+        }
+        mainExcepetionConsole.apply(console, [message]);
+    }
 
     window.ondragend = function(event:DragEvent){
       EventHandler.DisableDropZones(event);
