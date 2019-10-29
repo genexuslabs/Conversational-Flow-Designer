@@ -1,4 +1,4 @@
-import { Component, Prop, h, Listen, State } from "@stencil/core";
+import { Component, Prop, h, Listen, State, Event, EventEmitter } from "@stencil/core";
 import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
 import { RenderingOptions } from "../../global/ConversationalEditor/helpers/Helpers";
 import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
@@ -11,7 +11,8 @@ import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
 export class GXCF_Flow {
   @Prop() flow: FlowElement;
   @Prop() showDropZone: boolean;
-  
+  @State() refresh: boolean = true;
+
   @Listen('onExpandFlow')
   HandleExpandFlow(event:CustomEvent)
   {
@@ -38,31 +39,36 @@ export class GXCF_Flow {
     EventHandler.ChangingFlowTriggerSummary(event);
   }
 
-  private renderSummary = 
-    <div>           
+  private renderSummary():any{
+    return (
+      <div>           
         <gxcf-dropzone moveType="Up" show={this.showDropZone} objectReferenceId={this.flow.Id}></gxcf-dropzone>
         <gxcf-flowsummary data-flowid={this.flow.Id} flow={this.flow}></gxcf-flowsummary>
         <gxcf-dropzone moveType="Down" show={this.showDropZone} objectReferenceId={this.flow.Id}></gxcf-dropzone>
-    </div>;
+      </div>
+    );
+  }
 
-  private renderFull = 
-  <div>           
-      <gxcf-flowfull data-flowid={this.flow.Id} flow={this.flow}></gxcf-flowfull>
-  </div>;
-
-  @State() refresh:boolean = true;
+  private renderFull():any
+  {
+    return (
+      <div>           
+        <gxcf-flowfull data-flowid={this.flow.Id} flow={this.flow}></gxcf-flowfull>
+      </div>
+    );
+  }
 
   render() 
   {
     if (this.flow.RenderType == RenderingOptions.Summary)
     {
       console.log("Summary");
-      return this.renderSummary;
+      return this.renderSummary();
     }
     if (this.flow.RenderType == RenderingOptions.Full)
     {
       console.log("Full");
-      return this.renderFull;
+      return this.renderFull();
     }      
     
     return (<span>Flow Render Type '{this.flow.RenderType.toString()}' is not valid</span>)

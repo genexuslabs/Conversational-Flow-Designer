@@ -221,6 +221,7 @@ declare namespace LocalJSX {
   interface GxcfConversationaldesigner {}
   interface GxcfConversationalobject {
     'conversationalObject'?: string;
+    'onSelectConversationalObject'?: (event: CustomEvent<any>) => void;
   }
   interface GxcfDownarrow {
     'arrowid'?: string;

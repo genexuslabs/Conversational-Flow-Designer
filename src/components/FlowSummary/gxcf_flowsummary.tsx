@@ -2,7 +2,7 @@ import { Component, Prop, Event, EventEmitter, h, State, Listen } from "@stencil
 import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
 import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
 import { RenderingOptions } from "../../global/ConversationalEditor/helpers/Helpers";
-
+import { App } from "../../global/ConversationalEditor/App";
 
 @Component({
   tag: "gxcf-flowsummary",
@@ -11,12 +11,11 @@ import { RenderingOptions } from "../../global/ConversationalEditor/helpers/Help
 })
 export class GXCF_FlowSummary {
   @Prop() flow: FlowElement;
-  @State() flowState: FlowElement;
+  @State() refresh: boolean;
 
   @Event() onExpandFlow: EventEmitter;
   TriggerOnExpandFlow(event){
-    this.flow.RenderType = RenderingOptions.Full;
-    console.log("New Rendering type: "+this.flow.RenderType);
+    this.flow = App.GetApp().Instance.SetFlowRenderType(this.flow, RenderingOptions.Full);
     this.onExpandFlow.emit(event);
   }
 
@@ -36,14 +35,13 @@ export class GXCF_FlowSummary {
   }
 
   @Listen('selectConversationalObject')
-  HandleSelectConversationalObject(event:CustomEvent)
-  {
-    console.log(event.isTrusted.valueOf());
-    EventHandler.SelectConversationalObject(event).then( retFlow => {
-      this.flow = retFlow;
-      this.flowState = retFlow;
-    });
-  }
+    HandleSelectConversationalObject(event:CustomEvent)
+    {
+        EventHandler.SelectConversationalObject(event).then( retFlow => {
+        this.flow = retFlow;
+        this.refresh = !this.refresh;
+        });
+    }
 
   get SummaryId():string
   {

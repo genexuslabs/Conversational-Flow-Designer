@@ -30,16 +30,18 @@ export class EventHandler
         if (eventElement)
             console.log("Select conversational object for: "+eventElement.id);  
         
-        let flow:FlowElement = null;
+        var flow:FlowElement = null;
 
         if (window.external.SelectConversationalObject)
         {            
             let flowId:string = EventHandler.GetFlowId(eventElement);
-            let flowName:string = App.GetApp().Instance.GetFlowName(flowId);            
-            await window.external.SelectConversationalObject(flowName).then(newCO => 
+            let flowName:string = App.GetApp().Instance.GetFlowName(flowId);     
+            await window.external.SelectConversationalObject(flowName).then(sFlow => 
             {
-                if (newCO != "")
-                    flow = App.GetApp().Instance.SetConversationalObjectForFlow(flowName, newCO);
+                console.log(sFlow);
+                let jsonFlow = JSON.parse(sFlow);
+                flow = App.GetApp().Instance.LoadFlow(flowName, jsonFlow);
+                return flow;
             });                      
         }
         return flow;
@@ -66,7 +68,6 @@ export class EventHandler
             flow.TriggerMessages.forEach(function(msg){
                 messages += msg+";";
             });
-            console.log("Call external");
             window.external.SetTriggers(flow.Name, messages);
         }  
     }

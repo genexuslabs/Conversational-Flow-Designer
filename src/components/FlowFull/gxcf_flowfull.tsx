@@ -1,7 +1,8 @@
-import { Component, Prop, h, EventEmitter, Event, State, Listen } from "@stencil/core";
+import { Component, Prop, h, EventEmitter, Event, Listen, State } from "@stencil/core";
 import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
 import { RenderingOptions, HintId } from "../../global/ConversationalEditor/helpers/Helpers";
 import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
+import { App } from "../../global/ConversationalEditor/App";
 
 @Component({
   tag: "gxcf-flowfull",
@@ -10,13 +11,14 @@ import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
 })
 export class GXCF_FlowFull {
     @Prop() flow:FlowElement;
+    @State() refresh:boolean = true;
 
     @Event() onCollapseFlow: EventEmitter;
     TriggerOnCollapseFlow(event){
-        this.flow.RenderType = RenderingOptions.Summary;
+        this.flow = App.GetApp().Instance.SetFlowRenderType(this.flow, RenderingOptions.Summary);
         this.onCollapseFlow.emit(event);
     }
-
+    
     @Listen('editItem')
     HandleEditItem(event:Event)
     {
@@ -58,6 +60,7 @@ export class GXCF_FlowFull {
 
     private RenderizeUserInputs():any[]{
         let userInputs:any[] = [];
+        console.log("Flow: "+JSON.stringify(this.flow))
         this.flow.UserInputs.forEach(function(userInput){
             userInputs.push(
                 <gxcf-collapseduserinput userInput={userInput}></gxcf-collapseduserinput>
@@ -77,7 +80,17 @@ export class GXCF_FlowFull {
         return responses;
     }
 
+    @Listen('selectConversationalObject')
+    HandleSelectConversationalObject(event:CustomEvent)
+    {
+        EventHandler.SelectConversationalObject(event).then( retFlow => {
+        this.flow = retFlow;
+        this.refresh = !this.refresh;
+        });
+    }
+
     render() {
+        console.log("Render");
         return (
         <div id={this.flow.Id} data-elementType="flow" class="FlowFull">
             <div class="FullFlowContent">

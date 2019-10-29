@@ -1,6 +1,7 @@
 import { RenderingOptions } from "../../helpers/Helpers";
 import { UserInputElement} from "./UserInputElement";
 import { ResponseElement } from "./ResponseElement";
+import { CustomJSON } from "../Instance";
 
 export class FlowElement
 {        
@@ -49,13 +50,35 @@ export class FlowElement
             this.TriggerMessages[index] = newValue;
     }         
 
-    public AddUserInput(userInput:UserInputElement)
+    public AddUserInput(userInput:UserInputElement):void
     {
         this.UserInputs.push(userInput);
     }
 
-    public AddResponse(response:ResponseElement)
+    public AddResponse(response:ResponseElement):void
     {
         this.Responses.push(response);
+    }
+
+    public LoadFlow(jsonFlow:CustomJSON)
+    {
+        this.Name = jsonFlow.Name;
+        this.Id = `GXCF_Id${this.FormatName()}`;
+        this.UserInputs = new Array<UserInputElement>();
+        this.Responses = new Array<ResponseElement>();
+        this.TriggerMessages = new Array<string>();
+        this.ConversationalObject = jsonFlow.ConversationalObjectName;  
+        this.TriggerMessages = jsonFlow.Triggers; 
+        jsonFlow.Fields.forEach(function(field)
+        {
+            let userInput:UserInputElement = new UserInputElement(field.Variable, field.IsCollection, field.RequiredMessages, field.ErrorMessages, field.Entity, field.DataType, field.TryLimit, field.AskAgain, field.CleanInContext, field.ValidationProcedure, field.Required, field.RequiredCondition);
+            this.AddUserInput(userInput);
+        }, this);
+        jsonFlow.View.Templates.forEach(function(template)
+        {
+            console.log(JSON.stringify(template)); 
+            let response:ResponseElement = new ResponseElement(template.Style, template.Format, template.ComponentType, template.WebComponent, template.SDComponent, template.Condition, template.RedirectTo);
+            this.AddResponse(response);
+        }, this);        
     }
 }

@@ -119,7 +119,7 @@ private addFlow =
         }
         mainErrorConsole.apply(console, [message]);
     }
-    
+
     var mainWarnConsole = console.warn;
     console.warn = function(message)
     {

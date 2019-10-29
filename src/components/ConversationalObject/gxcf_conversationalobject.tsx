@@ -1,5 +1,4 @@
 import { Component, Prop, h, EventEmitter, Event, State } from "@stencil/core";
-import { UserInputElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/UserInputElement";
 import { HintId } from "../../global/ConversationalEditor/helpers/Helpers";
 
 @Component({
@@ -9,13 +8,18 @@ import { HintId } from "../../global/ConversationalEditor/helpers/Helpers";
 })
 export class GXCF_ConversationalObject {
   @Prop() conversationalObject: string;
+  
+  @Event() selectConversationalObject: EventEmitter
+  TriggerSelectConversationalObject(event){
+    this.selectConversationalObject.emit(event);
+  }
 
   render() {
       return (
         <div class="ConversationalObject">
           <span class="ConversationalObjectHeader">CONVERSATIONAL OBJECT</span>
           <gxcf-hint hintId={HintId.ConversationalObject} class="Hint"></gxcf-hint>
-          <span class="SelectConversationalObject">{this.conversationalObject}</span>
+          <span class="SelectConversationalObject" onClick={ (event) => this.TriggerSelectConversationalObject(event)}>{this.conversationalObject}</span>
         </div>
       );
   }

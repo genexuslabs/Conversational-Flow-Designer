@@ -3,7 +3,7 @@ interface External
     AddFlow: Function;
     MoveFlow(source:string, target:string, moveType:string): Function;
     ModifyFlowName(currentFlowName:string, newFlowName:string): Function;
-    SelectConversationalObject(flowName:string): Promise<string>;
+    SelectConversationalObject(flowName:string): Promise<any>;
     ModifyFirstTriggerMessage(flowName:string, newFirstTriggerMessage:string): Function;
     LogError(errorMessage:string): Function;
     Log(logMessage:string): Function;

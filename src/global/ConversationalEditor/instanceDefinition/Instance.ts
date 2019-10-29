@@ -1,4 +1,4 @@
-import { MoveType } from "../helpers/Helpers.js";
+import { MoveType, RenderingOptions } from "../helpers/Helpers.js";
 import { FlowElement } from "./Elements/FlowElement.js";
 import { App } from "../App.js";
 import { UserInputElement } from "./Elements/UserInputElement.js";
@@ -62,27 +62,15 @@ export class Instance
         console.log(this.Flows);
     }
 
-    public InitializeInstance(jsonInstance:JSON) {
+    public InitializeInstance(jsonInstance:CustomJSON) {
+        let index:number = 0;
         jsonInstance.Flows.forEach(function(initializeFlow)
         { 
-            let flow:FlowElement = new FlowElement(initializeFlow.Name)   
-            flow.ConversationalObject = initializeFlow.ConversationalObjectName;  
-            flow.TriggerMessages = initializeFlow.Triggers; 
-                                  
-            initializeFlow.Fields.forEach(function(field)
-            {
-                let userInput:UserInputElement = new UserInputElement(field.Variable, field.IsCollection, field.RequiredMessages, field.ErrorMessages, field.Entity, field.DataType, field.TryLimit, field.AskAgain, field.CleanInContext, field.ValidationProcedure, field.Required, field.RequiredCondition);
-                flow.AddUserInput(userInput);
-            });
-            initializeFlow.View.Templates.forEach(function(template)
-            {
-                console.log(JSON.stringify(template)); 
-                let response:ResponseElement = new ResponseElement(template.Style, template.Format, template.ComponentType, template.WebComponent, template.SDComponent, template.Condition, template.RedirectTo);
-                flow.AddResponse(response);
-            });
-            console.log("Set flow")
-
+            let flow:FlowElement = new FlowElement(initializeFlow.Name);
+            flow.LoadFlow(initializeFlow);   
             App.GetApp().Instance.AddFlow(flow); 
+            console.log(index)
+            index++;
         });
         console.log("Instance flows: "+App.GetApp().Instance.Flows.length.toString());
     } 
@@ -118,6 +106,7 @@ export class Instance
 
     public GetFlowById(id:string):FlowElement
     {
+        console.log("Search Id: "+id);
         this.Flows.forEach(function(element)
         {    
             console.log("FlowsIds: "+element.Id)        
@@ -230,16 +219,43 @@ export class Instance
     {
         this.Flows[this.Flows.length] = flow;
     } 
+
+    public LoadFlow(flowName:string, flowJson:CustomJSON):FlowElement
+    {
+        let rFlow:FlowElement = null;
+        this.Flows.forEach(function(flow)
+        {
+            if (flow.Name == flowName)
+            {
+                flow.LoadFlow(flowJson);
+                rFlow = flow;
+            }
+        });
+        return rFlow;
+    }
+
+    public SetFlowRenderType(flow:FlowElement, renderType:RenderingOptions)
+    {
+        this.Flows.forEach(function(iFlow)
+        {
+            if (iFlow.Name == flow.Name)
+            {
+                iFlow.RenderType = renderType;
+                flow = iFlow;
+            }
+        });
+        return flow;
+    }
 }
 
-export interface JSON  {
+export interface CustomJSON extends JSON  {
     Provider:string;
-    Flows:JSON[];
+    Flows:CustomJSON[];
     Name:string;
     Triggers:string[];
     ConversationalObjectName:string;
-    Fields:JSON[];
-    Redirections: JSON[],
+    Fields:CustomJSON[];
+    Redirections: CustomJSON[],
     IsCollection:boolean;
     RequiredMessages: string[];
     ErrorMessages: string[];
@@ -259,6 +275,6 @@ export interface JSON  {
     SDComponent:string;
     Condition:string;
     RedirectTo:string;
-    View:JSON;
-    Templates:JSON[];
+    View:CustomJSON;
+    Templates:CustomJSON[];
 }
