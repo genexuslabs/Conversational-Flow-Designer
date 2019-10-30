@@ -1,17 +1,16 @@
 .FlowSummary
-{
-    background-color: $element-background-color;
-    border-radius: 4px;
+{    
+    border-radius: 1px;
     display:block;
     //margin: 20px 0px 20px 0px;
-    padding: 12px 22px 12px 22px;
+    padding: 8px 12px 8px 12px;
     margin:auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
+    margin-top: 8px;
+    margin-bottom: 8px;
     width: 91%;
-    height: 5%;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s
+    overflow: hidden;
+    -webkit-animation: fadeIn 0.5s;
+    animation: fadeIn 0.5s
 }
 
 .FlowSummary:hover
@@ -19,8 +18,12 @@
     transform: scale(1.05);
 }
 
-.FlowDownArrow
+.ActiveContent
 {
-    position: relative;
-    float: right;
+    background-color: $active-content-background;
+}
+
+.NoActiveContent
+{
+    background-color: $element-background-color;
 }

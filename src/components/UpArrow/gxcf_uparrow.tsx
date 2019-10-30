@@ -7,8 +7,7 @@ import { Component, Prop, h } from "@stencil/core";
 })
 export class GXCF_UpArrow {
   @Prop() arrowid: string;
-//onclick="expandSummaryFlow(event)"
-//name={this.arrowname}
+
   render() {
     return (
         <div id={this.arrowid} class="UpArrow"></div>

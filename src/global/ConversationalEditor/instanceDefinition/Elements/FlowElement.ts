@@ -4,7 +4,7 @@ import { ResponseElement } from "./ResponseElement";
 import { CustomJSON } from "../Instance";
 
 export class FlowElement
-{        
+{            
     public Name:string = "";
     public ConversationalObject:string = "";
     public TriggerMessages:string[] = [];    
@@ -12,6 +12,8 @@ export class FlowElement
     public RenderType:RenderingOptions = RenderingOptions.Summary;
     public UserInputs: UserInputElement[];
     public Responses: ResponseElement[];
+    public Component:any;
+    public UserInputComponent:any;
 
     constructor(name:string)
     {        
@@ -80,5 +82,12 @@ export class FlowElement
             let response:ResponseElement = new ResponseElement(template.Style, template.Format, template.ComponentType, template.WebComponent, template.SDComponent, template.Condition, template.RedirectTo);
             this.AddResponse(response);
         }, this);        
+    }
+
+    public SetRenderType(renderType: RenderingOptions)
+    {
+        this.RenderType = renderType;
+        this.Component.refresh = !this.Component.refresh;
+        
     }
 }

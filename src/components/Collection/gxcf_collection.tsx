@@ -50,7 +50,7 @@ export class GXCF_Collection {
 
     private AddItemElement = 
         <div id="AddItem" class="AddItem" onClick={ (event) => this.AddItem(event) }>
-            <gxcf-pluselement></gxcf-pluselement><span>Add another sample trigger message</span>            
+            <gxcf-addelement class="AddItemText"></gxcf-addelement><span class="AddItemText">Add another sample trigger message</span>            
         </div>;
 
     private RenderizeItems(items:string[]):any[]{
@@ -63,7 +63,7 @@ export class GXCF_Collection {
             renderedItems.push(            
                 <div class="Item">
                     <input data-item-index={index} class="ItemInput" type="text" value={items[index]} onChange={ (event) => this.EditItem(event) }></input>
-                    <div data-item-index={index} class="Trash" onClick={ (event) => this.DeleteItem(event)}></div>
+                    <div data-item-index={index} class="Trash" onClick={ (event) => this.DeleteItem(event)}>X</div>
                 </div>
             );
         }

@@ -57,13 +57,13 @@ HandleAddFlowElement()
 
 private addFlow = 
   <div id="AddFlowElement" class="AddFlow" onClick={ () => this.HandleAddFlowElement() }>
-    <gxcf-pluselement></gxcf-pluselement><span>Add another Flow</span>            
+    <gxcf-addelement></gxcf-addelement><span class="AddFlowElementText">Add another Flow</span>            
   </div>;
 
   render() {
     this.Initialize();
     console.log("Post initialize");
-    
+    console.log("IsEmpty: "+App.GetApp().InstanceIsEmpty())
     if (!this.openEditor && App.GetApp().InstanceIsEmpty())
     {
       return (<gxcf-welcome></gxcf-welcome>)
@@ -72,8 +72,8 @@ private addFlow =
     return (
       <div class="MainTable">
         <div id={Controls.FlowsContainer} class="FlowsContainer">
-          {this.RenderizeFlows()}
-        </div>      
+          {this.RenderizeFlows()}          
+        </div>              
         {this.addFlow}
       </div>
     );    
@@ -143,6 +143,6 @@ private addFlow =
     window.ondragend = function(event:DragEvent){
       EventHandler.DisableDropZones(event);
     }
-    App.GetApp()    
+    App.GetApp(); 
   }   
 }

@@ -3,7 +3,7 @@
     border-color: $flow-element-border-color;
     background-color: $flow-element-background-color;
     border-width: 1px;
-    border-radius: 4px;
+    border-radius: 1px;
     border-style: solid;
     padding: 12px 22px 12px 22px;
     overflow:hidden;
@@ -26,9 +26,9 @@
 {
     float:left;
     clear:both;
-    font-size: 18px;
+    font-size: $common-font-size;
     font-style: italic;
-    color: $text-color;
+    color: $elements-messages-font-color;
     border: none;
     background-color: $flow-element-background-color;
     width: 95%;
@@ -38,6 +38,8 @@
 {    
     background-color: $flow-element-background-color;
     border:none;
-    color: $title-color;
     float:left;
+    color: $elements-title-font-color;
+    font-size: $common-font-size;
+    font-weight: bold;
 }

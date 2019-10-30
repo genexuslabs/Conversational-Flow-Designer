@@ -1,11 +1,11 @@
 .SummaryDescription
 {
     font-style: italic;
-    font-size: 18px;
+    font-size: $common-font-size;
     font-weight: 400;
     text-align: left;
     clear: both;
-    background-color: $element-background-color;
+    background-color: $common-action-background;
     border:none;
     display:block;
     width: 59%;

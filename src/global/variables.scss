@@ -1,20 +1,34 @@
-$selection-color: #0077DE;
+$selection-color: black;
 $selection-font-color: white;
 $text-color: #000000;
 $title-color: #4A4A4A;
-$background-color: white;
-$element-background-color: #F5F5F5;
-$flow-element-background-color: #EEEEEE;
-$flow-element-border-color: #9B9B9B;
-$inelement-select-color: #D8D8D8;
-$action-font-color:#9B9B9B;
-$trash-image: url("src/assets/images/trash.png");
-$small-icon-size: 16px;
+$background-color: rgb(216, 216, 216);
+$element-background-color: rgb(245, 245, 245);
+$flow-element-background-color: #f8f8f8;
+$flow-element-border-color: #f8f8f8;
+$inelement-select-color: rgb(74, 74, 74);
+$action-font-color: rgb(0, 0, 0);;
 $separator-line-color: #979797;
 $add-element-background-color: white;
 $add-element-font-color: #D8D8D8;
 $conversational-object-background-color: #D8D8D8;
 $conversational-object-select-color: white;
+$action-border-color: rgb(151, 150, 150);
+$action-background-color: rgb(251, 251, 251);
+$select-border-color: #c8c8c8;
+$active-content-background: white;
+$common-action-background: transparent;
+$collection-background-color: white;
+$common-font-size: 12px;
+$hint-color: rgb(155, 155, 155);
+$hint-font-size: 9px;
+$arrow-color: black;
+$elements-header-font-color: #191919;
+$add-element-font-size: 16px;
+$elements-title-font-color: black;
+$elements-messages-font-color: black;
+$welcome-font-color: white;
+$welcome-color: #0077DE;
 
 @-webkit-keyframes fadeIn {
     from {opacity: 0;}

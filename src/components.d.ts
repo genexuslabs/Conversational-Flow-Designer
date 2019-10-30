@@ -16,8 +16,12 @@ import {
 import {
   FlowElement,
 } from './global/ConversationalEditor/instanceDefinition/Elements/FlowElement';
+import {
+  RenderingOptions,
+} from './global/ConversationalEditor/helpers/Helpers';
 
 export namespace Components {
+  interface GxcfAddelement {}
   interface GxcfCollapsedresponse {
     'response': ResponseElement;
   }
@@ -52,11 +56,11 @@ export namespace Components {
   }
   interface GxcfFlowsummary {
     'flow': FlowElement;
+    'renderingType': RenderingOptions;
   }
   interface GxcfHint {
     'hintId': string;
   }
-  interface GxcfPluselement {}
   interface GxcfSelect {
     'selectcaption': string;
     'selectid': string;
@@ -78,6 +82,12 @@ export namespace Components {
 
 declare global {
 
+
+  interface HTMLGxcfAddelementElement extends Components.GxcfAddelement, HTMLStencilElement {}
+  var HTMLGxcfAddelementElement: {
+    prototype: HTMLGxcfAddelementElement;
+    new (): HTMLGxcfAddelementElement;
+  };
 
   interface HTMLGxcfCollapsedresponseElement extends Components.GxcfCollapsedresponse, HTMLStencilElement {}
   var HTMLGxcfCollapsedresponseElement: {
@@ -145,12 +155,6 @@ declare global {
     new (): HTMLGxcfHintElement;
   };
 
-  interface HTMLGxcfPluselementElement extends Components.GxcfPluselement, HTMLStencilElement {}
-  var HTMLGxcfPluselementElement: {
-    prototype: HTMLGxcfPluselementElement;
-    new (): HTMLGxcfPluselementElement;
-  };
-
   interface HTMLGxcfSelectElement extends Components.GxcfSelect, HTMLStencilElement {}
   var HTMLGxcfSelectElement: {
     prototype: HTMLGxcfSelectElement;
@@ -181,6 +185,7 @@ declare global {
     new (): HTMLGxcfWelcomeElement;
   };
   interface HTMLElementTagNameMap {
+    'gxcf-addelement': HTMLGxcfAddelementElement;
     'gxcf-collapsedresponse': HTMLGxcfCollapsedresponseElement;
     'gxcf-collapseduserinput': HTMLGxcfCollapseduserinputElement;
     'gxcf-collection': HTMLGxcfCollectionElement;
@@ -192,7 +197,6 @@ declare global {
     'gxcf-flowfull': HTMLGxcfFlowfullElement;
     'gxcf-flowsummary': HTMLGxcfFlowsummaryElement;
     'gxcf-hint': HTMLGxcfHintElement;
-    'gxcf-pluselement': HTMLGxcfPluselementElement;
     'gxcf-select': HTMLGxcfSelectElement;
     'gxcf-summarydescription': HTMLGxcfSummarydescriptionElement;
     'gxcf-summarytitle': HTMLGxcfSummarytitleElement;
@@ -202,6 +206,7 @@ declare global {
 }
 
 declare namespace LocalJSX {
+  interface GxcfAddelement {}
   interface GxcfCollapsedresponse {
     'response'?: ResponseElement;
   }
@@ -248,13 +253,13 @@ declare namespace LocalJSX {
     'onOnExpandFlow'?: (event: CustomEvent<any>) => void;
     'onOnFlowDragStart'?: (event: CustomEvent<any>) => void;
     'onSelectConversationalObject'?: (event: CustomEvent<any>) => void;
+    'renderingType'?: RenderingOptions;
   }
   interface GxcfHint {
     'hintId'?: string;
     'onHideHint'?: (event: CustomEvent<any>) => void;
     'onShowHint'?: (event: CustomEvent<any>) => void;
   }
-  interface GxcfPluselement {}
   interface GxcfSelect {
     'selectcaption'?: string;
     'selectid'?: string;
@@ -278,6 +283,7 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
+    'gxcf-addelement': GxcfAddelement;
     'gxcf-collapsedresponse': GxcfCollapsedresponse;
     'gxcf-collapseduserinput': GxcfCollapseduserinput;
     'gxcf-collection': GxcfCollection;
@@ -289,7 +295,6 @@ declare namespace LocalJSX {
     'gxcf-flowfull': GxcfFlowfull;
     'gxcf-flowsummary': GxcfFlowsummary;
     'gxcf-hint': GxcfHint;
-    'gxcf-pluselement': GxcfPluselement;
     'gxcf-select': GxcfSelect;
     'gxcf-summarydescription': GxcfSummarydescription;
     'gxcf-summarytitle': GxcfSummarytitle;
@@ -304,6 +309,7 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
+      'gxcf-addelement': LocalJSX.GxcfAddelement & JSXBase.HTMLAttributes<HTMLGxcfAddelementElement>;
       'gxcf-collapsedresponse': LocalJSX.GxcfCollapsedresponse & JSXBase.HTMLAttributes<HTMLGxcfCollapsedresponseElement>;
       'gxcf-collapseduserinput': LocalJSX.GxcfCollapseduserinput & JSXBase.HTMLAttributes<HTMLGxcfCollapseduserinputElement>;
       'gxcf-collection': LocalJSX.GxcfCollection & JSXBase.HTMLAttributes<HTMLGxcfCollectionElement>;
@@ -315,7 +321,6 @@ declare module "@stencil/core" {
       'gxcf-flowfull': LocalJSX.GxcfFlowfull & JSXBase.HTMLAttributes<HTMLGxcfFlowfullElement>;
       'gxcf-flowsummary': LocalJSX.GxcfFlowsummary & JSXBase.HTMLAttributes<HTMLGxcfFlowsummaryElement>;
       'gxcf-hint': LocalJSX.GxcfHint & JSXBase.HTMLAttributes<HTMLGxcfHintElement>;
-      'gxcf-pluselement': LocalJSX.GxcfPluselement & JSXBase.HTMLAttributes<HTMLGxcfPluselementElement>;
       'gxcf-select': LocalJSX.GxcfSelect & JSXBase.HTMLAttributes<HTMLGxcfSelectElement>;
       'gxcf-summarydescription': LocalJSX.GxcfSummarydescription & JSXBase.HTMLAttributes<HTMLGxcfSummarydescriptionElement>;
       'gxcf-summarytitle': LocalJSX.GxcfSummarytitle & JSXBase.HTMLAttributes<HTMLGxcfSummarytitleElement>;

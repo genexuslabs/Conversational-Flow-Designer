@@ -43,6 +43,7 @@ export class Instance
     private LoadDummy():void{
         let flow:FlowElement = new FlowElement("TestA");
         flow.TriggerMessages[0] = "testing"
+        flow.TriggerMessages[1] = "testing1"
         flow.ConversationalObject = "TestAProcedure"
         let userInput:UserInputElement = new UserInputElement("Test", false, ["Test message"], [], "Test1", "VarChar", 0, false, false, "", "","");
         flow.AddUserInput(userInput);
@@ -240,9 +241,11 @@ export class Instance
         {
             if (iFlow.Name == flow.Name)
             {
-                iFlow.RenderType = renderType;
+                iFlow.SetRenderType(renderType);
                 flow = iFlow;
             }
+            else
+                iFlow.SetRenderType(RenderingOptions.Summary);
         });
         return flow;
     }

@@ -39,11 +39,11 @@ export class GXCF_Flow {
     EventHandler.ChangingFlowTriggerSummary(event);
   }
 
-  private renderSummary():any{
+  private renderSummary(renderingOption:RenderingOptions):any{
     return (
       <div>           
         <gxcf-dropzone moveType="Up" show={this.showDropZone} objectReferenceId={this.flow.Id}></gxcf-dropzone>
-        <gxcf-flowsummary data-flowid={this.flow.Id} flow={this.flow}></gxcf-flowsummary>
+        <gxcf-flowsummary renderingType={ renderingOption } data-flowid={this.flow.Id} flow={this.flow}></gxcf-flowsummary>
         <gxcf-dropzone moveType="Down" show={this.showDropZone} objectReferenceId={this.flow.Id}></gxcf-dropzone>
       </div>
     );
@@ -51,19 +51,23 @@ export class GXCF_Flow {
 
   private renderFull():any
   {
-    return (
-      <div>           
-        <gxcf-flowfull data-flowid={this.flow.Id} flow={this.flow}></gxcf-flowfull>
+    return (    
+      <div>
+        { this.renderSummary(RenderingOptions.Full) }
+        <div class="FullFlowContainer">           
+          <gxcf-flowfull data-flowid={this.flow.Id} flow={this.flow}></gxcf-flowfull>
+        </div>
       </div>
-    );
+      );
   }
 
   render() 
   {
+    this.flow.Component = this;
     if (this.flow.RenderType == RenderingOptions.Summary)
     {
       console.log("Summary");
-      return this.renderSummary();
+      return this.renderSummary(RenderingOptions.Summary);
     }
     if (this.flow.RenderType == RenderingOptions.Full)
     {

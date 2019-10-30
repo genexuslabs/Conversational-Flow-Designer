@@ -7,11 +7,10 @@ import { Component, Prop, h } from "@stencil/core";
 })
 export class GXCF_DownArrow {
   @Prop() arrowid: string;
-//onclick="expandSummaryFlow(event)"
-//name={this.arrowname}
+
   render() {
     return (
-        <div id={this.arrowid} class="DownArrow"></div>
+        <p id={this.arrowid} class="DownArrow"></p>
     );
   }
 }

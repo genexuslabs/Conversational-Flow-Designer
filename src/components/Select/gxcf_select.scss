@@ -1,15 +1,22 @@
 .Select
 {
-    background-color: $inelement-select-color;
-    color: $title-color;
-    font-size: 11px;
+    background-color: $common-action-background;
+    color: $inelement-select-color;
+    font-size: $common-font-size;
     font-weight: 600;
     text-align: center;
     border-radius: 12px;
+    border-style: solid;
+    border-color: $select-border-color;
+    border-width: 1px;
     float:right;
     width:28%;
     height: 33%;
-    padding: 5px 5px 5px 5px;
+    padding: 3px 2px 3px 2px;
+    font-family: 'Source Sans Pro', sans-serif;
+    overflow:hidden; 
+    white-space:nowrap; 
+    text-overflow: ellipsis;
 }
 
 .Select:hover
