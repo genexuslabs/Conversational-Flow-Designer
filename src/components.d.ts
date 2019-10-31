@@ -30,6 +30,7 @@ export namespace Components {
   }
   interface GxcfCollection {
     'collection': string[];
+    'collectionAddText': string;
     'collectionHeader': string;
     'collectionHintId': string;
     'currentItemIndex': number;
@@ -58,6 +59,9 @@ export namespace Components {
     'flow': FlowElement;
     'renderingType': RenderingOptions;
   }
+  interface GxcfFulluserinput {
+    'userInput': UserInputElement;
+  }
   interface GxcfHint {
     'hintId': string;
   }
@@ -76,6 +80,9 @@ export namespace Components {
   }
   interface GxcfUparrow {
     'arrowid': string;
+  }
+  interface GxcfUserinput {
+    'userInput': UserInputElement;
   }
   interface GxcfWelcome {}
 }
@@ -149,6 +156,12 @@ declare global {
     new (): HTMLGxcfFlowsummaryElement;
   };
 
+  interface HTMLGxcfFulluserinputElement extends Components.GxcfFulluserinput, HTMLStencilElement {}
+  var HTMLGxcfFulluserinputElement: {
+    prototype: HTMLGxcfFulluserinputElement;
+    new (): HTMLGxcfFulluserinputElement;
+  };
+
   interface HTMLGxcfHintElement extends Components.GxcfHint, HTMLStencilElement {}
   var HTMLGxcfHintElement: {
     prototype: HTMLGxcfHintElement;
@@ -179,6 +192,12 @@ declare global {
     new (): HTMLGxcfUparrowElement;
   };
 
+  interface HTMLGxcfUserinputElement extends Components.GxcfUserinput, HTMLStencilElement {}
+  var HTMLGxcfUserinputElement: {
+    prototype: HTMLGxcfUserinputElement;
+    new (): HTMLGxcfUserinputElement;
+  };
+
   interface HTMLGxcfWelcomeElement extends Components.GxcfWelcome, HTMLStencilElement {}
   var HTMLGxcfWelcomeElement: {
     prototype: HTMLGxcfWelcomeElement;
@@ -196,11 +215,13 @@ declare global {
     'gxcf-flow': HTMLGxcfFlowElement;
     'gxcf-flowfull': HTMLGxcfFlowfullElement;
     'gxcf-flowsummary': HTMLGxcfFlowsummaryElement;
+    'gxcf-fulluserinput': HTMLGxcfFulluserinputElement;
     'gxcf-hint': HTMLGxcfHintElement;
     'gxcf-select': HTMLGxcfSelectElement;
     'gxcf-summarydescription': HTMLGxcfSummarydescriptionElement;
     'gxcf-summarytitle': HTMLGxcfSummarytitleElement;
     'gxcf-uparrow': HTMLGxcfUparrowElement;
+    'gxcf-userinput': HTMLGxcfUserinputElement;
     'gxcf-welcome': HTMLGxcfWelcomeElement;
   }
 }
@@ -211,10 +232,12 @@ declare namespace LocalJSX {
     'response'?: ResponseElement;
   }
   interface GxcfCollapseduserinput {
+    'onOnExpandUserInput'?: (event: CustomEvent<any>) => void;
     'userInput'?: UserInputElement;
   }
   interface GxcfCollection {
     'collection'?: string[];
+    'collectionAddText'?: string;
     'collectionHeader'?: string;
     'collectionHintId'?: string;
     'currentItemIndex'?: number;
@@ -255,6 +278,10 @@ declare namespace LocalJSX {
     'onSelectConversationalObject'?: (event: CustomEvent<any>) => void;
     'renderingType'?: RenderingOptions;
   }
+  interface GxcfFulluserinput {
+    'onOnCollapseUserInput'?: (event: CustomEvent<any>) => void;
+    'userInput'?: UserInputElement;
+  }
   interface GxcfHint {
     'hintId'?: string;
     'onHideHint'?: (event: CustomEvent<any>) => void;
@@ -278,6 +305,9 @@ declare namespace LocalJSX {
   interface GxcfUparrow {
     'arrowid'?: string;
   }
+  interface GxcfUserinput {
+    'userInput'?: UserInputElement;
+  }
   interface GxcfWelcome {
     'onOpenEditor'?: (event: CustomEvent<any>) => void;
   }
@@ -294,11 +324,13 @@ declare namespace LocalJSX {
     'gxcf-flow': GxcfFlow;
     'gxcf-flowfull': GxcfFlowfull;
     'gxcf-flowsummary': GxcfFlowsummary;
+    'gxcf-fulluserinput': GxcfFulluserinput;
     'gxcf-hint': GxcfHint;
     'gxcf-select': GxcfSelect;
     'gxcf-summarydescription': GxcfSummarydescription;
     'gxcf-summarytitle': GxcfSummarytitle;
     'gxcf-uparrow': GxcfUparrow;
+    'gxcf-userinput': GxcfUserinput;
     'gxcf-welcome': GxcfWelcome;
   }
 }
@@ -320,11 +352,13 @@ declare module "@stencil/core" {
       'gxcf-flow': LocalJSX.GxcfFlow & JSXBase.HTMLAttributes<HTMLGxcfFlowElement>;
       'gxcf-flowfull': LocalJSX.GxcfFlowfull & JSXBase.HTMLAttributes<HTMLGxcfFlowfullElement>;
       'gxcf-flowsummary': LocalJSX.GxcfFlowsummary & JSXBase.HTMLAttributes<HTMLGxcfFlowsummaryElement>;
+      'gxcf-fulluserinput': LocalJSX.GxcfFulluserinput & JSXBase.HTMLAttributes<HTMLGxcfFulluserinputElement>;
       'gxcf-hint': LocalJSX.GxcfHint & JSXBase.HTMLAttributes<HTMLGxcfHintElement>;
       'gxcf-select': LocalJSX.GxcfSelect & JSXBase.HTMLAttributes<HTMLGxcfSelectElement>;
       'gxcf-summarydescription': LocalJSX.GxcfSummarydescription & JSXBase.HTMLAttributes<HTMLGxcfSummarydescriptionElement>;
       'gxcf-summarytitle': LocalJSX.GxcfSummarytitle & JSXBase.HTMLAttributes<HTMLGxcfSummarytitleElement>;
       'gxcf-uparrow': LocalJSX.GxcfUparrow & JSXBase.HTMLAttributes<HTMLGxcfUparrowElement>;
+      'gxcf-userinput': LocalJSX.GxcfUserinput & JSXBase.HTMLAttributes<HTMLGxcfUserinputElement>;
       'gxcf-welcome': LocalJSX.GxcfWelcome & JSXBase.HTMLAttributes<HTMLGxcfWelcomeElement>;
     }
   }

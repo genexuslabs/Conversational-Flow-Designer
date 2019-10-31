@@ -1,0 +1,91 @@
+.FullUserInput
+{
+    border-color: $user-input-border-color;
+    background-color: $flow-element-background-color;
+    border-width: 2px;
+    border-radius: 2px;
+    border-style: solid;
+    padding: 12px 22px 12px 22px;
+    overflow:hidden;
+    margin-bottom: 15px;
+    -webkit-animation: fadeIn 1s;
+    animation: fadeIn 1s;  
+}
+
+.UserInputTitle
+{    
+    background-color: $flow-element-background-color;
+    border:none;
+    color: $elements-title-font-color;
+    font-weight: bold;
+    float:left;
+}
+
+.ExpandUserInputDownArrow
+{
+    float:right;
+}
+
+.DataType
+{
+    color: $elements-header-font-color;
+    clear: both;
+    margin-top: 5px;
+}
+
+.SwitchIconOn
+{
+    content: $switch-icon-on;
+    vertical-align: bottom;
+}
+
+.TextMode
+{
+    color: $user-input-guides;
+    margin-left: 5px;
+}
+
+.UserInputSwitchPartOn
+{
+    content: $switch-userinputpart-on;
+    vertical-align: bottom;
+}
+
+.UserInputSwitchPartOff
+{
+    content: $switch-userinputpart-off;
+    vertical-align: bottom;
+}
+
+.UserInputPart {
+    margin-top: 15px;
+    outline: none;
+}
+
+.UserInputPart::-webkit-details-marker {
+    display: none
+}
+
+.UserInputPart::before {
+    content: $switch-userinputpart-off;
+    color: transparent;
+    padding:4px;
+}
+
+details[open] .UserInputPart::before {
+    content: $switch-userinputpart-on;
+    color: transparent;
+    padding:4px;
+}
+
+.UserInputPartSummaryText
+{
+    vertical-align: top;
+    font-size: $user-input-part-header-size;
+    color: $elements-header-font-color;
+}
+
+.UserInputHints
+{
+    vertical-align: top;
+}

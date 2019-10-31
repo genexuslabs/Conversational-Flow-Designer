@@ -1,3 +1,5 @@
+import { RenderingOptions } from "../../helpers/Helpers";
+
 export class UserInputElement
 {
     public Variable:string;
@@ -12,6 +14,8 @@ export class UserInputElement
     public ValidationProcedure: string;
     public Required: RequiredTypes;
     public RequiredCondition: string;
+    public RenderType:RenderingOptions;
+    public Component:any;
 
     public constructor (varName:string, isColl:boolean, reqMsgs:string[], errorMsgs:string[], entity:string, dataType:string, tryLimit:number, askAgain:boolean, clean:boolean, validationProc:string, reqType:string, reqCondition:string)
     {
@@ -27,6 +31,7 @@ export class UserInputElement
         this.ValidationProcedure = validationProc;
         this.Required = RequiredTypes[reqType];
         this.RequiredCondition = reqCondition;
+        this.RenderType = RenderingOptions.Summary;
     }
 
     public GetFirstAskMessage():string
@@ -34,6 +39,11 @@ export class UserInputElement
         if (this.RequiredMessages.length > 0)
             return this.RequiredMessages[0];
         return "";
+    }
+
+    public SetRenderType(renderType:RenderingOptions)
+    {
+        this.RenderType = renderType;
     }
 }
 

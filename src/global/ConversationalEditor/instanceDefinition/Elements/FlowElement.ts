@@ -86,8 +86,7 @@ export class FlowElement
 
     public SetRenderType(renderType: RenderingOptions)
     {
-        this.RenderType = renderType;
-        this.Component.refresh = !this.Component.refresh;
-        
+        this.RenderType = renderType; 
+        this.Component.refresh = !this.Component.refresh;       
     }
 }

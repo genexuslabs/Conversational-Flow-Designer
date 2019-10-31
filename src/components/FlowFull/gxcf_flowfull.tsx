@@ -61,7 +61,7 @@ export class GXCF_FlowFull {
         console.log("Flow: "+JSON.stringify(this.flow))
         this.flow.UserInputs.forEach(function(userInput){
             userInputs.push(
-                <gxcf-collapseduserinput userInput={userInput}></gxcf-collapseduserinput>
+                <gxcf-userinput userInput={userInput}></gxcf-userinput>
             );
         });
         return userInputs;
@@ -95,7 +95,7 @@ export class GXCF_FlowFull {
             <div class="FullFlowContent">
                 <div class="TabFullFlowContent">
                     <gxcf-summarytitle summaryid={this.SummaryId} summaryvalue={this.flow.Name} classType="FullTitle"></gxcf-summarytitle>            
-                    <gxcf-collection collection={ this.flow.TriggerMessages } collectionHeader={this.CollectionHeader} collectionHintId={HintId.TriggerMessages}></gxcf-collection>                
+                    <gxcf-collection collection={ this.flow.TriggerMessages } collectionHeader={this.CollectionHeader} collectionHintId={HintId.TriggerMessages} collectionAddText="Add another sample trigger message"></gxcf-collection>                
                 </div>
             </div>            
             <hr class="Separator"></hr>

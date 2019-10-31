@@ -2,6 +2,7 @@ body
 {    
     font-family: 'Open Sans', sans-serif;
     background-color: $background-color;
+    font-size: $common-font-size;
 }
 .MainTable
 {
@@ -16,7 +17,6 @@ body
     border-width: 1px;
     display:block;
     padding: 4px 6px 4px 6px;    
-    font-size: $common-font-size;
     font-weight: normal;
     margin-top: 5px;
     width: 33%;

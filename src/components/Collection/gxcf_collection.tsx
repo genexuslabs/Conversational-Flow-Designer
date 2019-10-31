@@ -8,6 +8,7 @@ import { Component, Prop, h, EventEmitter, Event, State } from "@stencil/core";
 export class GXCF_Collection {
     @Prop() collection: string[];
     @Prop() collectionHeader: string;
+    @Prop() collectionAddText: string;
     @Prop() collectionHintId: string;
     @Prop() currentItemIndex: number;
     @Prop() currentItemValue: string;
@@ -50,7 +51,7 @@ export class GXCF_Collection {
 
     private AddItemElement = 
         <div id="AddItem" class="AddItem" onClick={ (event) => this.AddItem(event) }>
-            <gxcf-addelement class="AddItemText"></gxcf-addelement><span class="AddItemText">Add another sample trigger message</span>            
+            <gxcf-addelement class="AddItemText"></gxcf-addelement><span class="AddItemText">{this.collectionAddText}</span>            
         </div>;
 
     private RenderizeItems(items:string[]):any[]{

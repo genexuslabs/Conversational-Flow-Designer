@@ -5,7 +5,7 @@ import { UserInputElement } from "./Elements/UserInputElement.js";
 import { ResponseElement } from "./Elements/ResponseElement.js";
 
 export class Instance
-{                      
+{                 
     public Flows:FlowElement[] = [];
 
     //Initialize
@@ -244,7 +244,7 @@ export class Instance
                 iFlow.SetRenderType(renderType);
                 flow = iFlow;
             }
-            else
+            else if (iFlow.RenderType == renderType)
                 iFlow.SetRenderType(RenderingOptions.Summary);
         });
         return flow;

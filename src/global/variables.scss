@@ -29,6 +29,12 @@ $elements-title-font-color: black;
 $elements-messages-font-color: black;
 $welcome-font-color: white;
 $welcome-color: #0077DE;
+$switch-icon-on: url("src/assets/images/switch.png");
+$switch-userinputpart-off: url("src/assets/images/minus.png");
+$switch-userinputpart-on: url("src/assets/images/plus.png");
+$user-input-guides: #0077de;
+$user-input-part-header-size: 10px;
+$user-input-border-color: #d8d8d8;
 
 @-webkit-keyframes fadeIn {
     from {opacity: 0;}
