@@ -39,22 +39,16 @@
     vertical-align: bottom;
 }
 
+.SwitchIconOff
+{
+    content: $switch-icon-on;
+    vertical-align: bottom;
+}
+
 .TextMode
 {
     color: $user-input-guides;
     margin-left: 5px;
-}
-
-.UserInputSwitchPartOn
-{
-    content: $switch-userinputpart-on;
-    vertical-align: bottom;
-}
-
-.UserInputSwitchPartOff
-{
-    content: $switch-userinputpart-off;
-    vertical-align: bottom;
 }
 
 .UserInputPart {
