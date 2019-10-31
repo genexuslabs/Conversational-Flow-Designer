@@ -1,8 +1,7 @@
 import { Component, Prop, h, EventEmitter, Event, Listen, State } from "@stencil/core";
 import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
-import { RenderingOptions, HintId } from "../../global/ConversationalEditor/helpers/Helpers";
+import { HintId } from "../../global/ConversationalEditor/helpers/Helpers";
 import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
-import { App } from "../../global/ConversationalEditor/App";
 
 @Component({
   tag: "gxcf-flowfull",
@@ -15,7 +14,6 @@ export class GXCF_FlowFull {
 
     @Event() onCollapseFlow: EventEmitter;
     TriggerOnCollapseFlow(event){
-        this.flow = App.GetApp().Instance.SetFlowRenderType(this.flow, RenderingOptions.Summary);
         this.onCollapseFlow.emit(event);
     }
     

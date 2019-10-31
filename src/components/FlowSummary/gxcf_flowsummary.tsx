@@ -2,7 +2,6 @@ import { Component, Prop, Event, EventEmitter, h, State, Listen } from "@stencil
 import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
 import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
 import { RenderingOptions } from "../../global/ConversationalEditor/helpers/Helpers";
-import { App } from "../../global/ConversationalEditor/App";
 
 @Component({
   tag: "gxcf-flowsummary",
@@ -16,7 +15,6 @@ export class GXCF_FlowSummary {
 
   @Event() onExpandFlow: EventEmitter;
   TriggerOnExpandFlow(event){
-    this.flow = App.GetApp().Instance.SetFlowRenderType(this.flow, RenderingOptions.Full);
     this.onExpandFlow.emit(event);
   }
 

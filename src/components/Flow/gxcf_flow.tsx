@@ -2,6 +2,7 @@ import { Component, Prop, h, Listen, State, Event, EventEmitter } from "@stencil
 import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
 import { RenderingOptions } from "../../global/ConversationalEditor/helpers/Helpers";
 import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
+import { App } from "../../global/ConversationalEditor/App";
 
 @Component({
   tag: "gxcf-flow",
@@ -17,14 +18,16 @@ export class GXCF_Flow {
   HandleExpandFlow(event:CustomEvent)
   {
     console.log(event.type);
-    this.refresh = !this.refresh;
+    this.flow = App.GetApp().Instance.SetFlowRenderType(this.flow, RenderingOptions.Full);
+    this.flow.SetRenderType(RenderingOptions.Full);
   }
 
   @Listen('onCollapseFlow')
   HandleCollapseFlow(event:CustomEvent)
   {
     console.log(event.type);
-    this.refresh = !this.refresh;
+    this.flow = App.GetApp().Instance.SetFlowRenderType(this.flow, RenderingOptions.Summary);
+    this.flow.SetRenderType(RenderingOptions.Summary);
   }
 
   @Listen('changingFlowName')
@@ -65,16 +68,9 @@ export class GXCF_Flow {
   {
     this.flow.Component = this;
     if (this.flow.RenderType == RenderingOptions.Summary)
-    {
-      console.log("Summary");
       return this.renderSummary(RenderingOptions.Summary);
-    }
     if (this.flow.RenderType == RenderingOptions.Full)
-    {
-      console.log("Full");
-      return this.renderFull();
-    }      
-    
+      return this.renderFull();    
     return (<span>Flow Render Type '{this.flow.RenderType.toString()}' is not valid</span>)
   }  
 }
