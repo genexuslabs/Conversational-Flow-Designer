@@ -14,4 +14,6 @@ interface External
     ModifyUserInputName(flowName:string, currentUserInputName:string, newUserInputName:string): Function;
     AddUserInput(flowName:string):Function;
     AddResponse(flowName:string):Function;
+    SetErrorMessages(flowName:string, userInput:string, askMessages:string): Function;
+    SelectValidationProcedure(flowName:string, userInput:string):Promise<any>;
 }

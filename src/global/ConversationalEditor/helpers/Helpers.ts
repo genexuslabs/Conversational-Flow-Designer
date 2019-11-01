@@ -60,9 +60,11 @@ export class HintId
     public static AskMessages:string = "AskMessages";
     public static ValidateUserInput:string = "ValidateUserInput";
     public static Redirection:string= "Redirection";
+    public static ErrorMessages:string= "ErrorMessages";
+    public static TryLimit:string= "TryLimit";
 }
 
-export class PropertiesDefinition
+export class PropertiesDefinition //For Test
 {
     public static readonly TriggerMessagesTitle:string = "Trigger Messages";
     public static readonly TriggerMessagesDescription:string = "Specifies the trigger messages for this flow. You can type multiple messages using the ';' delimiter";
@@ -86,7 +88,7 @@ export class PropertiesDefinition
 
     public static readonly AskMessagesTitle:string = "Ask Messages";
     public static readonly AskMessagesDescription:string = "Specify the ask messages for this parameter. You can type multiple messages using the ‘;’ delimiter and you can reference any context parameter using the '&' character.";
-    public static readonly AskMessagesLabel:string = "What's are the ask messages?"
+    public static readonly AskMessagesLabel:string = "What're the ask messages?"
 
     public static readonly ValidateUserInputTitle:string = "Validate User Input";
     public static readonly ValidateUserInputDescription:string = "The Validation Procedure is available for any Chatbot User Input and is triggered as soon the user enters data for that user input.";
@@ -95,6 +97,14 @@ export class PropertiesDefinition
     public static readonly RedirectionTitle:string = "Redirection";
     public static readonly RedirectionDescription:string = "Select an existing flow to redirect the conversation when the current condition is true.";
     public static readonly RedirectionLabel:string = "What's a redirection?"
+
+    public static readonly ErrorMessagesTitle:string = "On Error Messages";
+    public static readonly ErrorMessagesDescription:string = "Specifies the On Error Messages for this parameter. You can type multiple messages using the ‘;’ delimiter and reference any context parameter using the '&' character.";
+    public static readonly ErrorMessagesLabel:string = "What're the On Error Messages?"
+
+    public static readonly TryLimitTitle:string = "Try Limit";
+    public static readonly TryLimitDescription:string = "When Ask again property is set to TRUE, you can establish the number of times the user is asked to re-try.";
+    public static readonly TryLimitLabel:string = "What's the Try Limit?"
 
     public static GetTitle(hintId:HintId):string
     {
@@ -114,6 +124,10 @@ export class PropertiesDefinition
             return this.ValidateUserInputTitle;
         if (hintId == HintId.Redirection)
             return this.RedirectionTitle;
+        if (hintId == HintId.ErrorMessages)
+            return this.ErrorMessagesTitle;
+        if (hintId == HintId.TryLimit)
+            return this.TryLimitTitle;    
         return "";
     }
 
@@ -135,6 +149,10 @@ export class PropertiesDefinition
             return this.ValidateUserInputDescription;
         if (hintId == HintId.Redirection)
             return this.RedirectionDescription;
+        if (hintId == HintId.ErrorMessages)
+            return this.ErrorMessagesDescription;
+        if (hintId == HintId.TryLimit)
+            return this.TryLimitDescription;              
         return "";
     }
 
@@ -156,6 +174,10 @@ export class PropertiesDefinition
             return this.ValidateUserInputLabel;
         if (hintId == HintId.Redirection)
             return this.RedirectionLabel;
+        if (hintId == HintId.ErrorMessages)
+            return this.ErrorMessagesLabel;
+        if (hintId == HintId.TryLimit)
+            return this.TryLimitLabel;  
         return "";
     }
 }

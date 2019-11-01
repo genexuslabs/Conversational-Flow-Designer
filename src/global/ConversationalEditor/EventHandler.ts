@@ -47,6 +47,17 @@ export class EventHandler
         return flow;
     }    
 
+    public static async SelectValidationProcedure(flow:FlowElement, userInput:UserInputElement):Promise<UserInputElement>
+    {   
+        if (window.external.SelectValidationProcedure)
+        {
+            await window.external.SelectValidationProcedure(flow.Name, userInput.Variable).then(function(validationProcedure){
+                userInput.SetValidationProcedure(validationProcedure);
+            });
+        }
+        return userInput;
+    }
+
     public static GetFormattedMessages(lMessages:string[]):string
     {
         let messages:string = "";

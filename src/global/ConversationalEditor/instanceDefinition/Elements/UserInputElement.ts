@@ -4,7 +4,7 @@ import { IConversationalElement, CollectionType } from "./IConversationalElement
 import { EventHandler } from "../../EventHandler";
 
 export class UserInputElement implements IConversationalElement
-{             
+{                 
     public Variable:string;
     public IsCollection:boolean;
     public RequiredMessages: string[];
@@ -57,12 +57,27 @@ export class UserInputElement implements IConversationalElement
         this.ExternalUpdateAskMessages();
     }
 
+    public SetOnErrorMessage(index:number, value:string)
+    {
+        this.ErrorMessages[index] = value;
+        this.ExternalUpdateErrorMessages();
+    }
+
     public DeleteAskMessage(index:number)
     {
         if (this.RequiredMessages.length > index)
         {
             this.RequiredMessages.splice(index, 0);
             this.ExternalUpdateAskMessages();
+        }
+    }
+
+    public DeleteOnErrorMessage(index:number)
+    {
+        if (this.ErrorMessages.length > index)
+        {
+            this.ErrorMessages.splice(index, 0);
+            this.ExternalUpdateErrorMessages();
         }
     }
 
@@ -75,16 +90,30 @@ export class UserInputElement implements IConversationalElement
         }
     }
 
+    private ExternalUpdateErrorMessages()
+    {
+        if (window.external.SetErrorMessages)
+        {
+            let messages:string = EventHandler.GetFormattedMessages(this.ErrorMessages);
+            window.external.SetErrorMessages(this.Parent.Name, this.Variable, messages);
+        }
+    }
+
     public SetItem(index:number, value:string, collectionType:CollectionType)
     {
         if (collectionType == CollectionType.AskMessages)
             this.SetAskMessage(index, value);
+        else if (collectionType == CollectionType.OnErrorMessages)
+            this.SetOnErrorMessage(index, value);
+
     }
 
     public DeleteItem(index: number, collectionType: CollectionType)
     {
         if (collectionType == CollectionType.AskMessages)
             this.DeleteAskMessage(index);
+        else if (collectionType == CollectionType.OnErrorMessages)
+            this.DeleteOnErrorMessage(index);
     } 
 
     public SetName(name:string)
@@ -99,6 +128,11 @@ export class UserInputElement implements IConversationalElement
     {
         this.SetItem(0, value, CollectionType.AskMessages);
     } 
+
+    public SetValidationProcedure(validationProcedure:string)
+    {
+        this.ValidationProcedure = validationProcedure;
+    }
 }
 
 export enum RequiredTypes

@@ -14,7 +14,8 @@ export class GXCF_FullUserInput {
   @Prop() userInput: UserInputElement;
   @Prop() flow:FlowElement
   @State() enableAdvancedMode: boolean = false;
-  
+  @State() refresh:boolean = false;
+
   @Event() onCollapseUserInput: EventEmitter;
   TriggerOnCollapseUserInput(event){    
     this.onCollapseUserInput.emit(event);
@@ -25,6 +26,15 @@ export class GXCF_FullUserInput {
     this.onModifyUserInputName.emit(event);
   }
 
+  TriggerOnChangeValidationProcedure(event){    
+    console.log(event);
+    EventHandler.SelectValidationProcedure(this.flow, this.userInput).then(uInput =>
+    {
+      this.userInput = uInput;
+      this.refresh = !this.refresh;
+    });
+  }
+
   SwitchAdvancedMode(event){
     console.log(event);
     this.enableAdvancedMode = !this.enableAdvancedMode;
@@ -33,7 +43,8 @@ export class GXCF_FullUserInput {
   private RenderBasicMode():any
   {
     return (
-      <details><summary class="UserInputPart"><span class="UserInputPartSummaryText">Ask messages</span><gxcf-hint hintId={HintId.AskMessages} class="UserInputHints"/></summary>
+      <details open><summary class="UserInputPart"><span class="UserInputPartSummaryText">Ask messages</span></summary>
+        <gxcf-hint hintId={HintId.AskMessages} class="UserInputHints"/>
         <gxcf-collection collection={this.userInput.RequiredMessages} collectionAddText="Add another ask message" itemParent={this.userInput} collectionType={ CollectionType.AskMessages }></gxcf-collection>
       </details>
     );
@@ -43,13 +54,33 @@ export class GXCF_FullUserInput {
   {
     return (
       <div>
-        <details><summary class="UserInputPart"><span class="UserInputPartSummaryText">Condition to be required</span><gxcf-hint hintId={HintId.Required} class="UserInputHints"/></summary>
-          <p>Test</p>
+        <details><summary class="UserInputPart"><span class="UserInputPartSummaryText">Condition to be required</span></summary>
+          <gxcf-hint hintId={HintId.Required} class="UserInputHints"/>
+          <div class="ContainerRequiredConditon">
+            <span class="LabelRequiredConditon">If...</span>
+            <input class="InputRequiredCondition" placeholder="always" value={this.userInput.RequiredCondition}/>
+          </div>
         </details>
         {this.RenderBasicMode()}
-        <details><summary class="UserInputPart"><span class="UserInputPartSummaryText">Validate User Input</span><gxcf-hint hintId={HintId.ValidateUserInput} class="UserInputHints"/></summary>
+        <details><summary class="UserInputPart"><span class="UserInputPartSummaryText">Validate User Input</span></summary>
+          <div>
+            <gxcf-hint hintId={HintId.ErrorMessages} class="UserInputHints"/>
+            <gxcf-collection collection={this.userInput.ErrorMessages} collectionAddText="Add another error message" itemParent={this.userInput} collectionType={ CollectionType.OnErrorMessages } collectionHeader="Entity or Data Type Error messages"></gxcf-collection>
+          </div>
+          <div class="ContainerForUserInput">
+            <gxcf-hint hintId={HintId.TryLimit} class="UserInputHints"/>
+            <span>Try Limit</span>            
+            <input class="UserInputLine" placeholder="0 - No limits" value={this.userInput.TryLimit}/>
+            <hr class="Separator"></hr>
+          </div>
+          <div class="ContainerForUserInput">
+            <gxcf-hint hintId={HintId.ValidateUserInput} class="UserInputHints"/>
+            <span>Validation Procedure</span>       
+            <input class="UserInputLine SelectVP" placeholder="Select a Validation Procedure" value={this.userInput.ValidationProcedure} onClick={ (event) => this.TriggerOnChangeValidationProcedure(event)}/>     
+          </div>
         </details>
-        <details><summary class="UserInputPart"><span class="UserInputPartSummaryText">Redirection</span><gxcf-hint hintId={HintId.Redirection} class="UserInputHints"/></summary>
+        <details><summary class="UserInputPart"><span class="UserInputPartSummaryText">Redirection</span></summary>
+        <gxcf-hint hintId={HintId.Redirection} class="UserInputHints"/>
         </details>
       </div>
     );
