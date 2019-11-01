@@ -2,6 +2,7 @@ import { Component, Prop, h, EventEmitter, Event, Listen, State } from "@stencil
 import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
 import { HintId } from "../../global/ConversationalEditor/helpers/Helpers";
 import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
+import { CollectionType } from "../../global/ConversationalEditor/instanceDefinition/Elements/IConversationalElement";
 
 @Component({
   tag: "gxcf-flowfull",
@@ -16,19 +17,17 @@ export class GXCF_FlowFull {
     TriggerOnCollapseFlow(event){
         this.onCollapseFlow.emit(event);
     }
-    
-    @Listen('editItem')
-    HandleEditItem(event:Event)
-    {
-        let element:any = event.srcElement;            
-        EventHandler.EditTrigger(element.currentItemIndex, element.currentItemValue, this.flow);
+
+    TriggerOnAddUserInput(event){    
+        console.log(event);
+        this.flow.NewUserInput();
+        this.refresh = !this.refresh;
     }
-    
-    @Listen('deleteItem')
-    HandleDeleteItem(event:Event)
-    {
-        let element:any = event.srcElement;            
-        EventHandler.DeleteTrigger(element.currentItemIndex, this.flow);
+
+    TriggerOnAddResponse(event){    
+        console.log(event);
+        this.flow.NewResponse();
+        this.refresh = !this.refresh;
     }
 
     get SummaryId():string
@@ -58,12 +57,11 @@ export class GXCF_FlowFull {
 
     private RenderizeUserInputs():any[]{
         let userInputs:any[] = [];
-        console.log("Flow: "+JSON.stringify(this.flow))
         this.flow.UserInputs.forEach(function(userInput){
             userInputs.push(
-                <gxcf-userinput userInput={userInput}></gxcf-userinput>
+                <gxcf-userinput userInput={userInput} flow={this.flow} ></gxcf-userinput>
             );
-        });
+        }, this);
         return userInputs;
     } 
 
@@ -89,13 +87,12 @@ export class GXCF_FlowFull {
 
     render() {
         this.flow.UserInputComponent = this;
-        console.log("Render");
         return (
         <div id={this.flow.Id} data-elementType="flow" class="FlowFull">
             <div class="FullFlowContent">
                 <div class="TabFullFlowContent">
                     <gxcf-summarytitle summaryid={this.SummaryId} summaryvalue={this.flow.Name} classType="FullTitle"></gxcf-summarytitle>            
-                    <gxcf-collection collection={ this.flow.TriggerMessages } collectionHeader={this.CollectionHeader} collectionHintId={HintId.TriggerMessages} collectionAddText="Add another sample trigger message"></gxcf-collection>                
+                    <gxcf-collection collection={ this.flow.TriggerMessages } collectionHeader={this.CollectionHeader} collectionHintId={HintId.TriggerMessages} collectionAddText="Add another sample trigger message" collectionType={ CollectionType.TriggerMessages } itemParent={ this.flow }></gxcf-collection>                
                 </div>
             </div>            
             <hr class="Separator"></hr>
@@ -105,9 +102,9 @@ export class GXCF_FlowFull {
                     <gxcf-hint hintId={HintId.UserInput} class="Hint"/>
                 </div>
                 { this.RenderizeUserInputs() }
-                <div class="AddFlowElement LeftTab">
+                <div class="AddFlowElement LeftTab" onClick={ (event) => this.TriggerOnAddUserInput(event)}>
                     <gxcf-addelement></gxcf-addelement>
-                    <span class="AddElementText">Add another user input request</span>
+                    <span class="AddElementText">Add another user input</span>
                 </div>
             </div>
             <hr class="Separator"></hr>
@@ -117,7 +114,7 @@ export class GXCF_FlowFull {
                     <gxcf-hint hintId={ HintId.Responses } class="Hint"/>
                 </div>
                 { this.RenderizeResponse() }
-                <div class="AddFlowElement">
+                <div class="AddFlowElement" onClick={ (event) => this.TriggerOnAddResponse(event)}>
                     <gxcf-addelement></gxcf-addelement>
                     <span class="AddElementText">Add another possible response</span>
                 </div>

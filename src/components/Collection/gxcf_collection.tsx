@@ -12,35 +12,36 @@ export class GXCF_Collection {
     @Prop() collectionHintId: string;
     @Prop() currentItemIndex: number;
     @Prop() currentItemValue: string;
+    @Prop() itemParent:any;
+    @Prop() collectionType:any;
+
     @State() refresh: boolean = true;
 
-    @Event() addItem:EventEmitter;
     AddItem(event)
     {
+        console.log(event);
         let newItem:string = "";
         this.collection.push(newItem);
         this.refresh = !this.refresh;
-        this.addItem.emit(event);
+        this.itemParent.SetItem(this.currentItemIndex, this.currentItemValue, this.collectionType);
     }
 
-    @Event() deleteItem:EventEmitter;
     DeleteItem(event)
     {
         let element:HTMLDivElement = event.srcElement as HTMLDivElement;
         this.setCurrentIndex(element);
         this.collection.splice(this.currentItemIndex, 1);
-        this.deleteItem.emit(event);
+        console.log(event);
+        this.itemParent.DeleteItem(this.currentItemIndex, this.collectionType);
     }
 
-    @Event() editItem:EventEmitter;
     EditItem(event:Event)
     {          
-        console.log(event.srcElement)  
         let element:HTMLInputElement = event.srcElement as HTMLInputElement;
         this.setCurrentIndex(element);
         this.currentItemValue = element.value;
-        console.log("TValue: "+this.currentItemValue);  
-        this.editItem.emit(event);               
+        console.log(event);
+        this.itemParent.SetItem(this.currentItemIndex, this.currentItemValue, this.collectionType);
     }
 
     setCurrentIndex(element:any)

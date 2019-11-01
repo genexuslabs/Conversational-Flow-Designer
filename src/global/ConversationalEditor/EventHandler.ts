@@ -2,6 +2,7 @@ import { App } from "./App.js";
 import { FlowElement } from "./instanceDefinition/Elements/FlowElement.js";
 import { GXCF_DropZone } from "../../components/DropZone/gxcf_dropzone.js";
 import { DragDropHelpers, MoveType, Controls, ComponentsAttributes } from "./helpers/Helpers.js";
+import { UserInputElement } from "./instanceDefinition/Elements/UserInputElement.js";
 
 export var sourceId:string="";
 
@@ -38,7 +39,6 @@ export class EventHandler
             let flowName:string = App.GetApp().Instance.GetFlowName(flowId);     
             await window.external.SelectConversationalObject(flowName).then(sFlow => 
             {
-                console.log(sFlow);
                 let jsonFlow = JSON.parse(sFlow);
                 flow = App.GetApp().Instance.LoadFlow(flowName, jsonFlow);
                 return flow;
@@ -47,29 +47,13 @@ export class EventHandler
         return flow;
     }    
 
-    public static EditTrigger(index:number, value:string, flow:FlowElement):void
+    public static GetFormattedMessages(lMessages:string[]):string
     {
-        flow.SetTrigger(index, value);
-        this.SetTriggers(flow);           
-    }
-
-    public static DeleteTrigger(index:number, flow:FlowElement):void
-    {
-        flow.TriggerMessages.splice(index, 1);
-        this.SetTriggers(flow);           
-    }
-
-    private static SetTriggers(flow:FlowElement)
-    {
-        if (window.external.SetTriggers)
-        {
-            let messages:string = "";
-            console.log(flow.TriggerMessages)
-            flow.TriggerMessages.forEach(function(msg){
-                messages += msg+";";
-            });
-            window.external.SetTriggers(flow.Name, messages);
-        }  
+        let messages:string = "";
+        lMessages.forEach(function(msg){
+            messages += msg+";";
+        });   
+        return messages;
     }
 
     public static OnFlowDragStart:Function = (customEvent:CustomEvent)=>
@@ -88,6 +72,7 @@ export class EventHandler
         event.preventDefault;
         return <DragEvent>event.detail;
     }
+    
     public static OnDragOverFlow:Function = (customEvent:CustomEvent)=>
     {
         let event:DragEvent = <DragEvent>EventHandler.GetEvent(customEvent);
@@ -99,10 +84,7 @@ export class EventHandler
             {
                 if (target.getAttribute(ComponentsAttributes.ElementType) == ComponentsAttributes.ElmentTypeValue && target.id != sourceId)
                 {
-                    console.log(target.tagName)
                     let sourceId:string = event.dataTransfer.getData("text");                                                                            
-                    console.log(target.id)
-                    console.log(sourceId)
                     if (target.id != sourceId)
                     {
                         let parent:HTMLElement = <HTMLElement>target.parentElement;
@@ -207,10 +189,9 @@ export class EventHandler
 
     public static DisableDropZones(event:DragEvent)
     {
-        console.log(event.detail);
         let flowElements:HTMLCollection = EventHandler.GetDropZones();
         let index:number = 0;
-        
+        console.log(event);
         while (index < flowElements.length)
         {            
             GXCF_DropZone.Hide(<HTMLElement>flowElements[index]);
@@ -235,71 +216,14 @@ export class EventHandler
         return App.GetApp().Instance.Flows;
     }  
 
-    public static ChangingFlowName(customEvent:CustomEvent){
-        let event = EventHandler.GetEvent(customEvent);
-        if (event.currentTarget)
-        {
-            let element:HTMLInputElement = <HTMLInputElement>event.currentTarget;
-            let parent:HTMLElement = element;
-            let flowId:string = EventHandler.GetFlowId(parent);
-            
-            let flowName:string = App.GetApp().Instance.GetFlowName(flowId);
-            if (element.value)
-            {
-                App.GetApp().Instance.ModifyFlowName(flowName, element.value);
-                if (window.external.ModifyFlowName)
-                {
-                    window.external.ModifyFlowName(flowName, element.value);
-                }
-            }        
-        }       
-    }
-    
-    public static ChangingFlowTriggerSummary(customEvent:CustomEvent){
-        let event = EventHandler.GetEvent(customEvent);
-        if (event.currentTarget)
-        {
-            let element:HTMLInputElement = <HTMLInputElement>event.currentTarget;
-            let parent:HTMLElement = element;
-            let flowId:string = EventHandler.GetFlowId(parent);
-    
-            let flowName:string = App.GetApp().Instance.GetFlowName(flowId);
-            if (element.value)
-            {
-                App.GetApp().Instance.ModifyFlowTriggerSummary(flowName, element.value);
-                if (window.external.ModifyFirstTriggerMessage)
-                {
-                    console.log("FlowName: "+flowName);
-                    console.log("Value: "+element.value);
-                    window.external.ModifyFirstTriggerMessage(flowName, element.value);
-                }
-            }        
-        }       
-    }
-
-    private static GetFlowIdforSummaryElements(element:HTMLElement):string
+    public static GetValue(customEvent:CustomEvent):any
     {
-        let iterate:Boolean = true;
-        while(iterate)
+        let event = EventHandler.GetEvent(customEvent);
+        if (event.currentTarget)
         {
-            if (element.parentElement != null && element.parentElement.id != Controls.FlowsContainer)
-            {                
-                element = element.parentElement;
-                iterate = false;
-            }                       
+            let element:HTMLInputElement = <HTMLInputElement>event.currentTarget;
+            return element.value;
         }
-
-        return element.id;
-    }
-}
-
-export function selectConversationalObject(event:Event)
-{    
-    if (event.currentTarget)
-    {        
-        let element:HTMLElement = <HTMLElement>event.currentTarget;
-        let flowId:string = <string>element.getAttribute(ComponentsAttributes.FlowId);
-        let flowName:string = App.GetApp().Instance.GetFlowName(flowId);
-        App.GetApp().Instance.SelectConversationalObject(flowName);
+        return null;
     }
 }

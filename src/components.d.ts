@@ -33,8 +33,10 @@ export namespace Components {
     'collectionAddText': string;
     'collectionHeader': string;
     'collectionHintId': string;
+    'collectionType': any;
     'currentItemIndex': number;
     'currentItemValue': string;
+    'itemParent': any;
   }
   interface GxcfConversationaldesigner {}
   interface GxcfConversationalobject {
@@ -60,6 +62,7 @@ export namespace Components {
     'renderingType': RenderingOptions;
   }
   interface GxcfFulluserinput {
+    'flow': FlowElement;
     'userInput': UserInputElement;
   }
   interface GxcfHint {
@@ -82,6 +85,7 @@ export namespace Components {
     'arrowid': string;
   }
   interface GxcfUserinput {
+    'flow': FlowElement;
     'userInput': UserInputElement;
   }
   interface GxcfWelcome {}
@@ -233,6 +237,8 @@ declare namespace LocalJSX {
   }
   interface GxcfCollapseduserinput {
     'onOnExpandUserInput'?: (event: CustomEvent<any>) => void;
+    'onOnModifyUserInputFirstAskMessage'?: (event: CustomEvent<any>) => void;
+    'onOnModifyUserInputName'?: (event: CustomEvent<any>) => void;
     'userInput'?: UserInputElement;
   }
   interface GxcfCollection {
@@ -240,11 +246,10 @@ declare namespace LocalJSX {
     'collectionAddText'?: string;
     'collectionHeader'?: string;
     'collectionHintId'?: string;
+    'collectionType'?: any;
     'currentItemIndex'?: number;
     'currentItemValue'?: string;
-    'onAddItem'?: (event: CustomEvent<any>) => void;
-    'onDeleteItem'?: (event: CustomEvent<any>) => void;
-    'onEditItem'?: (event: CustomEvent<any>) => void;
+    'itemParent'?: any;
   }
   interface GxcfConversationaldesigner {}
   interface GxcfConversationalobject {
@@ -279,7 +284,9 @@ declare namespace LocalJSX {
     'renderingType'?: RenderingOptions;
   }
   interface GxcfFulluserinput {
+    'flow'?: FlowElement;
     'onOnCollapseUserInput'?: (event: CustomEvent<any>) => void;
+    'onOnModifyUserInputName'?: (event: CustomEvent<any>) => void;
     'userInput'?: UserInputElement;
   }
   interface GxcfHint {
@@ -306,6 +313,7 @@ declare namespace LocalJSX {
     'arrowid'?: string;
   }
   interface GxcfUserinput {
+    'flow'?: FlowElement;
     'userInput'?: UserInputElement;
   }
   interface GxcfWelcome {

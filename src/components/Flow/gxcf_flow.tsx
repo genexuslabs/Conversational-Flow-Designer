@@ -33,13 +33,17 @@ export class GXCF_Flow {
   @Listen('changingFlowName')
   HandleChangingFlowName(event:CustomEvent)
   {
-    EventHandler.ChangingFlowName(event);
+    let value = EventHandler.GetValue(event);
+    if (value != null)
+      this.flow.SetName(value);
   }
 
   @Listen('changingFlowTriggerSummary')
   HandleChangingFlowTriggerSummary(event:CustomEvent)
   {
-    EventHandler.ChangingFlowTriggerSummary(event);
+    let value = EventHandler.GetValue(event);
+    if (value != null)
+      this.flow.SetFirstTriggerMessage(value);
   }
 
   private renderSummary(renderingOption:RenderingOptions):any{

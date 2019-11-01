@@ -2,7 +2,7 @@ import { Component, Prop, h, EventEmitter, Event, State, Listen } from "@stencil
 import { UserInputElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/UserInputElement";
 import { RenderingOptions } from "../../global/ConversationalEditor/helpers/Helpers";
 import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
-import { App } from "../../global/ConversationalEditor/App";
+import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
 
 @Component({
   tag: "gxcf-userinput",
@@ -10,7 +10,8 @@ import { App } from "../../global/ConversationalEditor/App";
   shadow: false
 })
 export class GXCF_UserInput {
-    @Prop() userInput: UserInputElement;
+    @Prop() userInput:UserInputElement;
+    @Prop() flow:FlowElement;
     @State() refresh:boolean = false;
 
     @Listen('onExpandUserInput')
@@ -29,6 +30,30 @@ export class GXCF_UserInput {
         this.refresh = !this.refresh;
     }
 
+    @Listen('onModifyUserInputName')
+    HandleOnModifyUserInputName(event:CustomEvent)
+    {
+        console.log("Event: "+event.type);        
+        let value = EventHandler.GetValue(event);
+        if (value != null)
+        {
+            this.userInput.SetName(value);
+            this.refresh = !this.refresh;
+        }        
+    }
+
+    @Listen('onModifyUserInputFirstAskMessage')
+    HandleOnModifyUserInputFirstAskMessage(event:CustomEvent)
+    {
+        console.log("Event: "+event.type);        
+        let value = EventHandler.GetValue(event);
+        if (value != null)
+        {
+            this.userInput.SetFirstAskMessage(value);
+            this.refresh = !this.refresh;
+        }
+    }
+
     private collapsedUserInput():any
     {
         return (
@@ -39,7 +64,7 @@ export class GXCF_UserInput {
     private fullUserInput():any
     {
         return (
-            <gxcf-fulluserinput userInput={this.userInput}></gxcf-fulluserinput>
+            <gxcf-fulluserinput userInput={this.userInput} flow={this.flow}></gxcf-fulluserinput>
         );
     }
 

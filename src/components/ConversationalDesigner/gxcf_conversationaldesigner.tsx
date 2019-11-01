@@ -49,7 +49,6 @@ HandleOpenEditor(){
 HandleAddFlowElement()
 {  
   this.flows =  EventHandler.AddFlowElement();
-  console.log(this.flows)
 }
 
 @State() flows:FlowElement[];
@@ -62,8 +61,6 @@ private addFlow =
 
   render() {
     this.Initialize();
-    console.log("Post initialize");
-    console.log("IsEmpty: "+App.GetApp().InstanceIsEmpty())
     if (!this.openEditor && App.GetApp().InstanceIsEmpty())
     {
       return (<gxcf-welcome></gxcf-welcome>)
@@ -83,7 +80,6 @@ private addFlow =
     let flows:any[] = [];
     
     App.GetApp().Instance.Flows.forEach(function(flowElement){            
-      console.log(flowElement);
       flows.push(<gxcf-flow flow = {flowElement} showDropZone={false}></gxcf-flow>);
     });
     return flows;

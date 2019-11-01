@@ -45,7 +45,7 @@ export class Instance
         flow.TriggerMessages[0] = "testing"
         flow.TriggerMessages[1] = "testing1"
         flow.ConversationalObject = "TestAProcedure"
-        let userInput:UserInputElement = new UserInputElement("Test", false, ["Test message"], [], "Test1", "VarChar", 0, false, false, "", "","");
+        let userInput:UserInputElement = new UserInputElement("Test", false, ["Test message"], [], "Test1", "VarChar", 0, false, false, "", "","", flow);
         flow.AddUserInput(userInput);
         let response:ResponseElement = new ResponseElement("Test", ["Test"], "Test", "", "", "", "");
         flow.AddResponse(response);
@@ -70,7 +70,6 @@ export class Instance
             let flow:FlowElement = new FlowElement(initializeFlow.Name);
             flow.LoadFlow(initializeFlow);   
             App.GetApp().Instance.AddFlow(flow); 
-            console.log(index)
             index++;
         });
         console.log("Instance flows: "+App.GetApp().Instance.Flows.length.toString());
@@ -118,35 +117,6 @@ export class Instance
         });
         return null;
     }
-
-    public ModifyFlowName(flowName: string, value: string) {
-        this.Flows.forEach(function(element)
-        {            
-            if (flowName == element.Name)
-            {        
-                element.Name = value;
-                if (window.external.ModifyFlowName)
-                {
-                    window.external.ModifyFlowName(flowName, value);
-                }                
-            }
-        });
-    }
-
-    public ModifyFlowTriggerSummary(flowName: string, value: string) {
-        this.Flows.forEach(function(element)
-        {
-            if (flowName == element.Name)
-            {                
-                element.TriggerMessages[0] = value;
-
-                if (window.external.ModifyFirstTriggerMessage)
-                {
-                    window.external.ModifyFirstTriggerMessage(flowName, value);
-                }                
-            }
-        });
-    }  
 
     public MoveFlows(sourceName: string, targetName: string, moveType:MoveType) {
         let sourceFlow:FlowElement = new FlowElement("");
