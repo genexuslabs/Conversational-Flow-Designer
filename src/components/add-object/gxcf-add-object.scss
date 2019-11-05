@@ -1,0 +1,21 @@
+.AddObject
+{
+    color: $inelement-select-color;    
+    font-size: $common-font-size;
+    clear:both;
+    margin-top: 10px;
+    border-color: $background-color;
+    border-style: solid; 
+    border-width: 1px;
+    background-color: $collection-background-color;
+    cursor: pointer;
+    padding: 1px 0px 1px 5px;
+    height: 24px;   
+    vertical-align: middle;
+}
+
+.AddObjectText
+{
+    line-height: 24px;
+    vertical-align: middle;
+}

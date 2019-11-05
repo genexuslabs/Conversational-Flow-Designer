@@ -8,13 +8,13 @@
     padding: 12px 22px 12px 22px;
     overflow:hidden;
     margin-bottom: 15px;
-    -webkit-animation: fadeIn 1s;
-    animation: fadeIn 1s
+    -webkit-animation: $animation-time;
+    animation: $animation-time;
 }
 
 .CollapsedResponse:hover
 {
-    transform: scale(1.04);
+    transform: $animation-scale-size;
 }
 
 .CollapsedResponseDownArrow

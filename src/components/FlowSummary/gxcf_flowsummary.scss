@@ -9,13 +9,13 @@
     margin-bottom: 8px;
     width: 91%;
     overflow: hidden;
-    -webkit-animation: fadeIn 0.5s;
-    animation: fadeIn 0.5s
+    -webkit-animation: $animation-time;
+    animation: $animation-time;
 }
 
 .FlowSummary:hover
 {
-    transform: scale(1.05);
+    transform: $animation-scale-size;
 }
 
 .ActiveContent

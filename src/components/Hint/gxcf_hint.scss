@@ -21,6 +21,7 @@
     z-index: -1;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
+    font-size: $common-font-size;
 }
 
 .HintTitle
@@ -36,4 +37,6 @@
 .CloseHint
 {
     float:right;
+    font-size: $common-font-size;
+    cursor: pointer;
 }
