@@ -21,7 +21,7 @@ $common-action-background: transparent;
 $collection-background-color: white;
 $common-font-size: 12px;
 $hint-color: rgb(155, 155, 155);
-$hint-font-size: 9px;
+$hint-font-size: 10px;
 $arrow-color: black;
 $elements-header-font-color: #191919;
 $add-element-font-size: 16px;
@@ -33,8 +33,10 @@ $switch-icon-on: url("src/assets/images/switch.png");
 $switch-userinputpart-off: url("src/assets/images/minus.png");
 $switch-userinputpart-on: url("src/assets/images/plus.png");
 $user-input-guides: #0077de;
-$user-input-part-header-size: 10px;
+$user-input-part-header-size: 11px;
 $user-input-border-color: #d8d8d8;
+$animation-time: fadeIn 0.3s;
+$animation-scale-size: scale(1.05);
 
 @-webkit-keyframes fadeIn {
     from {opacity: 0;}
