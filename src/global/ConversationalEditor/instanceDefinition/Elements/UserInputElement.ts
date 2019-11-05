@@ -6,7 +6,7 @@ import {
 } from "./IConversationalElement";
 import { EventHandler } from "../../EventHandler";
 import { RedirectionProperty } from "./RedirectionProperty";
-import { UserInput } from "../../../../components/UserInput/gxcf_userinput";
+import { UserInput } from "../../../../components/user-input/gxcf_userinput";
 
 export enum RequiredTypes {
   Always,

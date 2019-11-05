@@ -8,8 +8,8 @@ import {
 } from "./IConversationalElement";
 import { EventHandler } from "../../EventHandler";
 import { RedirectionProperty } from "./RedirectionProperty";
-import { Flow } from "../../../../components/Flow/gxcf_flow";
-import { FlowFull } from "../../../../components/FlowFull/gxcf_flowfull";
+import { Flow } from "../../../../components/flow/gxcf_flow";
+import { FlowFull } from "../../../../components/flow-full/gxcf_flowfull";
 
 export class FlowElement implements IConversationalElement {
   public Name = "";

@@ -5,12 +5,10 @@ import { Component, Prop, h } from "@stencil/core";
   styleUrl: "gxcf_downarrow.scss",
   shadow: false
 })
-export class GXCF_DownArrow {
+export class DownArrow {
   @Prop() arrowid: string;
 
   render() {
-    return (
-        <p id={this.arrowid} class="DownArrow"></p>
-    );
+    return <p id={this.arrowid} class="DownArrow"></p>;
   }
 }

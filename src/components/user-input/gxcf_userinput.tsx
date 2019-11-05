@@ -1,12 +1,4 @@
-import {
-  Component,
-  Prop,
-  h,
-  EventEmitter,
-  Event,
-  State,
-  Listen
-} from "@stencil/core";
+import { Component, Prop, h, State, Listen } from "@stencil/core";
 import { UserInputElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/UserInputElement";
 import { RenderingOptions } from "../../global/ConversationalEditor/helpers/Helpers";
 import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
@@ -23,21 +15,21 @@ export class UserInput {
   @State() refresh = false;
 
   @Listen("onExpandUserInput")
-  HandleOnExpandUserInput(event: CustomEvent) {
+  HandleOnExpandUserInput(event: CustomEvent): void {
     console.log("Event: " + event.type);
     this.userInput.SetRenderType(RenderingOptions.Full);
     this.refresh = !this.refresh;
   }
 
   @Listen("onCollapseUserInput")
-  HandleCollapseUserInput(event: CustomEvent) {
+  HandleCollapseUserInput(event: CustomEvent): void {
     console.log(event.type);
     this.userInput.SetRenderType(RenderingOptions.Summary);
     this.refresh = !this.refresh;
   }
 
   @Listen("onModifyUserInputName")
-  HandleOnModifyUserInputName(event: CustomEvent) {
+  HandleOnModifyUserInputName(event: CustomEvent): void {
     console.log("Event: " + event.type);
     const value = EventHandler.GetValue(event);
     if (value != null) {
@@ -47,7 +39,7 @@ export class UserInput {
   }
 
   @Listen("onModifyUserInputFirstAskMessage")
-  HandleOnModifyUserInputFirstAskMessage(event: CustomEvent) {
+  HandleOnModifyUserInputFirstAskMessage(event: CustomEvent): void {
     console.log("Event: " + event.type);
     const value = EventHandler.GetValue(event);
     if (value != null) {
@@ -56,7 +48,7 @@ export class UserInput {
     }
   }
 
-  private collapsedUserInput(): any {
+  private collapsedUserInput(): HTMLElement {
     return (
       <gxcf-collapseduserinput
         userInput={this.userInput}
@@ -64,7 +56,7 @@ export class UserInput {
     );
   }
 
-  private fullUserInput(): any {
+  private fullUserInput(): HTMLElement {
     return (
       <gxcf-fulluserinput
         userInput={this.userInput}
