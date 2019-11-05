@@ -2,8 +2,8 @@ import { Component, Prop, h, EventEmitter, Event, State } from "@stencil/core";
 import { HintId } from "../../global/ConversationalEditor/helpers/Helpers";
 
 @Component({
-  tag: "gxcf-conversationalobject",
-  styleUrl: "gxcf_conversationalobject.scss",
+  tag: "conversational-object",
+  styleUrl: "conversational-object.scss",
   shadow: false
 })
 export class ConversationalObject {

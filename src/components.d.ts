@@ -17,6 +17,10 @@ export namespace Components {
   interface AddObject {
     collectionAddText: string;
   }
+  interface ConversationalDesigner {}
+  interface ConversationalObject {
+    conversationalObject: string;
+  }
   interface CustomCollection {
     collection: string[];
     collectionAddText: string;
@@ -62,10 +66,6 @@ export namespace Components {
   interface FlowFull {
     flow: FlowElement;
   }
-  interface GxcfConversationaldesigner {}
-  interface GxcfConversationalobject {
-    conversationalObject: string;
-  }
   interface ResponseCollapsed {
     response: ResponseElement;
   }
@@ -109,6 +109,22 @@ declare global {
   var HTMLAddObjectElement: {
     prototype: HTMLAddObjectElement;
     new (): HTMLAddObjectElement;
+  };
+
+  interface HTMLConversationalDesignerElement
+    extends Components.ConversationalDesigner,
+      HTMLStencilElement {}
+  var HTMLConversationalDesignerElement: {
+    prototype: HTMLConversationalDesignerElement;
+    new (): HTMLConversationalDesignerElement;
+  };
+
+  interface HTMLConversationalObjectElement
+    extends Components.ConversationalObject,
+      HTMLStencilElement {}
+  var HTMLConversationalObjectElement: {
+    prototype: HTMLConversationalObjectElement;
+    new (): HTMLConversationalObjectElement;
   };
 
   interface HTMLCustomCollectionElement
@@ -199,22 +215,6 @@ declare global {
     new (): HTMLFlowFullElement;
   };
 
-  interface HTMLGxcfConversationaldesignerElement
-    extends Components.GxcfConversationaldesigner,
-      HTMLStencilElement {}
-  var HTMLGxcfConversationaldesignerElement: {
-    prototype: HTMLGxcfConversationaldesignerElement;
-    new (): HTMLGxcfConversationaldesignerElement;
-  };
-
-  interface HTMLGxcfConversationalobjectElement
-    extends Components.GxcfConversationalobject,
-      HTMLStencilElement {}
-  var HTMLGxcfConversationalobjectElement: {
-    prototype: HTMLGxcfConversationalobjectElement;
-    new (): HTMLGxcfConversationalobjectElement;
-  };
-
   interface HTMLResponseCollapsedElement
     extends Components.ResponseCollapsed,
       HTMLStencilElement {}
@@ -271,6 +271,8 @@ declare global {
   interface HTMLElementTagNameMap {
     "add-element": HTMLAddElementElement;
     "add-object": HTMLAddObjectElement;
+    "conversational-designer": HTMLConversationalDesignerElement;
+    "conversational-object": HTMLConversationalObjectElement;
     "custom-collection": HTMLCustomCollectionElement;
     "custom-condition": HTMLCustomConditionElement;
     "custom-hint": HTMLCustomHintElement;
@@ -282,8 +284,6 @@ declare global {
     "flow-collapsed": HTMLFlowCollapsedElement;
     "flow-container": HTMLFlowContainerElement;
     "flow-full": HTMLFlowFullElement;
-    "gxcf-conversationaldesigner": HTMLGxcfConversationaldesignerElement;
-    "gxcf-conversationalobject": HTMLGxcfConversationalobjectElement;
     "response-collapsed": HTMLResponseCollapsedElement;
     "summary-description": HTMLSummaryDescriptionElement;
     "summary-title": HTMLSummaryTitleElement;
@@ -299,6 +299,11 @@ declare namespace LocalJSX {
   interface AddObject {
     collectionAddText?: string;
     onAddObject?: (event: CustomEvent<any>) => void;
+  }
+  interface ConversationalDesigner {}
+  interface ConversationalObject {
+    conversationalObject?: string;
+    onSelectConversationalObject?: (event: CustomEvent<any>) => void;
   }
   interface CustomCollection {
     collection?: string[];
@@ -357,11 +362,6 @@ declare namespace LocalJSX {
     flow?: FlowElement;
     onOnCollapseFlow?: (event: CustomEvent<any>) => void;
   }
-  interface GxcfConversationaldesigner {}
-  interface GxcfConversationalobject {
-    conversationalObject?: string;
-    onSelectConversationalObject?: (event: CustomEvent<any>) => void;
-  }
   interface ResponseCollapsed {
     response?: ResponseElement;
   }
@@ -399,6 +399,8 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     "add-element": AddElement;
     "add-object": AddObject;
+    "conversational-designer": ConversationalDesigner;
+    "conversational-object": ConversationalObject;
     "custom-collection": CustomCollection;
     "custom-condition": CustomCondition;
     "custom-hint": CustomHint;
@@ -410,8 +412,6 @@ declare namespace LocalJSX {
     "flow-collapsed": FlowCollapsed;
     "flow-container": FlowContainer;
     "flow-full": FlowFull;
-    "gxcf-conversationaldesigner": GxcfConversationaldesigner;
-    "gxcf-conversationalobject": GxcfConversationalobject;
     "response-collapsed": ResponseCollapsed;
     "summary-description": SummaryDescription;
     "summary-title": SummaryTitle;
@@ -431,6 +431,10 @@ declare module "@stencil/core" {
         JSXBase.HTMLAttributes<HTMLAddElementElement>;
       "add-object": LocalJSX.AddObject &
         JSXBase.HTMLAttributes<HTMLAddObjectElement>;
+      "conversational-designer": LocalJSX.ConversationalDesigner &
+        JSXBase.HTMLAttributes<HTMLConversationalDesignerElement>;
+      "conversational-object": LocalJSX.ConversationalObject &
+        JSXBase.HTMLAttributes<HTMLConversationalObjectElement>;
       "custom-collection": LocalJSX.CustomCollection &
         JSXBase.HTMLAttributes<HTMLCustomCollectionElement>;
       "custom-condition": LocalJSX.CustomCondition &
@@ -453,10 +457,6 @@ declare module "@stencil/core" {
         JSXBase.HTMLAttributes<HTMLFlowContainerElement>;
       "flow-full": LocalJSX.FlowFull &
         JSXBase.HTMLAttributes<HTMLFlowFullElement>;
-      "gxcf-conversationaldesigner": LocalJSX.GxcfConversationaldesigner &
-        JSXBase.HTMLAttributes<HTMLGxcfConversationaldesignerElement>;
-      "gxcf-conversationalobject": LocalJSX.GxcfConversationalobject &
-        JSXBase.HTMLAttributes<HTMLGxcfConversationalobjectElement>;
       "response-collapsed": LocalJSX.ResponseCollapsed &
         JSXBase.HTMLAttributes<HTMLResponseCollapsedElement>;
       "summary-description": LocalJSX.SummaryDescription &

@@ -5,8 +5,8 @@ import { FlowElement } from "../../global/ConversationalEditor/instanceDefinitio
 import { Controls } from "../../global/ConversationalEditor/helpers/Helpers";
 
 @Component({
-  tag: "gxcf-conversationaldesigner",
-  styleUrl: "gxcf_conversationaldesigner.scss",
+  tag: "conversational-designer",
+  styleUrl: "conversational-designer.scss",
   shadow: false
 })
 export class ConversationalDesginer {
