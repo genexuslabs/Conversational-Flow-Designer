@@ -60,7 +60,6 @@ private addFlow =
   </div>;
 
   render() {
-    this.Initialize();
     if (!this.openEditor && App.GetApp().InstanceIsEmpty())
     {
       return (<gxcf-welcome></gxcf-welcome>)
@@ -85,7 +84,7 @@ private addFlow =
     return flows;
   }
 
-  private Initialize():void{
+  componentWillLoad():void{
     var mainLogConsole = console.log;
     console.log = function(message) 
     {
