@@ -5,3 +5,4 @@ dist
 www
 ConversationalFlowsEditor.code-workspace
 *.js
+!.eslintrc.js
