@@ -1,7 +1,7 @@
 import { Component, Prop, h } from "@stencil/core";
-import { UserInputElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/UserInputElement";
-import { App } from "../../global/ConversationalEditor/App";
-import { RedirectionProperty } from "../../global/ConversationalEditor/instanceDefinition/Elements/RedirectionProperty";
+import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
+import { App } from "../../global/conversational-editor/app";
+import { RedirectionProperty } from "../../global/conversational-editor/instance-definition/elements/redirection-property";
 
 @Component({
   tag: "custom-redirection",

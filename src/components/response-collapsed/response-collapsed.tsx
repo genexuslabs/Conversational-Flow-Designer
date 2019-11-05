@@ -1,5 +1,5 @@
 import { Component, Prop, h } from "@stencil/core";
-import { ResponseElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/ResponseElement";
+import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
 
 @Component({
   tag: "response-collapsed",

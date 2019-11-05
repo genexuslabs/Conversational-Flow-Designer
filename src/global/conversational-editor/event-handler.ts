@@ -1,11 +1,11 @@
-import { App } from "./App.js";
-import { FlowElement } from "./instanceDefinition/Elements/FlowElement.js";
+import { App } from "./app.js";
+import { FlowElement } from "./instance-definition/elements/flow-element.js";
 import {
   DragDropHelpers,
   MoveType,
   ComponentsAttributes
-} from "./helpers/Helpers.js";
-import { UserInputElement } from "./instanceDefinition/Elements/UserInputElement.js";
+} from "./helpers/helpers.js";
+import { UserInputElement } from "./instance-definition/elements/user-input-element.js";
 import { DropZone } from "../../components/drop-zone/drop-zone.js";
 
 export let sourceId = "";

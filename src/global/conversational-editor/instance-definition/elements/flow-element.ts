@@ -1,17 +1,17 @@
-import { RenderingOptions } from "../../helpers/Helpers";
-import { UserInputElement } from "./UserInputElement";
-import { ResponseElement } from "./ResponseElement";
-import { CustomJSON } from "../Instance";
+import { RenderingOptions } from "../../helpers/helpers";
+import { UserInputElement } from "./user-input-element";
+import { ResponseElement } from "./response-element";
+import { CustomJSON } from "../instance";
 import {
-  IConversationalElement,
+  ConversationalElement,
   CollectionType
-} from "./IConversationalElement";
-import { EventHandler } from "../../EventHandler";
-import { RedirectionProperty } from "./RedirectionProperty";
+} from "./iconversational-element";
+import { EventHandler } from "../../event-handler";
+import { RedirectionProperty } from "./redirection-property";
 import { Flow } from "../../../../components/flow-container/flow-container";
 import { FlowFull } from "../../../../components/flow-full/flow-full";
 
-export class FlowElement implements IConversationalElement {
+export class FlowElement implements ConversationalElement {
   public Name = "";
   public ConversationalObject = "";
   public TriggerMessages: string[] = [];

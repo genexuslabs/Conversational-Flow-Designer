@@ -7,10 +7,10 @@ import {
   Listen,
   State
 } from "@stencil/core";
-import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
-import { HintId } from "../../global/ConversationalEditor/helpers/Helpers";
-import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
-import { CollectionType } from "../../global/ConversationalEditor/instanceDefinition/Elements/IConversationalElement";
+import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
+import { HintId } from "../../global/conversational-editor/helpers/helpers";
+import { EventHandler } from "../../global/conversational-editor/event-handler";
+import { CollectionType } from "../../global/conversational-editor/instance-definition/elements/iconversational-element";
 
 @Component({
   tag: "flow-full",

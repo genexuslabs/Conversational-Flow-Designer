@@ -1,5 +1,5 @@
 import { Component, Prop, h, EventEmitter, Event } from "@stencil/core";
-import { UserInputElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/UserInputElement";
+import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
 
 @Component({
   tag: "user-input-collapsed",

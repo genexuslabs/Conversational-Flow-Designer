@@ -1,8 +1,8 @@
 import { Component, h, Listen, State } from "@stencil/core";
-import { App } from "../../global/ConversationalEditor/App";
-import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
-import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
-import { Controls } from "../../global/ConversationalEditor/helpers/Helpers";
+import { App } from "../../global/conversational-editor/app";
+import { EventHandler } from "../../global/conversational-editor/event-handler";
+import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
+import { Controls } from "../../global/conversational-editor/helpers/helpers";
 
 @Component({
   tag: "conversational-designer",

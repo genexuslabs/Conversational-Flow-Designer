@@ -1,8 +1,8 @@
 import { Component, Prop, h, State, Listen } from "@stencil/core";
-import { UserInputElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/UserInputElement";
-import { RenderingOptions } from "../../global/ConversationalEditor/helpers/Helpers";
-import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
-import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
+import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
+import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
+import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
+import { EventHandler } from "../../global/conversational-editor/event-handler";
 
 @Component({
   tag: "user-input-container",

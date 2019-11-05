@@ -6,11 +6,11 @@
  */
 
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { UserInputElement } from "./global/ConversationalEditor/instanceDefinition/Elements/UserInputElement";
-import { RedirectionProperty } from "./global/ConversationalEditor/instanceDefinition/Elements/RedirectionProperty";
-import { FlowElement } from "./global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
-import { RenderingOptions } from "./global/ConversationalEditor/helpers/Helpers";
-import { ResponseElement } from "./global/ConversationalEditor/instanceDefinition/Elements/ResponseElement";
+import { UserInputElement } from "./global/conversational-editor/instance-definition/elements/user-input-element";
+import { RedirectionProperty } from "./global/conversational-editor/instance-definition/elements/redirection-property";
+import { FlowElement } from "./global/conversational-editor/instance-definition/elements/flow-element";
+import { RenderingOptions } from "./global/conversational-editor/helpers/helpers";
+import { ResponseElement } from "./global/conversational-editor/instance-definition/elements/response-element";
 
 export namespace Components {
   interface AddElement {}

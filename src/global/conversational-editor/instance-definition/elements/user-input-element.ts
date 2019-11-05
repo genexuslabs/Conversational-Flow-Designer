@@ -1,11 +1,11 @@
-import { RenderingOptions } from "../../helpers/Helpers";
-import { FlowElement } from "./FlowElement";
+import { RenderingOptions } from "../../helpers/helpers";
+import { FlowElement } from "./flow-element";
 import {
-  IConversationalElement,
+  ConversationalElement,
   CollectionType
-} from "./IConversationalElement";
-import { EventHandler } from "../../EventHandler";
-import { RedirectionProperty } from "./RedirectionProperty";
+} from "./iconversational-element";
+import { EventHandler } from "../../event-handler";
+import { RedirectionProperty } from "./redirection-property";
 import { UserInput } from "../../../../components/user-input-container/user-input-container";
 
 export enum RequiredTypes {
@@ -14,7 +14,7 @@ export enum RequiredTypes {
   Condition
 }
 
-export class UserInputElement implements IConversationalElement {
+export class UserInputElement implements ConversationalElement {
   public Variable: string;
   public IsCollection: boolean;
   public RequiredMessages: string[];

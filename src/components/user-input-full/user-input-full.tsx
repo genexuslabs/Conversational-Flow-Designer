@@ -7,11 +7,11 @@ import {
   State,
   Listen
 } from "@stencil/core";
-import { UserInputElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/UserInputElement";
-import { HintId } from "../../global/ConversationalEditor/helpers/Helpers";
-import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
-import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
-import { CollectionType } from "../../global/ConversationalEditor/instanceDefinition/Elements/IConversationalElement";
+import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
+import { HintId } from "../../global/conversational-editor/helpers/helpers";
+import { EventHandler } from "../../global/conversational-editor/event-handler";
+import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
+import { CollectionType } from "../../global/conversational-editor/instance-definition/elements/iconversational-element";
 
 @Component({
   tag: "user-input-full",

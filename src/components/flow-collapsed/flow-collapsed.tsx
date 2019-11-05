@@ -7,9 +7,9 @@ import {
   State,
   Listen
 } from "@stencil/core";
-import { FlowElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/FlowElement";
-import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
-import { RenderingOptions } from "../../global/ConversationalEditor/helpers/Helpers";
+import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
+import { EventHandler } from "../../global/conversational-editor/event-handler";
+import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
 
 @Component({
   tag: "flow-collapsed",

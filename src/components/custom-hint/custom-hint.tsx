@@ -1,5 +1,5 @@
 import { Component, Prop, h, EventEmitter, Event, State } from "@stencil/core";
-import { PropertiesDefinition } from "../../global/ConversationalEditor/helpers/Helpers";
+import { PropertiesDefinition } from "../../global/conversational-editor/helpers/helpers";
 
 @Component({
   tag: "custom-hint",

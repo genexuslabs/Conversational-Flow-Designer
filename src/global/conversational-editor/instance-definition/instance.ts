@@ -1,9 +1,9 @@
-import { MoveType, RenderingOptions } from "../helpers/Helpers.js";
-import { FlowElement } from "./Elements/FlowElement.js";
-import { App } from "../App.js";
-import { UserInputElement } from "./Elements/UserInputElement.js";
-import { ResponseElement } from "./Elements/ResponseElement.js";
-import { RedirectionProperty } from "./Elements/RedirectionProperty.js";
+import { MoveType, RenderingOptions } from "../helpers/helpers.js";
+import { FlowElement } from "./elements/flow-element.js";
+import { App } from "../app.js";
+import { UserInputElement } from "./elements/user-input-element.js";
+import { ResponseElement } from "./elements/response-element.js";
+import { RedirectionProperty } from "./elements/redirection-property.js";
 
 export class Instance {
   public Flows: FlowElement[] = [];

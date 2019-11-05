@@ -1,5 +1,5 @@
 import { Component, Prop, h, EventEmitter, Event, State } from "@stencil/core";
-import { HintId } from "../../global/ConversationalEditor/helpers/Helpers";
+import { HintId } from "../../global/conversational-editor/helpers/helpers";
 
 @Component({
   tag: "conversational-object",
