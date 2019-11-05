@@ -1,8 +1,8 @@
 import { Component, h, Prop, Event, EventEmitter } from "@stencil/core";
 
 @Component({
-  tag: "gxcf-add-object",
-  styleUrl: "gxcf-add-object.scss",
+  tag: "add-object",
+  styleUrl: "add-object.scss",
   shadow: false
 })
 export class AddObject {
@@ -18,7 +18,7 @@ export class AddObject {
     return (
       <div>
         <div class="AddObject" onClick={event => this.TriggerAddObject(event)}>
-          <gxcf-addelement class="AddObjectText"></gxcf-addelement>
+          <add-element class="AddObjectText"></add-element>
           <span class="AddObjectText">{this.collectionAddText}</span>
         </div>
       </div>

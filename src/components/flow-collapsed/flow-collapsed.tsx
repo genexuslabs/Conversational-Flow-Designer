@@ -12,8 +12,8 @@ import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
 import { RenderingOptions } from "../../global/ConversationalEditor/helpers/Helpers";
 
 @Component({
-  tag: "gxcf-flowsummary",
-  styleUrl: "gxcf_flowsummary.scss",
+  tag: "flow-collapsed",
+  styleUrl: "flow-collapsed.scss",
   shadow: false
 })
 export class FlowSummary {
@@ -86,20 +86,20 @@ export class FlowSummary {
         onDragOver={event => this.TriggerOnDragOverFlow(event)}
         onClick={event => this.TriggerOnExpandFlow(event)}
       >
-        <gxcf-summarytitle
+        <summary-title
           summaryid={this.SummaryId}
           summaryvalue={this.flow.Name}
           classType="SummaryTitle"
-        ></gxcf-summarytitle>
-        <gxcf-select
+        ></summary-title>
+        <custom-select
           selectid={this.SelectId}
           selectcaption={this.flow.GetSummaryConversationalObject()}
           onClick={event => this.TriggerSelectConversationalObject(event)}
-        ></gxcf-select>
-        <gxcf-summarydescription
+        ></custom-select>
+        <summary-description
           descriptionid={this.DescriptionId}
           descriptionvalue={this.flow.GetSummaryTriggerMessage()}
-        ></gxcf-summarydescription>
+        ></summary-description>
       </div>
     );
   }

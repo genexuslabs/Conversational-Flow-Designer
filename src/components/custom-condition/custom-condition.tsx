@@ -1,8 +1,8 @@
 import { Component, Prop, h } from "@stencil/core";
 
 @Component({
-  tag: "gxcf-condition",
-  styleUrl: "gxcf_condition.scss",
+  tag: "custom-condition",
+  styleUrl: "custom-condition.scss",
   shadow: false
 })
 export class Condition {

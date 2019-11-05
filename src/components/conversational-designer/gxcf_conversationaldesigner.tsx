@@ -53,7 +53,7 @@ export class ConversationalDesginer {
       class="AddFlow"
       onClick={() => this.HandleAddFlowElement()}
     >
-      <gxcf-addelement></gxcf-addelement>
+      <add-element></add-element>
       <span class="AddFlowElementText">Add another Flow</span>
     </div>
   );
@@ -63,7 +63,10 @@ export class ConversationalDesginer {
 
     App.GetApp().Instance.Flows.forEach(function(flowElement) {
       flows.push(
-        <gxcf-flow flow={flowElement} showDropZone={false}></gxcf-flow>
+        <flow-container
+          flow={flowElement}
+          showDropZone={false}
+        ></flow-container>
       );
     });
     return flows;
@@ -118,7 +121,7 @@ export class ConversationalDesginer {
 
   render() {
     if (!this.openEditor && App.GetApp().InstanceIsEmpty()) {
-      return <gxcf-welcome></gxcf-welcome>;
+      return <designer-welcome></designer-welcome>;
     }
 
     return (

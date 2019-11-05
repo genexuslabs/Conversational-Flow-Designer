@@ -1,8 +1,8 @@
 import { Component, Prop, h, State } from "@stencil/core";
 
 @Component({
-  tag: "gxcf-collection",
-  styleUrl: "gxcf_collection.scss",
+  tag: "custom-collection",
+  styleUrl: "custom-collection.scss",
   shadow: false
 })
 export class Collection {
@@ -56,7 +56,7 @@ export class Collection {
 
   private AddItemElement = (
     <div id="AddItem" class="AddItem" onClick={event => this.AddItem(event)}>
-      <gxcf-addelement class="AddItemText"></gxcf-addelement>
+      <add-element class="AddItemText"></add-element>
       <span class="AddItemText">{this.collectionAddText}</span>
     </div>
   );

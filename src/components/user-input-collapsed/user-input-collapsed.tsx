@@ -2,8 +2,8 @@ import { Component, Prop, h, EventEmitter, Event } from "@stencil/core";
 import { UserInputElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/UserInputElement";
 
 @Component({
-  tag: "gxcf-collapseduserinput",
-  styleUrl: "gxcf_collapseduserinput.scss",
+  tag: "user-input-collapsed",
+  styleUrl: "user-input-collapsed.scss",
   shadow: false
 })
 export class CollapsedUserInput {
@@ -33,10 +33,10 @@ export class CollapsedUserInput {
           value={this.userInput.Variable}
           onChange={event => this.TriggerOnModifyUserInputName(event)}
         />
-        <gxcf-downarrow
+        <down-arrow
           class="CollapsedUserInputDownArrow"
           onClick={event => this.TriggerOnExpandUserInput(event)}
-        ></gxcf-downarrow>
+        />
         <input
           type="text"
           class="FirstAskMessage"

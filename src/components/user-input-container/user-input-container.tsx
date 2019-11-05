@@ -5,8 +5,8 @@ import { FlowElement } from "../../global/ConversationalEditor/instanceDefinitio
 import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
 
 @Component({
-  tag: "gxcf-userinput",
-  styleUrl: "gxcf_userinput.scss",
+  tag: "user-input-container",
+  styleUrl: "user-input-container.scss",
   shadow: false
 })
 export class UserInput {
@@ -49,20 +49,11 @@ export class UserInput {
   }
 
   private collapsedUserInput(): HTMLElement {
-    return (
-      <gxcf-collapseduserinput
-        userInput={this.userInput}
-      ></gxcf-collapseduserinput>
-    );
+    return <user-input-collapsed userInput={this.userInput} />;
   }
 
   private fullUserInput(): HTMLElement {
-    return (
-      <gxcf-fulluserinput
-        userInput={this.userInput}
-        flow={this.flow}
-      ></gxcf-fulluserinput>
-    );
+    return <user-input-full userInput={this.userInput} flow={this.flow} />;
   }
 
   render() {

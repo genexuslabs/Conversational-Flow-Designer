@@ -13,8 +13,8 @@ import { EventHandler } from "../../global/ConversationalEditor/EventHandler";
 import { CollectionType } from "../../global/ConversationalEditor/instanceDefinition/Elements/IConversationalElement";
 
 @Component({
-  tag: "gxcf-flowfull",
-  styleUrl: "gxcf_flowfull.scss",
+  tag: "flow-full",
+  styleUrl: "flow-full.scss",
   shadow: false
 })
 export class FlowFull {
@@ -62,7 +62,7 @@ export class FlowFull {
     const userInputs: HTMLElement[] = [];
     this.flow.UserInputs.forEach(function(userInput) {
       userInputs.push(
-        <gxcf-userinput userInput={userInput} flow={this.flow}></gxcf-userinput>
+        <user-input-container userInput={userInput} flow={this.flow} />
       );
     }, this);
     return userInputs;
@@ -71,9 +71,7 @@ export class FlowFull {
   private RenderizeResponse(): HTMLElement[] {
     const responses: HTMLElement[] = [];
     this.flow.Responses.forEach(function(response) {
-      responses.push(
-        <gxcf-collapsedresponse response={response}></gxcf-collapsedresponse>
-      );
+      responses.push(<response-collapsed response={response} />);
     });
     return responses;
   }
@@ -92,19 +90,19 @@ export class FlowFull {
       <div id={this.flow.Id} data-elementType="flow" class="FlowFull">
         <div class="FullFlowContent">
           <div class="TabFullFlowContent">
-            <gxcf-summarytitle
+            <summary-title
               summaryid={this.SummaryId}
               summaryvalue={this.flow.Name}
               classType="FullTitle"
-            ></gxcf-summarytitle>
-            <gxcf-collection
+            />
+            <custom-collection
               collection={this.flow.TriggerMessages}
               collectionHeader={this.CollectionHeader}
               collectionHintId={HintId.TriggerMessages}
               collectionAddText="Add another sample trigger message"
               collectionType={CollectionType.TriggerMessages}
               itemParent={this.flow}
-            ></gxcf-collection>
+            />
           </div>
         </div>
         <hr class="Separator"></hr>
@@ -113,14 +111,14 @@ export class FlowFull {
             <span class="LeftTab ElementsHeaderText">
               User Inputs ({this.flow.UserInputs.length})
             </span>
-            <gxcf-hint hintId={HintId.UserInput} class="Hint" />
+            <custom-hint hintId={HintId.UserInput} class="Hint" />
           </div>
           {this.RenderizeUserInputs()}
           <div
             class="AddFlowElement LeftTab"
             onClick={event => this.TriggerOnAddUserInput(event)}
           >
-            <gxcf-addelement></gxcf-addelement>
+            <add-element />
             <span class="AddElementText">Add another user input</span>
           </div>
         </div>
@@ -130,14 +128,14 @@ export class FlowFull {
             <span class="ElementsHeaderText">
               Responses ({this.flow.UserInputs.length})
             </span>
-            <gxcf-hint hintId={HintId.Responses} class="Hint" />
+            <custom-hint hintId={HintId.Responses} class="Hint" />
           </div>
           {this.RenderizeResponse()}
           <div
             class="AddFlowElement"
             onClick={event => this.TriggerOnAddResponse(event)}
           >
-            <gxcf-addelement></gxcf-addelement>
+            <add-element />
             <span class="AddElementText">Add another possible response</span>
           </div>
         </div>

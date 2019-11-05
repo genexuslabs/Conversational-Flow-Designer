@@ -2,8 +2,8 @@ import { Component, Prop, h, Event } from "@stencil/core";
 import { EventEmitter } from "@stencil/router/dist/types/stencil.core";
 
 @Component({
-  tag: "gxcf-summarytitle",
-  styleUrl: "gxcf_summarytitle.scss",
+  tag: "summary-title",
+  styleUrl: "summary-title.scss",
   shadow: false
 })
 export class SummaryTitle {

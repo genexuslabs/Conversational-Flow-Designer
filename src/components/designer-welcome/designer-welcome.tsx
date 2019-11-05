@@ -1,8 +1,8 @@
 import { Component, h, Event, EventEmitter } from "@stencil/core";
 
 @Component({
-  tag: "gxcf-welcome",
-  styleUrl: "gxcf_welcome.scss",
+  tag: "designer-welcome",
+  styleUrl: "designer-welcome.scss",
   shadow: false
 })
 export class Welcome {

@@ -1,8 +1,8 @@
 import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 
 @Component({
-  tag: "gxcf-dropzone",
-  styleUrl: "gxcf_dropzone.scss",
+  tag: "drop-zone",
+  styleUrl: "drop-zone.scss",
   shadow: false
 })
 export class DropZone {
@@ -41,7 +41,7 @@ export class DropZone {
     element.className = "ShowZone";
   }
 
-  public static readonly Tag: string = "GXCF-DROPZONE";
+  public static readonly Tag: string = "drop-zone";
 
   render() {
     let className = "HideZone";

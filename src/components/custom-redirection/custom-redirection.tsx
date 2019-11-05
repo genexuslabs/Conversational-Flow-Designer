@@ -4,8 +4,8 @@ import { App } from "../../global/ConversationalEditor/App";
 import { RedirectionProperty } from "../../global/ConversationalEditor/instanceDefinition/Elements/RedirectionProperty";
 
 @Component({
-  tag: "gxcf-redirection",
-  styleUrl: "gxcf_redirection.scss",
+  tag: "custom-redirection",
+  styleUrl: "custom-redirection.scss",
   shadow: false
 })
 export class Redirection {
@@ -36,7 +36,7 @@ export class Redirection {
     return (
       <div class="RedirectionContainer">
         <div>
-          <gxcf-condition
+          <custom-condition
             currentCondition={this.redirectionProperty.RedirectCondition}
             onConditionChange={this.ResponseConditionChange}
           />

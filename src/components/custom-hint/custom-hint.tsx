@@ -2,8 +2,8 @@ import { Component, Prop, h, EventEmitter, Event, State } from "@stencil/core";
 import { PropertiesDefinition } from "../../global/ConversationalEditor/helpers/Helpers";
 
 @Component({
-  tag: "gxcf-hint",
-  styleUrl: "gxcf_hint.scss",
+  tag: "custom-hint",
+  styleUrl: "custom-hint.scss",
   shadow: false
 })
 export class Hint {

@@ -18,10 +18,10 @@ export class ConversationalObject {
     return (
       <div class="ConversationalObject">
         <span class="ConversationalObjectHeader">CONVERSATIONAL OBJECT</span>
-        <gxcf-hint
+        <custom-hint
           hintId={HintId.ConversationalObject}
           class="Hint"
-        ></gxcf-hint>
+        ></custom-hint>
         <span
           class="SelectConversationalObject"
           onClick={event => this.TriggerSelectConversationalObject(event)}

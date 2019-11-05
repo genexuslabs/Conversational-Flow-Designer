@@ -2,8 +2,8 @@ import { Component, Prop, h } from "@stencil/core";
 import { ResponseElement } from "../../global/ConversationalEditor/instanceDefinition/Elements/ResponseElement";
 
 @Component({
-  tag: "gxcf-collapsedresponse",
-  styleUrl: "gxcf_collapsedresponse.scss",
+  tag: "response-collapsed",
+  styleUrl: "response-collapsed.scss",
   shadow: false
 })
 export class CollapsedResponse {
@@ -17,7 +17,7 @@ export class CollapsedResponse {
           class="CollapsedResponseTitle"
           value={this.response.Style}
         />
-        <gxcf-downarrow class="CollapsedResponseDownArrow"></gxcf-downarrow>
+        <down-arrow class="CollapsedResponseDownArrow" />
         <input
           type="text"
           class="FirstResponseMessage"

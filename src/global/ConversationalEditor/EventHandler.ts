@@ -6,7 +6,7 @@ import {
   ComponentsAttributes
 } from "./helpers/Helpers.js";
 import { UserInputElement } from "./instanceDefinition/Elements/UserInputElement.js";
-import { DropZone } from "../../components/drop-zone/gxcf_dropzone.js";
+import { DropZone } from "../../components/drop-zone/drop-zone.js";
 
 export let sourceId = "";
 
@@ -116,9 +116,8 @@ export class EventHandler {
   };
 
   public static OnLeaveDropZone(customEvent: CustomEvent): void {
-    const event: DragEvent = EventHandler.GetEvent(customEvent) as DragEvent;
+    const event: DragEvent = EventHandler.GetEvent(customEvent);
     event.preventDefault();
-
     const dropZone: HTMLElement = EventHandler.GetDropZone(event);
 
     DropZone.InActive(dropZone);
