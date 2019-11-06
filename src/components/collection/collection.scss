@@ -1,7 +1,7 @@
 .AddItem
 {
     color: $inelement-select-color;    
-    font-size: $common-font-size;
+    font-size: $normal-font-size;
     clear:both;
     margin-top: 10px;
     border-color: $background-color;
@@ -22,7 +22,7 @@
 
 .ItemInput
 {
-    font-size: $common-font-size;
+    font-size: $normal-font-size;
     width: 96%;
     font-style: italic;
     padding-left: 5px;
@@ -90,7 +90,7 @@
 .CollectionHeader
 {
     color: $title-color;
-    font-size: $common-font-size;
+    font-size: $normal-font-size;
     float:left;  
     clear:left; 
     margin-bottom: 15px;

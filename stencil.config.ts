@@ -1,21 +1,24 @@
-import { Config } from '@stencil/core';
-import { sass } from '@stencil/sass';
+import { Config } from "@stencil/core";
+import { sass } from "@stencil/sass";
 
 export const config: Config = {
   namespace: "gxcf-conversational-flows",
   outputTargets: [
     {
-      type: 'dist'
+      type: "dist"
     },
     {
-      type: 'www',
+      type: "www",
       serviceWorker: null
     }
   ],
   plugins: [
     sass({
-      injectGlobalPaths : [
-        'src/global/variables.scss'
+      injectGlobalPaths: [
+        "src/global/token-animations.scss",
+        "src/global/token-colors.scss",
+        "src/global/token-fonts.scss",
+        "src/global/token-icons.scss"
       ]
     })
   ]

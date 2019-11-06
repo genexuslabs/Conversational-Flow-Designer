@@ -1,6 +1,6 @@
 .Hint
 {
-    font-size: $hint-font-size;
+    font-size: $small-font-size;
     color: $hint-color;
     text-decoration: underline;
 }
@@ -21,7 +21,7 @@
     z-index: -1;
     -webkit-animation: fadeIn 1s;
     animation: fadeIn 1s;
-    font-size: $common-font-size;
+    font-size: $normal-font-size;
 }
 
 .HintTitle
@@ -37,6 +37,6 @@
 .CloseHint
 {
     float:right;
-    font-size: $common-font-size;
+    font-size: $normal-font-size;
     cursor: pointer;
 }
