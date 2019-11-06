@@ -10,17 +10,20 @@ import { EventHandler } from "../../event-handler";
 import { RedirectionProperty } from "./redirection-property";
 import { Flow } from "../../../../components/flow-container/flow-container";
 import { FlowFull } from "../../../../components/flow-full/flow-full";
+import { FlowCollapsed } from "../../../../components/flow-collapsed/flow-collapsed";
 
 export class FlowElement implements ConversationalElement {
   public Name = "";
   public ConversationalObject = "";
   public TriggerMessages: string[] = [];
   public Id = "";
-  public RenderType: RenderingOptions = RenderingOptions.Summary;
+  public RenderType: RenderingOptions = RenderingOptions.Collapsed;
   public UserInputs: UserInputElement[];
   public Responses: ResponseElement[];
   public Component: Flow;
   public UserInputComponent: FlowFull;
+  public UserInputComponentCollapsed: FlowCollapsed;
+  public ConversationalObjectType: string;
 
   constructor(name: string) {
     this.Name = name;
@@ -84,6 +87,8 @@ export class FlowElement implements ConversationalElement {
     this.TriggerMessages = new Array<string>();
     this.ConversationalObject = jsonFlow.ConversationalObjectName;
     this.TriggerMessages = jsonFlow.Triggers;
+    this.ConversationalObjectType = jsonFlow.ConversationalObjectType;
+
     jsonFlow.Fields.forEach(function(field) {
       console.log(JSON.stringify(field));
       const redirections: RedirectionProperty[] = new Array<

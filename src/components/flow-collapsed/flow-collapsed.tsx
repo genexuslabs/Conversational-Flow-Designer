@@ -16,7 +16,7 @@ import { RenderingOptions } from "../../global/conversational-editor/helpers/hel
   styleUrl: "flow-collapsed.scss",
   shadow: false
 })
-export class FlowSummary {
+export class FlowCollapsed {
   @Prop() flow: FlowElement;
   @Prop() renderingType: RenderingOptions;
   @State() refresh: boolean;
@@ -41,17 +41,6 @@ export class FlowSummary {
     this.onDragOverFlow.emit(event);
   }
 
-  @Listen("selectConversationalObject")
-  HandleSelectConversationalObject(event: CustomEvent): void {
-    EventHandler.SelectConversationalObject(event).then(retFlow => {
-      this.flow = retFlow;
-      if (this.flow.UserInputComponent)
-        this.flow.UserInputComponent.refresh = !this.flow.UserInputComponent
-          .refresh;
-      this.refresh = !this.refresh;
-    });
-  }
-
   get SummaryId(): string {
     return `GXCFSum_${this.flow.Id}`;
   }
@@ -69,8 +58,9 @@ export class FlowSummary {
   }
 
   render() {
+    this.flow.UserInputComponentCollapsed = this;
     let classProp;
-    if (this.renderingType == RenderingOptions.Summary) {
+    if (this.renderingType == RenderingOptions.Collapsed) {
       classProp = "FlowSummary NoActiveContent";
     } else {
       classProp = "FlowSummary ActiveContent";
@@ -94,6 +84,7 @@ export class FlowSummary {
         <gxcf-select
           selectid={this.SelectId}
           selectcaption={this.flow.GetSummaryConversationalObject()}
+          selectIconType={this.flow.ConversationalObjectType}
           onClick={event => this.TriggerSelectConversationalObject(event)}
         />
         <gxcf-summary-description

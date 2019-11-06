@@ -202,7 +202,7 @@ export class Instance {
       if (iFlow.Name == flow.Name) {
         iFlow.SetRenderType(renderType);
         flow = iFlow;
-      } else if (iFlow.RenderType == renderType) iFlow.SetRenderType(RenderingOptions.Summary);
+      } else if (iFlow.RenderType == renderType) iFlow.SetRenderType(RenderingOptions.Collapsed);
     });
     return flow;
   }
@@ -238,4 +238,5 @@ export interface CustomJSON extends JSON {
   View: CustomJSON;
   Templates: CustomJSON[];
   RedirectCondition: string;
+  ConversationalObjectType: string;
 }

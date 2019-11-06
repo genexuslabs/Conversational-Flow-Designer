@@ -47,7 +47,7 @@ export enum MoveType {
 }
 
 export enum RenderingOptions {
-  Summary,
+  Collapsed,
   Tall,
   Full
 }

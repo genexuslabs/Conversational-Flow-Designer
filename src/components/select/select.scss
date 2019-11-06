@@ -10,7 +10,7 @@
   float: right;
   width: 28%;
   height: 33%;
-  padding: 3px 2px 3px 2px;
+  padding: 4px 5px 4px 5px;
   font-family: "Source Sans Pro", sans-serif;
   overflow: hidden;
   white-space: nowrap;
@@ -19,4 +19,44 @@
 
 .Select:hover {
   cursor: pointer;
+}
+
+.SelectIconHidden
+{
+    display:none;
+}
+
+.SelectIcon
+{
+    display:inline-block;
+    width:16px;
+    height:16px;
+    line-height: 16px;
+    vertical-align: middle;
+    margin-right: 2px;
+}
+
+.Procedure
+{
+    content: var(--procedure-icon);
+}
+
+.WebPanel
+{
+    content: var(--web-panel-icon);
+}
+
+.SDPanel
+{
+    content: var(--sd-panel-icon);
+}
+
+.Transaction
+{
+    content: var(--transaction-icon);
+}
+
+.DataProvider
+{
+    content: var(--data-provider-icon);
 }

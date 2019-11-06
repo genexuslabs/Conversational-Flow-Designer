@@ -60,7 +60,7 @@ export class UserInputElement implements ConversationalElement {
     this.ValidationProcedure = validationProc;
     this.Required = RequiredTypes[reqType];
     this.RequiredCondition = reqCondition;
-    this.RenderType = RenderingOptions.Summary;
+    this.RenderType = RenderingOptions.Collapsed;
     this.Parent = parent;
     this.Redirections = redirections;
   }

@@ -29,9 +29,9 @@ export class Flow {
     console.log(event.type);
     this.flow = App.GetApp().Instance.SetFlowRenderType(
       this.flow,
-      RenderingOptions.Summary
+      RenderingOptions.Collapsed
     );
-    this.flow.SetRenderType(RenderingOptions.Summary);
+    this.flow.SetRenderType(RenderingOptions.Collapsed);
   }
 
   @Listen("changingFlowName")
@@ -44,6 +44,23 @@ export class Flow {
   HandleChangingFlowTriggerSummary(event: CustomEvent): void {
     const value = EventHandler.GetValue(event);
     if (value != null) this.flow.SetFirstTriggerMessage(value);
+  }
+
+  @Listen("selectConversationalObject")
+  HandleSelectConversationalObject(event: CustomEvent): void {
+    console.log(event);
+    console.log("hit");
+    EventHandler.SelectConversationalObject(event).then(retFlow => {
+      this.flow = retFlow;
+      if (this.flow.UserInputComponent) {
+        console.log("Refresh main component");
+        this.flow.UserInputComponent.refresh = !this.flow.UserInputComponent
+          .refresh;
+        this.flow.UserInputComponentCollapsed.refresh = !this.flow
+          .UserInputComponentCollapsed.refresh;
+      }
+      this.refresh = !this.refresh;
+    });
   }
 
   private renderSummary(renderingOption: RenderingOptions): HTMLElement {
@@ -80,9 +97,10 @@ export class Flow {
   }
 
   render() {
+    console.log("container refresh");
     this.flow.Component = this;
-    if (this.flow.RenderType == RenderingOptions.Summary)
-      return this.renderSummary(RenderingOptions.Summary);
+    if (this.flow.RenderType == RenderingOptions.Collapsed)
+      return this.renderSummary(RenderingOptions.Collapsed);
     if (this.flow.RenderType == RenderingOptions.Full) return this.renderFull();
     return (
       <span>

@@ -24,7 +24,7 @@ export class UserInput {
   @Listen("onCollapseUserInput")
   HandleCollapseUserInput(event: CustomEvent): void {
     console.log(event.type);
-    this.userInput.SetRenderType(RenderingOptions.Summary);
+    this.userInput.SetRenderType(RenderingOptions.Collapsed);
     this.refresh = !this.refresh;
   }
 
@@ -58,7 +58,7 @@ export class UserInput {
 
   render() {
     console.log(this.userInput.RenderType);
-    if (this.userInput.RenderType == RenderingOptions.Summary)
+    if (this.userInput.RenderType == RenderingOptions.Collapsed)
       return this.collapsedUserInput();
     if (this.userInput.RenderType == RenderingOptions.Full)
       return this.fullUserInput();
