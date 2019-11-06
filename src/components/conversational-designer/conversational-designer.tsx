@@ -5,7 +5,7 @@ import { FlowElement } from "../../global/conversational-editor/instance-definit
 import { Controls } from "../../global/conversational-editor/helpers/helpers";
 
 @Component({
-  tag: "conversational-designer",
+  tag: "gxcf-conversational-designer",
   styleUrl: "conversational-designer.scss",
   shadow: false
 })
@@ -53,7 +53,7 @@ export class ConversationalDesginer {
       class="AddFlow"
       onClick={() => this.HandleAddFlowElement()}
     >
-      <add-element></add-element>
+      <gxcf-add-element />
       <span class="AddFlowElementText">Add another Flow</span>
     </div>
   );
@@ -63,10 +63,7 @@ export class ConversationalDesginer {
 
     App.GetApp().Instance.Flows.forEach(function(flowElement) {
       flows.push(
-        <flow-container
-          flow={flowElement}
-          showDropZone={false}
-        ></flow-container>
+        <gxcf-flow-container flow={flowElement} showDropZone={false} />
       );
     });
     return flows;
@@ -121,7 +118,7 @@ export class ConversationalDesginer {
 
   render() {
     if (!this.openEditor && App.GetApp().InstanceIsEmpty()) {
-      return <designer-welcome></designer-welcome>;
+      return <gxcf-designer-welcome />;
     }
 
     return (

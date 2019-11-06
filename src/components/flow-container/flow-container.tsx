@@ -5,7 +5,7 @@ import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { App } from "../../global/conversational-editor/app";
 
 @Component({
-  tag: "flow-container",
+  tag: "gxcf-flow-container",
   styleUrl: "flow-container.scss",
   shadow: false
 })
@@ -49,17 +49,17 @@ export class Flow {
   private renderSummary(renderingOption: RenderingOptions): HTMLElement {
     return (
       <div>
-        <drop-zone
+        <gxcf-drop-zone
           moveType="Up"
           show={this.showDropZone}
           objectReferenceId={this.flow.Id}
         />
-        <flow-collapsed
+        <gxcf-flow-collapsed
           renderingType={renderingOption}
           data-flowid={this.flow.Id}
           flow={this.flow}
         />
-        <drop-zone
+        <gxcf-drop-zone
           moveType="Down"
           show={this.showDropZone}
           objectReferenceId={this.flow.Id}
@@ -73,7 +73,7 @@ export class Flow {
       <div>
         {this.renderSummary(RenderingOptions.Full)}
         <div class="FullFlowContainer">
-          <flow-full data-flowid={this.flow.Id} flow={this.flow} />
+          <gxcf-flow-full data-flowid={this.flow.Id} flow={this.flow} />
         </div>
       </div>
     );

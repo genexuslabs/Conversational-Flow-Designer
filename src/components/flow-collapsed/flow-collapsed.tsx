@@ -12,7 +12,7 @@ import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
 
 @Component({
-  tag: "flow-collapsed",
+  tag: "gxcf-flow-collapsed",
   styleUrl: "flow-collapsed.scss",
   shadow: false
 })
@@ -86,20 +86,20 @@ export class FlowSummary {
         onDragOver={event => this.TriggerOnDragOverFlow(event)}
         onClick={event => this.TriggerOnExpandFlow(event)}
       >
-        <summary-title
+        <gxcf-summary-title
           summaryid={this.SummaryId}
           summaryvalue={this.flow.Name}
           classType="SummaryTitle"
-        ></summary-title>
-        <custom-select
+        />
+        <gxcf-select
           selectid={this.SelectId}
           selectcaption={this.flow.GetSummaryConversationalObject()}
           onClick={event => this.TriggerSelectConversationalObject(event)}
-        ></custom-select>
-        <summary-description
+        />
+        <gxcf-summary-description
           descriptionid={this.DescriptionId}
           descriptionvalue={this.flow.GetSummaryTriggerMessage()}
-        ></summary-description>
+        />
       </div>
     );
   }

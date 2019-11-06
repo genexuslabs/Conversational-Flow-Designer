@@ -5,7 +5,7 @@ import { FlowElement } from "../../global/conversational-editor/instance-definit
 import { EventHandler } from "../../global/conversational-editor/event-handler";
 
 @Component({
-  tag: "user-input-container",
+  tag: "gxcf-user-input-container",
   styleUrl: "user-input-container.scss",
   shadow: false
 })
@@ -49,11 +49,11 @@ export class UserInput {
   }
 
   private collapsedUserInput(): HTMLElement {
-    return <user-input-collapsed userInput={this.userInput} />;
+    return <gxcf-user-input-collapsed userInput={this.userInput} />;
   }
 
   private fullUserInput(): HTMLElement {
-    return <user-input-full userInput={this.userInput} flow={this.flow} />;
+    return <gxcf-user-input-full userInput={this.userInput} flow={this.flow} />;
   }
 
   render() {

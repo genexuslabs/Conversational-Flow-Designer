@@ -1,8 +1,8 @@
 import { Component, Prop, h } from "@stencil/core";
 
 @Component({
-  tag: "custom-select",
-  styleUrl: "custom-select.scss",
+  tag: "gxcf-select",
+  styleUrl: "select.scss",
   shadow: false
 })
 export class Select {

@@ -14,7 +14,7 @@ import { FlowElement } from "../../global/conversational-editor/instance-definit
 import { CollectionType } from "../../global/conversational-editor/instance-definition/elements/iconversational-element";
 
 @Component({
-  tag: "user-input-full",
+  tag: "gxcf-user-input-full",
   styleUrl: "user-input-full.scss",
   shadow: false
 })
@@ -64,16 +64,18 @@ export class FullUserInput {
     if (this.userInput.Redirections.length > 0) {
       this.userInput.Redirections.forEach(function(redir) {
         redirs.push(
-          <custom-redirection
+          <gxcf-redirection
             userInput={this.userInput}
             redirectionProperty={redir}
           />
         );
       }, this);
     } else {
-      redirs.push(<custom-redirection userInput={this.userInput} />);
+      redirs.push(<gxcf-redirection userInput={this.userInput} />);
     }
-    redirs.push(<add-object collectionAddText="Add another redirection" />);
+    redirs.push(
+      <gxcf-add-object collectionAddText="Add another redirection" />
+    );
     return redirs;
   }
 
@@ -83,8 +85,8 @@ export class FullUserInput {
         <summary class="UserInputPart">
           <span class="UserInputPartSummaryText">Ask messages</span>
         </summary>
-        <custom-hint hintId={HintId.AskMessages} class="UserInputHints" />
-        <custom-collection
+        <gxcf-hint hintId={HintId.AskMessages} class="UserInputHints" />
+        <gxcf-collection
           collection={this.userInput.RequiredMessages}
           collectionAddText="Add another ask message"
           itemParent={this.userInput}
@@ -103,8 +105,8 @@ export class FullUserInput {
               Condition to be required
             </span>
           </summary>
-          <custom-hint hintId={HintId.Required} class="UserInputHints" />
-          <custom-condition
+          <gxcf-hint hintId={HintId.Required} class="UserInputHints" />
+          <gxcf-condition
             currentCondition={this.userInput.RequiredCondition}
             onConditionChange={this.ChangeRequiredCondition}
           />
@@ -115,8 +117,8 @@ export class FullUserInput {
             <span class="UserInputPartSummaryText">Validate User Input</span>
           </summary>
           <div>
-            <custom-hint hintId={HintId.ErrorMessages} class="UserInputHints" />
-            <custom-collection
+            <gxcf-hint hintId={HintId.ErrorMessages} class="UserInputHints" />
+            <gxcf-collection
               collection={this.userInput.ErrorMessages}
               collectionAddText="Add another error message"
               itemParent={this.userInput}
@@ -125,7 +127,7 @@ export class FullUserInput {
             />
           </div>
           <div class="ContainerForUserInput">
-            <custom-hint hintId={HintId.TryLimit} class="UserInputHints" />
+            <gxcf-hint hintId={HintId.TryLimit} class="UserInputHints" />
             <span>Try Limit</span>
             <input
               class="UserInputLine"
@@ -135,7 +137,7 @@ export class FullUserInput {
             <hr class="Separator"></hr>
           </div>
           <div class="ContainerForUserInput">
-            <custom-hint
+            <gxcf-hint
               hintId={HintId.ValidateUserInput}
               class="UserInputHints"
             />
@@ -152,7 +154,7 @@ export class FullUserInput {
           <summary class="UserInputPart">
             <span class="UserInputPartSummaryText">Redirection</span>
           </summary>
-          <custom-hint hintId={HintId.Redirection} class="UserInputHints" />
+          <gxcf-hint hintId={HintId.Redirection} class="UserInputHints" />
           {this.RenderRedirections()}
         </details>
       </div>
@@ -181,7 +183,7 @@ export class FullUserInput {
           value={this.userInput.Variable}
           onChange={event => this.TriggerOnModifyUserInputName(event)}
         />
-        <up-arrow
+        <gxcf-up-arrow
           class="ExpandUserInputDownArrow"
           onClick={event => this.TriggerOnCollapseUserInput(event)}
         />

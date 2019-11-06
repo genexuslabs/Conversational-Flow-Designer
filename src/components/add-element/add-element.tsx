@@ -1,7 +1,7 @@
 import { Component, h } from "@stencil/core";
 
 @Component({
-  tag: "add-element",
+  tag: "gxcf-add-element",
   styleUrl: "add-element.scss",
   shadow: false
 })

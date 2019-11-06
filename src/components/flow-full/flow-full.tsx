@@ -13,7 +13,7 @@ import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { CollectionType } from "../../global/conversational-editor/instance-definition/elements/iconversational-element";
 
 @Component({
-  tag: "flow-full",
+  tag: "gxcf-flow-full",
   styleUrl: "flow-full.scss",
   shadow: false
 })
@@ -62,7 +62,7 @@ export class FlowFull {
     const userInputs: HTMLElement[] = [];
     this.flow.UserInputs.forEach(function(userInput) {
       userInputs.push(
-        <user-input-container userInput={userInput} flow={this.flow} />
+        <gxcf-user-input-container userInput={userInput} flow={this.flow} />
       );
     }, this);
     return userInputs;
@@ -71,7 +71,7 @@ export class FlowFull {
   private RenderizeResponse(): HTMLElement[] {
     const responses: HTMLElement[] = [];
     this.flow.Responses.forEach(function(response) {
-      responses.push(<response-collapsed response={response} />);
+      responses.push(<gxcf-response-collapsed response={response} />);
     });
     return responses;
   }
@@ -90,12 +90,12 @@ export class FlowFull {
       <div id={this.flow.Id} data-elementType="flow" class="FlowFull">
         <div class="FullFlowContent">
           <div class="TabFullFlowContent">
-            <summary-title
+            <gxcf-summary-title
               summaryid={this.SummaryId}
               summaryvalue={this.flow.Name}
               classType="FullTitle"
             />
-            <custom-collection
+            <gxcf-collection
               collection={this.flow.TriggerMessages}
               collectionHeader={this.CollectionHeader}
               collectionHintId={HintId.TriggerMessages}
@@ -111,14 +111,14 @@ export class FlowFull {
             <span class="LeftTab ElementsHeaderText">
               User Inputs ({this.flow.UserInputs.length})
             </span>
-            <custom-hint hintId={HintId.UserInput} class="Hint" />
+            <gxcf-hint hintId={HintId.UserInput} class="Hint" />
           </div>
           {this.RenderizeUserInputs()}
           <div
             class="AddFlowElement LeftTab"
             onClick={event => this.TriggerOnAddUserInput(event)}
           >
-            <add-element />
+            <gxcf-add-element />
             <span class="AddElementText">Add another user input</span>
           </div>
         </div>
@@ -128,14 +128,14 @@ export class FlowFull {
             <span class="ElementsHeaderText">
               Responses ({this.flow.UserInputs.length})
             </span>
-            <custom-hint hintId={HintId.Responses} class="Hint" />
+            <gxcf-hint hintId={HintId.Responses} class="Hint" />
           </div>
           {this.RenderizeResponse()}
           <div
             class="AddFlowElement"
             onClick={event => this.TriggerOnAddResponse(event)}
           >
-            <add-element />
+            <gxcf-add-element />
             <span class="AddElementText">Add another possible response</span>
           </div>
         </div>

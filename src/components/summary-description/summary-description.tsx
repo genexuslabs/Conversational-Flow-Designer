@@ -1,7 +1,7 @@
 import { Component, Prop, h, EventEmitter, Event } from "@stencil/core";
 
 @Component({
-  tag: "summary-description",
+  tag: "gxcf-summary-description",
   styleUrl: "summary-description.scss",
   shadow: false
 })

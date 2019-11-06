@@ -6,22 +6,18 @@
  */
 
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { UserInputElement } from "./global/conversational-editor/instance-definition/elements/user-input-element";
-import { RedirectionProperty } from "./global/conversational-editor/instance-definition/elements/redirection-property";
 import { FlowElement } from "./global/conversational-editor/instance-definition/elements/flow-element";
 import { RenderingOptions } from "./global/conversational-editor/helpers/helpers";
+import { UserInputElement } from "./global/conversational-editor/instance-definition/elements/user-input-element";
+import { RedirectionProperty } from "./global/conversational-editor/instance-definition/elements/redirection-property";
 import { ResponseElement } from "./global/conversational-editor/instance-definition/elements/response-element";
 
 export namespace Components {
-  interface AddElement {}
-  interface AddObject {
+  interface GxcfAddElement {}
+  interface GxcfAddObject {
     collectionAddText: string;
   }
-  interface ConversationalDesigner {}
-  interface ConversationalObject {
-    conversationalObject: string;
-  }
-  interface CustomCollection {
+  interface GxcfCollection {
     collection: string[];
     collectionAddText: string;
     collectionHeader: string;
@@ -31,281 +27,282 @@ export namespace Components {
     currentItemValue: string;
     itemParent: any;
   }
-  interface CustomCondition {
+  interface GxcfCondition {
     currentCondition: string;
     onConditionChange: Function;
   }
-  interface CustomHint {
-    hintId: string;
+  interface GxcfConversationalDesigner {}
+  interface GxcfConversationalObject {
+    conversationalObject: string;
   }
-  interface CustomRedirection {
-    redirectionProperty: RedirectionProperty;
-    userInput: UserInputElement;
-  }
-  interface CustomSelect {
-    selectcaption: string;
-    selectid: string;
-  }
-  interface DesignerWelcome {}
-  interface DownArrow {
+  interface GxcfDesignerWelcome {}
+  interface GxcfDownArrow {
     arrowid: string;
   }
-  interface DropZone {
+  interface GxcfDropZone {
     moveType: string;
     objectReferenceId: string;
     show: boolean;
   }
-  interface FlowCollapsed {
+  interface GxcfFlowCollapsed {
     flow: FlowElement;
     renderingType: RenderingOptions;
   }
-  interface FlowContainer {
+  interface GxcfFlowContainer {
     flow: FlowElement;
     showDropZone: boolean;
   }
-  interface FlowFull {
+  interface GxcfFlowFull {
     flow: FlowElement;
   }
-  interface ResponseCollapsed {
+  interface GxcfHint {
+    hintId: string;
+  }
+  interface GxcfRedirection {
+    redirectionProperty: RedirectionProperty;
+    userInput: UserInputElement;
+  }
+  interface GxcfResponseCollapsed {
     response: ResponseElement;
   }
-  interface SummaryDescription {
+  interface GxcfSelect {
+    selectcaption: string;
+    selectid: string;
+  }
+  interface GxcfSummaryDescription {
     descriptionid: string;
     descriptionvalue: string;
   }
-  interface SummaryTitle {
+  interface GxcfSummaryTitle {
     classType: string;
     summaryid: string;
     summaryvalue: string;
   }
-  interface UpArrow {
+  interface GxcfUpArrow {
     arrowid: string;
   }
-  interface UserInputCollapsed {
+  interface GxcfUserInputCollapsed {
     userInput: UserInputElement;
   }
-  interface UserInputContainer {
+  interface GxcfUserInputContainer {
     flow: FlowElement;
     userInput: UserInputElement;
   }
-  interface UserInputFull {
+  interface GxcfUserInputFull {
     flow: FlowElement;
     userInput: UserInputElement;
   }
 }
 
 declare global {
-  interface HTMLAddElementElement
-    extends Components.AddElement,
+  interface HTMLGxcfAddElementElement
+    extends Components.GxcfAddElement,
       HTMLStencilElement {}
-  var HTMLAddElementElement: {
-    prototype: HTMLAddElementElement;
-    new (): HTMLAddElementElement;
+  var HTMLGxcfAddElementElement: {
+    prototype: HTMLGxcfAddElementElement;
+    new (): HTMLGxcfAddElementElement;
   };
 
-  interface HTMLAddObjectElement
-    extends Components.AddObject,
+  interface HTMLGxcfAddObjectElement
+    extends Components.GxcfAddObject,
       HTMLStencilElement {}
-  var HTMLAddObjectElement: {
-    prototype: HTMLAddObjectElement;
-    new (): HTMLAddObjectElement;
+  var HTMLGxcfAddObjectElement: {
+    prototype: HTMLGxcfAddObjectElement;
+    new (): HTMLGxcfAddObjectElement;
   };
 
-  interface HTMLConversationalDesignerElement
-    extends Components.ConversationalDesigner,
+  interface HTMLGxcfCollectionElement
+    extends Components.GxcfCollection,
       HTMLStencilElement {}
-  var HTMLConversationalDesignerElement: {
-    prototype: HTMLConversationalDesignerElement;
-    new (): HTMLConversationalDesignerElement;
+  var HTMLGxcfCollectionElement: {
+    prototype: HTMLGxcfCollectionElement;
+    new (): HTMLGxcfCollectionElement;
   };
 
-  interface HTMLConversationalObjectElement
-    extends Components.ConversationalObject,
+  interface HTMLGxcfConditionElement
+    extends Components.GxcfCondition,
       HTMLStencilElement {}
-  var HTMLConversationalObjectElement: {
-    prototype: HTMLConversationalObjectElement;
-    new (): HTMLConversationalObjectElement;
+  var HTMLGxcfConditionElement: {
+    prototype: HTMLGxcfConditionElement;
+    new (): HTMLGxcfConditionElement;
   };
 
-  interface HTMLCustomCollectionElement
-    extends Components.CustomCollection,
+  interface HTMLGxcfConversationalDesignerElement
+    extends Components.GxcfConversationalDesigner,
       HTMLStencilElement {}
-  var HTMLCustomCollectionElement: {
-    prototype: HTMLCustomCollectionElement;
-    new (): HTMLCustomCollectionElement;
+  var HTMLGxcfConversationalDesignerElement: {
+    prototype: HTMLGxcfConversationalDesignerElement;
+    new (): HTMLGxcfConversationalDesignerElement;
   };
 
-  interface HTMLCustomConditionElement
-    extends Components.CustomCondition,
+  interface HTMLGxcfConversationalObjectElement
+    extends Components.GxcfConversationalObject,
       HTMLStencilElement {}
-  var HTMLCustomConditionElement: {
-    prototype: HTMLCustomConditionElement;
-    new (): HTMLCustomConditionElement;
+  var HTMLGxcfConversationalObjectElement: {
+    prototype: HTMLGxcfConversationalObjectElement;
+    new (): HTMLGxcfConversationalObjectElement;
   };
 
-  interface HTMLCustomHintElement
-    extends Components.CustomHint,
+  interface HTMLGxcfDesignerWelcomeElement
+    extends Components.GxcfDesignerWelcome,
       HTMLStencilElement {}
-  var HTMLCustomHintElement: {
-    prototype: HTMLCustomHintElement;
-    new (): HTMLCustomHintElement;
+  var HTMLGxcfDesignerWelcomeElement: {
+    prototype: HTMLGxcfDesignerWelcomeElement;
+    new (): HTMLGxcfDesignerWelcomeElement;
   };
 
-  interface HTMLCustomRedirectionElement
-    extends Components.CustomRedirection,
+  interface HTMLGxcfDownArrowElement
+    extends Components.GxcfDownArrow,
       HTMLStencilElement {}
-  var HTMLCustomRedirectionElement: {
-    prototype: HTMLCustomRedirectionElement;
-    new (): HTMLCustomRedirectionElement;
+  var HTMLGxcfDownArrowElement: {
+    prototype: HTMLGxcfDownArrowElement;
+    new (): HTMLGxcfDownArrowElement;
   };
 
-  interface HTMLCustomSelectElement
-    extends Components.CustomSelect,
+  interface HTMLGxcfDropZoneElement
+    extends Components.GxcfDropZone,
       HTMLStencilElement {}
-  var HTMLCustomSelectElement: {
-    prototype: HTMLCustomSelectElement;
-    new (): HTMLCustomSelectElement;
+  var HTMLGxcfDropZoneElement: {
+    prototype: HTMLGxcfDropZoneElement;
+    new (): HTMLGxcfDropZoneElement;
   };
 
-  interface HTMLDesignerWelcomeElement
-    extends Components.DesignerWelcome,
+  interface HTMLGxcfFlowCollapsedElement
+    extends Components.GxcfFlowCollapsed,
       HTMLStencilElement {}
-  var HTMLDesignerWelcomeElement: {
-    prototype: HTMLDesignerWelcomeElement;
-    new (): HTMLDesignerWelcomeElement;
+  var HTMLGxcfFlowCollapsedElement: {
+    prototype: HTMLGxcfFlowCollapsedElement;
+    new (): HTMLGxcfFlowCollapsedElement;
   };
 
-  interface HTMLDownArrowElement
-    extends Components.DownArrow,
+  interface HTMLGxcfFlowContainerElement
+    extends Components.GxcfFlowContainer,
       HTMLStencilElement {}
-  var HTMLDownArrowElement: {
-    prototype: HTMLDownArrowElement;
-    new (): HTMLDownArrowElement;
+  var HTMLGxcfFlowContainerElement: {
+    prototype: HTMLGxcfFlowContainerElement;
+    new (): HTMLGxcfFlowContainerElement;
   };
 
-  interface HTMLDropZoneElement
-    extends Components.DropZone,
+  interface HTMLGxcfFlowFullElement
+    extends Components.GxcfFlowFull,
       HTMLStencilElement {}
-  var HTMLDropZoneElement: {
-    prototype: HTMLDropZoneElement;
-    new (): HTMLDropZoneElement;
+  var HTMLGxcfFlowFullElement: {
+    prototype: HTMLGxcfFlowFullElement;
+    new (): HTMLGxcfFlowFullElement;
   };
 
-  interface HTMLFlowCollapsedElement
-    extends Components.FlowCollapsed,
+  interface HTMLGxcfHintElement
+    extends Components.GxcfHint,
       HTMLStencilElement {}
-  var HTMLFlowCollapsedElement: {
-    prototype: HTMLFlowCollapsedElement;
-    new (): HTMLFlowCollapsedElement;
+  var HTMLGxcfHintElement: {
+    prototype: HTMLGxcfHintElement;
+    new (): HTMLGxcfHintElement;
   };
 
-  interface HTMLFlowContainerElement
-    extends Components.FlowContainer,
+  interface HTMLGxcfRedirectionElement
+    extends Components.GxcfRedirection,
       HTMLStencilElement {}
-  var HTMLFlowContainerElement: {
-    prototype: HTMLFlowContainerElement;
-    new (): HTMLFlowContainerElement;
+  var HTMLGxcfRedirectionElement: {
+    prototype: HTMLGxcfRedirectionElement;
+    new (): HTMLGxcfRedirectionElement;
   };
 
-  interface HTMLFlowFullElement
-    extends Components.FlowFull,
+  interface HTMLGxcfResponseCollapsedElement
+    extends Components.GxcfResponseCollapsed,
       HTMLStencilElement {}
-  var HTMLFlowFullElement: {
-    prototype: HTMLFlowFullElement;
-    new (): HTMLFlowFullElement;
+  var HTMLGxcfResponseCollapsedElement: {
+    prototype: HTMLGxcfResponseCollapsedElement;
+    new (): HTMLGxcfResponseCollapsedElement;
   };
 
-  interface HTMLResponseCollapsedElement
-    extends Components.ResponseCollapsed,
+  interface HTMLGxcfSelectElement
+    extends Components.GxcfSelect,
       HTMLStencilElement {}
-  var HTMLResponseCollapsedElement: {
-    prototype: HTMLResponseCollapsedElement;
-    new (): HTMLResponseCollapsedElement;
+  var HTMLGxcfSelectElement: {
+    prototype: HTMLGxcfSelectElement;
+    new (): HTMLGxcfSelectElement;
   };
 
-  interface HTMLSummaryDescriptionElement
-    extends Components.SummaryDescription,
+  interface HTMLGxcfSummaryDescriptionElement
+    extends Components.GxcfSummaryDescription,
       HTMLStencilElement {}
-  var HTMLSummaryDescriptionElement: {
-    prototype: HTMLSummaryDescriptionElement;
-    new (): HTMLSummaryDescriptionElement;
+  var HTMLGxcfSummaryDescriptionElement: {
+    prototype: HTMLGxcfSummaryDescriptionElement;
+    new (): HTMLGxcfSummaryDescriptionElement;
   };
 
-  interface HTMLSummaryTitleElement
-    extends Components.SummaryTitle,
+  interface HTMLGxcfSummaryTitleElement
+    extends Components.GxcfSummaryTitle,
       HTMLStencilElement {}
-  var HTMLSummaryTitleElement: {
-    prototype: HTMLSummaryTitleElement;
-    new (): HTMLSummaryTitleElement;
+  var HTMLGxcfSummaryTitleElement: {
+    prototype: HTMLGxcfSummaryTitleElement;
+    new (): HTMLGxcfSummaryTitleElement;
   };
 
-  interface HTMLUpArrowElement extends Components.UpArrow, HTMLStencilElement {}
-  var HTMLUpArrowElement: {
-    prototype: HTMLUpArrowElement;
-    new (): HTMLUpArrowElement;
+  interface HTMLGxcfUpArrowElement
+    extends Components.GxcfUpArrow,
+      HTMLStencilElement {}
+  var HTMLGxcfUpArrowElement: {
+    prototype: HTMLGxcfUpArrowElement;
+    new (): HTMLGxcfUpArrowElement;
   };
 
-  interface HTMLUserInputCollapsedElement
-    extends Components.UserInputCollapsed,
+  interface HTMLGxcfUserInputCollapsedElement
+    extends Components.GxcfUserInputCollapsed,
       HTMLStencilElement {}
-  var HTMLUserInputCollapsedElement: {
-    prototype: HTMLUserInputCollapsedElement;
-    new (): HTMLUserInputCollapsedElement;
+  var HTMLGxcfUserInputCollapsedElement: {
+    prototype: HTMLGxcfUserInputCollapsedElement;
+    new (): HTMLGxcfUserInputCollapsedElement;
   };
 
-  interface HTMLUserInputContainerElement
-    extends Components.UserInputContainer,
+  interface HTMLGxcfUserInputContainerElement
+    extends Components.GxcfUserInputContainer,
       HTMLStencilElement {}
-  var HTMLUserInputContainerElement: {
-    prototype: HTMLUserInputContainerElement;
-    new (): HTMLUserInputContainerElement;
+  var HTMLGxcfUserInputContainerElement: {
+    prototype: HTMLGxcfUserInputContainerElement;
+    new (): HTMLGxcfUserInputContainerElement;
   };
 
-  interface HTMLUserInputFullElement
-    extends Components.UserInputFull,
+  interface HTMLGxcfUserInputFullElement
+    extends Components.GxcfUserInputFull,
       HTMLStencilElement {}
-  var HTMLUserInputFullElement: {
-    prototype: HTMLUserInputFullElement;
-    new (): HTMLUserInputFullElement;
+  var HTMLGxcfUserInputFullElement: {
+    prototype: HTMLGxcfUserInputFullElement;
+    new (): HTMLGxcfUserInputFullElement;
   };
   interface HTMLElementTagNameMap {
-    "add-element": HTMLAddElementElement;
-    "add-object": HTMLAddObjectElement;
-    "conversational-designer": HTMLConversationalDesignerElement;
-    "conversational-object": HTMLConversationalObjectElement;
-    "custom-collection": HTMLCustomCollectionElement;
-    "custom-condition": HTMLCustomConditionElement;
-    "custom-hint": HTMLCustomHintElement;
-    "custom-redirection": HTMLCustomRedirectionElement;
-    "custom-select": HTMLCustomSelectElement;
-    "designer-welcome": HTMLDesignerWelcomeElement;
-    "down-arrow": HTMLDownArrowElement;
-    "drop-zone": HTMLDropZoneElement;
-    "flow-collapsed": HTMLFlowCollapsedElement;
-    "flow-container": HTMLFlowContainerElement;
-    "flow-full": HTMLFlowFullElement;
-    "response-collapsed": HTMLResponseCollapsedElement;
-    "summary-description": HTMLSummaryDescriptionElement;
-    "summary-title": HTMLSummaryTitleElement;
-    "up-arrow": HTMLUpArrowElement;
-    "user-input-collapsed": HTMLUserInputCollapsedElement;
-    "user-input-container": HTMLUserInputContainerElement;
-    "user-input-full": HTMLUserInputFullElement;
+    "gxcf-add-element": HTMLGxcfAddElementElement;
+    "gxcf-add-object": HTMLGxcfAddObjectElement;
+    "gxcf-collection": HTMLGxcfCollectionElement;
+    "gxcf-condition": HTMLGxcfConditionElement;
+    "gxcf-conversational-designer": HTMLGxcfConversationalDesignerElement;
+    "gxcf-conversational-object": HTMLGxcfConversationalObjectElement;
+    "gxcf-designer-welcome": HTMLGxcfDesignerWelcomeElement;
+    "gxcf-down-arrow": HTMLGxcfDownArrowElement;
+    "gxcf-drop-zone": HTMLGxcfDropZoneElement;
+    "gxcf-flow-collapsed": HTMLGxcfFlowCollapsedElement;
+    "gxcf-flow-container": HTMLGxcfFlowContainerElement;
+    "gxcf-flow-full": HTMLGxcfFlowFullElement;
+    "gxcf-hint": HTMLGxcfHintElement;
+    "gxcf-redirection": HTMLGxcfRedirectionElement;
+    "gxcf-response-collapsed": HTMLGxcfResponseCollapsedElement;
+    "gxcf-select": HTMLGxcfSelectElement;
+    "gxcf-summary-description": HTMLGxcfSummaryDescriptionElement;
+    "gxcf-summary-title": HTMLGxcfSummaryTitleElement;
+    "gxcf-up-arrow": HTMLGxcfUpArrowElement;
+    "gxcf-user-input-collapsed": HTMLGxcfUserInputCollapsedElement;
+    "gxcf-user-input-container": HTMLGxcfUserInputContainerElement;
+    "gxcf-user-input-full": HTMLGxcfUserInputFullElement;
   }
 }
 
 declare namespace LocalJSX {
-  interface AddElement {}
-  interface AddObject {
+  interface GxcfAddElement {}
+  interface GxcfAddObject {
     collectionAddText?: string;
     onAddObject?: (event: CustomEvent<any>) => void;
   }
-  interface ConversationalDesigner {}
-  interface ConversationalObject {
-    conversationalObject?: string;
-    onSelectConversationalObject?: (event: CustomEvent<any>) => void;
-  }
-  interface CustomCollection {
+  interface GxcfCollection {
     collection?: string[];
     collectionAddText?: string;
     collectionHeader?: string;
@@ -315,30 +312,22 @@ declare namespace LocalJSX {
     currentItemValue?: string;
     itemParent?: any;
   }
-  interface CustomCondition {
+  interface GxcfCondition {
     currentCondition?: string;
     onConditionChange?: Function;
   }
-  interface CustomHint {
-    hintId?: string;
-    onHideHint?: (event: CustomEvent<any>) => void;
-    onShowHint?: (event: CustomEvent<any>) => void;
+  interface GxcfConversationalDesigner {}
+  interface GxcfConversationalObject {
+    conversationalObject?: string;
+    onSelectConversationalObject?: (event: CustomEvent<any>) => void;
   }
-  interface CustomRedirection {
-    redirectionProperty?: RedirectionProperty;
-    userInput?: UserInputElement;
-  }
-  interface CustomSelect {
-    selectcaption?: string;
-    selectid?: string;
-  }
-  interface DesignerWelcome {
+  interface GxcfDesignerWelcome {
     onOpenEditor?: (event: CustomEvent<any>) => void;
   }
-  interface DownArrow {
+  interface GxcfDownArrow {
     arrowid?: string;
   }
-  interface DropZone {
+  interface GxcfDropZone {
     moveType?: string;
     objectReferenceId?: string;
     onDropOnDropZone?: (event: CustomEvent<any>) => void;
@@ -346,7 +335,7 @@ declare namespace LocalJSX {
     onOnDragOverDropZone?: (event: CustomEvent<any>) => void;
     show?: boolean;
   }
-  interface FlowCollapsed {
+  interface GxcfFlowCollapsed {
     flow?: FlowElement;
     onOnDragOverFlow?: (event: CustomEvent<any>) => void;
     onOnExpandFlow?: (event: CustomEvent<any>) => void;
@@ -354,42 +343,55 @@ declare namespace LocalJSX {
     onSelectConversationalObject?: (event: CustomEvent<any>) => void;
     renderingType?: RenderingOptions;
   }
-  interface FlowContainer {
+  interface GxcfFlowContainer {
     flow?: FlowElement;
     showDropZone?: boolean;
   }
-  interface FlowFull {
+  interface GxcfFlowFull {
     flow?: FlowElement;
     onOnCollapseFlow?: (event: CustomEvent<any>) => void;
   }
-  interface ResponseCollapsed {
+  interface GxcfHint {
+    hintId?: string;
+    onHideHint?: (event: CustomEvent<any>) => void;
+    onShowHint?: (event: CustomEvent<any>) => void;
+  }
+  interface GxcfRedirection {
+    redirectionProperty?: RedirectionProperty;
+    userInput?: UserInputElement;
+  }
+  interface GxcfResponseCollapsed {
     response?: ResponseElement;
   }
-  interface SummaryDescription {
+  interface GxcfSelect {
+    selectcaption?: string;
+    selectid?: string;
+  }
+  interface GxcfSummaryDescription {
     descriptionid?: string;
     descriptionvalue?: string;
     onChangingFlowTriggerSummary?: (event: CustomEvent<any>) => void;
   }
-  interface SummaryTitle {
+  interface GxcfSummaryTitle {
     classType?: string;
     onChangingFlowName?: (event: CustomEvent<any>) => void;
     summaryid?: string;
     summaryvalue?: string;
   }
-  interface UpArrow {
+  interface GxcfUpArrow {
     arrowid?: string;
   }
-  interface UserInputCollapsed {
+  interface GxcfUserInputCollapsed {
     onOnExpandUserInput?: (event: CustomEvent<any>) => void;
     onOnModifyUserInputFirstAskMessage?: (event: CustomEvent<any>) => void;
     onOnModifyUserInputName?: (event: CustomEvent<any>) => void;
     userInput?: UserInputElement;
   }
-  interface UserInputContainer {
+  interface GxcfUserInputContainer {
     flow?: FlowElement;
     userInput?: UserInputElement;
   }
-  interface UserInputFull {
+  interface GxcfUserInputFull {
     flow?: FlowElement;
     onOnCollapseUserInput?: (event: CustomEvent<any>) => void;
     onOnModifyUserInputName?: (event: CustomEvent<any>) => void;
@@ -397,28 +399,28 @@ declare namespace LocalJSX {
   }
 
   interface IntrinsicElements {
-    "add-element": AddElement;
-    "add-object": AddObject;
-    "conversational-designer": ConversationalDesigner;
-    "conversational-object": ConversationalObject;
-    "custom-collection": CustomCollection;
-    "custom-condition": CustomCondition;
-    "custom-hint": CustomHint;
-    "custom-redirection": CustomRedirection;
-    "custom-select": CustomSelect;
-    "designer-welcome": DesignerWelcome;
-    "down-arrow": DownArrow;
-    "drop-zone": DropZone;
-    "flow-collapsed": FlowCollapsed;
-    "flow-container": FlowContainer;
-    "flow-full": FlowFull;
-    "response-collapsed": ResponseCollapsed;
-    "summary-description": SummaryDescription;
-    "summary-title": SummaryTitle;
-    "up-arrow": UpArrow;
-    "user-input-collapsed": UserInputCollapsed;
-    "user-input-container": UserInputContainer;
-    "user-input-full": UserInputFull;
+    "gxcf-add-element": GxcfAddElement;
+    "gxcf-add-object": GxcfAddObject;
+    "gxcf-collection": GxcfCollection;
+    "gxcf-condition": GxcfCondition;
+    "gxcf-conversational-designer": GxcfConversationalDesigner;
+    "gxcf-conversational-object": GxcfConversationalObject;
+    "gxcf-designer-welcome": GxcfDesignerWelcome;
+    "gxcf-down-arrow": GxcfDownArrow;
+    "gxcf-drop-zone": GxcfDropZone;
+    "gxcf-flow-collapsed": GxcfFlowCollapsed;
+    "gxcf-flow-container": GxcfFlowContainer;
+    "gxcf-flow-full": GxcfFlowFull;
+    "gxcf-hint": GxcfHint;
+    "gxcf-redirection": GxcfRedirection;
+    "gxcf-response-collapsed": GxcfResponseCollapsed;
+    "gxcf-select": GxcfSelect;
+    "gxcf-summary-description": GxcfSummaryDescription;
+    "gxcf-summary-title": GxcfSummaryTitle;
+    "gxcf-up-arrow": GxcfUpArrow;
+    "gxcf-user-input-collapsed": GxcfUserInputCollapsed;
+    "gxcf-user-input-container": GxcfUserInputContainer;
+    "gxcf-user-input-full": GxcfUserInputFull;
   }
 }
 
@@ -427,49 +429,50 @@ export { LocalJSX as JSX };
 declare module "@stencil/core" {
   export namespace JSX {
     interface IntrinsicElements {
-      "add-element": LocalJSX.AddElement &
-        JSXBase.HTMLAttributes<HTMLAddElementElement>;
-      "add-object": LocalJSX.AddObject &
-        JSXBase.HTMLAttributes<HTMLAddObjectElement>;
-      "conversational-designer": LocalJSX.ConversationalDesigner &
-        JSXBase.HTMLAttributes<HTMLConversationalDesignerElement>;
-      "conversational-object": LocalJSX.ConversationalObject &
-        JSXBase.HTMLAttributes<HTMLConversationalObjectElement>;
-      "custom-collection": LocalJSX.CustomCollection &
-        JSXBase.HTMLAttributes<HTMLCustomCollectionElement>;
-      "custom-condition": LocalJSX.CustomCondition &
-        JSXBase.HTMLAttributes<HTMLCustomConditionElement>;
-      "custom-hint": LocalJSX.CustomHint &
-        JSXBase.HTMLAttributes<HTMLCustomHintElement>;
-      "custom-redirection": LocalJSX.CustomRedirection &
-        JSXBase.HTMLAttributes<HTMLCustomRedirectionElement>;
-      "custom-select": LocalJSX.CustomSelect &
-        JSXBase.HTMLAttributes<HTMLCustomSelectElement>;
-      "designer-welcome": LocalJSX.DesignerWelcome &
-        JSXBase.HTMLAttributes<HTMLDesignerWelcomeElement>;
-      "down-arrow": LocalJSX.DownArrow &
-        JSXBase.HTMLAttributes<HTMLDownArrowElement>;
-      "drop-zone": LocalJSX.DropZone &
-        JSXBase.HTMLAttributes<HTMLDropZoneElement>;
-      "flow-collapsed": LocalJSX.FlowCollapsed &
-        JSXBase.HTMLAttributes<HTMLFlowCollapsedElement>;
-      "flow-container": LocalJSX.FlowContainer &
-        JSXBase.HTMLAttributes<HTMLFlowContainerElement>;
-      "flow-full": LocalJSX.FlowFull &
-        JSXBase.HTMLAttributes<HTMLFlowFullElement>;
-      "response-collapsed": LocalJSX.ResponseCollapsed &
-        JSXBase.HTMLAttributes<HTMLResponseCollapsedElement>;
-      "summary-description": LocalJSX.SummaryDescription &
-        JSXBase.HTMLAttributes<HTMLSummaryDescriptionElement>;
-      "summary-title": LocalJSX.SummaryTitle &
-        JSXBase.HTMLAttributes<HTMLSummaryTitleElement>;
-      "up-arrow": LocalJSX.UpArrow & JSXBase.HTMLAttributes<HTMLUpArrowElement>;
-      "user-input-collapsed": LocalJSX.UserInputCollapsed &
-        JSXBase.HTMLAttributes<HTMLUserInputCollapsedElement>;
-      "user-input-container": LocalJSX.UserInputContainer &
-        JSXBase.HTMLAttributes<HTMLUserInputContainerElement>;
-      "user-input-full": LocalJSX.UserInputFull &
-        JSXBase.HTMLAttributes<HTMLUserInputFullElement>;
+      "gxcf-add-element": LocalJSX.GxcfAddElement &
+        JSXBase.HTMLAttributes<HTMLGxcfAddElementElement>;
+      "gxcf-add-object": LocalJSX.GxcfAddObject &
+        JSXBase.HTMLAttributes<HTMLGxcfAddObjectElement>;
+      "gxcf-collection": LocalJSX.GxcfCollection &
+        JSXBase.HTMLAttributes<HTMLGxcfCollectionElement>;
+      "gxcf-condition": LocalJSX.GxcfCondition &
+        JSXBase.HTMLAttributes<HTMLGxcfConditionElement>;
+      "gxcf-conversational-designer": LocalJSX.GxcfConversationalDesigner &
+        JSXBase.HTMLAttributes<HTMLGxcfConversationalDesignerElement>;
+      "gxcf-conversational-object": LocalJSX.GxcfConversationalObject &
+        JSXBase.HTMLAttributes<HTMLGxcfConversationalObjectElement>;
+      "gxcf-designer-welcome": LocalJSX.GxcfDesignerWelcome &
+        JSXBase.HTMLAttributes<HTMLGxcfDesignerWelcomeElement>;
+      "gxcf-down-arrow": LocalJSX.GxcfDownArrow &
+        JSXBase.HTMLAttributes<HTMLGxcfDownArrowElement>;
+      "gxcf-drop-zone": LocalJSX.GxcfDropZone &
+        JSXBase.HTMLAttributes<HTMLGxcfDropZoneElement>;
+      "gxcf-flow-collapsed": LocalJSX.GxcfFlowCollapsed &
+        JSXBase.HTMLAttributes<HTMLGxcfFlowCollapsedElement>;
+      "gxcf-flow-container": LocalJSX.GxcfFlowContainer &
+        JSXBase.HTMLAttributes<HTMLGxcfFlowContainerElement>;
+      "gxcf-flow-full": LocalJSX.GxcfFlowFull &
+        JSXBase.HTMLAttributes<HTMLGxcfFlowFullElement>;
+      "gxcf-hint": LocalJSX.GxcfHint &
+        JSXBase.HTMLAttributes<HTMLGxcfHintElement>;
+      "gxcf-redirection": LocalJSX.GxcfRedirection &
+        JSXBase.HTMLAttributes<HTMLGxcfRedirectionElement>;
+      "gxcf-response-collapsed": LocalJSX.GxcfResponseCollapsed &
+        JSXBase.HTMLAttributes<HTMLGxcfResponseCollapsedElement>;
+      "gxcf-select": LocalJSX.GxcfSelect &
+        JSXBase.HTMLAttributes<HTMLGxcfSelectElement>;
+      "gxcf-summary-description": LocalJSX.GxcfSummaryDescription &
+        JSXBase.HTMLAttributes<HTMLGxcfSummaryDescriptionElement>;
+      "gxcf-summary-title": LocalJSX.GxcfSummaryTitle &
+        JSXBase.HTMLAttributes<HTMLGxcfSummaryTitleElement>;
+      "gxcf-up-arrow": LocalJSX.GxcfUpArrow &
+        JSXBase.HTMLAttributes<HTMLGxcfUpArrowElement>;
+      "gxcf-user-input-collapsed": LocalJSX.GxcfUserInputCollapsed &
+        JSXBase.HTMLAttributes<HTMLGxcfUserInputCollapsedElement>;
+      "gxcf-user-input-container": LocalJSX.GxcfUserInputContainer &
+        JSXBase.HTMLAttributes<HTMLGxcfUserInputContainerElement>;
+      "gxcf-user-input-full": LocalJSX.GxcfUserInputFull &
+        JSXBase.HTMLAttributes<HTMLGxcfUserInputFullElement>;
     }
   }
 }

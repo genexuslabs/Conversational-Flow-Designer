@@ -2,7 +2,7 @@ import { Component, Prop, h, EventEmitter, Event } from "@stencil/core";
 import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
 
 @Component({
-  tag: "user-input-collapsed",
+  tag: "gxcf-user-input-collapsed",
   styleUrl: "user-input-collapsed.scss",
   shadow: false
 })
@@ -33,7 +33,7 @@ export class CollapsedUserInput {
           value={this.userInput.Variable}
           onChange={event => this.TriggerOnModifyUserInputName(event)}
         />
-        <down-arrow
+        <gxcf-down-arrow
           class="CollapsedUserInputDownArrow"
           onClick={event => this.TriggerOnExpandUserInput(event)}
         />
