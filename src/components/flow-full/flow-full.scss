@@ -1,90 +1,73 @@
-:root
-{
-    .FlowFull
-    {
-        background-color: var(--active-content-background);
-        display:block;
-        margin: 20px 0px 20px 0px;
-        margin-bottom: 20px;
-        -webkit-animation: fadeIn 1s;
-        animation: fadeIn 1s;
-        padding-bottom: 20px;
-    }
-    
-    .TabFullFlowContent
-    {    
-        margin: 0px 50px 0px 50px;
-    }
-    
-    .FullFlowContent
-    {
-        background-color: var(--element-background-color);
-        padding: 15px 0px 15px 0px;
-        margin-bottom: -10px;
-    }
-    
-    .FullFlowContentUserInputs
-    {
-        margin: 15px 50px 0px 20px;
-    }
-    
-    .FullFlowContentResponses
-    {
-        margin: 15px 50px 0px 50px;
-    }
-    
-    .Separator
-    {
-        border-top: 2px dashed var(--separator-line-color);
-    }
-    
-    .FlowUpArrow
-    {
-        float: right;
-        position: relative;
-    }
-    
-    .AddFlowElement
-    {
-        border-radius: 1px;
-        border-width: 1px;
-        border-style: solid;
-        border-color: var(--action-border-color);
-        background-color: var(--action-background-color);
-        padding: 5px;
-    }
-    
-    .AddFlowElement:hover
-    {
-        cursor: pointer;
-    }
-    
-    .AddElementText
-    {
-        color: var(--add-element-font-color);
-        font-size: var(--normal-font-size);    
-    }
-    
-    .Hint
-    {
-        float: right;
-    }
-    
-    .ElementsHeader
-    {
-        clear:both;
-        color: var(--title-color);
-        font-weight: 400;
-        margin-bottom: 15px;
-    }
-    
-    .LeftTab
-    {
-        margin-left: 30px;
-    }
-    
-    .ElementsHeaderText
-    {
-        color: var(--elements-header-font-color);
-    }
+.FlowFull {
+  background-color: var(--active-content-background);
+  display: block;
+  margin: 20px 0px 20px 0px;
+  margin-bottom: 20px;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+  padding-bottom: 20px;
+}
+
+.TabFullFlowContent {
+  margin: 0px 50px 0px 50px;
+}
+
+.FullFlowContent {
+  background-color: var(--element-background-color);
+  padding: 15px 0px 15px 0px;
+  margin-bottom: -10px;
+}
+
+.FullFlowContentUserInputs {
+  margin: 15px 50px 0px 20px;
+}
+
+.FullFlowContentResponses {
+  margin: 15px 50px 0px 50px;
+}
+
+.Separator {
+  border-top: 2px dashed var(--separator-line-color);
+}
+
+.FlowUpArrow {
+  float: right;
+  position: relative;
+}
+
+.AddFlowElement {
+  border-radius: 1px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: var(--action-border-color);
+  background-color: var(--action-background-color);
+  padding: 5px;
+}
+
+.AddFlowElement:hover {
+  cursor: pointer;
+}
+
+.AddElementText {
+  color: var(--add-element-font-color);
+  font-size: var(--normal-font-size);
+}
+
+.Hint {
+  float: right;
+}
+
+.ElementsHeader {
+  clear: both;
+  color: var(--title-color);
+  font-weight: 400;
+  margin-bottom: 15px;
+}
+
+.LeftTab {
+  margin-left: 30px;
+}
+
+.ElementsHeaderText {
+  color: var(--elements-header-font-color);
 }

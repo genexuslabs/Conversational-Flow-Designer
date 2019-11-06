@@ -1,41 +1,37 @@
-:root
-{
-  .Welcome {
-    margin-top: 10%;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;    
-  }
-    
-  .Title {
-    font-weight: bold;
-    font-size: var(--large2-font-size);
-    color: var(--title-color);
-    font-weight: 600;
-  }
-    
-  .Intro {
-      display: block;
-      text-align: left;
-      font-weight: 400;
-      color: var(--text-color);
-      width:40%;
-      margin-left:auto;
-      margin-right:auto;
-  }
-    
-  a {
-    background-color: var(--welcome-color);
-    color: var(--welcome-font-color);
-    padding: 7px 16px 7px 16px;
-    font-size: 14px;
-    border-radius: 2px;
-    letter-spacing: 1px;
-    font-weight: 600;
-  }
-  
-  .Start:hover
-  {
-    cursor:pointer;
-  }
+.Welcome {
+  margin-top: 10%;
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.Title {
+  font-weight: bold;
+  font-size: var(--large2-font-size);
+  color: var(--title-color);
+  font-weight: 600;
+}
+
+.Intro {
+  display: block;
+  text-align: left;
+  font-weight: 400;
+  color: var(--text-color);
+  width: 40%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+a {
+  background-color: var(--welcome-color);
+  color: var(--welcome-font-color);
+  padding: 7px 16px 7px 16px;
+  font-size: 14px;
+  border-radius: 2px;
+  letter-spacing: 1px;
+  font-weight: 600;
+}
+
+.Start:hover {
+  cursor: pointer;
 }

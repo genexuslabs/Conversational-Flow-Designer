@@ -1,13 +1,8 @@
-:root
-{
-    .AddElement
-    {
-        padding: 2px 5px 2px 5px;
-        font-size: var(--large-font-size);
-    }
-    
-    .AddElement:hover
-    {
-        cursor: pointer;
-    }
+.AddElement {
+  padding: 2px 5px 2px 5px;
+  font-size: var(--large-font-size);
+}
+
+.AddElement:hover {
+  cursor: pointer;
 }

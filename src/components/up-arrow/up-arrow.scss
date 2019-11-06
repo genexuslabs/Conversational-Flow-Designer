@@ -1,18 +1,13 @@
-:root
-{
-    .UpArrow
-    {
-        border: solid var(--arrow-color);
-        border-width: 0 2px 2px 0;
-        display: inline-block;
-        padding: 4px;
-        transform: rotate(-135deg);
-        -webkit-transform: rotate(-135deg);
-        margin: 5px 0px 0px 5px;
-    }
-    
-    .UpArrow:hover
-    {
-        cursor: pointer;
-    }
+.UpArrow {
+  border: solid var(--arrow-color);
+  border-width: 0 2px 2px 0;
+  display: inline-block;
+  padding: 4px;
+  transform: rotate(-135deg);
+  -webkit-transform: rotate(-135deg);
+  margin: 5px 0px 0px 5px;
+}
+
+.UpArrow:hover {
+  cursor: pointer;
 }

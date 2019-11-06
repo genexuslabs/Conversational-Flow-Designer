@@ -1,45 +1,36 @@
-:root
-{
-    .Hint
-    {
-        font-size: var(--small2-font-size);
-        color: var(--hint-color);
-        text-decoration: underline;
-    }
-    
-    .Hint:hover
-    {
-        cursor: help;
-    }
-    
-    .ShowHint
-    {
-        background-color: var(--element-background-color);
-        border-style: solid;
-        border-radius: 5px;
-        border-width: 1px;
-        padding: 0px 5px 0px 5px;
-        float: right;
-        z-index: -1;
-        -webkit-animation: fadeIn 1s;
-        animation: fadeIn 1s;
-        font-size: var(--normal-font-size);
-    }
-    
-    .HintTitle
-    {
-        color: var(--title-color);
-    }
-    
-    .HintDescription
-    {
-        color: var(--action-font-color);
-    }
-    
-    .CloseHint
-    {
-        float:right;
-        font-size: var(--normal-font-size);
-        cursor: pointer;
-    }
+.Hint {
+  font-size: var(--small2-font-size);
+  color: var(--hint-color);
+  text-decoration: underline;
+}
+
+.Hint:hover {
+  cursor: help;
+}
+
+.ShowHint {
+  background-color: var(--element-background-color);
+  border-style: solid;
+  border-radius: 5px;
+  border-width: 1px;
+  padding: 0px 5px 0px 5px;
+  float: right;
+  z-index: -1;
+  -webkit-animation: fadeIn 1s;
+  animation: fadeIn 1s;
+  font-size: var(--normal-font-size);
+}
+
+.HintTitle {
+  color: var(--title-color);
+}
+
+.HintDescription {
+  color: var(--action-font-color);
+}
+
+.CloseHint {
+  float: right;
+  font-size: var(--normal-font-size);
+  cursor: pointer;
 }
