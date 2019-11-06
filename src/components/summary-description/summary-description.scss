@@ -1,11 +1,14 @@
-.SummaryDescription
+:root
 {
-    font-style: italic;
-    font-weight: 400;
-    text-align: left;
-    clear: both;
-    background-color: $common-action-background;
-    border:none;
-    display:block;
-    width: 59%;
+    .SummaryDescription
+    {
+        font-style: italic;
+        font-weight: 400;
+        text-align: left;
+        clear: both;
+        background-color: var(--common-action-background);
+        border:none;
+        display:block;
+        width: 59%;
+    }
 }

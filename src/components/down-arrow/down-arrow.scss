@@ -1,15 +1,18 @@
-.DownArrow
+:root
 {
-    border: solid $arrow-color;
-    border-width: 0 2px 2px 0;
-    display: inline-block;
-    padding: 4px;
-    transform: rotate(45deg);
-    -webkit-transform: rotate(45deg);
-    margin: 5px 0px 0px 5px;
-}
-
-.DownArrow:hover
-{
-    cursor: pointer;
+    .DownArrow
+    {
+        border: solid var(--arrow-color);
+        border-width: 0 2px 2px 0;
+        display: inline-block;
+        padding: 4px;
+        transform: rotate(45deg);
+        -webkit-transform: rotate(45deg);
+        margin: 5px 0px 0px 5px;
+    }
+    
+    .DownArrow:hover
+    {
+        cursor: pointer;
+    }
 }

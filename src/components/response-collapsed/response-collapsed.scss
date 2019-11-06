@@ -1,44 +1,47 @@
-.CollapsedResponse
+:root
 {
-    border-color: $flow-element-border-color;
-    background-color: $flow-element-background-color;
-    border-width: 1px;
-    border-radius: 1px;
-    border-style: solid;
-    padding: 12px 22px 12px 22px;
-    overflow:hidden;
-    margin-bottom: 15px;
-    -webkit-animation: $animation-time;
-    animation: $animation-time;
-}
-
-.CollapsedResponse:hover
-{
-    transform: $animation-scale-size;
-}
-
-.CollapsedResponseDownArrow
-{
-    float:right;
-}
-
-.FirstResponseMessage
-{
-    float:left;
-    clear:both;
-    font-style: italic;
-    color: $elements-messages-font-color;
-    border: none;
-    background-color: $flow-element-background-color;
-    width: 95%;
-}
-
-.CollapsedResponseTitle
-{    
-    background-color: $flow-element-background-color;
-    border:none;
-    float:left;
-    color: $elements-title-font-color;
-    font-size: $normal-font-size;
-    font-weight: bold;
+    .CollapsedResponse
+    {
+        border-color: var(--flow-element-border-color);
+        background-color: var(--flow-element-background-color);
+        border-width: 1px;
+        border-radius: 1px;
+        border-style: solid;
+        padding: 12px 22px 12px 22px;
+        overflow:hidden;
+        margin-bottom: 15px;
+        -webkit-animation: var(--animation-time);
+        animation: var(--animation-time);
+    }
+    
+    .CollapsedResponse:hover
+    {
+        transform: var(--animation-scale-size);
+    }
+    
+    .CollapsedResponseDownArrow
+    {
+        float:right;
+    }
+    
+    .FirstResponseMessage
+    {
+        float:left;
+        clear:both;
+        font-style: italic;
+        color: var(--elements-messages-font-color);
+        border: none;
+        background-color: var(--flow-element-background-color);
+        width: 95%;
+    }
+    
+    .CollapsedResponseTitle
+    {    
+        background-color: var(--flow-element-background-color);
+        border:none;
+        float:left;
+        color: var(--elements-title-font-color);
+        font-size: var(--normal-font-size);
+        font-weight: bold;
+    }
 }

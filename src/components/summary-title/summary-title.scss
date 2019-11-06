@@ -1,23 +1,26 @@
-.SummaryTitle
+:root
 {
-    color: $title-color;
-    background-color: $common-action-background;
-    font-weight: bold;
-    margin-bottom: 2px;
-    float: left;
-    border: none;
-    text-align: left;
-    width: 62%;
-}
-
-.FullTitle
-{
-    color: $title-color;
-    background-color: $common-action-background;
-    font-weight: bold;
-    margin-bottom: 2px;
-    float: left;
-    border: none;
-    text-align: left;
-    width: 62%;
+    .SummaryTitle
+    {
+        color: var(--title-color);
+        background-color: var(--common-action-background);
+        font-weight: bold;
+        margin-bottom: 2px;
+        float: left;
+        border: none;
+        text-align: left;
+        width: 62%;
+    }
+    
+    .FullTitle
+    {
+        color: var(--title-color);
+        background-color: var(--common-action-background);
+        font-weight: bold;
+        margin-bottom: 2px;
+        float: left;
+        border: none;
+        text-align: left;
+        width: 62%;
+    }
 }

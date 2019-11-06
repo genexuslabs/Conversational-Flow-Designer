@@ -1,29 +1,32 @@
-.FlowSummary
-{    
-    border-radius: 1px;
-    display:block;
-    //margin: 20px 0px 20px 0px;
-    padding: 8px 12px 8px 12px;
-    margin:auto;
-    margin-top: 8px;
-    margin-bottom: 8px;
-    width: 91%;
-    overflow: hidden;
-    -webkit-animation: $animation-time;
-    animation: $animation-time;
-}
-
-.FlowSummary:hover
+:root
 {
-    transform: $animation-scale-size;
-}
-
-.ActiveContent
-{
-    background-color: $active-content-background;
-}
-
-.NoActiveContent
-{
-    background-color: $element-background-color;
+    .FlowSummary
+    {    
+        border-radius: 1px;
+        display:block;
+        //margin: 20px 0px 20px 0px;
+        padding: 8px 12px 8px 12px;
+        margin:auto;
+        margin-top: 8px;
+        margin-bottom: 8px;
+        width: 91%;
+        overflow: hidden;
+        -webkit-animation: var(--animation-time);
+        animation: var(--animation-time);
+    }
+    
+    .FlowSummary:hover
+    {
+        transform: var(--animation-scale-size);
+    }
+    
+    .ActiveContent
+    {
+        background-color: var(--active-content-background);
+    }
+    
+    .NoActiveContent
+    {
+        background-color: var(--element-background-color);
+    }
 }

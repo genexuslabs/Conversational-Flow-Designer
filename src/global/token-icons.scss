@@ -1,3 +1,6 @@
-$switch-icon-on: url("src/assets/images/switch.png");
-$switch-userinputpart-off: url("src/assets/images/minus.png");
-$switch-userinputpart-on: url("src/assets/images/plus.png");
+:root
+{
+    --switch-icon-on: url("src/assets/images/switch.png");
+    --switch-userinputpart-off: url("src/assets/images/minus.png");
+    --switch-userinputpart-on: url("src/assets/images/plus.png");
+}
