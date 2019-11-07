@@ -7,7 +7,10 @@ import {
   State,
   Listen
 } from "@stencil/core";
-import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
+import {
+  UserInputElement,
+  RequiredTypes
+} from "../../global/conversational-editor/instance-definition/elements/user-input-element";
 import { HintId } from "../../global/conversational-editor/helpers/helpers";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
@@ -49,12 +52,20 @@ export class FullUserInput {
     this.enableAdvancedMode = !this.enableAdvancedMode;
   }
 
-  ChangeRequiredCondition(value): void {
-    console.log(value);
+  HandleChangeCondition(event: CustomEvent): void {
+    const value = EventHandler.GetValue(event);
+    this.userInput.Required = RequiredTypes.Condition;
+    this.userInput.RequiredCondition = value;
+    if (window.external.SetUserInputRequiredCondition)
+      window.external.SetUserInputRequiredCondition(
+        this.flow.Name,
+        this.userInput.Variable,
+        value
+      );
   }
 
   @Listen("addObject")
-  HandleAddObject(event): void {
+  HandleAddObject(event: Event): void {
     console.log(event);
     console.log("add redirection");
   }
@@ -106,7 +117,7 @@ export class FullUserInput {
           <gxcf-hint hintId={HintId.Required} class="UserInputHints" />
           <gxcf-condition
             currentCondition={this.userInput.RequiredCondition}
-            onConditionChange={this.ChangeRequiredCondition}
+            onConditionChange={event => this.HandleChangeCondition(event)}
           />
         </details>
         {this.RenderBasicMode()}

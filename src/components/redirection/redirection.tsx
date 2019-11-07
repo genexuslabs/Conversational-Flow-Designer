@@ -28,17 +28,12 @@ export class Redirection {
     return combo;
   }
 
-  private ResponseConditionChange(value): void {
-    console.log(value);
-  }
-
   render() {
     return (
       <div class="RedirectionContainer">
         <div>
           <gxcf-condition
             currentCondition={this.redirectionProperty.RedirectCondition}
-            onConditionChange={this.ResponseConditionChange}
           />
           <select class="RedirectToSelect" required>
             {this.LoadFlowsCombo()}

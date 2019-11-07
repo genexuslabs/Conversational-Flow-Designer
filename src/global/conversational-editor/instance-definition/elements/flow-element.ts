@@ -63,7 +63,7 @@ export class FlowElement implements ConversationalElement {
   }
 
   private ExternalUpdateTriggerMessages(): void {
-    if (window.external.SetAskMessages) {
+    if (window.external.SetTriggers) {
       const messages: string = EventHandler.GetFormattedMessages(
         this.TriggerMessages
       );

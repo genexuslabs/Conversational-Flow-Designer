@@ -1,4 +1,6 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
+import { ConditionType } from "../../global/conversational-editor/helpers/helpers";
+import { runInThisContext } from "vm";
 
 @Component({
   tag: "gxcf-condition",
@@ -7,7 +9,11 @@ import { Component, Prop, h } from "@stencil/core";
 })
 export class Condition {
   @Prop() currentCondition: string;
-  @Prop() onConditionChange: Function;
+
+  @Event() conditionChange: EventEmitter;
+  TriggerOnConditionChange(event): void {
+    this.conditionChange.emit(event);
+  }
 
   render() {
     return (
@@ -17,7 +23,7 @@ export class Condition {
           class="InputCondition"
           placeholder="always"
           value={this.currentCondition}
-          onChange={event => this.onConditionChange(event)}
+          onChange={event => this.TriggerOnConditionChange(event)}
         />
       </div>
     );

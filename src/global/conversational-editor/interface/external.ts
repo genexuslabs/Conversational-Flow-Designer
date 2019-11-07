@@ -27,4 +27,9 @@ interface External {
     askMessages: string
   ): Function;
   SelectValidationProcedure(flowName: string, userInput: string): Promise<any>;
+  SetUserInputRequiredCondition(
+    flowName: string,
+    userInput: string,
+    newCondition: string
+  );
 }
