@@ -1,6 +1,4 @@
 import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
-import { ConditionType } from "../../global/conversational-editor/helpers/helpers";
-import { runInThisContext } from "vm";
 
 @Component({
   tag: "gxcf-condition",
