@@ -9,6 +9,6 @@ export class DownArrow {
   @Prop() arrowid: string;
 
   render() {
-    return <p id={this.arrowid} class="DownArrow"></p>;
+    return <div id={this.arrowid} class="DownArrow"></div>;
   }
 }
