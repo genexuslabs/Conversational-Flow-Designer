@@ -13,12 +13,16 @@
   border-style: solid;
   border-radius: 5px;
   border-width: 1px;
-  padding: 0px 5px 0px 5px;
-  float: right;
-  z-index: -1;
-  -webkit-animation: fadeIn 1s;
-  animation: fadeIn 1s;
+  padding: 5px 5px 5px 5px;
+  z-index: 2;
+  -webkit-animation: var(--animation-time-long);
+  animation: var(--animation-time-long);
   font-size: var(--normal-font-size);
+  position:fixed;
+  top: var(--modal-margin);
+  bottom: var(--modal-margin);
+  right: var(--modal-margin);
+  left: var(--modal-margin);
 }
 
 .HintTitle {

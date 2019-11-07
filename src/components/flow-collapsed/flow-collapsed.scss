@@ -1,7 +1,6 @@
 .FlowSummary {
   border-radius: 1px;
   display: block;
-  //margin: 20px 0px 20px 0px;
   padding: 8px 12px 8px 12px;
   margin: auto;
   margin-top: 8px;
@@ -10,6 +9,7 @@
   overflow: hidden;
   -webkit-animation: var(--animation-time);
   animation: var(--animation-time);
+  z-index: 1;
 }
 
 .FlowSummary:hover {

@@ -18,7 +18,8 @@ export const config: Config = {
         "src/global/token-animations.scss",
         "src/global/token-colors.scss",
         "src/global/token-fonts.scss",
-        "src/global/token-icons.scss"
+        "src/global/token-icons.scss",
+        "src/global/token-boxing.scss"
       ]
     })
   ]
