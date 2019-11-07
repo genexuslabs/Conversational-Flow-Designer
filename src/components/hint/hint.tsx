@@ -30,9 +30,7 @@ export class Hint {
       <span class="HintTitle">
         {PropertiesDefinition.GetTitle(this.hintId)}
       </span>
-      <span onClick={event => this.HideHint(event)} class="CloseHint">
-        x
-      </span>
+      <span onClick={event => this.HideHint(event)} class="CloseHint" />
       <p class="HintDescription">
         {PropertiesDefinition.GetDescription(this.hintId)}
       </p>
