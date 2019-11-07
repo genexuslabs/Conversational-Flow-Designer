@@ -32,4 +32,5 @@ interface External {
     userInput: string,
     newCondition: string
   );
+  SetTryLimit(flowName: string, userInput: string, value: string);
 }

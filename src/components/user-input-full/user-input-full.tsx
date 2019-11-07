@@ -70,6 +70,22 @@ export class FullUserInput {
     console.log("add redirection");
   }
 
+  HandleTryLimitChange(event: CustomEvent): void {
+    event.preventDefault();
+    if (event.currentTarget) {
+      const element: HTMLInputElement = event.currentTarget as HTMLInputElement;
+      const value = element.value;
+      this.userInput.TryLimit = +value;
+      console.log(value);
+      if (window.external.SetTryLimit)
+        window.external.SetTryLimit(
+          this.flow.Name,
+          this.userInput.Variable,
+          value
+        );
+    }
+  }
+
   private RenderRedirections(): HTMLElement[] {
     const redirs: HTMLElement[] = new Array<HTMLElement>();
     if (this.userInput.Redirections.length > 0) {
@@ -142,6 +158,9 @@ export class FullUserInput {
               class="UserInputLine"
               placeholder="0 - No limits"
               value={this.userInput.TryLimit}
+              onChange={(event: CustomEvent) =>
+                this.HandleTryLimitChange(event)
+              }
             />
             <hr class="Separator"></hr>
           </div>
