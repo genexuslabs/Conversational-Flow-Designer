@@ -80,9 +80,7 @@ export class Collection {
             data-item-index={index}
             class="Trash"
             onClick={event => this.DeleteItem(event)}
-          >
-            X
-          </div>
+          />
         </div>
       );
     }
@@ -90,11 +88,6 @@ export class Collection {
   }
 
   render() {
-    if (this.collection == null) {
-      this.collection = [];
-      this.collection.push("test1");
-      this.collection.push("test2");
-    }
     return (
       <div class="Collection">
         <div class="CollectionContainer">

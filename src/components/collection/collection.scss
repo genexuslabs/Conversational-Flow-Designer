@@ -1,6 +1,6 @@
 .ItemInput {
   font-size: var(--normal-font-size);
-  width: 96%;
+  width: 95%;
   font-style: italic;
   padding-left: 5px;
   border-style: none;
@@ -49,9 +49,11 @@
 }
 
 .Trash {
-  display: inline;
-  text-align: right;
+  display: inline-block;
   vertical-align: middle;
+  content: var(--close-icon);
+  width: var(--medium-icon-width);
+  height: var(--medium-icon-height);
 }
 
 .Trash:hover {
