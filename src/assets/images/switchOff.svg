@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="24px" height="16px" viewBox="0 0 24 16" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 59.1 (86144) - https://sketch.com -->
+    <title>SwitchOff</title>
+    <desc>Created with Sketch.</desc>
+    <g id="SwitchOff" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <path d="M18,2 L6,2 C2.6862915,2 0,4.6862915 0,8 C0,11.3137085 2.6862915,14 6,14 L18,14 C21.3137085,14 24,11.3137085 24,8 C24,4.6862915 21.3137085,2 18,2 L18,2 Z" id="Path" fill="#9B9B9B"></path>
+        <path d="M6,11 C4.34314575,11 3,9.65685425 3,8 C3,6.34314575 4.34314575,5 6,5 C7.65685425,5 9,6.34314575 9,8 C9,9.65685425 7.65685425,11 6,11 Z" id="Path" fill="#FFFFFF"></path>
+    </g>
+</svg>

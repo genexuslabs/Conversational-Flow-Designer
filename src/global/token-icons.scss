@@ -1,8 +1,18 @@
 :root
 {
-    --switch-icon-on: url("src/assets/images/switch.png");
-    --switch-userinputpart-off: url("src/assets/images/minus.png");
-    --switch-userinputpart-on: url("src/assets/images/plus.png");
+    --add-icon: url("src/assets/images/add.svg");
+    --alert-icon: url("src/assets/images/alert.svg");
+    --arrow-down-icon: url("src/assets/images/chevronDown.svg");
+    --arrow-up-icon: url("src/assets/images/chevronUp.svg");
+    --close-icon: url("src/assets/images/close.svg");
+    --delete-icon: url("src/assets/images/delete.svg");
+    --dot-icon: url("src/assets/images/dot.svg");
+    --edit-icon: url("src/assets/images/edit.svg");
+    --error-small-icon: url("src/assets/images/errorSmall.svg");
+    --switch-icon-on: url("src/assets/images/switchOn.svg");
+    --switch-icon-off: url("src/assets/images/switchOff.svg");
+    --switch-userinputpart-off: url("src/assets/images/minus.svg");
+    --switch-userinputpart-on: url("src/assets/images/plus.svg");
     --procedure-icon: url("src/assets/images/procedure.svg");
     --web-panel-icon: url("src/assets/images/webPanel.svg");
     --sd-panel-icon: url("src/assets/images/sdPanel.svg");
