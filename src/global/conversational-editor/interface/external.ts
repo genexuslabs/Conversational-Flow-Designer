@@ -33,4 +33,5 @@ interface External {
     newCondition: string
   );
   SetTryLimit(flowName: string, userInput: string, value: string);
+  AddNewRedirection(flowName: string, userInput: string);
 }

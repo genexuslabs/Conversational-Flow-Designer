@@ -156,4 +156,10 @@ export class UserInputElement implements ConversationalElement {
   public SetValidationProcedure(validationProcedure: string): void {
     this.ValidationProcedure = validationProcedure;
   }
+
+  public AddNewRedirection() {
+    this.Redirections.push(new RedirectionProperty("", ""));
+    if (window.external.AddNewRedirection)
+      window.external.AddNewRedirection(this.Parent.Name, this.Variable);
+  }
 }

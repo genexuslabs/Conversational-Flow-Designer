@@ -86,6 +86,12 @@ export class FullUserInput {
     }
   }
 
+  HandleAddRedirection(event) {
+    console.log(event);
+    this.userInput.AddNewRedirection();
+    this.refresh = !this.refresh;
+  }
+
   private RenderRedirections(): HTMLElement[] {
     const redirs: HTMLElement[] = new Array<HTMLElement>();
     if (this.userInput.Redirections.length > 0) {
@@ -100,7 +106,12 @@ export class FullUserInput {
     } else {
       redirs.push(<gxcf-redirection userInput={this.userInput} />);
     }
-    redirs.push(<gxcf-add-object addText="Add another redirection" />);
+    redirs.push(
+      <gxcf-add-object
+        addText="Add another redirection"
+        onClick={event => this.HandleAddRedirection(event)}
+      />
+    );
     return redirs;
   }
 
