@@ -7,6 +7,6 @@ import { Component, h } from "@stencil/core";
 })
 export class AddElement {
   render() {
-    return <span class="AddElement">+</span>;
+    return <span class="AddElement" />;
   }
 }

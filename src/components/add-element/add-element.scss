@@ -1,6 +1,9 @@
-.AddElement {
-  padding: 2px 5px 2px 5px;
-  font-size: var(--large-font-size);
+.AddElement {  
+  content: var(--add-icon);
+  width: var(--medium-icon-width);
+  height: var(--medium-icon-height);
+  vertical-align: middle;
+  text-align: center;
 }
 
 .AddElement:hover {

@@ -2,11 +2,11 @@
   color: var(--inelement-select-color);
   font-size: var(--normal-font-size);
   clear: both;
-  margin-top: 10px;
-  border-color: var(--background-color);
+  border-color: var(--action-border-color);
+  background-color: var(--action-background-color);
   border-style: solid;
   border-width: 1px;
-  background-color: var(--collection-background-color);
+  border-radius: 1px;
   cursor: pointer;
   padding: 1px 0px 1px 5px;
   height: 24px;
@@ -16,4 +16,6 @@
 .AddObjectText {
   line-height: 24px;
   vertical-align: middle;
+  color: var(--add-element-font-color);
+  font-size: var(--normal-font-size);
 }

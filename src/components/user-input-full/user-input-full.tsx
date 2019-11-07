@@ -73,9 +73,7 @@ export class FullUserInput {
     } else {
       redirs.push(<gxcf-redirection userInput={this.userInput} />);
     }
-    redirs.push(
-      <gxcf-add-object collectionAddText="Add another redirection" />
-    );
+    redirs.push(<gxcf-add-object addText="Add another redirection" />);
     return redirs;
   }
 

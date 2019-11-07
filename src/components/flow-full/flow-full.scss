@@ -35,24 +35,6 @@
   position: relative;
 }
 
-.AddFlowElement {
-  border-radius: 1px;
-  border-width: 1px;
-  border-style: solid;
-  border-color: var(--action-border-color);
-  background-color: var(--action-background-color);
-  padding: 5px;
-}
-
-.AddFlowElement:hover {
-  cursor: pointer;
-}
-
-.AddElementText {
-  color: var(--add-element-font-color);
-  font-size: var(--normal-font-size);
-}
-
 .Hint {
   float: right;
 }

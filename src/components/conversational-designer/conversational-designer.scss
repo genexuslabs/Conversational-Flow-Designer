@@ -8,19 +8,9 @@ body {
   margin: auto;
 }
 .AddFlow {
-  background-color: var(--action-background-color);
-  border-color: var(--action-border-color);
-  border-style: solid;
-  border-width: 1px;
   display: block;
-  padding: 4px 6px 4px 6px;
-  font-weight: normal;
   margin-top: 5px;
-  width: 33%;
-}
-
-.AddFlowElementText {
-  color: var(--add-element-font-color);
+  width: 34%;
 }
 
 .FlowsContainer {

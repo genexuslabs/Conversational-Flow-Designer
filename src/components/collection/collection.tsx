@@ -55,10 +55,10 @@ export class Collection {
   }
 
   private AddItemElement = (
-    <div id="AddItem" class="AddItem" onClick={event => this.AddItem(event)}>
-      <gxcf-add-element class="AddItemText" />
-      <span class="AddItemText">{this.collectionAddText}</span>
-    </div>
+    <gxcf-add-object
+      addText={this.collectionAddText}
+      onClick={event => this.AddItem(event)}
+    />
   );
 
   private RenderizeItems(items: string[]): HTMLElement[] {

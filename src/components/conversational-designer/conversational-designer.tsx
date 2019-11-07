@@ -48,14 +48,11 @@ export class ConversationalDesginer {
   @State() openEditor: boolean;
 
   private addFlow = (
-    <div
-      id="AddFlowElement"
+    <gxcf-add-object
       class="AddFlow"
       onClick={() => this.HandleAddFlowElement()}
-    >
-      <gxcf-add-element />
-      <span class="AddFlowElementText">Add another Flow</span>
-    </div>
+      addText="Add another flow"
+    />
   );
 
   private RenderizeFlows(): HTMLElement[] {

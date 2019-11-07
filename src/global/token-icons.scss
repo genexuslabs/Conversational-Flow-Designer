@@ -1,5 +1,6 @@
 :root
 {
+    //SVG icons:
     --add-icon: url("src/assets/images/add.svg");
     --alert-icon: url("src/assets/images/alert.svg");
     --arrow-down-icon: url("src/assets/images/chevronDown.svg");
@@ -18,4 +19,8 @@
     --sd-panel-icon: url("src/assets/images/sdPanel.svg");
     --transaction-icon: url("src/assets/images/transaction.svg");
     --data-provider-icon: url("src/assets/images/dataProvider.svg");
+
+    //Icons sizes
+    --medium-icon-width: 16px;
+    --medium-icon-height: 16px;
 }

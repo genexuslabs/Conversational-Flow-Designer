@@ -114,13 +114,11 @@ export class FlowFull {
             <gxcf-hint hintId={HintId.UserInput} class="Hint" />
           </div>
           {this.RenderizeUserInputs()}
-          <div
-            class="AddFlowElement LeftTab"
+          <gxcf-add-object
+            class="LeftTab"
             onClick={event => this.TriggerOnAddUserInput(event)}
-          >
-            <gxcf-add-element />
-            <span class="AddElementText">Add another user input</span>
-          </div>
+            addText="Add another user input"
+          />
         </div>
         <hr class="Separator"></hr>
         <div class="FullFlowContentResponses">
@@ -131,13 +129,10 @@ export class FlowFull {
             <gxcf-hint hintId={HintId.Responses} class="Hint" />
           </div>
           {this.RenderizeResponse()}
-          <div
-            class="AddFlowElement"
+          <gxcf-add-object
             onClick={event => this.TriggerOnAddResponse(event)}
-          >
-            <gxcf-add-element />
-            <span class="AddElementText">Add another possible response</span>
-          </div>
+            addText="Add another possible response"
+          />
         </div>
       </div>
     );
