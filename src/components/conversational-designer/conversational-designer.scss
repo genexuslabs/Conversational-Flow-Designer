@@ -2,6 +2,7 @@ body {
   font-family: "Open Sans", sans-serif;
   background-color: var(--background-color);
   font-size: var(--normal-font-size);
+  overflow-y: hidden;
 }
 .MainTable {
   width: 95%;
@@ -16,12 +17,13 @@ body {
 .SearchBar
 {
   width: 34%;
+  margin-bottom: 5px;
 }
 
 .FlowsContainer {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 92vh;
+  max-height: 87vh;
   width: 34%;
   left: 0;
 }
