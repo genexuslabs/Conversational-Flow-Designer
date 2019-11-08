@@ -27,14 +27,14 @@ export class FullUserInput {
   @State() enableAdvancedMode = false;
   @State() refresh = false;
 
-  @Event() onCollapseUserInput: EventEmitter;
+  @Event() collapseUserInput: EventEmitter;
   TriggerOnCollapseUserInput(event): void {
-    this.onCollapseUserInput.emit(event);
+    this.collapseUserInput.emit(event);
   }
 
-  @Event() onModifyUserInputName: EventEmitter;
+  @Event() modifyUserInputName: EventEmitter;
   TriggerOnModifyUserInputName(event): void {
-    this.onModifyUserInputName.emit(event);
+    this.modifyUserInputName.emit(event);
   }
 
   TriggerOnChangeValidationProcedure(event): void {

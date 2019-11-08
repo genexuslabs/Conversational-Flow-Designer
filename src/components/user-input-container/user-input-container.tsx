@@ -14,21 +14,21 @@ export class UserInput {
   @Prop() flow: FlowElement;
   @State() refresh = false;
 
-  @Listen("onExpandUserInput")
+  @Listen("expandUserInput")
   HandleOnExpandUserInput(event: CustomEvent): void {
     console.log("Event: " + event.type);
     this.userInput.SetRenderType(RenderingOptions.Full);
     this.refresh = !this.refresh;
   }
 
-  @Listen("onCollapseUserInput")
+  @Listen("collapseUserInput")
   HandleCollapseUserInput(event: CustomEvent): void {
     console.log(event.type);
     this.userInput.SetRenderType(RenderingOptions.Collapsed);
     this.refresh = !this.refresh;
   }
 
-  @Listen("onModifyUserInputName")
+  @Listen("modifyUserInputName")
   HandleOnModifyUserInputName(event: CustomEvent): void {
     console.log("Event: " + event.type);
     const value = EventHandler.GetValue(event);
@@ -38,7 +38,7 @@ export class UserInput {
     }
   }
 
-  @Listen("onModifyUserInputFirstAskMessage")
+  @Listen("modifyUserInputFirstAskMessage")
   HandleOnModifyUserInputFirstAskMessage(event: CustomEvent): void {
     console.log("Event: " + event.type);
     const value = EventHandler.GetValue(event);

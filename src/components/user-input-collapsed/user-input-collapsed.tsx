@@ -9,19 +9,19 @@ import { UserInputElement } from "../../global/conversational-editor/instance-de
 export class CollapsedUserInput {
   @Prop() userInput: UserInputElement;
 
-  @Event() onExpandUserInput: EventEmitter;
+  @Event() expandUserInput: EventEmitter;
   TriggerOnExpandUserInput(event): void {
-    this.onExpandUserInput.emit(event);
+    this.expandUserInput.emit(event);
   }
 
-  @Event() onModifyUserInputName: EventEmitter;
+  @Event() modifyUserInputName: EventEmitter;
   TriggerOnModifyUserInputName(event): void {
-    this.onModifyUserInputName.emit(event);
+    this.modifyUserInputName.emit(event);
   }
 
-  @Event() onModifyUserInputFirstAskMessage: EventEmitter;
+  @Event() modifyUserInputFirstAskMessage: EventEmitter;
   TriggerOnModifyUserInputFirstAskMessage(event): void {
-    this.onModifyUserInputFirstAskMessage.emit(event);
+    this.modifyUserInputFirstAskMessage.emit(event);
   }
 
   render() {

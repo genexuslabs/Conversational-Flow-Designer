@@ -341,7 +341,6 @@ declare namespace LocalJSX {
     onOnDragOverFlow?: (event: CustomEvent<any>) => void;
     onOnExpandFlow?: (event: CustomEvent<any>) => void;
     onOnFlowDragStart?: (event: CustomEvent<any>) => void;
-    onRefreshComponent?: (event: CustomEvent<any>) => void;
     onSelectConversationalObject?: (event: CustomEvent<any>) => void;
     renderingType?: RenderingOptions;
   }
@@ -386,9 +385,9 @@ declare namespace LocalJSX {
     arrowid?: string;
   }
   interface GxcfUserInputCollapsed {
-    onOnExpandUserInput?: (event: CustomEvent<any>) => void;
-    onOnModifyUserInputFirstAskMessage?: (event: CustomEvent<any>) => void;
-    onOnModifyUserInputName?: (event: CustomEvent<any>) => void;
+    onExpandUserInput?: (event: CustomEvent<any>) => void;
+    onModifyUserInputFirstAskMessage?: (event: CustomEvent<any>) => void;
+    onModifyUserInputName?: (event: CustomEvent<any>) => void;
     userInput?: UserInputElement;
   }
   interface GxcfUserInputContainer {
@@ -397,8 +396,8 @@ declare namespace LocalJSX {
   }
   interface GxcfUserInputFull {
     flow?: FlowElement;
-    onOnCollapseUserInput?: (event: CustomEvent<any>) => void;
-    onOnModifyUserInputName?: (event: CustomEvent<any>) => void;
+    onCollapseUserInput?: (event: CustomEvent<any>) => void;
+    onModifyUserInputName?: (event: CustomEvent<any>) => void;
     userInput?: UserInputElement;
   }
 
