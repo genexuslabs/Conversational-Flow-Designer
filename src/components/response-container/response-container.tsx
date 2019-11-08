@@ -2,8 +2,8 @@ import { Component, Prop, h } from "@stencil/core";
 import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
 
 @Component({
-  tag: "gxcf-response",
-  styleUrl: "response.scss",
+  tag: "gxcf-response-container",
+  styleUrl: "response-container.scss",
   shadow: false
 })
 export class Response {
