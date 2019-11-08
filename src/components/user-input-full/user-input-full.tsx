@@ -71,19 +71,9 @@ export class FullUserInput {
   }
 
   HandleTryLimitChange(event: CustomEvent): void {
-    event.preventDefault();
-    if (event.currentTarget) {
-      const element: HTMLInputElement = event.currentTarget as HTMLInputElement;
-      const value = element.value;
-      this.userInput.TryLimit = +value;
-      console.log(value);
-      if (window.external.SetTryLimit)
-        window.external.SetTryLimit(
-          this.flow.Name,
-          this.userInput.Variable,
-          value
-        );
-    }
+    const value: string = EventHandler.GetValueFromInput(event);
+    this.userInput.SetTryLimit(+value);
+    console.log(value);
   }
 
   HandleAddRedirection(event) {
@@ -98,13 +88,13 @@ export class FullUserInput {
       this.userInput.Redirections.forEach(function(redir) {
         redirs.push(
           <gxcf-redirection
-            userInput={this.userInput}
+            element={this.userInput}
             redirectionProperty={redir}
           />
         );
       }, this);
     } else {
-      redirs.push(<gxcf-redirection userInput={this.userInput} />);
+      redirs.push(<gxcf-redirection element={this.userInput} />);
     }
     redirs.push(
       <gxcf-add-object

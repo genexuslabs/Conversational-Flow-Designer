@@ -31,7 +31,19 @@ interface External {
     flowName: string,
     userInput: string,
     newCondition: string
-  );
-  SetTryLimit(flowName: string, userInput: string, value: string);
-  AddNewRedirection(flowName: string, userInput: string);
+  ): Function;
+  SetTryLimit(flowName: string, userInput: string, value: string): Function;
+  AddNewRedirection(flowName: string, userInput: string): Function;
+  SetRedirectionCondition(
+    flowName: string,
+    userInput: string,
+    value: string,
+    index: number
+  ): Function;
+  SetRedirectTo(
+    flowName: string,
+    userInput: string,
+    value: string,
+    index: number
+  ): Function;
 }

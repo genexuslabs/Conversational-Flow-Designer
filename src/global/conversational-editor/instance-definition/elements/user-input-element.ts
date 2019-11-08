@@ -158,8 +158,42 @@ export class UserInputElement implements ConversationalElement {
   }
 
   public AddNewRedirection() {
-    this.Redirections.push(new RedirectionProperty("", ""));
+    if (this.Redirections == null)
+      this.Redirections = new Array<RedirectionProperty>();
+    this.Redirections.push(
+      new RedirectionProperty("", "", this.Redirections.length)
+    );
     if (window.external.AddNewRedirection)
       window.external.AddNewRedirection(this.Parent.Name, this.Variable);
+  }
+
+  public SetRedirectCondition(value: string, index: any) {
+    if (this.Redirections.length > index) {
+      this.Redirections[index].RedirectCondition = value;
+      if (window.external.SetRedirectionCondition)
+        window.external.SetRedirectionCondition(
+          this.Parent.Name,
+          this.Variable,
+          value,
+          index
+        );
+    }
+  }
+
+  public SetTryLimit(value: number) {
+    this.TryLimit = value;
+    if (window.external.SetTryLimit)
+      window.external.SetTryLimit(
+        this.Parent.Name,
+        this.Variable,
+        value.toString()
+      );
+  }
+
+  GetParentName(): string {
+    return this.Parent.Name;
+  }
+  GetName(): string {
+    return this.Variable;
   }
 }

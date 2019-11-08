@@ -1,7 +1,8 @@
-import { Component, Prop, h } from "@stencil/core";
-import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
+import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 import { App } from "../../global/conversational-editor/app";
 import { RedirectionProperty } from "../../global/conversational-editor/instance-definition/elements/redirection-property";
+import { EventHandler } from "../../global/conversational-editor/event-handler";
+import { ConversationalElement } from "../../global/conversational-editor/instance-definition/elements/iconversational-element";
 
 @Component({
   tag: "gxcf-redirection",
@@ -9,8 +10,20 @@ import { RedirectionProperty } from "../../global/conversational-editor/instance
   shadow: false
 })
 export class Redirection {
-  @Prop() userInput: UserInputElement;
+  @Prop() element: ConversationalElement;
   @Prop() redirectionProperty: RedirectionProperty;
+
+  TriggerOnChangeRedirectCondition(event): void {
+    const value = EventHandler.GetValue(event);
+    this.redirectionProperty.SetRedirectCondition(this.element, value);
+  }
+
+  @Event() changeRedirectTo: EventEmitter;
+  TriggerOnChangeRedirectTo(event): void {
+    console.log("Trigger");
+    const value = EventHandler.GetValueFromSelect(event);
+    this.redirectionProperty.SetRedirectTo(this.element, value);
+  }
 
   private LoadFlowsCombo(): HTMLElement[] {
     const combo: HTMLElement[] = new Array<HTMLElement>();
@@ -34,8 +47,15 @@ export class Redirection {
         <div>
           <gxcf-condition
             currentCondition={this.redirectionProperty.RedirectCondition}
+            onConditionChange={event =>
+              this.TriggerOnChangeRedirectCondition(event)
+            }
           />
-          <select class="RedirectToSelect" required>
+          <select
+            class="RedirectToSelect"
+            required
+            onChange={event => this.TriggerOnChangeRedirectTo(event)}
+          >
             {this.LoadFlowsCombo()}
           </select>
         </div>

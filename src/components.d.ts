@@ -8,9 +8,10 @@
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FlowElement } from "./global/conversational-editor/instance-definition/elements/flow-element";
 import { RenderingOptions } from "./global/conversational-editor/helpers/helpers";
-import { UserInputElement } from "./global/conversational-editor/instance-definition/elements/user-input-element";
+import { ConversationalElement } from "./global/conversational-editor/instance-definition/elements/iconversational-element";
 import { RedirectionProperty } from "./global/conversational-editor/instance-definition/elements/redirection-property";
 import { ResponseElement } from "./global/conversational-editor/instance-definition/elements/response-element";
+import { UserInputElement } from "./global/conversational-editor/instance-definition/elements/user-input-element";
 
 export namespace Components {
   interface GxcfAddElement {}
@@ -58,8 +59,8 @@ export namespace Components {
     hintId: string;
   }
   interface GxcfRedirection {
+    element: ConversationalElement;
     redirectionProperty: RedirectionProperty;
-    userInput: UserInputElement;
   }
   interface GxcfResponseCollapsed {
     response: ResponseElement;
@@ -358,8 +359,9 @@ declare namespace LocalJSX {
     onShowHint?: (event: CustomEvent<any>) => void;
   }
   interface GxcfRedirection {
+    element?: ConversationalElement;
+    onChangeRedirectTo?: (event: CustomEvent<any>) => void;
     redirectionProperty?: RedirectionProperty;
-    userInput?: UserInputElement;
   }
   interface GxcfResponseCollapsed {
     response?: ResponseElement;

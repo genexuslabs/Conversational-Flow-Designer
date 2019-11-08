@@ -94,10 +94,16 @@ export class FlowElement implements ConversationalElement {
       const redirections: RedirectionProperty[] = new Array<
         RedirectionProperty
       >();
+      let index = 0;
       field.Redirections.forEach(function(redir) {
         redirections.push(
-          new RedirectionProperty(redir.RedirectCondition, redir.RedirectTo)
+          new RedirectionProperty(
+            redir.RedirectCondition,
+            redir.RedirectTo,
+            index
+          )
         );
+        index++;
       });
       const userInput: UserInputElement = new UserInputElement(
         field.Variable,
@@ -204,5 +210,13 @@ export class FlowElement implements ConversationalElement {
     if (this.Responses == null) this.Responses = new Array<ResponseElement>();
     this.Responses.push(response);
     if (window.external.AddResponse) window.external.AddResponse(this.Name);
+  }
+
+  GetParentName(): string {
+    return "";
+  }
+
+  GetName(): string {
+    return this.Name;
   }
 }

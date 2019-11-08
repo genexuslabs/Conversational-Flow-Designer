@@ -224,4 +224,27 @@ export class EventHandler {
     }
     return null;
   }
+
+  static GetValueFromSelect(customEvent: CustomEvent): any {
+    customEvent = this.PreventEvent(customEvent);
+    if (customEvent.currentTarget) {
+      const element: HTMLSelectElement = customEvent.currentTarget as HTMLSelectElement;
+      return element.value;
+    }
+    return null;
+  }
+
+  static GetValueFromInput(customEvent: CustomEvent): string {
+    customEvent = this.PreventEvent(customEvent);
+    if (customEvent.currentTarget) {
+      const element: HTMLInputElement = customEvent.currentTarget as HTMLInputElement;
+      return element.value;
+    }
+    return "";
+  }
+
+  private static PreventEvent(event: CustomEvent): CustomEvent {
+    event.preventDefault();
+    return event;
+  }
 }
