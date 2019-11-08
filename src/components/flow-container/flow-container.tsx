@@ -14,7 +14,7 @@ export class Flow {
   @Prop() showDropZone: boolean;
   @State() refresh = true;
 
-  @Listen("onExpandFlow")
+  @Listen("expandFlow")
   HandleExpandFlow(event: CustomEvent): void {
     console.log(event.type);
     this.flow = App.GetApp().Instance.SetFlowRenderType(
@@ -24,7 +24,7 @@ export class Flow {
     this.flow.SetRenderType(RenderingOptions.Full);
   }
 
-  @Listen("onCollapseFlow")
+  @Listen("collapseFlow")
   HandleCollapseFlow(event: CustomEvent): void {
     console.log(event.type);
     this.flow = App.GetApp().Instance.SetFlowRenderType(

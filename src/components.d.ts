@@ -338,9 +338,9 @@ declare namespace LocalJSX {
   }
   interface GxcfFlowCollapsed {
     flow?: FlowElement;
-    onOnDragOverFlow?: (event: CustomEvent<any>) => void;
-    onOnExpandFlow?: (event: CustomEvent<any>) => void;
-    onOnFlowDragStart?: (event: CustomEvent<any>) => void;
+    onDragOverFlow?: (event: CustomEvent<any>) => void;
+    onExpandFlow?: (event: CustomEvent<any>) => void;
+    onFlowDragStart?: (event: CustomEvent<any>) => void;
     onSelectConversationalObject?: (event: CustomEvent<any>) => void;
     renderingType?: RenderingOptions;
   }
@@ -350,7 +350,7 @@ declare namespace LocalJSX {
   }
   interface GxcfFlowFull {
     flow?: FlowElement;
-    onOnCollapseFlow?: (event: CustomEvent<any>) => void;
+    onCollapseFlow?: (event: CustomEvent<any>) => void;
   }
   interface GxcfHint {
     hintId?: string;

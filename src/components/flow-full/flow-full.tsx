@@ -21,9 +21,9 @@ export class FlowFull {
   @Prop() flow: FlowElement;
   @State() refresh = true;
 
-  @Event() onCollapseFlow: EventEmitter;
+  @Event() collapseFlow: EventEmitter;
   TriggerOnCollapseFlow(event): void {
-    this.onCollapseFlow.emit(event);
+    this.collapseFlow.emit(event);
   }
 
   TriggerOnAddUserInput(event): void {

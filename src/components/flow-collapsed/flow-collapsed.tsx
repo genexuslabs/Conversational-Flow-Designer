@@ -21,9 +21,9 @@ export class FlowCollapsed {
   @Prop() renderingType: RenderingOptions;
   @State() refresh: boolean;
 
-  @Event() onExpandFlow: EventEmitter;
+  @Event() expandFlow: EventEmitter;
   TriggerOnExpandFlow(event): void {
-    this.onExpandFlow.emit(event);
+    this.expandFlow.emit(event);
   }
 
   @Event() selectConversationalObject: EventEmitter;
@@ -31,14 +31,14 @@ export class FlowCollapsed {
     this.selectConversationalObject.emit(event);
   }
 
-  @Event() onFlowDragStart: EventEmitter;
+  @Event() flowDragStart: EventEmitter;
   TriggerOnFlowDragStart(event): void {
-    this.onFlowDragStart.emit(event);
+    this.flowDragStart.emit(event);
   }
 
-  @Event() onDragOverFlow: EventEmitter;
+  @Event() dragOverFlow: EventEmitter;
   TriggerOnDragOverFlow(event): void {
-    this.onDragOverFlow.emit(event);
+    this.dragOverFlow.emit(event);
   }
 
   get SummaryId(): string {

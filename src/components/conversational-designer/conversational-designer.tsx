@@ -10,12 +10,12 @@ import { Controls } from "../../global/conversational-editor/helpers/helpers";
   shadow: false
 })
 export class ConversationalDesginer {
-  @Listen("onFlowDragStart")
+  @Listen("flowDragStart")
   HandleOnFlowDragStart(event: CustomEvent): void {
     EventHandler.OnFlowDragStart(event);
   }
 
-  @Listen("onDragOverFlow")
+  @Listen("dragOverFlow")
   HandleOnDragOverFlow(event: CustomEvent): void {
     EventHandler.OnDragOverFlow(event);
   }
