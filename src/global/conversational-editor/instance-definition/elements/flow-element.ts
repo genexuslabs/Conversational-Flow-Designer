@@ -123,6 +123,7 @@ export class FlowElement implements ConversationalElement {
       );
       this.AddUserInput(userInput);
     }, this);
+    let index = 0;
     jsonFlow.View.Templates.forEach(function(template) {
       const response: ResponseElement = new ResponseElement(
         template.Style,
@@ -132,9 +133,12 @@ export class FlowElement implements ConversationalElement {
         template.SDComponent,
         template.Condition,
         template.RedirectTo,
-        RenderingOptions.Collapsed
+        RenderingOptions.Collapsed,
+        index,
+        this
       );
       this.AddResponse(response);
+      index++;
     }, this);
   }
 
@@ -207,7 +211,9 @@ export class FlowElement implements ConversationalElement {
       "",
       "",
       "",
-      RenderingOptions.Collapsed
+      RenderingOptions.Collapsed,
+      this.Responses.length,
+      this
     );
     if (this.Responses == null) this.Responses = new Array<ResponseElement>();
     this.Responses.push(response);

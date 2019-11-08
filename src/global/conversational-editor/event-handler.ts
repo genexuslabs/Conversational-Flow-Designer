@@ -7,6 +7,7 @@ import {
 } from "./helpers/helpers.js";
 import { UserInputElement } from "./instance-definition/elements/user-input-element.js";
 import { DropZone } from "../../components/drop-zone/drop-zone.js";
+import { Collection } from "../../components/collection/collection.js";
 
 export let sourceId = "";
 
@@ -221,6 +222,26 @@ export class EventHandler {
     if (event.currentTarget) {
       const element: HTMLInputElement = event.currentTarget as HTMLInputElement;
       return element.value;
+    }
+    return null;
+  }
+
+  public static GetValueFromDetail(customEvent: CustomEvent): any {
+    customEvent.preventDefault;
+    customEvent = customEvent.detail;
+    if (customEvent.currentTarget) {
+      const element: HTMLInputElement = customEvent.currentTarget as HTMLInputElement;
+      return element.value;
+    }
+    return null;
+  }
+
+  public static GetCollectionIndexFromDetail(customEvent: CustomEvent): any {
+    customEvent.preventDefault;
+    customEvent = customEvent.detail;
+    if (customEvent.currentTarget) {
+      const element: HTMLInputElement = customEvent.currentTarget as HTMLInputElement;
+      return element.getAttribute(Collection.DataItemIndex);
     }
     return null;
   }

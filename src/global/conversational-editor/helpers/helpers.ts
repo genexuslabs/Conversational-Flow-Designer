@@ -63,10 +63,30 @@ export class HintId {
   public static Redirection = "Redirection";
   public static ErrorMessages = "ErrorMessages";
   public static TryLimit = "TryLimit";
+  public static ResponseMessage: "ResponseMessage";
+  public static ResponseCondition: "ResponseCondition";
+  public static ResponseStyle: "ResponseStyle";
 }
 
 export class PropertiesDefinition {
   //For Test
+  public static readonly ResponseMessageTitle: string = "Response Messages";
+  public static readonly ResponseMessageDescription: string =
+    "Response Messages";
+  public static readonly ResponseMessageLabel: string =
+    "What's a Response Message?";
+
+  public static readonly ResponseConditionTitle: string = "Response Condition";
+  public static readonly ResponseConditionDescription: string =
+    "Response Condition";
+  public static readonly ResponseConditionLabel: string =
+    "What's a Response Condition?";
+
+  public static readonly ResponseStyleTitle: string = "Response Style";
+  public static readonly ResponseStyleDescription: string = "Response Style";
+  public static readonly ResponseStyleLabel: string =
+    "What's a Response Style?";
+
   public static readonly TriggerMessagesTitle: string = "Trigger Messages";
   public static readonly TriggerMessagesDescription: string =
     "Specifies the trigger messages for this flow. You can type multiple messages using the ';' delimiter";
@@ -135,6 +155,9 @@ export class PropertiesDefinition {
     if (hintId == HintId.Redirection) return this.RedirectionTitle;
     if (hintId == HintId.ErrorMessages) return this.ErrorMessagesTitle;
     if (hintId == HintId.TryLimit) return this.TryLimitTitle;
+    if (hintId == HintId.ResponseMessage) return this.ResponseMessageTitle;
+    if (hintId == HintId.ResponseCondition) return this.ResponseConditionTitle;
+    if (hintId == HintId.ResponseStyle) return this.ResponseStyleTitle;
     return "";
   }
 
@@ -149,9 +172,11 @@ export class PropertiesDefinition {
     if (hintId == HintId.AskMessages) return this.AskMessagesDescription;
     if (hintId == HintId.ValidateUserInput)
       return this.ValidateUserInputDescription;
-    if (hintId == HintId.Redirection) return this.RedirectionDescription;
-    if (hintId == HintId.ErrorMessages) return this.ErrorMessagesDescription;
-    if (hintId == HintId.TryLimit) return this.TryLimitDescription;
+    if (hintId == HintId.ResponseMessage)
+      return this.ResponseMessageDescription;
+    if (hintId == HintId.ResponseCondition)
+      return this.ResponseConditionDescription;
+    if (hintId == HintId.ResponseStyle) return this.ResponseStyleDescription;
     return "";
   }
 
@@ -167,6 +192,9 @@ export class PropertiesDefinition {
     if (hintId == HintId.Redirection) return this.RedirectionLabel;
     if (hintId == HintId.ErrorMessages) return this.ErrorMessagesLabel;
     if (hintId == HintId.TryLimit) return this.TryLimitLabel;
+    if (hintId == HintId.ResponseMessage) return this.ResponseMessageLabel;
+    if (hintId == HintId.ResponseCondition) return this.ResponseConditionLabel;
+    if (hintId == HintId.ResponseStyle) return this.ResponseStyleLabel;
     return "";
   }
 }

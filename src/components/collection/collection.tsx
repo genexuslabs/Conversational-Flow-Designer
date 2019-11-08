@@ -1,4 +1,5 @@
-import { Component, Prop, h, State } from "@stencil/core";
+import { Component, Prop, h, State, Event } from "@stencil/core";
+import { EventEmitter } from "events";
 
 @Component({
   tag: "gxcf-collection",
@@ -17,16 +18,23 @@ export class Collection {
 
   @State() refresh = true;
 
+  @Event() deleteItem: EventEmitter;
+  @Event() editItem: EventEmitter;
+
+  public static readonly DataItemIndex = "data-item-index";
+
   AddItem(event): void {
     console.log(event);
     const newItem = "";
     this.collection.push(newItem);
     this.refresh = !this.refresh;
-    this.itemParent.SetItem(
-      this.currentItemIndex,
-      this.currentItemValue,
-      this.collectionType
-    );
+    if (this.itemParent) {
+      this.itemParent.SetItem(
+        this.currentItemIndex,
+        this.currentItemValue,
+        this.collectionType
+      );
+    }
   }
 
   DeleteItem(event): void {
@@ -34,24 +42,29 @@ export class Collection {
     this.setCurrentIndex(element);
     this.collection.splice(this.currentItemIndex, 1);
     console.log(event);
-    this.itemParent.DeleteItem(this.currentItemIndex, this.collectionType);
+    if (this.itemParent)
+      this.itemParent.DeleteItem(this.currentItemIndex, this.collectionType);
+    else this.deleteItem.emit(event, this.currentItemIndex);
   }
 
-  EditItem(event: Event): void {
+  EditItem(event): void {
     const element: HTMLInputElement = event.srcElement as HTMLInputElement;
     this.setCurrentIndex(element);
     this.currentItemValue = element.value;
     console.log(event);
-    this.itemParent.SetItem(
-      this.currentItemIndex,
-      this.currentItemValue,
-      this.collectionType
-    );
+    if (this.itemParent) {
+      this.itemParent.SetItem(
+        this.currentItemIndex,
+        this.currentItemValue,
+        this.collectionType
+      );
+    } else this.editItem.emit(event, this.currentItemIndex);
   }
 
   setCurrentIndex(element: any): void {
-    this.currentItemIndex = parseInt(element.getAttribute("data-item-index"));
-    console.log("TIndex: " + this.currentItemIndex);
+    this.currentItemIndex = parseInt(
+      element.getAttribute(Collection.DataItemIndex)
+    );
   }
 
   private AddItemElement = (

@@ -14,6 +14,11 @@ interface External {
     userInput: string,
     askMessages: string
   ): Function;
+  SetResponseMessages(
+    flowName: string,
+    responseIndex: number,
+    responseMessages: string
+  ): Function;
   ModifyUserInputName(
     flowName: string,
     currentUserInputName: string,

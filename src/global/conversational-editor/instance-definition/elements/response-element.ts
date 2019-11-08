@@ -1,4 +1,5 @@
 import { RenderingOptions } from "../../helpers/helpers";
+import { FlowElement } from "./flow-element";
 
 export class ResponseElement {
   public Style: string;
@@ -9,6 +10,8 @@ export class ResponseElement {
   public Condition: string;
   public RedirectTo: string;
   public RenderType: RenderingOptions;
+  public Index: number;
+  public Parent: FlowElement;
 
   public constructor(
     style: string,
@@ -18,7 +21,9 @@ export class ResponseElement {
     sdComponent: string,
     condition: string,
     redirectTo: string,
-    renderType: RenderingOptions
+    renderType: RenderingOptions,
+    index: number,
+    parent: FlowElement
   ) {
     this.Style = style;
     this.Messages = messages;
@@ -28,6 +33,8 @@ export class ResponseElement {
     this.Condition = condition;
     this.RedirectTo = redirectTo;
     this.RenderType = renderType;
+    this.Index = index;
+    this.Parent = parent;
   }
 
   public GetFristResponseMessage(): string {
@@ -37,5 +44,32 @@ export class ResponseElement {
 
   public SetRenderType(renderType: RenderingOptions) {
     this.RenderType = renderType;
+  }
+
+  public EditMessage(message: string, index: number): void {
+    this.Messages[index] = message;
+    console.log("Edit message");
+    this.SetMessages();
+  }
+
+  public DeleteMessage(index: number): void {
+    if (this.Messages.length > index) {
+      this.Messages.splice(index, 0);
+      this.SetMessages();
+    }
+  }
+
+  private SetMessages(): void {
+    let responseMessages = "";
+    this.Messages.forEach(function(msg) {
+      responseMessages += msg + ";";
+    });
+    console.log("Call external");
+    if (window.external.SetResponseMessages)
+      window.external.SetResponseMessages(
+        this.Parent.Name,
+        this.Index,
+        responseMessages
+      );
   }
 }
