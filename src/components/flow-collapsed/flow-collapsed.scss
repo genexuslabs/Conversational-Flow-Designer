@@ -18,6 +18,7 @@
 
 .ActiveContent {
   background-color: var(--active-content-background);
+  border-top: 3px solid var(--highlight-color-2)
 }
 
 .NoActiveContent {
