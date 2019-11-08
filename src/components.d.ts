@@ -85,6 +85,7 @@ export namespace Components {
   interface GxcfResponseFull {
     'response': ResponseElement;
   }
+  interface GxcfSearch {}
   interface GxcfSelect {
     'selectIconType': string;
     'selectcaption': string;
@@ -220,6 +221,12 @@ declare global {
     new (): HTMLGxcfResponseFullElement;
   };
 
+  interface HTMLGxcfSearchElement extends Components.GxcfSearch, HTMLStencilElement {}
+  var HTMLGxcfSearchElement: {
+    prototype: HTMLGxcfSearchElement;
+    new (): HTMLGxcfSearchElement;
+  };
+
   interface HTMLGxcfSelectElement extends Components.GxcfSelect, HTMLStencilElement {}
   var HTMLGxcfSelectElement: {
     prototype: HTMLGxcfSelectElement;
@@ -279,6 +286,7 @@ declare global {
     'gxcf-response-collapsed': HTMLGxcfResponseCollapsedElement;
     'gxcf-response-container': HTMLGxcfResponseContainerElement;
     'gxcf-response-full': HTMLGxcfResponseFullElement;
+    'gxcf-search': HTMLGxcfSearchElement;
     'gxcf-select': HTMLGxcfSelectElement;
     'gxcf-summary-description': HTMLGxcfSummaryDescriptionElement;
     'gxcf-summary-title': HTMLGxcfSummaryTitleElement;
@@ -366,6 +374,9 @@ declare namespace LocalJSX {
     'onCollapseResponse'?: (event: CustomEvent<any>) => void;
     'response'?: ResponseElement;
   }
+  interface GxcfSearch {
+    'onSearch'?: (event: CustomEvent<any>) => void;
+  }
   interface GxcfSelect {
     'selectIconType'?: string;
     'selectcaption'?: string;
@@ -420,6 +431,7 @@ declare namespace LocalJSX {
     'gxcf-response-collapsed': GxcfResponseCollapsed;
     'gxcf-response-container': GxcfResponseContainer;
     'gxcf-response-full': GxcfResponseFull;
+    'gxcf-search': GxcfSearch;
     'gxcf-select': GxcfSelect;
     'gxcf-summary-description': GxcfSummaryDescription;
     'gxcf-summary-title': GxcfSummaryTitle;
@@ -453,6 +465,7 @@ declare module "@stencil/core" {
       'gxcf-response-collapsed': LocalJSX.GxcfResponseCollapsed & JSXBase.HTMLAttributes<HTMLGxcfResponseCollapsedElement>;
       'gxcf-response-container': LocalJSX.GxcfResponseContainer & JSXBase.HTMLAttributes<HTMLGxcfResponseContainerElement>;
       'gxcf-response-full': LocalJSX.GxcfResponseFull & JSXBase.HTMLAttributes<HTMLGxcfResponseFullElement>;
+      'gxcf-search': LocalJSX.GxcfSearch & JSXBase.HTMLAttributes<HTMLGxcfSearchElement>;
       'gxcf-select': LocalJSX.GxcfSelect & JSXBase.HTMLAttributes<HTMLGxcfSelectElement>;
       'gxcf-summary-description': LocalJSX.GxcfSummaryDescription & JSXBase.HTMLAttributes<HTMLGxcfSummaryDescriptionElement>;
       'gxcf-summary-title': LocalJSX.GxcfSummaryTitle & JSXBase.HTMLAttributes<HTMLGxcfSummaryTitleElement>;

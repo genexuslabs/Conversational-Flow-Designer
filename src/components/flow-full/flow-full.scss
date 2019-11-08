@@ -1,12 +1,12 @@
 .FlowFull {
   background-color: var(--active-content-background);
   display: block;
-  margin: 20px 0px 20px 0px;
+  margin: 10px 0px 20px 0px;
   margin-bottom: 20px;
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
   padding-bottom: 20px;
-  border-top: 3px solid var(--highlight-color-2)
+  border-top: 3px solid var(--highlight-color-2);
 }
 
 .TabFullFlowContent {

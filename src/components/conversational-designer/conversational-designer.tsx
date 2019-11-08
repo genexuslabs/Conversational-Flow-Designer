@@ -2,7 +2,10 @@ import { Component, h, Listen, State } from "@stencil/core";
 import { App } from "../../global/conversational-editor/app";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
-import { Controls } from "../../global/conversational-editor/helpers/helpers";
+import {
+  Controls,
+  RenderingOptions
+} from "../../global/conversational-editor/helpers/helpers";
 
 @Component({
   tag: "gxcf-conversational-designer",
@@ -10,6 +13,10 @@ import { Controls } from "../../global/conversational-editor/helpers/helpers";
   shadow: false
 })
 export class ConversationalDesginer {
+  @State() search: string;
+  @State() flows: FlowElement[];
+  @State() openEditor: boolean;
+
   @Listen("flowDragStart")
   HandleOnFlowDragStart(event: CustomEvent): void {
     EventHandler.OnFlowDragStart(event);
@@ -44,8 +51,10 @@ export class ConversationalDesginer {
     this.flows = EventHandler.AddFlowElement();
   }
 
-  @State() flows: FlowElement[];
-  @State() openEditor: boolean;
+  HandleSearch(event: CustomEvent<any>): void {
+    const value: string = EventHandler.GetValue(event);
+    this.search = value;
+  }
 
   private addFlow = (
     <gxcf-add-object
@@ -57,12 +66,18 @@ export class ConversationalDesginer {
 
   private RenderizeFlows(): HTMLElement[] {
     const flows: HTMLElement[] = [];
-
-    App.GetApp().Instance.Flows.forEach(function(flowElement) {
-      flows.push(
-        <gxcf-flow-container flow={flowElement} showDropZone={false} />
-      );
-    });
+    console.log("Filter by: " + this.search);
+    let index = 0;
+    App.GetApp()
+      .Instance.GetFlows(this.search)
+      .forEach(function(flowElement) {
+        if (index == 0) flowElement.RenderType = RenderingOptions.Full;
+        else flowElement.RenderType = RenderingOptions.Collapsed;
+        flows.push(
+          <gxcf-flow-container flow={flowElement} showDropZone={false} />
+        );
+        index++;
+      });
     return flows;
   }
 
@@ -120,6 +135,9 @@ export class ConversationalDesginer {
 
     return (
       <div class="MainTable">
+        <div class="SearchBar">
+          <gxcf-search onSearch={event => this.HandleSearch(event)} />
+        </div>
         <div id={Controls.FlowsContainer} class="FlowsContainer">
           {this.RenderizeFlows()}
         </div>

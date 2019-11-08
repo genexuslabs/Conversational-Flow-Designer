@@ -1,0 +1,25 @@
+.Search
+{
+    border-color: var(--action-border-color);
+    background-color: var(--action-background-color);
+    border-radius: 1px;
+    border-style: solid;
+    line-height: 24px;
+    border-width: 1px;
+}
+
+.SearchIcon
+{
+    width: var(--medium-icon-width);
+    height: var(--medium-icon-height);
+    content: var(--search-icon);
+    display: inline-block;
+}
+
+.SearchText
+{
+    height: 24px;
+    vertical-align: middle;
+    width: 90%;
+    border:none;
+}

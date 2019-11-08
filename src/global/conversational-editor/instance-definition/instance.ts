@@ -207,6 +207,19 @@ export class Instance {
     });
     return flow;
   }
+
+  public GetFlows(search: string): Array<FlowElement> {
+    if (search == "" || search == null) return this.Flows;
+
+    const flows: Array<FlowElement> = new Array<FlowElement>();
+    this.Flows.forEach(function(flow) {
+      if (flow.Name.toLowerCase().includes(search.toLowerCase())) {
+        flows.push(flow);
+      }
+    });
+
+    return flows;
+  }
 }
 
 export interface CustomJSON extends JSON {
