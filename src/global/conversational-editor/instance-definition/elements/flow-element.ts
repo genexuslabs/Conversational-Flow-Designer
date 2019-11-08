@@ -131,7 +131,8 @@ export class FlowElement implements ConversationalElement {
         template.WebComponent,
         template.SDComponent,
         template.Condition,
-        template.RedirectTo
+        template.RedirectTo,
+        RenderingOptions.Collapsed
       );
       this.AddResponse(response);
     }, this);
@@ -205,7 +206,8 @@ export class FlowElement implements ConversationalElement {
       "",
       "",
       "",
-      ""
+      "",
+      RenderingOptions.Collapsed
     );
     if (this.Responses == null) this.Responses = new Array<ResponseElement>();
     this.Responses.push(response);

@@ -56,7 +56,8 @@ export class Instance {
       "",
       "",
       "",
-      ""
+      "",
+      RenderingOptions.Collapsed
     );
     flow.AddResponse(response);
     this.Flows[0] = flow;

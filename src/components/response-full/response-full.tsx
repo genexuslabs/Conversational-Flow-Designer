@@ -1,4 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
 
 @Component({
@@ -9,7 +9,24 @@ import { ResponseElement } from "../../global/conversational-editor/instance-def
 export class FullResponse {
   @Prop() response: ResponseElement;
 
+  @Event() collapseResponse: EventEmitter;
+  TriggerCollapseResponse(event): void {
+    this.collapseResponse.emit(event);
+  }
+
   render() {
-    return <div></div>;
+    return (
+      <div class="FullResponse">
+        <input
+          type="text"
+          class="FullResponseTitle"
+          value={this.response.Style}
+        />
+        <gxcf-up-arrow
+          class="FullResponseUpArrow"
+          onClick={event => this.TriggerCollapseResponse(event)}
+        />
+      </div>
+    );
   }
 }

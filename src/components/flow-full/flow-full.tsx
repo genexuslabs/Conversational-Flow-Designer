@@ -71,7 +71,7 @@ export class FlowFull {
   private RenderizeResponse(): HTMLElement[] {
     const responses: HTMLElement[] = [];
     this.flow.Responses.forEach(function(response) {
-      responses.push(<gxcf-response-collapsed response={response} />);
+      responses.push(<gxcf-response-container response={response} />);
     });
     return responses;
   }
@@ -124,7 +124,7 @@ export class FlowFull {
         <div class="FullFlowContentResponses">
           <div class="ElementsHeader">
             <span class="ElementsHeaderText">
-              Responses ({this.flow.UserInputs.length})
+              Responses ({this.flow.Responses.length})
             </span>
             <gxcf-hint hintId={HintId.Responses} class="Hint" />
           </div>

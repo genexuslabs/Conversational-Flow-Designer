@@ -1,0 +1,23 @@
+.FullResponse {
+    border-color: var(--flow-element-border-color);
+    background-color: var(--flow-element-background-color);
+    border-width: 1px;
+    border-radius: 1px;
+    border-style: solid;
+    padding: 12px 22px 12px 22px;
+    overflow: hidden;
+    margin-bottom: 15px;
+  }
+
+  .FullResponseUpArrow {
+    float: right;
+  }
+
+  .FullResponseTitle {
+    background-color: var(--flow-element-background-color);
+    border: none;
+    float: left;
+    color: var(--elements-title-font-color);
+    font-size: var(--normal-font-size);
+    font-weight: bold;
+  }

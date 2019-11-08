@@ -1,4 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
 
 @Component({
@@ -9,6 +9,11 @@ import { ResponseElement } from "../../global/conversational-editor/instance-def
 export class CollapsedResponse {
   @Prop() response: ResponseElement;
 
+  @Event() expandResponse: EventEmitter;
+  TriggerOnExpandResponse(event): void {
+    this.expandResponse.emit(event);
+  }
+
   render() {
     return (
       <div class="CollapsedResponse">
@@ -17,7 +22,10 @@ export class CollapsedResponse {
           class="CollapsedResponseTitle"
           value={this.response.Style}
         />
-        <gxcf-down-arrow class="CollapsedResponseDownArrow" />
+        <gxcf-down-arrow
+          class="CollapsedResponseDownArrow"
+          onClick={event => this.TriggerOnExpandResponse(event)}
+        />
         <input
           type="text"
           class="FirstResponseMessage"

@@ -1,3 +1,5 @@
+import { RenderingOptions } from "../../helpers/helpers";
+
 export class ResponseElement {
   public Style: string;
   public Messages: string[];
@@ -6,6 +8,7 @@ export class ResponseElement {
   public SDComponent: string;
   public Condition: string;
   public RedirectTo: string;
+  public RenderType: RenderingOptions;
 
   public constructor(
     style: string,
@@ -14,7 +17,8 @@ export class ResponseElement {
     webComponent: string,
     sdComponent: string,
     condition: string,
-    redirectTo: string
+    redirectTo: string,
+    renderType: RenderingOptions
   ) {
     this.Style = style;
     this.Messages = messages;
@@ -23,10 +27,15 @@ export class ResponseElement {
     this.SDComponent = sdComponent;
     this.Condition = condition;
     this.RedirectTo = redirectTo;
+    this.RenderType = renderType;
   }
 
   public GetFristResponseMessage(): string {
     if (this.Messages.length > 0) return this.Messages[0];
     return "";
+  }
+
+  public SetRenderType(renderType: RenderingOptions) {
+    this.RenderType = renderType;
   }
 }
