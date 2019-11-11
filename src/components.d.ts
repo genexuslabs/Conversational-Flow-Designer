@@ -36,10 +36,8 @@ export namespace Components {
     'collectionAddText': string;
     'collectionHeader': string;
     'collectionHintId': string;
-    'collectionType': any;
     'currentItemIndex': number;
     'currentItemValue': string;
-    'itemParent': any;
   }
   interface GxcfCondition {
     'currentCondition': string;
@@ -308,10 +306,8 @@ declare namespace LocalJSX {
     'collectionAddText'?: string;
     'collectionHeader'?: string;
     'collectionHintId'?: string;
-    'collectionType'?: any;
     'currentItemIndex'?: number;
     'currentItemValue'?: string;
-    'itemParent'?: any;
     'onDeleteItem'?: (event: CustomEvent<any>) => void;
     'onEditItem'?: (event: CustomEvent<any>) => void;
   }

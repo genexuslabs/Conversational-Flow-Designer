@@ -1,9 +1,6 @@
 import { RenderingOptions } from "../../helpers/helpers";
 import { FlowElement } from "./flow-element";
-import {
-  ConversationalElement,
-  CollectionType
-} from "./iconversational-element";
+import { ConversationalElement } from "./iconversational-element";
 import { EventHandler } from "../../event-handler";
 import { RedirectionProperty } from "./redirection-property";
 import { UserInput } from "../../../../components/user-input-container/user-input-container";
@@ -120,24 +117,6 @@ export class UserInputElement implements ConversationalElement {
     }
   }
 
-  public SetItem(
-    index: number,
-    value: string,
-    collectionType: CollectionType
-  ): void {
-    if (collectionType == CollectionType.AskMessages)
-      this.SetAskMessage(index, value);
-    else if (collectionType == CollectionType.OnErrorMessages)
-      this.SetOnErrorMessage(index, value);
-  }
-
-  public DeleteItem(index: number, collectionType: CollectionType): void {
-    if (collectionType == CollectionType.AskMessages)
-      this.DeleteAskMessage(index);
-    else if (collectionType == CollectionType.OnErrorMessages)
-      this.DeleteOnErrorMessage(index);
-  }
-
   public SetName(name: string): void {
     const oldName = this.Variable;
     this.Variable = name;
@@ -150,7 +129,7 @@ export class UserInputElement implements ConversationalElement {
   }
 
   public SetFirstAskMessage(value: string): void {
-    this.SetItem(0, value, CollectionType.AskMessages);
+    this.SetAskMessage(0, value);
   }
 
   public SetValidationProcedure(validationProcedure: string): void {

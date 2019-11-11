@@ -2,10 +2,7 @@ import { RenderingOptions } from "../../helpers/helpers";
 import { UserInputElement } from "./user-input-element";
 import { ResponseElement } from "./response-element";
 import { CustomJSON } from "../instance";
-import {
-  ConversationalElement,
-  CollectionType
-} from "./iconversational-element";
+import { ConversationalElement } from "./iconversational-element";
 import { EventHandler } from "../../event-handler";
 import { RedirectionProperty } from "./redirection-property";
 import { Flow } from "../../../../components/flow-container/flow-container";
@@ -145,20 +142,6 @@ export class FlowElement implements ConversationalElement {
   public SetRenderType(renderType: RenderingOptions): void {
     this.RenderType = renderType;
     this.Component.refresh = !this.Component.refresh;
-  }
-
-  public SetItem(
-    index: number,
-    value: string,
-    collectionType: CollectionType
-  ): void {
-    if (collectionType == CollectionType.TriggerMessages)
-      this.SetTrigger(index, value);
-  }
-
-  public DeleteItem(index: number, collectionType: CollectionType): void {
-    if (collectionType == CollectionType.TriggerMessages)
-      this.DeleteTrigger(index);
   }
 
   public SetName(name: string): void {

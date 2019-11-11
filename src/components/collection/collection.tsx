@@ -13,8 +13,6 @@ export class Collection {
   @Prop() collectionHintId: string;
   @Prop() currentItemIndex: number;
   @Prop() currentItemValue: string;
-  @Prop() itemParent: any;
-  @Prop() collectionType: any;
 
   @State() refresh = true;
 
@@ -28,40 +26,23 @@ export class Collection {
     const newItem = "";
     this.collection.push(newItem);
     this.refresh = !this.refresh;
-    if (this.itemParent) {
-      this.itemParent.SetItem(
-        this.currentItemIndex,
-        this.currentItemValue,
-        this.collectionType
-      );
-    }
   }
 
-  DeleteItem(event): void {
+  HandleDeleteItem(event): void {
     const element: HTMLDivElement = event.srcElement as HTMLDivElement;
-    this.setCurrentIndex(element);
+    this.SetCurrentIndex(element);
     this.collection.splice(this.currentItemIndex, 1);
-    console.log(event);
-    if (this.itemParent)
-      this.itemParent.DeleteItem(this.currentItemIndex, this.collectionType);
-    else this.deleteItem.emit(event, this.currentItemIndex);
+    this.deleteItem.emit(event, this.currentItemIndex);
   }
 
-  EditItem(event): void {
+  HandleEditItem(event): void {
     const element: HTMLInputElement = event.srcElement as HTMLInputElement;
-    this.setCurrentIndex(element);
+    this.SetCurrentIndex(element);
     this.currentItemValue = element.value;
-    console.log(event);
-    if (this.itemParent) {
-      this.itemParent.SetItem(
-        this.currentItemIndex,
-        this.currentItemValue,
-        this.collectionType
-      );
-    } else this.editItem.emit(event, this.currentItemIndex);
+    this.editItem.emit(event, this.currentItemIndex);
   }
 
-  setCurrentIndex(element: any): void {
+  SetCurrentIndex(element: any): void {
     this.currentItemIndex = parseInt(
       element.getAttribute(Collection.DataItemIndex)
     );
@@ -87,12 +68,12 @@ export class Collection {
             class="ItemInput"
             type="text"
             value={items[index]}
-            onChange={event => this.EditItem(event)}
+            onChange={event => this.HandleEditItem(event)}
           ></input>
           <div
             data-item-index={index}
             class="Trash"
-            onClick={event => this.DeleteItem(event)}
+            onClick={event => this.HandleDeleteItem(event)}
           />
         </div>
       );

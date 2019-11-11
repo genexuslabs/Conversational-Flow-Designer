@@ -10,7 +10,6 @@ import {
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
 import { HintId } from "../../global/conversational-editor/helpers/helpers";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
-import { CollectionType } from "../../global/conversational-editor/instance-definition/elements/iconversational-element";
 
 @Component({
   tag: "gxcf-flow-full",
@@ -87,14 +86,11 @@ export class FlowFull {
   HandleEditTriggerMessage(event: CustomEvent): void {
     const value = EventHandler.GetValue(event);
     const index = EventHandler.GetCollectionIndexFromDetail(event);
-    console.log("Value: " + value);
-    console.log("Index: " + index);
     this.flow.SetTrigger(index, value);
   }
 
   HandleDeleteTriggerMessage(event: CustomEvent): void {
     const index = EventHandler.GetCollectionIndexFromDetail(event);
-    console.log("Index: " + index);
     this.flow.DeleteTrigger(index);
   }
 
@@ -114,7 +110,6 @@ export class FlowFull {
               collectionHeader={this.CollectionHeader}
               collectionHintId={HintId.TriggerMessages}
               collectionAddText="Add another sample trigger message"
-              collectionType={CollectionType.TriggerMessages}
               onEditItem={event => this.HandleEditTriggerMessage(event)}
               onDeleteItem={event => this.HandleDeleteTriggerMessage(event)}
             />

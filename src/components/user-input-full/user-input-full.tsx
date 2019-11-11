@@ -14,7 +14,6 @@ import {
 import { HintId } from "../../global/conversational-editor/helpers/helpers";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
-import { CollectionType } from "../../global/conversational-editor/instance-definition/elements/iconversational-element";
 
 @Component({
   tag: "gxcf-user-input-full",
@@ -82,6 +81,29 @@ export class FullUserInput {
     this.refresh = !this.refresh;
   }
 
+  HandleEditAskMessage(event: CustomEvent): void {
+    const value = EventHandler.GetValue(event);
+    const index = EventHandler.GetCollectionIndexFromDetail(event);
+    this.userInput.SetAskMessage(index, value);
+  }
+
+  HandleDeleteAskMessage(event: CustomEvent): void {
+    const index = EventHandler.GetCollectionIndexFromDetail(event);
+    console.log("Index: " + index);
+    this.userInput.DeleteAskMessage(index);
+  }
+
+  HandleEditOnErrorMessage(event: CustomEvent): void {
+    const value = EventHandler.GetValue(event);
+    const index = EventHandler.GetCollectionIndexFromDetail(event);
+    this.userInput.SetOnErrorMessage(index, value);
+  }
+
+  HandleDeleteOnErrorMessage(event: CustomEvent): void {
+    const index = EventHandler.GetCollectionIndexFromDetail(event);
+    this.userInput.DeleteOnErrorMessage(index);
+  }
+
   private RenderRedirections(): HTMLElement[] {
     const redirs: HTMLElement[] = new Array<HTMLElement>();
     if (this.userInput.Redirections.length > 0) {
@@ -115,8 +137,8 @@ export class FullUserInput {
         <gxcf-collection
           collection={this.userInput.RequiredMessages}
           collectionAddText="Add another ask message"
-          itemParent={this.userInput}
-          collectionType={CollectionType.AskMessages}
+          onEditItem={event => this.HandleEditAskMessage(event)}
+          onDeleteItem={event => this.HandleDeleteAskMessage(event)}
         />
       </details>
     );
@@ -147,9 +169,9 @@ export class FullUserInput {
             <gxcf-collection
               collection={this.userInput.ErrorMessages}
               collectionAddText="Add another error message"
-              itemParent={this.userInput}
-              collectionType={CollectionType.OnErrorMessages}
               collectionHeader="Entity or Data Type Error messages"
+              onEditItem={event => this.HandleEditOnErrorMessage(event)}
+              onDeleteItem={event => this.HandleDeleteOnErrorMessage(event)}
             />
           </div>
           <div class="ContainerForUserInput">
