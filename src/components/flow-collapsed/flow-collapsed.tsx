@@ -82,6 +82,7 @@ export class FlowCollapsed {
           classType="SummaryTitle"
         />
         <gxcf-select
+          class="SelectBoxing"
           selectid={this.SelectId}
           selectcaption={this.flow.GetSummaryConversationalObject()}
           selectIconType={this.flow.ConversationalObjectType}
