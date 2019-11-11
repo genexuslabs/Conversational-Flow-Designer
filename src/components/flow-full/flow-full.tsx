@@ -84,6 +84,20 @@ export class FlowFull {
     });
   }
 
+  HandleEditTriggerMessage(event: CustomEvent): void {
+    const value = EventHandler.GetValue(event);
+    const index = EventHandler.GetCollectionIndexFromDetail(event);
+    console.log("Value: " + value);
+    console.log("Index: " + index);
+    this.flow.SetTrigger(index, value);
+  }
+
+  HandleDeleteTriggerMessage(event: CustomEvent): void {
+    const index = EventHandler.GetCollectionIndexFromDetail(event);
+    console.log("Index: " + index);
+    this.flow.DeleteTrigger(index);
+  }
+
   render() {
     this.flow.UserInputComponent = this;
     return (
@@ -101,7 +115,8 @@ export class FlowFull {
               collectionHintId={HintId.TriggerMessages}
               collectionAddText="Add another sample trigger message"
               collectionType={CollectionType.TriggerMessages}
-              itemParent={this.flow}
+              onEditItem={event => this.HandleEditTriggerMessage(event)}
+              onDeleteItem={event => this.HandleDeleteTriggerMessage(event)}
             />
           </div>
         </div>
