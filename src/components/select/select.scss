@@ -29,9 +29,9 @@
 .SelectIcon
 {
     display:inline-block;
-    width:16px;
-    height:16px;
-    line-height: 16px;
+    width: var(--medium-icon-width);
+    height:var(--medium-icon-height);
+    line-height: var(--medium-icon-height);
     vertical-align: middle;
     margin-right: 2px;
 }
