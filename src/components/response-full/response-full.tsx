@@ -54,6 +54,28 @@ export class FullResponse {
             this.HandleDeleteResponseMessage(event);
           }}
         />
+        <div class="ConditionMargin">
+          <span class="ConditionLabel">Condition</span>
+          <gxcf-hint class="HintBlock" hintId={HintId.ResponseCondition} />
+        </div>
+        <gxcf-condition
+          class="ConditionMargin"
+          currentCondition={this.response.Condition}
+        />
+        <hr class="Separator"></hr>
+        <div class="ConditionMargin">
+          <span class="ConditionLabel">Response Style</span>
+          <gxcf-hint class="HintBlock" hintId={HintId.ResponseStyle} />
+        </div>
+        <select>
+          <option value="component view">Component View</option>
+          <option value="text message" selected>
+            Text Message
+          </option>
+          <option value="redirect to" selected>
+            Redirect To
+          </option>
+        </select>
       </div>
     );
   }

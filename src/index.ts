@@ -1,2 +1,2 @@
-export { Components } from './components';
-import '@stencil/router';
+export { Components } from "./components";
+import "@stencil/router";
