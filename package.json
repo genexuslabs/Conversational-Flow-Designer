@@ -1,5 +1,5 @@
 {
-  "name": "conversationalflowsdesigner",
+  "name": "@genexus/conversational-flows-designer",
   "version": "0.0.1",
   "description": "Conversational Flows Designer",
   "private": true,
