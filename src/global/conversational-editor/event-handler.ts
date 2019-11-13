@@ -217,7 +217,7 @@ export class EventHandler {
     return App.GetApp().Instance.Flows;
   }
 
-  public static GetValue(customEvent: CustomEvent): any {
+  public static GetValue(customEvent: CustomEvent): string {
     const event = EventHandler.GetEvent(customEvent);
     if (event.currentTarget) {
       const element: HTMLInputElement = event.currentTarget as HTMLInputElement;
@@ -226,7 +226,7 @@ export class EventHandler {
     return null;
   }
 
-  public static GetValueFromDetail(customEvent: CustomEvent): any {
+  public static GetValueFromDetail(customEvent: CustomEvent): string {
     customEvent.preventDefault;
     customEvent = customEvent.detail;
     if (customEvent.currentTarget) {
@@ -236,7 +236,7 @@ export class EventHandler {
     return null;
   }
 
-  public static GetCollectionIndexFromDetail(customEvent: CustomEvent): any {
+  public static GetCollectionIndexFromDetail(customEvent: CustomEvent): string {
     customEvent.preventDefault;
     customEvent = customEvent.detail;
     if (customEvent.currentTarget) {
@@ -246,7 +246,7 @@ export class EventHandler {
     return null;
   }
 
-  static GetValueFromSelect(customEvent: CustomEvent): any {
+  static GetValueFromSelect(customEvent: CustomEvent): string {
     customEvent = this.PreventEvent(customEvent);
     if (customEvent.currentTarget) {
       const element: HTMLSelectElement = customEvent.currentTarget as HTMLSelectElement;

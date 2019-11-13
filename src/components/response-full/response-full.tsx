@@ -1,7 +1,6 @@
 import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
 import { HintId } from "../../global/conversational-editor/helpers/helpers";
-import M from "minimatch";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
 
 @Component({

@@ -22,7 +22,7 @@ export class RedirectionProperty {
       );
   }
 
-  SetRedirectTo(element: ConversationalElement, value: any) {
+  SetRedirectTo(element: ConversationalElement, value: string) {
     this.RedirectTo = value;
     if (window.external.SetRedirectTo)
       window.external.SetRedirectTo(

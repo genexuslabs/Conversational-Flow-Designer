@@ -84,24 +84,24 @@ export class FullUserInput {
   HandleEditAskMessage(event: CustomEvent): void {
     const value = EventHandler.GetValue(event);
     const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.userInput.SetAskMessage(index, value);
+    this.userInput.SetAskMessage(+index, value);
   }
 
   HandleDeleteAskMessage(event: CustomEvent): void {
     const index = EventHandler.GetCollectionIndexFromDetail(event);
     console.log("Index: " + index);
-    this.userInput.DeleteAskMessage(index);
+    this.userInput.DeleteAskMessage(+index);
   }
 
   HandleEditOnErrorMessage(event: CustomEvent): void {
     const value = EventHandler.GetValue(event);
     const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.userInput.SetOnErrorMessage(index, value);
+    this.userInput.SetOnErrorMessage(+index, value);
   }
 
   HandleDeleteOnErrorMessage(event: CustomEvent): void {
     const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.userInput.DeleteOnErrorMessage(index);
+    this.userInput.DeleteOnErrorMessage(+index);
   }
 
   private RenderRedirections(): HTMLElement[] {

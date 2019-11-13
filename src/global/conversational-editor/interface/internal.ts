@@ -1,4 +1,5 @@
 import { App } from "../app.js";
+import { CustomJSON } from "../instance-definition/instance.js";
 
 export function SetConversationalObject(
   flowName: string,
@@ -11,11 +12,7 @@ export function SetConversationalObject(
   );
 }
 
-export function InitializeInstance(instance: any) {
+export function InitializeInstance(instance: CustomJSON) {
   console.log("initialize");
   App.GetApp().Instance.InitializeInstance(instance);
-}
-
-function Test() {
-  alert("test!!");
 }

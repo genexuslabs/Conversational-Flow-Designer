@@ -86,12 +86,12 @@ export class FlowFull {
   HandleEditTriggerMessage(event: CustomEvent): void {
     const value = EventHandler.GetValue(event);
     const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.flow.SetTrigger(index, value);
+    this.flow.SetTrigger(+index, value);
   }
 
   HandleDeleteTriggerMessage(event: CustomEvent): void {
     const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.flow.DeleteTrigger(index);
+    this.flow.DeleteTrigger(+index);
   }
 
   render() {

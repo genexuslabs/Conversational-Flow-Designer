@@ -42,7 +42,7 @@ export class Collection {
     this.editItem.emit(event, this.currentItemIndex);
   }
 
-  SetCurrentIndex(element: any): void {
+  SetCurrentIndex(element: HTMLElement): void {
     this.currentItemIndex = parseInt(
       element.getAttribute(Collection.DataItemIndex)
     );
@@ -57,9 +57,6 @@ export class Collection {
 
   private RenderizeItems(items: string[]): HTMLElement[] {
     const renderedItems: HTMLElement[] = [];
-    console.log("Items: " + items.length);
-    const index = 0;
-
     for (let index = 0; index < items.length; index++) {
       renderedItems.push(
         <div class="Item">

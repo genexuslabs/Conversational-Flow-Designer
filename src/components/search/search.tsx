@@ -1,5 +1,4 @@
-import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
-import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
+import { Component, h, Event, EventEmitter } from "@stencil/core";
 
 @Component({
   tag: "gxcf-search",

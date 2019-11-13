@@ -146,7 +146,7 @@ export class UserInputElement implements ConversationalElement {
       window.external.AddNewRedirection(this.Parent.Name, this.Variable);
   }
 
-  public SetRedirectCondition(value: string, index: any) {
+  public SetRedirectCondition(value: string, index: number) {
     if (this.Redirections.length > index) {
       this.Redirections[index].RedirectCondition = value;
       if (window.external.SetRedirectionCondition)

@@ -1,14 +1,5 @@
-import {
-  Component,
-  Prop,
-  Event,
-  EventEmitter,
-  h,
-  State,
-  Listen
-} from "@stencil/core";
+import { Component, Prop, Event, EventEmitter, h, State } from "@stencil/core";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
-import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
 
 @Component({

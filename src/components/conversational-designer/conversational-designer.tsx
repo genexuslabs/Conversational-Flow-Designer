@@ -51,7 +51,7 @@ export class ConversationalDesginer {
     this.flows = EventHandler.AddFlowElement();
   }
 
-  HandleSearch(event: CustomEvent<any>): void {
+  HandleSearch(event: CustomEvent): void {
     const value: string = EventHandler.GetValue(event);
     this.search = value;
   }
