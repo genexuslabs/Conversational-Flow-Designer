@@ -164,7 +164,7 @@ export class FlowElement implements ConversationalElement {
 
   public NewUserInput(): void {
     const userInput: UserInputElement = new UserInputElement(
-      "New Variable",
+      "NewVariable",
       false,
       [],
       [],
