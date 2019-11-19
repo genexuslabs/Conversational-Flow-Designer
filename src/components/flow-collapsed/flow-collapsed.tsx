@@ -1,6 +1,9 @@
 import { Component, Prop, Event, EventEmitter, h, State } from "@stencil/core";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
-import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
+import {
+  RenderingOptions,
+  SelectTypes
+} from "../../global/conversational-editor/helpers/helpers";
 
 @Component({
   tag: "gxcf-flow-collapsed",
@@ -77,6 +80,7 @@ export class FlowCollapsed {
           selectid={this.SelectId}
           selectcaption={this.flow.GetSummaryConversationalObject()}
           selectIconType={this.flow.ConversationalObjectType}
+          selectType={SelectTypes.Compact}
           onClick={event => this.TriggerSelectConversationalObject(event)}
         />
         <gxcf-summary-description

@@ -7,7 +7,10 @@
 
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { FlowElement } from "./global/conversational-editor/instance-definition/elements/flow-element";
-import { RenderingOptions } from "./global/conversational-editor/helpers/helpers";
+import {
+  RenderingOptions,
+  SelectTypes
+} from "./global/conversational-editor/helpers/helpers";
 import { ConversationalElement } from "./global/conversational-editor/instance-definition/elements/iconversational-element";
 import { RedirectionProperty } from "./global/conversational-editor/instance-definition/elements/redirection-property";
 import { ResponseElement } from "./global/conversational-editor/instance-definition/elements/response-element";
@@ -74,6 +77,7 @@ export namespace Components {
   interface GxcfSearch {}
   interface GxcfSelect {
     selectIconType: string;
+    selectType: SelectTypes;
     selectcaption: string;
     selectid: string;
   }
@@ -414,6 +418,7 @@ declare namespace LocalJSX {
   }
   interface GxcfSelect {
     selectIconType?: string;
+    selectType?: SelectTypes;
     selectcaption?: string;
     selectid?: string;
   }

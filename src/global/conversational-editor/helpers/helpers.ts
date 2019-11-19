@@ -52,6 +52,11 @@ export enum RenderingOptions {
   Full
 }
 
+export enum SelectTypes {
+  Compact,
+  Full
+}
+
 export class ResponseStyles {
   public static TextMessage = "text message";
   public static ComponentView = "component view";
