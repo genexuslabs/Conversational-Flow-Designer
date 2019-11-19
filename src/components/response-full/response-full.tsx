@@ -99,13 +99,17 @@ export class FullResponse {
     if (this.response.Style == ResponseStyles.ComponentView) {
     } else if (this.response.Style == ResponseStyles.RedirectTo) {
       elements.push(
-        <gxcf-redirection
-          requireCondition={false}
-          redirectionProperty={
-            new RedirectionProperty("", this.response.RedirectTo, 0)
-          }
-          onChangeRedirectTo={event => this.HandleRedirectToChange(event)}
-        />
+        <div class="ResponseRedirection">
+          <gxcf-hint hintId={HintId.Redirection} />
+          <span>Redirect To</span>
+          <gxcf-redirection
+            requireCondition={false}
+            redirectionProperty={
+              new RedirectionProperty("", this.response.RedirectTo, 0)
+            }
+            onChangeRedirectTo={event => this.HandleRedirectToChange(event)}
+          />
+        </div>
       );
     }
 
