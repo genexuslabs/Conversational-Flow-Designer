@@ -134,10 +134,16 @@ export class FullResponse {
   private RenderStyleContent(): HTMLElement[] {
     const elements: Array<HTMLElement> = new Array<HTMLElement>();
     if (this.response.Style == ResponseStyles.ComponentView) {
-      elements.push(<div>{this.RenderizeComponentType()}</div>);
+      elements.push(
+        <div class="ResponseOption">
+          <gxcf-hint hintId={HintId.ShowResponseAs} />
+          <span>Show Response as (SD Only)</span>
+          {this.RenderizeComponentType()}
+        </div>
+      );
     } else if (this.response.Style == ResponseStyles.RedirectTo) {
       elements.push(
-        <div class="ResponseRedirection">
+        <div class="ResponseOption">
           <gxcf-hint hintId={HintId.Redirection} />
           <span>Redirect To</span>
           <gxcf-redirection

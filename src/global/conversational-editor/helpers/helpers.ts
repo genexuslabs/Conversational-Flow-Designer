@@ -83,9 +83,10 @@ export class HintId {
   public static Redirection = "Redirection";
   public static ErrorMessages = "ErrorMessages";
   public static TryLimit = "TryLimit";
-  public static ResponseMessage: "ResponseMessage";
-  public static ResponseCondition: "ResponseCondition";
-  public static ResponseStyle: "ResponseStyle";
+  public static ResponseMessage = "ResponseMessage";
+  public static ResponseCondition = "ResponseCondition";
+  public static ResponseStyle = "ResponseStyle";
+  public static ShowResponseAs = "ShowResponseAs";
 }
 
 export class PropertiesDefinition {
@@ -163,6 +164,11 @@ export class PropertiesDefinition {
     "When Ask again property is set to TRUE, you can establish the number of times the user is asked to re-try.";
   public static readonly TryLimitLabel: string = "What's the Try Limit?";
 
+  public static readonly ShowResponseAsTitle: string = "Show Response As";
+  public static readonly ShowResponseAsDescription: string = "Show Response As";
+  public static readonly ShowResponseAsLabel: string =
+    "What's Show Response As?";
+
   public static GetTitle(hintId: HintId): string {
     if (hintId == HintId.TriggerMessages) return this.TriggerMessagesTitle;
     if (hintId == HintId.Responses) return this.ResponseTitle;
@@ -178,6 +184,7 @@ export class PropertiesDefinition {
     if (hintId == HintId.ResponseMessage) return this.ResponseMessageTitle;
     if (hintId == HintId.ResponseCondition) return this.ResponseConditionTitle;
     if (hintId == HintId.ResponseStyle) return this.ResponseStyleTitle;
+    if (hintId == HintId.ShowResponseAs) return this.ShowResponseAsTitle;
     return "";
   }
 
@@ -197,6 +204,7 @@ export class PropertiesDefinition {
     if (hintId == HintId.ResponseCondition)
       return this.ResponseConditionDescription;
     if (hintId == HintId.ResponseStyle) return this.ResponseStyleDescription;
+    if (hintId == HintId.ShowResponseAs) return this.ShowResponseAsDescription;
     return "";
   }
 
@@ -215,6 +223,7 @@ export class PropertiesDefinition {
     if (hintId == HintId.ResponseMessage) return this.ResponseMessageLabel;
     if (hintId == HintId.ResponseCondition) return this.ResponseConditionLabel;
     if (hintId == HintId.ResponseStyle) return this.ResponseStyleLabel;
+    if (hintId == HintId.ShowResponseAs) return this.ShowResponseAsLabel;
     return "";
   }
 }
