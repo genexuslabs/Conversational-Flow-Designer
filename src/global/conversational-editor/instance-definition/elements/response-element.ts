@@ -72,4 +72,30 @@ export class ResponseElement {
         responseMessages
       );
   }
+
+  public SetStyle(value: string) {
+    this.Style = value;
+    if (window.external.SetStyle)
+      window.external.SetStyle(this.Parent.Name, this.Index, value);
+  }
+
+  public SetCondition(value: string) {
+    this.Condition = value;
+    if (window.external.SetResponseCondition)
+      window.external.SetResponseCondition(
+        this.Parent.Name,
+        this.Index,
+        this.Condition
+      );
+  }
+
+  public SetRedirectTo(value: string) {
+    this.RedirectTo = value;
+    if (window.external.SetResponseRedirectTo)
+      window.external.SetResponseRedirectTo(
+        this.Parent.Name,
+        this.Index,
+        this.RedirectTo
+      );
+  }
 }

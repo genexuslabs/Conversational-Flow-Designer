@@ -116,7 +116,9 @@ export class FullUserInput {
         );
       }, this);
     } else {
-      redirs.push(<gxcf-redirection element={this.userInput} />);
+      redirs.push(
+        <gxcf-redirection element={this.userInput} requireCondition={true} />
+      );
     }
     redirs.push(
       <gxcf-add-object
@@ -133,12 +135,12 @@ export class FullUserInput {
         <summary class="UserInputPart">
           <span class="UserInputPartSummaryText">Ask messages</span>
         </summary>
-        <gxcf-hint hintId={HintId.AskMessages} class="UserInputHints" />
         <gxcf-collection
           collection={this.userInput.RequiredMessages}
           collectionAddText="Add another ask message"
           onEditItem={event => this.HandleEditAskMessage(event)}
           onDeleteItem={event => this.HandleDeleteAskMessage(event)}
+          collectionHintId={HintId.AskMessages}
         />
       </details>
     );
@@ -165,13 +167,13 @@ export class FullUserInput {
             <span class="UserInputPartSummaryText">Validate User Input</span>
           </summary>
           <div>
-            <gxcf-hint hintId={HintId.ErrorMessages} class="UserInputHints" />
             <gxcf-collection
               collection={this.userInput.ErrorMessages}
               collectionAddText="Add another error message"
               collectionHeader="Entity or Data Type Error messages"
               onEditItem={event => this.HandleEditOnErrorMessage(event)}
               onDeleteItem={event => this.HandleDeleteOnErrorMessage(event)}
+              collectionHintId={HintId.ErrorMessages}
             />
           </div>
           <div class="ContainerForUserInput">

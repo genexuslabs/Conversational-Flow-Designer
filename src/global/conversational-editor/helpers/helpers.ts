@@ -52,6 +52,16 @@ export enum RenderingOptions {
   Full
 }
 
+export class ResponseStyles {
+  public static TextMessage = "text message";
+  public static ComponentView = "component view";
+  public static RedirectTo = "redirect to";
+
+  public static PrettyTextMessage = "Text Message";
+  public static PrettyComponentView = "Component View";
+  public static PrettyRedirectTo = "Redirect To";
+}
+
 export class HintId {
   public static TriggerMessages = "TriggerMessages";
   public static Responses = "Responses";

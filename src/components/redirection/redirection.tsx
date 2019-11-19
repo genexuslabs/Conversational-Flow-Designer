@@ -12,6 +12,7 @@ import { ConversationalElement } from "../../global/conversational-editor/instan
 export class Redirection {
   @Prop() element: ConversationalElement;
   @Prop() redirectionProperty: RedirectionProperty;
+  @Prop() requireCondition: boolean;
 
   TriggerOnChangeRedirectCondition(event): void {
     const value = EventHandler.GetValue(event);
@@ -22,12 +23,15 @@ export class Redirection {
   TriggerOnChangeRedirectTo(event): void {
     console.log("Trigger");
     const value = EventHandler.GetValueFromSelect(event);
-    this.redirectionProperty.SetRedirectTo(this.element, value);
+    if (this.element != null)
+      this.redirectionProperty.SetRedirectTo(this.element, value);
+    else this.changeRedirectTo.emit(event);
   }
 
   private LoadFlowsCombo(): HTMLElement[] {
     const combo: HTMLElement[] = new Array<HTMLElement>();
     App.GetApp().Instance.Flows.forEach(iFlow => {
+      console.log("Load: " + iFlow.Name);
       if (iFlow.Name == this.redirectionProperty.RedirectTo) {
         combo.push(
           <option value={iFlow.Name} selected>
@@ -41,24 +45,39 @@ export class Redirection {
     return combo;
   }
 
+  private RenderCondition(): HTMLElement {
+    return (
+      <gxcf-condition
+        currentCondition={this.redirectionProperty.RedirectCondition}
+        onConditionChange={event =>
+          this.TriggerOnChangeRedirectCondition(event)
+        }
+      />
+    );
+  }
+
+  private RenderRedirectionBody(): HTMLElement[] {
+    const elements: Array<HTMLElement> = new Array<HTMLElement>();
+
+    if (this.requireCondition) elements.push(this.RenderCondition());
+
+    elements.push(
+      <select
+        class="RedirectToSelect"
+        required
+        onChange={event => this.TriggerOnChangeRedirectTo(event)}
+      >
+        {this.LoadFlowsCombo()}
+      </select>
+    );
+
+    return elements;
+  }
+
   render() {
     return (
       <div class="RedirectionContainer">
-        <div>
-          <gxcf-condition
-            currentCondition={this.redirectionProperty.RedirectCondition}
-            onConditionChange={event =>
-              this.TriggerOnChangeRedirectCondition(event)
-            }
-          />
-          <select
-            class="RedirectToSelect"
-            required
-            onChange={event => this.TriggerOnChangeRedirectTo(event)}
-          >
-            {this.LoadFlowsCombo()}
-          </select>
-        </div>
+        <div>{this.RenderRedirectionBody()}</div>
       </div>
     );
   }

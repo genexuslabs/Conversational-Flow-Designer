@@ -54,4 +54,15 @@ interface External {
     value: string,
     index: number
   ): Function;
+  SetStyle(flowName: string, responseIndex: number, style: string): Function;
+  SetResponseCondition(
+    flowName: string,
+    index: number,
+    condition: string
+  ): Function;
+  SetResponseRedirectTo(
+    flowName: string,
+    index: number,
+    redirectTo: string
+  ): Function;
 }
