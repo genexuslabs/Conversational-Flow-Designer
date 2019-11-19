@@ -98,4 +98,14 @@ export class ResponseElement {
         this.RedirectTo
       );
   }
+
+  public SetComponentType(value: string) {
+    this.ComponentType = value;
+    if (window.external.SetComponentType)
+      window.external.SetComponentType(
+        this.Parent.Name,
+        this.Index,
+        this.ComponentType
+      );
+  }
 }

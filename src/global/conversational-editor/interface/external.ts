@@ -65,4 +65,9 @@ interface External {
     index: number,
     redirectTo: string
   ): Function;
+  SetComponentType(
+    flowName: string,
+    index: number,
+    componentType: string
+  ): Function;
 }

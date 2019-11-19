@@ -67,6 +67,11 @@ export class ResponseStyles {
   public static PrettyRedirectTo = "Redirect To";
 }
 
+export class ComponentTypes {
+  public static Component = "Component";
+  public static CallPanel = "Call Panel";
+}
+
 export class HintId {
   public static TriggerMessages = "TriggerMessages";
   public static Responses = "Responses";

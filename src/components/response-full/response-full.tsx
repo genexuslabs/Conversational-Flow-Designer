@@ -2,7 +2,8 @@ import { Component, Prop, h, Event, EventEmitter, State } from "@stencil/core";
 import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
 import {
   HintId,
-  ResponseStyles
+  ResponseStyles,
+  ComponentTypes
 } from "../../global/conversational-editor/helpers/helpers";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { RedirectionProperty } from "../../global/conversational-editor/instance-definition/elements/redirection-property";
@@ -48,6 +49,11 @@ export class FullResponse {
     this.response.SetRedirectTo(value);
   }
 
+  HandleChangeComponentType(event: CustomEvent): void {
+    const value: string = EventHandler.GetValueFromSelect(event);
+    this.response.SetComponentType(value);
+  }
+
   private RenderStyleSelector(): HTMLElement[] {
     const elements: Array<HTMLElement> = new Array<HTMLElement>();
     const textElementOption =
@@ -82,7 +88,7 @@ export class FullResponse {
       );
     elements.push(
       <select
-        class="ResponseStyle"
+        class="ResponseSelect"
         onChange={(event: CustomEvent) => this.HandleChangeResponseStyle(event)}
       >
         {componentElementOption}
@@ -93,10 +99,42 @@ export class FullResponse {
     return elements;
   }
 
+  private RenderizeComponentType(): HTMLElement {
+    const componentOption =
+      this.response.ComponentType == ComponentTypes.Component ? (
+        <option value={ComponentTypes.Component} selected>
+          {ComponentTypes.Component}
+        </option>
+      ) : (
+        <option value={ComponentTypes.Component}>
+          {ComponentTypes.Component}
+        </option>
+      );
+    const callPanelOption =
+      this.response.ComponentType == ComponentTypes.CallPanel ? (
+        <option value={ComponentTypes.CallPanel} selected>
+          {ComponentTypes.CallPanel}
+        </option>
+      ) : (
+        <option value={ComponentTypes.CallPanel}>
+          {ComponentTypes.CallPanel}
+        </option>
+      );
+    return (
+      <select
+        onChange={(event: CustomEvent) => this.HandleChangeComponentType(event)}
+        class="ResponseSelect"
+      >
+        {componentOption}
+        {callPanelOption}
+      </select>
+    );
+  }
+
   private RenderStyleContent(): HTMLElement[] {
     const elements: Array<HTMLElement> = new Array<HTMLElement>();
-    console.log("Render Style: " + this.response.Style);
     if (this.response.Style == ResponseStyles.ComponentView) {
+      elements.push(<div>{this.RenderizeComponentType()}</div>);
     } else if (this.response.Style == ResponseStyles.RedirectTo) {
       elements.push(
         <div class="ResponseRedirection">
