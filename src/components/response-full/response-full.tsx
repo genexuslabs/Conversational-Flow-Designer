@@ -3,7 +3,8 @@ import { ResponseElement } from "../../global/conversational-editor/instance-def
 import {
   HintId,
   ResponseStyles,
-  ComponentTypes
+  ComponentTypes,
+  SelectTypes
 } from "../../global/conversational-editor/helpers/helpers";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { RedirectionProperty } from "../../global/conversational-editor/instance-definition/elements/redirection-property";
@@ -52,6 +53,30 @@ export class FullResponse {
   HandleChangeComponentType(event: CustomEvent): void {
     const value: string = EventHandler.GetValueFromSelect(event);
     this.response.SetComponentType(value);
+  }
+
+  HandleChangeWebComponent(event: MouseEvent): void {
+    console.log(event);
+    if (window.external.SetWebComponent) {
+      window.external
+        .SetWebComponent(this.response.Parent.Name, this.response.Index)
+        .then(component => {
+          this.response.WebComponent = component;
+          this.refresh = !this.refresh;
+        });
+    }
+  }
+
+  HandleChangeSDComponent(event: MouseEvent) {
+    console.log(event);
+    if (window.external.SetSDComponent) {
+      window.external
+        .SetSDComponent(this.response.Parent.Name, this.response.Index)
+        .then(component => {
+          this.response.SDComponent = component;
+          this.refresh = !this.refresh;
+        });
+    }
   }
 
   private RenderStyleSelector(): HTMLElement[] {
@@ -135,15 +160,41 @@ export class FullResponse {
     const elements: Array<HTMLElement> = new Array<HTMLElement>();
     if (this.response.Style == ResponseStyles.ComponentView) {
       elements.push(
-        <div class="ResponseOption">
+        <div class="ResponseProperty">
           <gxcf-hint hintId={HintId.ShowResponseAs} />
           <span>Show Response as (SD Only)</span>
           {this.RenderizeComponentType()}
         </div>
       );
+      const sdComponent: string = this.response.ComponentType;
+      console.log("The component: " + sdComponent);
+      elements.push(
+        <div class="ResponseProperty">
+          <gxcf-hint hintId={HintId.SDComponent} />
+          <span>SD Component</span>
+          <gxcf-select
+            selectcaption={this.response.GetSDComponentName()}
+            selectIconType="SDPanel"
+            selectType={SelectTypes.Full}
+            onClick={event => this.HandleChangeSDComponent(event)}
+          />
+        </div>
+      );
+      elements.push(
+        <div class="ResponseProperty">
+          <gxcf-hint hintId={HintId.WebComponent} />
+          <span>Web Component</span>
+          <gxcf-select
+            selectcaption={this.response.GetWebComponentName()}
+            selectIconType="WebPanel"
+            selectType={SelectTypes.Full}
+            onClick={event => this.HandleChangeWebComponent(event)}
+          />
+        </div>
+      );
     } else if (this.response.Style == ResponseStyles.RedirectTo) {
       elements.push(
-        <div class="ResponseOption">
+        <div class="ResponseProperty">
           <gxcf-hint hintId={HintId.Redirection} />
           <span>Redirect To</span>
           <gxcf-redirection

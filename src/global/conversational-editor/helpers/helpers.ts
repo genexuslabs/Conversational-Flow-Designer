@@ -87,6 +87,8 @@ export class HintId {
   public static ResponseCondition = "ResponseCondition";
   public static ResponseStyle = "ResponseStyle";
   public static ShowResponseAs = "ShowResponseAs";
+  public static SDComponent = "SDComponent";
+  public static WebComponent = "WebComponent";
 }
 
 export class PropertiesDefinition {
@@ -169,6 +171,15 @@ export class PropertiesDefinition {
   public static readonly ShowResponseAsLabel: string =
     "What's Show Response As?";
 
+  public static readonly WebComponentTitle: string = "Web Compoennt";
+  public static readonly WebComponentDescription: string = "Web Component";
+  public static readonly WebComponentLabel: string =
+    "What's the Web Component?";
+
+  public static readonly SDComponentTitle: string = "SD Compoennt";
+  public static readonly SDComponentDescription: string = "SD Component";
+  public static readonly SDComponentLabel: string = "What's the SD Component?";
+
   public static GetTitle(hintId: HintId): string {
     if (hintId == HintId.TriggerMessages) return this.TriggerMessagesTitle;
     if (hintId == HintId.Responses) return this.ResponseTitle;
@@ -185,6 +196,8 @@ export class PropertiesDefinition {
     if (hintId == HintId.ResponseCondition) return this.ResponseConditionTitle;
     if (hintId == HintId.ResponseStyle) return this.ResponseStyleTitle;
     if (hintId == HintId.ShowResponseAs) return this.ShowResponseAsTitle;
+    if (hintId == HintId.WebComponent) return this.WebComponentTitle;
+    if (hintId == HintId.SDComponent) return this.SDComponentTitle;
     return "";
   }
 
@@ -205,6 +218,8 @@ export class PropertiesDefinition {
       return this.ResponseConditionDescription;
     if (hintId == HintId.ResponseStyle) return this.ResponseStyleDescription;
     if (hintId == HintId.ShowResponseAs) return this.ShowResponseAsDescription;
+    if (hintId == HintId.WebComponent) return this.WebComponentDescription;
+    if (hintId == HintId.SDComponent) return this.SDComponentDescription;
     return "";
   }
 
@@ -224,6 +239,8 @@ export class PropertiesDefinition {
     if (hintId == HintId.ResponseCondition) return this.ResponseConditionLabel;
     if (hintId == HintId.ResponseStyle) return this.ResponseStyleLabel;
     if (hintId == HintId.ShowResponseAs) return this.ShowResponseAsLabel;
+    if (hintId == HintId.WebComponent) return this.WebComponentLabel;
+    if (hintId == HintId.SDComponent) return this.SDComponentLabel;
     return "";
   }
 }

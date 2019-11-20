@@ -70,4 +70,6 @@ interface External {
     index: number,
     componentType: string
   ): Function;
+  SetWebComponent(flowName: string, index: number): Promise<string>;
+  SetSDComponent(flowName: string, index: number): Promise<string>;
 }

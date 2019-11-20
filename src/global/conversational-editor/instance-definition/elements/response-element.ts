@@ -12,6 +12,8 @@ export class ResponseElement {
   public RenderType: RenderingOptions;
   public Index: number;
   public Parent: FlowElement;
+  public SDComponentType: string;
+  public WebComponentType: string;
 
   public constructor(
     style: string,
@@ -107,5 +109,25 @@ export class ResponseElement {
         this.Index,
         this.ComponentType
       );
+  }
+
+  public GetSDComponentName(): string {
+    if (this.SDComponent && this.SDComponent != "") return this.SDComponent;
+    if (
+      this.Parent.ConversationalObject &&
+      this.Parent.ConversationalObject != ""
+    )
+      return `${this.Parent.ConversationalObject}ComponentSD`;
+    return "NONE";
+  }
+
+  public GetWebComponentName(): string {
+    if (this.WebComponent && this.WebComponent != "") return this.WebComponent;
+    if (
+      this.Parent.ConversationalObject &&
+      this.Parent.ConversationalObject != ""
+    )
+      return `${this.Parent.ConversationalObject}Component`;
+    return "NONE";
   }
 }

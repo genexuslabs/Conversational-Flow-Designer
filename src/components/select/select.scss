@@ -11,22 +11,22 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  background-color: var(--common-action-background);
+  font-weight: 600;
+  color: var(--inelement-select-color);
 }
 
 
 .FullSelect {
     text-align: left;
+    background-color: var(--active-content-background);
+    padding-left: 5px;
+    line-height: 24px;
+    font-size: var(--normal-font-size);
 }
 
 .Select:hover {
   cursor: pointer;
-}
-
-.Select
-{
-  background-color: var(--common-action-background);
-  color: var(--inelement-select-color);
-  font-weight: 600;
 }
 
 .SelectIconHidden
