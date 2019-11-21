@@ -17,9 +17,9 @@ export class Select {
 
   private GetIconClass(): string {
     let iconClass = "";
-    if (this.selectIconType != "")
+    if (this.selectIconType && this.selectIconType != "")
       iconClass = `${this.selectIconType} SelectIcon`;
-    else iconClass = `${this.selectIconType} SelectIconHidden`;
+    else iconClass = `SelectIconHidden`;
     return iconClass;
   }
 

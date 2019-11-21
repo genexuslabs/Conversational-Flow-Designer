@@ -8,7 +8,10 @@ import {
   State
 } from "@stencil/core";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
-import { HintId } from "../../global/conversational-editor/helpers/helpers";
+import {
+  HintId,
+  SelectTypes
+} from "../../global/conversational-editor/helpers/helpers";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
 
 @Component({
@@ -75,14 +78,6 @@ export class FlowFull {
     return responses;
   }
 
-  @Listen("selectConversationalObject")
-  HandleSelectConversationalObject(event: CustomEvent): void {
-    EventHandler.SelectConversationalObject(event).then(retFlow => {
-      this.flow = retFlow;
-      this.refresh = !this.refresh;
-    });
-  }
-
   HandleEditTriggerMessage(event: CustomEvent): void {
     const value = EventHandler.GetValue(event);
     const index = EventHandler.GetCollectionIndexFromDetail(event);
@@ -92,6 +87,11 @@ export class FlowFull {
   HandleDeleteTriggerMessage(event: CustomEvent): void {
     const index = EventHandler.GetCollectionIndexFromDetail(event);
     this.flow.DeleteTrigger(+index);
+  }
+
+  @Event() selectConversationalObject: EventEmitter;
+  TriggerSelectConversationalObject(event): void {
+    this.selectConversationalObject.emit(event);
   }
 
   render() {
@@ -105,6 +105,18 @@ export class FlowFull {
               summaryvalue={this.flow.Name}
               classType="FullTitle"
             />
+            <div class="CommandsContainer">
+              <div class="DeleteFlow CommandIcon CommandPosition" />
+              <div class="EditFlow CommandIcon CommandPosition" />
+              <gxcf-select
+                class="CustomSelectBoxing CommandPosition"
+                selectid={this.SelectId}
+                selectcaption={this.flow.GetSummaryConversationalObject()}
+                selectIconType={this.flow.ConversationalObjectType}
+                selectType={SelectTypes.Compact}
+                onClick={event => this.TriggerSelectConversationalObject(event)}
+              />
+            </div>
             <gxcf-collection
               collection={this.flow.TriggerMessages}
               collectionHeader={this.CollectionHeader}

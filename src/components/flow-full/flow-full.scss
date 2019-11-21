@@ -54,3 +54,36 @@
 .ElementsHeaderText {
   color: var(--elements-header-font-color);
 }
+
+.CommandsContainer
+{
+  float: right;
+  width: 38%;
+}
+
+.EditFlow
+{
+  content: var(--edit-icon);
+}
+
+.DeleteFlow
+{
+  content: var(--delete-icon);
+}
+
+.CommandIcon
+{
+  width: var(--long-icon-width);
+  height: var(--long-icon-height);  
+}
+
+.CommandPosition
+{
+  float: right;
+}
+
+.CustomSelectBoxing
+{
+  width: 50%;
+  margin-right: 8px;
+}
