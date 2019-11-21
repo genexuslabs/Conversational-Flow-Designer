@@ -391,10 +391,12 @@ declare namespace LocalJSX {
   }
   interface GxcfResponseContainer {
     'flow'?: FlowElement;
+    'onDeleteResponse'?: (event: CustomEvent<any>) => void;
     'response'?: ResponseElement;
   }
   interface GxcfResponseFull {
     'onCollapseResponse'?: (event: CustomEvent<any>) => void;
+    'onDeleteResponseFull'?: (event: CustomEvent<any>) => void;
     'response'?: ResponseElement;
   }
   interface GxcfSearch {

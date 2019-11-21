@@ -217,4 +217,11 @@ export class FlowElement implements ConversationalElement {
     if (window.external.DeleteUserInput)
       window.external.DeleteUserInput(this.Name, userInput.GetName());
   }
+
+  public DeleteResponse(response: ResponseElement) {
+    const index: number = this.Responses.indexOf(response);
+    this.Responses.splice(index, 1);
+    if (window.external.DeleteResponse)
+      window.external.DeleteResponse(this.Name, response.Index);
+  }
 }

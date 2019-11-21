@@ -74,4 +74,5 @@ interface External {
   SetSDComponent(flowName: string, index: number): Promise<string>;
   DeleteFlow(flowName: string): Function;
   DeleteUserInput(flowName: string, userInput: string): Function;
+  DeleteResponse(flowName: string, index: number): Function;
 }

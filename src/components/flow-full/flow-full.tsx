@@ -14,6 +14,7 @@ import {
 } from "../../global/conversational-editor/helpers/helpers";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
+import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
 
 @Component({
   tag: "gxcf-flow-full",
@@ -67,6 +68,12 @@ export class FlowFull {
     this.refresh = !this.refresh;
   }
 
+  HandleDeleteResponse(event: CustomEvent, response: ResponseElement): void {
+    console.log(event);
+    this.flow.DeleteResponse(response);
+    this.refresh = !this.refresh;
+  }
+
   private RenderizeUserInputs(): HTMLElement[] {
     const userInputs: HTMLElement[] = [];
     this.flow.UserInputs.forEach(function(userInput) {
@@ -86,8 +93,13 @@ export class FlowFull {
   private RenderizeResponse(): HTMLElement[] {
     const responses: HTMLElement[] = [];
     this.flow.Responses.forEach(function(response) {
-      responses.push(<gxcf-response-container response={response} />);
-    });
+      responses.push(
+        <gxcf-response-container
+          response={response}
+          onDeleteResponse={event => this.HandleDeleteResponse(event, response)}
+        />
+      );
+    }, this);
     return responses;
   }
 

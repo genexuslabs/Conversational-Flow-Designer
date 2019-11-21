@@ -79,6 +79,11 @@ export class FullResponse {
     }
   }
 
+  @Event() deleteResponseFull: EventEmitter;
+  TriggerDeleteResponseFull(event: MouseEvent): void {
+    this.deleteResponseFull.emit(event);
+  }
+
   private RenderStyleSelector(): HTMLElement[] {
     const elements: Array<HTMLElement> = new Array<HTMLElement>();
     const textElementOption =
@@ -220,8 +225,12 @@ export class FullResponse {
           value={this.response.Style}
         />
         <gxcf-up-arrow
-          class="FullResponseUpArrow"
+          class="FullResponseCommands"
           onClick={event => this.TriggerCollapseResponse(event)}
+        />
+        <gxcf-button-delete
+          class="FullResponseCommands"
+          onClick={event => this.TriggerDeleteResponseFull(event)}
         />
         <gxcf-collection
           collection={this.response.Messages}

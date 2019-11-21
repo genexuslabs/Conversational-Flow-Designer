@@ -1,4 +1,12 @@
-import { Component, Prop, h, State, Listen } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  h,
+  State,
+  Listen,
+  Event,
+  EventEmitter
+} from "@stencil/core";
 import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
 import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
@@ -27,6 +35,11 @@ export class Response {
     this.Refresh();
   }
 
+  @Event() deleteResponse: EventEmitter;
+  TriggerDeleteResponse(event: any) {
+    this.deleteResponse.emit(event);
+  }
+
   private Refresh(): void {
     this.refresh = !this.refresh;
   }
@@ -36,7 +49,12 @@ export class Response {
   }
 
   private RenderFull(): HTMLElement {
-    return <gxcf-response-full response={this.response} />;
+    return (
+      <gxcf-response-full
+        response={this.response}
+        onDeleteResponseFull={event => this.TriggerDeleteResponse(event)}
+      />
+    );
   }
 
   render() {
