@@ -384,11 +384,14 @@ declare namespace LocalJSX {
   }
   interface GxcfFlowContainer {
     flow?: FlowElement;
+    onDeleteFlow?: (event: CustomEvent<any>) => void;
     showDropZone?: boolean;
   }
   interface GxcfFlowFull {
     flow?: FlowElement;
     onCollapseFlow?: (event: CustomEvent<any>) => void;
+    onDeleteFullFlow?: (event: CustomEvent<any>) => void;
+    onSelectConversationalObject?: (event: CustomEvent<any>) => void;
   }
   interface GxcfHint {
     hintId?: string;

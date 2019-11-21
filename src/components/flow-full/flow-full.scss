@@ -77,6 +77,12 @@
   height: var(--long-icon-height);  
 }
 
+.CommandIcon:Hover
+{
+  cursor: pointer;
+}
+
+
 .CommandPosition
 {
   float: right;

@@ -94,6 +94,11 @@ export class FlowFull {
     this.selectConversationalObject.emit(event);
   }
 
+  @Event() deleteFullFlow: EventEmitter;
+  TriggerDeleteFlow(event): void {
+    this.deleteFullFlow.emit(event);
+  }
+
   render() {
     this.flow.UserInputComponent = this;
     return (
@@ -106,7 +111,10 @@ export class FlowFull {
               classType="FullTitle"
             />
             <div class="CommandsContainer">
-              <div class="DeleteFlow CommandIcon CommandPosition" />
+              <div
+                class="DeleteFlow CommandIcon CommandPosition"
+                onClick={event => this.TriggerDeleteFlow(event)}
+              />
               <div class="EditFlow CommandIcon CommandPosition" />
               <gxcf-select
                 class="CustomSelectBoxing CommandPosition"

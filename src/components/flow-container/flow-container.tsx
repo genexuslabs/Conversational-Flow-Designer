@@ -1,4 +1,12 @@
-import { Component, h, Prop, Listen, State } from "@stencil/core";
+import {
+  Component,
+  h,
+  Prop,
+  Listen,
+  State,
+  Event,
+  EventEmitter
+} from "@stencil/core";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
 import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
@@ -63,6 +71,11 @@ export class Flow {
     });
   }
 
+  @Event() deleteFlow: EventEmitter;
+  TriggerDeleteFlow(event: CustomEvent): void {
+    this.deleteFlow.emit(event);
+  }
+
   private renderSummary(renderingOption: RenderingOptions): HTMLElement {
     return (
       <div>
@@ -90,7 +103,11 @@ export class Flow {
       <div>
         {this.renderSummary(RenderingOptions.Full)}
         <div class="FullFlowContainer">
-          <gxcf-flow-full data-flowid={this.flow.Id} flow={this.flow} />
+          <gxcf-flow-full
+            data-flowid={this.flow.Id}
+            flow={this.flow}
+            onDeleteFullFlow={event => this.TriggerDeleteFlow(event)}
+          />
         </div>
       </div>
     );

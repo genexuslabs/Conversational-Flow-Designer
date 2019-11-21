@@ -222,6 +222,12 @@ export class Instance {
 
     return flows;
   }
+
+  public DeleteFlow(flow: FlowElement) {
+    const index: number = this.Flows.indexOf(flow);
+    this.Flows.splice(index, 1);
+    if (window.external.DeleteFlow) window.external.DeleteFlow(flow.Name);
+  }
 }
 
 export interface CustomJSON extends JSON {
