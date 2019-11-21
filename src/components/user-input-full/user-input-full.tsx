@@ -104,6 +104,11 @@ export class FullUserInput {
     this.userInput.DeleteOnErrorMessage(+index);
   }
 
+  @Event() deleteUserInputFull: EventEmitter;
+  TriggerDeleteUserInput(event): void {
+    this.deleteUserInputFull.emit(event);
+  }
+
   private RenderRedirections(): HTMLElement[] {
     const redirs: HTMLElement[] = new Array<HTMLElement>();
     if (this.userInput.Redirections.length > 0) {
@@ -237,8 +242,12 @@ export class FullUserInput {
           onChange={event => this.TriggerOnModifyUserInputName(event)}
         />
         <gxcf-up-arrow
-          class="ExpandUserInputDownArrow"
+          class="UserInputCommandsPosition"
           onClick={event => this.TriggerOnCollapseUserInput(event)}
+        />
+        <gxcf-button-delete
+          class="UserInputCommandsPosition"
+          onClick={event => this.TriggerDeleteUserInput(event)}
         />
         <p class="DataType">Datatype: {this.userInput.DataType}</p>
         <img

@@ -1,4 +1,12 @@
-import { Component, Prop, h, State, Listen } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  h,
+  State,
+  Listen,
+  Event,
+  EventEmitter
+} from "@stencil/core";
 import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
 import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
@@ -48,12 +56,23 @@ export class UserInput {
     }
   }
 
+  @Event() deleteUserInput: EventEmitter;
+  TriggerDeleteUserInput(event: CustomEvent<any>): void {
+    this.deleteUserInput.emit(event);
+  }
+
   private collapsedUserInput(): HTMLElement {
     return <gxcf-user-input-collapsed userInput={this.userInput} />;
   }
 
   private fullUserInput(): HTMLElement {
-    return <gxcf-user-input-full userInput={this.userInput} flow={this.flow} />;
+    return (
+      <gxcf-user-input-full
+        userInput={this.userInput}
+        flow={this.flow}
+        onDeleteUserInputFull={event => this.TriggerDeleteUserInput(event)}
+      />
+    );
   }
 
   render() {

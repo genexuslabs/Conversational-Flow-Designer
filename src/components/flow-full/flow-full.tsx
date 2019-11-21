@@ -13,6 +13,7 @@ import {
   SelectTypes
 } from "../../global/conversational-editor/helpers/helpers";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
+import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
 
 @Component({
   tag: "gxcf-flow-full",
@@ -60,11 +61,23 @@ export class FlowFull {
     return `Sample trigger messages (${this.flow.TriggerMessages.length.toString()})`;
   }
 
+  HandleDeleteUserInput(event: CustomEvent, userInput: UserInputElement): void {
+    console.log(event);
+    this.flow.DeleteUserInput(userInput);
+    this.refresh = !this.refresh;
+  }
+
   private RenderizeUserInputs(): HTMLElement[] {
     const userInputs: HTMLElement[] = [];
     this.flow.UserInputs.forEach(function(userInput) {
       userInputs.push(
-        <gxcf-user-input-container userInput={userInput} flow={this.flow} />
+        <gxcf-user-input-container
+          userInput={userInput}
+          flow={this.flow}
+          onDeleteUserInput={event =>
+            this.HandleDeleteUserInput(event, userInput)
+          }
+        />
       );
     }, this);
     return userInputs;
