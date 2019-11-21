@@ -61,28 +61,6 @@
   width: 38%;
 }
 
-.EditFlow
-{
-  content: var(--edit-icon);
-}
-
-.DeleteFlow
-{
-  content: var(--delete-icon);
-}
-
-.CommandIcon
-{
-  width: var(--long-icon-width);
-  height: var(--long-icon-height);  
-}
-
-.CommandIcon:Hover
-{
-  cursor: pointer;
-}
-
-
 .CommandPosition
 {
   float: right;

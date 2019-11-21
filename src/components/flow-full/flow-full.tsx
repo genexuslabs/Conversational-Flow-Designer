@@ -111,11 +111,11 @@ export class FlowFull {
               classType="FullTitle"
             />
             <div class="CommandsContainer">
-              <div
-                class="DeleteFlow CommandIcon CommandPosition"
+              <gxcf-button-delete
+                class="CommandPosition"
                 onClick={event => this.TriggerDeleteFlow(event)}
               />
-              <div class="EditFlow CommandIcon CommandPosition" />
+              <gxcf-button-edit class="CommandPosition" />
               <gxcf-select
                 class="CustomSelectBoxing CommandPosition"
                 selectid={this.SelectId}

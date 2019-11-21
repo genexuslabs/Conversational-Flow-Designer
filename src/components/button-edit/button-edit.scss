@@ -1,0 +1,11 @@
+.EditFlow
+{
+    content: var(--edit-icon);
+    width: var(--long-icon-width);
+    height: var(--long-icon-height);  
+}
+
+.EditFlow:hover
+{
+    cursor:pointer;
+}

@@ -21,6 +21,8 @@ export namespace Components {
   interface GxcfAddObject {
     addText: string;
   }
+  interface GxcfButtonDelete {}
+  interface GxcfButtonEdit {}
   interface GxcfCollection {
     collection: string[];
     collectionAddText: string;
@@ -121,6 +123,22 @@ declare global {
   var HTMLGxcfAddObjectElement: {
     prototype: HTMLGxcfAddObjectElement;
     new (): HTMLGxcfAddObjectElement;
+  };
+
+  interface HTMLGxcfButtonDeleteElement
+    extends Components.GxcfButtonDelete,
+      HTMLStencilElement {}
+  var HTMLGxcfButtonDeleteElement: {
+    prototype: HTMLGxcfButtonDeleteElement;
+    new (): HTMLGxcfButtonDeleteElement;
+  };
+
+  interface HTMLGxcfButtonEditElement
+    extends Components.GxcfButtonEdit,
+      HTMLStencilElement {}
+  var HTMLGxcfButtonEditElement: {
+    prototype: HTMLGxcfButtonEditElement;
+    new (): HTMLGxcfButtonEditElement;
   };
 
   interface HTMLGxcfCollectionElement
@@ -309,6 +327,8 @@ declare global {
   interface HTMLElementTagNameMap {
     "gxcf-add-element": HTMLGxcfAddElementElement;
     "gxcf-add-object": HTMLGxcfAddObjectElement;
+    "gxcf-button-delete": HTMLGxcfButtonDeleteElement;
+    "gxcf-button-edit": HTMLGxcfButtonEditElement;
     "gxcf-collection": HTMLGxcfCollectionElement;
     "gxcf-condition": HTMLGxcfConditionElement;
     "gxcf-conversational-designer": HTMLGxcfConversationalDesignerElement;
@@ -341,6 +361,8 @@ declare namespace LocalJSX {
     addText?: string;
     onAddObject?: (event: CustomEvent<any>) => void;
   }
+  interface GxcfButtonDelete {}
+  interface GxcfButtonEdit {}
   interface GxcfCollection {
     collection?: string[];
     collectionAddText?: string;
@@ -459,6 +481,8 @@ declare namespace LocalJSX {
   interface IntrinsicElements {
     "gxcf-add-element": GxcfAddElement;
     "gxcf-add-object": GxcfAddObject;
+    "gxcf-button-delete": GxcfButtonDelete;
+    "gxcf-button-edit": GxcfButtonEdit;
     "gxcf-collection": GxcfCollection;
     "gxcf-condition": GxcfCondition;
     "gxcf-conversational-designer": GxcfConversationalDesigner;
@@ -494,6 +518,10 @@ declare module "@stencil/core" {
         JSXBase.HTMLAttributes<HTMLGxcfAddElementElement>;
       "gxcf-add-object": LocalJSX.GxcfAddObject &
         JSXBase.HTMLAttributes<HTMLGxcfAddObjectElement>;
+      "gxcf-button-delete": LocalJSX.GxcfButtonDelete &
+        JSXBase.HTMLAttributes<HTMLGxcfButtonDeleteElement>;
+      "gxcf-button-edit": LocalJSX.GxcfButtonEdit &
+        JSXBase.HTMLAttributes<HTMLGxcfButtonEditElement>;
       "gxcf-collection": LocalJSX.GxcfCollection &
         JSXBase.HTMLAttributes<HTMLGxcfCollectionElement>;
       "gxcf-condition": LocalJSX.GxcfCondition &
