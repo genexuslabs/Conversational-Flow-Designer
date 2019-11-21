@@ -28,6 +28,7 @@ export class Instance {
   }
 
   private LoadDummy(): void {
+    const coType = "Procedure";
     const flow: FlowElement = new FlowElement("TestA");
     flow.TriggerMessages[0] = "testing";
     flow.TriggerMessages[1] = "testing1";
@@ -48,6 +49,7 @@ export class Instance {
       flow,
       new Array<RedirectionProperty>()
     );
+    flow.ConversationalObjectType = coType;
     flow.AddUserInput(userInput);
     const response: ResponseElement = new ResponseElement(
       "Test",
@@ -67,11 +69,13 @@ export class Instance {
     const flow2: FlowElement = new FlowElement("TestB");
     flow2.TriggerMessages[0] = "testingB";
     flow2.ConversationalObject = "TestBDataProvider";
+    flow2.ConversationalObjectType = coType;
     this.Flows[1] = flow2;
 
     const flow3: FlowElement = new FlowElement("TestC");
     flow3.TriggerMessages[0] = "testingC";
     flow3.ConversationalObject = "TestCTransaction";
+    flow3.ConversationalObjectType = coType;
     this.Flows[2] = flow3;
     console.log(this.Flows);
   }
