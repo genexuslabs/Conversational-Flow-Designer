@@ -16,6 +16,7 @@ export class ConversationalDesginer {
   @State() search: string;
   @State() flows: FlowElement[];
   @State() openEditor: boolean;
+  @State() refresh: boolean;
 
   @Listen("flowDragStart")
   HandleOnFlowDragStart(event: CustomEvent): void {
@@ -59,7 +60,7 @@ export class ConversationalDesginer {
   HandleDeleteFlow(event: CustomEvent, flow: FlowElement): void {
     console.log("Delete flow " + event);
     App.GetApp().Instance.DeleteFlow(flow);
-    this.flows = App.GetApp().Instance.Flows;
+    this.refresh = !this.refresh;
   }
 
   private addFlow = (
