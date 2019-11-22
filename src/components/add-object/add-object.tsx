@@ -3,7 +3,7 @@ import { Component, h, Prop, Event, EventEmitter } from "@stencil/core";
 @Component({
   tag: "gxcf-add-object",
   styleUrl: "add-object.scss",
-  shadow: false
+  shadow: true
 })
 export class AddObject {
   @Prop() addText: string;

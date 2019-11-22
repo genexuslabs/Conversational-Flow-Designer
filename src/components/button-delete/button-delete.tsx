@@ -3,7 +3,7 @@ import { Component, h } from "@stencil/core";
 @Component({
   tag: "gxcf-button-delete",
   styleUrl: "button-delete.scss",
-  shadow: false
+  shadow: true
 })
 export class ButtonDelete {
   render() {

@@ -4,7 +4,7 @@ import { SelectTypes } from "../../global/conversational-editor/helpers/helpers"
 @Component({
   tag: "gxcf-select",
   styleUrl: "select.scss",
-  shadow: false
+  shadow: true
 })
 export class Select {
   @Prop() selectid: string;

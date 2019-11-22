@@ -3,7 +3,7 @@ import { Component, h, Event, EventEmitter } from "@stencil/core";
 @Component({
   tag: "gxcf-designer-welcome",
   styleUrl: "designer-welcome.scss",
-  shadow: false
+  shadow: true
 })
 export class Welcome {
   @Event() openEditor: EventEmitter;

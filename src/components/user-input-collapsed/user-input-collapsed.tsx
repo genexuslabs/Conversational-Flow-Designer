@@ -4,7 +4,7 @@ import { UserInputElement } from "../../global/conversational-editor/instance-de
 @Component({
   tag: "gxcf-user-input-collapsed",
   styleUrl: "user-input-collapsed.scss",
-  shadow: false
+  shadow: true
 })
 export class CollapsedUserInput {
   @Prop() userInput: UserInputElement;

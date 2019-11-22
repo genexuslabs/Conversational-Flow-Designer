@@ -4,7 +4,7 @@ import { PropertiesDefinition } from "../../global/conversational-editor/helpers
 @Component({
   tag: "gxcf-hint",
   styleUrl: "hint.scss",
-  shadow: false
+  shadow: true
 })
 export class Hint {
   @Prop() hintId: string;

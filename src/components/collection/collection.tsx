@@ -4,7 +4,7 @@ import { EventEmitter } from "events";
 @Component({
   tag: "gxcf-collection",
   styleUrl: "collection.scss",
-  shadow: false
+  shadow: true
 })
 export class Collection {
   @Prop() collection: string[];

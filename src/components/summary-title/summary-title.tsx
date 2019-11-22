@@ -4,7 +4,7 @@ import { EventEmitter } from "@stencil/router/dist/types/stencil.core";
 @Component({
   tag: "gxcf-summary-title",
   styleUrl: "summary-title.scss",
-  shadow: false
+  shadow: true
 })
 export class SummaryTitle {
   @Prop() summaryid: string;

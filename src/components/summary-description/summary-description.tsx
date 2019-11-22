@@ -3,7 +3,7 @@ import { Component, Prop, h, EventEmitter, Event } from "@stencil/core";
 @Component({
   tag: "gxcf-summary-description",
   styleUrl: "summary-description.scss",
-  shadow: false
+  shadow: true
 })
 export class SummaryDescription {
   @Prop() descriptionid: string;

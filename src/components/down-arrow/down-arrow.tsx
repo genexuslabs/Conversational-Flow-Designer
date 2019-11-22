@@ -3,7 +3,7 @@ import { Component, Prop, h } from "@stencil/core";
 @Component({
   tag: "gxcf-down-arrow",
   styleUrl: "down-arrow.scss",
-  shadow: false
+  shadow: true
 })
 export class DownArrow {
   @Prop() arrowid: string;

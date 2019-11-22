@@ -12,7 +12,7 @@ import { RedirectionProperty } from "../../global/conversational-editor/instance
 @Component({
   tag: "gxcf-response-full",
   styleUrl: "response-full.scss",
-  shadow: false
+  shadow: true
 })
 export class FullResponse {
   @Prop() response: ResponseElement;

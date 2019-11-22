@@ -3,7 +3,7 @@ import { Component, h } from "@stencil/core";
 @Component({
   tag: "gxcf-add-element",
   styleUrl: "add-element.scss",
-  shadow: false
+  shadow: true
 })
 export class AddElement {
   render() {

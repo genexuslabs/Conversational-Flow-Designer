@@ -4,7 +4,7 @@ import { ResponseElement } from "../../global/conversational-editor/instance-def
 @Component({
   tag: "gxcf-response-collapsed",
   styleUrl: "response-collapsed.scss",
-  shadow: false
+  shadow: true
 })
 export class CollapsedResponse {
   @Prop() response: ResponseElement;

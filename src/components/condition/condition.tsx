@@ -3,7 +3,7 @@ import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 @Component({
   tag: "gxcf-condition",
   styleUrl: "condition.scss",
-  shadow: false
+  shadow: true
 })
 export class Condition {
   @Prop() currentCondition: string;

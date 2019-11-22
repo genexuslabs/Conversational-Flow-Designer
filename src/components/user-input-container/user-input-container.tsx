@@ -15,7 +15,7 @@ import { EventHandler } from "../../global/conversational-editor/event-handler";
 @Component({
   tag: "gxcf-user-input-container",
   styleUrl: "user-input-container.scss",
-  shadow: false
+  shadow: true
 })
 export class UserInput {
   @Prop() userInput: UserInputElement;

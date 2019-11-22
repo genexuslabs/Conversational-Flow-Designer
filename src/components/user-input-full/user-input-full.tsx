@@ -18,7 +18,7 @@ import { FlowElement } from "../../global/conversational-editor/instance-definit
 @Component({
   tag: "gxcf-user-input-full",
   styleUrl: "user-input-full.scss",
-  shadow: false
+  shadow: true
 })
 export class FullUserInput {
   @Prop() userInput: UserInputElement;

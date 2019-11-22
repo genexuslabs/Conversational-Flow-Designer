@@ -4,7 +4,7 @@ import { HintId } from "../../global/conversational-editor/helpers/helpers";
 @Component({
   tag: "gxcf-conversational-object",
   styleUrl: "conversational-object.scss",
-  shadow: false
+  shadow: true
 })
 export class ConversationalObject {
   @Prop() conversationalObject: string;

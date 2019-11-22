@@ -7,7 +7,7 @@ import { ConversationalElement } from "../../global/conversational-editor/instan
 @Component({
   tag: "gxcf-redirection",
   styleUrl: "redirection.scss",
-  shadow: false
+  shadow: true
 })
 export class Redirection {
   @Prop() element: ConversationalElement;

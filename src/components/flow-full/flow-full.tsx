@@ -19,7 +19,7 @@ import { ResponseElement } from "../../global/conversational-editor/instance-def
 @Component({
   tag: "gxcf-flow-full",
   styleUrl: "flow-full.scss",
-  shadow: false
+  shadow: true
 })
 export class FlowFull {
   @Prop() flow: FlowElement;

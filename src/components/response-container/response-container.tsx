@@ -14,7 +14,7 @@ import { FlowElement } from "../../global/conversational-editor/instance-definit
 @Component({
   tag: "gxcf-response-container",
   styleUrl: "response-container.scss",
-  shadow: false
+  shadow: true
 })
 export class Response {
   @Prop() response: ResponseElement;

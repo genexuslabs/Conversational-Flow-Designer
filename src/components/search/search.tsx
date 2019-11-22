@@ -3,7 +3,7 @@ import { Component, h, Event, EventEmitter } from "@stencil/core";
 @Component({
   tag: "gxcf-search",
   styleUrl: "search.scss",
-  shadow: false
+  shadow: true
 })
 export class Search {
   @Event() search: EventEmitter;
