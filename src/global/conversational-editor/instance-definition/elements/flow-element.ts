@@ -83,7 +83,6 @@ export class FlowElement implements ConversationalElement {
     this.ConversationalObjectType = jsonFlow.ConversationalObjectType;
 
     jsonFlow.Fields.forEach(function(field) {
-      console.log(JSON.stringify(field));
       const redirections: RedirectionProperty[] = new Array<
         RedirectionProperty
       >();
@@ -137,7 +136,6 @@ export class FlowElement implements ConversationalElement {
 
   public SetRenderType(renderType: RenderingOptions): void {
     this.RenderType = renderType;
-    this.Component.refresh = !this.Component.refresh;
   }
 
   public SetName(name: string): void {

@@ -58,6 +58,7 @@ export namespace Components {
   }
   interface GxcfFlowContainer {
     flow: FlowElement;
+    renderType: RenderingOptions;
     showDropZone: boolean;
   }
   interface GxcfFlowFull {
@@ -403,9 +404,6 @@ declare namespace LocalJSX {
   }
   interface GxcfFlowCollapsed {
     flow?: FlowElement;
-    onDragLeaveFlow?: (event: CustomEvent<any>) => void;
-    onDragOverFlow?: (event: CustomEvent<any>) => void;
-    onDragStartFlow?: (event: CustomEvent<any>) => void;
     onExpandFlow?: (event: CustomEvent<any>) => void;
     onSelectConversationalObject?: (event: CustomEvent<any>) => void;
     renderingType?: RenderingOptions;
@@ -413,6 +411,8 @@ declare namespace LocalJSX {
   interface GxcfFlowContainer {
     flow?: FlowElement;
     onDeleteFlow?: (event: CustomEvent<any>) => void;
+    onRefreshFlows?: (event: CustomEvent<any>) => void;
+    renderType?: RenderingOptions;
     showDropZone?: boolean;
   }
   interface GxcfFlowFull {

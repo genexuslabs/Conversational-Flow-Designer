@@ -30,6 +30,12 @@ export class ConversationalDesginer {
     this.openEditor = true;
   }
 
+  @Listen("refreshFlows")
+  HandleRefreshFlows(event: CustomEvent): void {
+    console.log(event);
+    this.flows = Object.assign({}, App.GetApp().Instance.Flows);
+  }
+
   HandleAddFlowElement(): void {
     this.flows = EventHandler.AddFlowElement();
   }
@@ -59,13 +65,14 @@ export class ConversationalDesginer {
     App.GetApp()
       .Instance.GetFlows(this.search)
       .forEach(function(flowElement) {
-        if (index == 0) flowElement.RenderType = RenderingOptions.Full;
-        else flowElement.RenderType = RenderingOptions.Collapsed;
+        /*if (index == 0) flowElement.RenderType = RenderingOptions.Full;
+        else flowElement.RenderType = RenderingOptions.Collapsed;*/
         flows.push(
           <gxcf-flow-container
             flow={flowElement}
             onDeleteFlow={event => this.HandleDeleteFlow(event, flowElement)}
             data-gxcf-element-id={flowElement.Name}
+            renderType={flowElement.RenderType}
           />
         );
         index++;

@@ -34,6 +34,7 @@ export class Instance {
     flow.TriggerMessages[0] = "testing";
     flow.TriggerMessages[1] = "testing1";
     flow.ConversationalObject = "TestAProcedure";
+    flow.RenderType = RenderingOptions.Full;
     const userInput: UserInputElement = new UserInputElement(
       "Test",
       false,
@@ -81,10 +82,12 @@ export class Instance {
   }
 
   public InitializeInstance(jsonInstance: CustomJSON): void {
+    const instance: Instance = App.GetApp().Instance;
     jsonInstance.Flows.forEach(function(initializeFlow) {
       const flow: FlowElement = new FlowElement(initializeFlow.Name);
       flow.LoadFlow(initializeFlow);
-      App.GetApp().Instance.AddFlow(flow);
+      if (instance.Flows.length == 0) flow.RenderType = RenderingOptions.Full;
+      instance.AddFlow(flow);
     });
   }
 
@@ -203,14 +206,12 @@ export class Instance {
   public SetFlowRenderType(
     flow: FlowElement,
     renderType: RenderingOptions
-  ): FlowElement {
+  ): void {
     this.Flows.forEach(function(iFlow) {
       if (iFlow.Name == flow.Name) {
         iFlow.SetRenderType(renderType);
-        flow = iFlow;
       } else if (iFlow.RenderType == renderType) iFlow.SetRenderType(RenderingOptions.Collapsed);
     });
-    return flow;
   }
 
   public GetFlows(search: string): Array<FlowElement> {

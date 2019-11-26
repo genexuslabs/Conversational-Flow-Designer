@@ -4,7 +4,6 @@ import {
   RenderingOptions,
   SelectTypes
 } from "../../global/conversational-editor/helpers/helpers";
-import { isConditionalExpression } from "typescript";
 
 @Component({
   tag: "gxcf-flow-collapsed",
@@ -24,21 +23,6 @@ export class FlowCollapsed {
   @Event() selectConversationalObject: EventEmitter;
   TriggerSelectConversationalObject(event): void {
     this.selectConversationalObject.emit(event);
-  }
-
-  @Event() dragStartFlow: EventEmitter;
-  TriggerOnFlowDragStart(event: DragEvent): void {
-    this.dragStartFlow.emit(event);
-  }
-
-  @Event() dragOverFlow: EventEmitter;
-  TriggerOnDragOverFlow(event: DragEvent): void {
-    this.dragOverFlow.emit(event);
-  }
-
-  @Event() dragLeaveFlow: EventEmitter;
-  TriggerOnDragLeaveFlow(event: DragEvent): void {
-    this.dragLeaveFlow.emit(event);
   }
 
   get SummaryId(): string {
@@ -71,9 +55,6 @@ export class FlowCollapsed {
         data-elementType="flow"
         class={classProp}
         draggable
-        onDragStart={event => this.TriggerOnFlowDragStart(event)}
-        onDragOver={event => this.TriggerOnDragOverFlow(event)}
-        onDragLeave={event => this.TriggerOnDragLeaveFlow(event)}
         onClick={event => this.TriggerOnExpandFlow(event)}
       >
         <gxcf-summary-title

@@ -50,7 +50,6 @@ export class ResponseElement {
 
   public EditMessage(message: string, index: number): void {
     this.Messages[index] = message;
-    console.log("Edit message");
     this.SetMessages();
   }
 
@@ -66,7 +65,6 @@ export class ResponseElement {
     this.Messages.forEach(function(msg) {
       responseMessages += msg + ";";
     });
-    console.log("Call external");
     if (window.external.SetResponseMessages)
       window.external.SetResponseMessages(
         this.Parent.Name,

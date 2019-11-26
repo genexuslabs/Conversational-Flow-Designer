@@ -21,28 +21,21 @@ import { App } from "../../global/conversational-editor/app";
 export class Flow {
   @Prop() flow: FlowElement;
   @Prop() showDropZone = false;
+  @Prop() renderType: RenderingOptions;
   @State() activeDropZone = false;
   @State() refresh = true;
   @Element() element: HTMLElement;
 
+  @Event() refreshFlows: EventEmitter;
+  TriggerRefreshFlows(event: CustomEvent): void {
+    this.refreshFlows.emit(event);
+  }
+
   @Listen("expandFlow")
   HandleExpandFlow(event: CustomEvent): void {
     console.log(event.type);
-    this.flow = App.GetApp().Instance.SetFlowRenderType(
-      this.flow,
-      RenderingOptions.Full
-    );
-    this.flow.SetRenderType(RenderingOptions.Full);
-  }
-
-  @Listen("collapseFlow")
-  HandleCollapseFlow(event: CustomEvent): void {
-    console.log(event.type);
-    this.flow = App.GetApp().Instance.SetFlowRenderType(
-      this.flow,
-      RenderingOptions.Collapsed
-    );
-    this.flow.SetRenderType(RenderingOptions.Collapsed);
+    App.GetApp().Instance.SetFlowRenderType(this.flow, RenderingOptions.Full);
+    this.TriggerRefreshFlows(event);
   }
 
   @Listen("changingFlowName")
@@ -109,13 +102,11 @@ export class Flow {
 
   render() {
     this.flow.Component = this;
-    if (this.flow.RenderType == RenderingOptions.Collapsed)
+    if (this.renderType == RenderingOptions.Collapsed)
       return this.renderSummary(RenderingOptions.Collapsed);
-    if (this.flow.RenderType == RenderingOptions.Full) return this.renderFull();
+    if (this.renderType == RenderingOptions.Full) return this.renderFull();
     return (
-      <span>
-        Flow Render Type '{this.flow.RenderType.toString()}' is not valid
-      </span>
+      <span>Flow Render Type '{this.renderType.toString()}' is not valid</span>
     );
   }
 }
