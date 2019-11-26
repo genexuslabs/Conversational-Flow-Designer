@@ -60,16 +60,8 @@ export class Flow {
   @Listen("selectConversationalObject")
   HandleSelectConversationalObject(event: CustomEvent): void {
     console.log(event);
-    EventHandler.SelectConversationalObject(this.flow).then(retFlow => {
-      this.flow = retFlow;
-      if (this.flow.UserInputComponent) {
-        this.flow.UserInputComponent.refresh = !this.flow.UserInputComponent
-          .refresh;
-        this.flow.UserInputComponentCollapsed.refresh = !this.flow
-          .UserInputComponentCollapsed.refresh;
-      }
-      this.refresh = !this.refresh;
-    });
+    EventHandler.SelectConversationalObject(this.flow, this
+      .element as HTMLGxcfFlowContainerElement);
   }
 
   @Event() deleteFlow: EventEmitter;

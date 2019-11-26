@@ -6,8 +6,6 @@ import { ConversationalElement } from "./iconversational-element";
 import { EventHandler } from "../../event-handler";
 import { RedirectionProperty } from "./redirection-property";
 import { Flow } from "../../../../components/flow-container/flow-container";
-import { FlowFull } from "../../../../components/flow-full/flow-full";
-import { FlowCollapsed } from "../../../../components/flow-collapsed/flow-collapsed";
 
 export class FlowElement implements ConversationalElement {
   public Name = "";
@@ -18,8 +16,6 @@ export class FlowElement implements ConversationalElement {
   public UserInputs: UserInputElement[];
   public Responses: ResponseElement[];
   public Component: Flow;
-  public UserInputComponent: FlowFull;
-  public UserInputComponentCollapsed: FlowCollapsed;
   public ConversationalObjectType: string;
 
   constructor(name: string) {

@@ -25,20 +25,17 @@ export class EventHandler {
     return "";
   }
 
-  public static async SelectConversationalObject(
-    flow: FlowElement
-  ): Promise<FlowElement> {
+  public static SelectConversationalObject(
+    flow: FlowElement,
+    flowContainer: HTMLGxcfFlowContainerElement
+  ): void {
     if (window.external.SelectConversationalObject) {
-      await window.external
-        .SelectConversationalObject(flow.Name)
-        .then(sFlow => {
-          console.log(sFlow);
-          const jsonFlow = JSON.parse(sFlow);
-          flow = App.GetApp().Instance.LoadFlow(flow.Name, jsonFlow);
-          return flow;
-        });
+      window.external.SelectConversationalObject(flow.Name).then(sFlow => {
+        const jsonFlow = JSON.parse(sFlow);
+        flow = App.GetApp().Instance.LoadFlow(flow.Name, jsonFlow);
+        flowContainer.flow = flow;
+      });
     }
-    return flow;
   }
 
   public static async SelectValidationProcedure(

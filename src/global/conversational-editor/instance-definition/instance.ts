@@ -181,14 +181,23 @@ export class Instance {
   }
 
   public LoadFlow(flowName: string, flowJson: CustomJSON): FlowElement {
-    let rFlow: FlowElement = null;
+    let index = 0;
+    let flowIndex = 0;
+    if (this.Flows.length == 0) return null;
+    let renderType: RenderingOptions = RenderingOptions.Collapsed;
     this.Flows.forEach(function(flow) {
       if (flow.Name == flowName) {
-        flow.LoadFlow(flowJson);
-        rFlow = flow;
+        renderType = flow.RenderType;
+        flowIndex = index;
       }
+      index++;
     });
-    return rFlow;
+
+    const newFlow = new FlowElement(flowName);
+    newFlow.LoadFlow(flowJson);
+    newFlow.RenderType = renderType;
+    this.Flows[flowIndex] = newFlow;
+    return newFlow;
   }
 
   public SetFlowRenderType(

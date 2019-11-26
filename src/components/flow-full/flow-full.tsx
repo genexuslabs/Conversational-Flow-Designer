@@ -125,7 +125,6 @@ export class FlowFull {
   }
 
   render() {
-    this.flow.UserInputComponent = this;
     return (
       <div id={this.flow.Id} data-elementType="flow" class="FlowFull">
         <div class="FullFlowContent">

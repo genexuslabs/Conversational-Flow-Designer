@@ -4,6 +4,7 @@ import {
   RenderingOptions,
   SelectTypes
 } from "../../global/conversational-editor/helpers/helpers";
+import { isConditionalExpression } from "typescript";
 
 @Component({
   tag: "gxcf-flow-collapsed",
@@ -57,7 +58,6 @@ export class FlowCollapsed {
   }
 
   render() {
-    this.flow.UserInputComponentCollapsed = this;
     let classProp;
     if (this.renderingType == RenderingOptions.Collapsed) {
       classProp = "FlowSummary NoActiveContent";
