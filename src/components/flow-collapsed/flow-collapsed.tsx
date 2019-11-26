@@ -8,7 +8,7 @@ import {
 @Component({
   tag: "gxcf-flow-collapsed",
   styleUrl: "flow-collapsed.scss",
-  shadow: false
+  shadow: true
 })
 export class FlowCollapsed {
   @Prop() flow: FlowElement;
@@ -25,14 +25,19 @@ export class FlowCollapsed {
     this.selectConversationalObject.emit(event);
   }
 
-  @Event() flowDragStart: EventEmitter;
-  TriggerOnFlowDragStart(event): void {
-    this.flowDragStart.emit(event);
+  @Event() dragStartFlow: EventEmitter;
+  TriggerOnFlowDragStart(event: DragEvent): void {
+    this.dragStartFlow.emit(event);
   }
 
   @Event() dragOverFlow: EventEmitter;
-  TriggerOnDragOverFlow(event): void {
+  TriggerOnDragOverFlow(event: DragEvent): void {
     this.dragOverFlow.emit(event);
+  }
+
+  @Event() dragLeaveFlow: EventEmitter;
+  TriggerOnDragLeaveFlow(event: DragEvent): void {
+    this.dragLeaveFlow.emit(event);
   }
 
   get SummaryId(): string {
@@ -68,6 +73,7 @@ export class FlowCollapsed {
         draggable
         onDragStart={event => this.TriggerOnFlowDragStart(event)}
         onDragOver={event => this.TriggerOnDragOverFlow(event)}
+        onDragLeave={event => this.TriggerOnDragLeaveFlow(event)}
         onClick={event => this.TriggerOnExpandFlow(event)}
       >
         <gxcf-summary-title

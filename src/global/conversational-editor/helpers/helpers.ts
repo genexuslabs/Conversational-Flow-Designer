@@ -41,9 +41,9 @@ export class Controls {
   public static readonly FlowsContainer: string = "FlowsContainer";
 }
 
-export enum MoveType {
-  Up,
-  Down
+export class MoveType {
+  public static readonly Up: string = "Up";
+  public static readonly Down: string = "Down";
 }
 
 export enum RenderingOptions {

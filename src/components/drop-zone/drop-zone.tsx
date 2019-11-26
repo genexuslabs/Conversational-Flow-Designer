@@ -1,52 +1,70 @@
-import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  h,
+  Event,
+  EventEmitter,
+  Element,
+  Method
+} from "@stencil/core";
+
+class DropZoneStyles {
+  public static readonly Show: string = "ShowZone";
+  public static readonly Active: string = "ActiveDropZone";
+  public static readonly Hide: string = "HideZone";
+}
 
 @Component({
   tag: "gxcf-drop-zone",
   styleUrl: "drop-zone.scss",
-  shadow: false
+  shadow: true
 })
 export class DropZone {
   @Prop() moveType: string;
   @Prop() show: boolean;
   @Prop() objectReferenceId: string;
+  @Element() element: HTMLElement;
 
   @Event() dropOnDropZone: EventEmitter;
-  TriggerDropOnDropZone(event): void {
+  TriggerDropOnDropZone(event: DragEvent): void {
     this.dropOnDropZone.emit(event);
   }
 
-  @Event() onDragOverDropZone: EventEmitter;
-  TriggerOnDragOverDropZone(event): void {
-    this.onDragOverDropZone.emit(event);
+  HandleDragOverDropZone(event): void {
+    console.log(event);
+    this.Active();
   }
 
-  @Event() onDragLeaveDropZone: EventEmitter;
-  TriggerOnDragLeaveDropZone(event): void {
-    this.onDragLeaveDropZone.emit(event);
+  HandleDragLeaveDropZone(event): void {
+    console.log(event);
+    this.InActive();
   }
 
-  public static Show(element: HTMLElement): void {
-    element.firstElementChild.className = "ShowZone";
+  public Active(): void {
+    const shadow = this.element.shadowRoot;
+    shadow.firstElementChild.className = DropZoneStyles.Active;
   }
 
-  public static Hide(element: HTMLElement): void {
-    element.firstElementChild.className = "HideZone";
+  public InActive(): void {
+    this.Show();
   }
 
-  public static Active(element: HTMLElement): void {
-    element.className = "ActiveDropZone";
+  @Method()
+  public async Show() {
+    const shadow = this.element.shadowRoot;
+    shadow.firstElementChild.className = DropZoneStyles.Show;
   }
 
-  public static InActive(element: HTMLElement): void {
-    element.className = "ShowZone";
+  @Method()
+  public async Hide() {
+    const shadow = this.element.shadowRoot;
+    shadow.firstElementChild.className = DropZoneStyles.Hide;
   }
-
-  public static readonly Tag: string = "gxcf-drop-zone";
 
   render() {
-    let className = "HideZone";
+    let className = DropZoneStyles.Hide;
 
-    if (this.show) className = "ShowZone";
+    if (this.show) className = DropZoneStyles.Show;
 
     return (
       <span
@@ -55,8 +73,8 @@ export class DropZone {
         data-objectReferenceId={this.objectReferenceId}
         class={className}
         onDrop={event => this.TriggerDropOnDropZone(event)}
-        onDragOver={event => this.TriggerOnDragOverDropZone(event)}
-        onDragLeave={event => this.TriggerOnDragLeaveDropZone(event)}
+        onDragOver={event => this.HandleDragOverDropZone(event)}
+        onDragLeave={event => this.HandleDragLeaveDropZone(event)}
       >
         {" "}
         +{" "}

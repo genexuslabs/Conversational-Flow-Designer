@@ -1,4 +1,4 @@
-import { Component, h, Listen, State } from "@stencil/core";
+import { Component, h, Listen, State, Element, Prop } from "@stencil/core";
 import { App } from "../../global/conversational-editor/app";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
@@ -6,6 +6,8 @@ import {
   Controls,
   RenderingOptions
 } from "../../global/conversational-editor/helpers/helpers";
+import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
+import { Instance } from "../../global/conversational-editor/instance-definition/instance";
 
 @Component({
   tag: "gxcf-conversational-designer",
@@ -17,31 +19,11 @@ export class ConversationalDesginer {
   @State() flows: FlowElement[];
   @State() openEditor: boolean;
   @State() refresh: boolean;
+  @Prop() instance: Instance;
 
-  @Listen("flowDragStart")
-  HandleOnFlowDragStart(event: CustomEvent): void {
-    EventHandler.OnFlowDragStart(event);
-  }
+  @Element() element: HTMLElement;
 
-  @Listen("dragOverFlow")
-  HandleOnDragOverFlow(event: CustomEvent): void {
-    EventHandler.OnDragOverFlow(event);
-  }
-
-  @Listen("dropOnDropZone")
-  HandleDropOnDropZone(event: CustomEvent): void {
-    EventHandler.OnDropOverDropZone(event);
-  }
-
-  @Listen("onDragOverDropZone")
-  HandleOnDragOverDropZone(event: CustomEvent): void {
-    EventHandler.OnDragOverDropZone(event);
-  }
-
-  @Listen("onDragLeaveDropZone")
-  HandleOnDragLeaveDropZone(event: CustomEvent): void {
-    EventHandler.OnLeaveDropZone(event);
-  }
+  private dragDropHandler: ConversationalDesignerDragDrop;
 
   @Listen("openEditor")
   HandleOpenEditor(): void {
@@ -73,7 +55,6 @@ export class ConversationalDesginer {
 
   private RenderizeFlows(): HTMLElement[] {
     const flows: HTMLElement[] = [];
-    console.log("Filter by: " + this.search);
     let index = 0;
     App.GetApp()
       .Instance.GetFlows(this.search)
@@ -83,8 +64,8 @@ export class ConversationalDesginer {
         flows.push(
           <gxcf-flow-container
             flow={flowElement}
-            showDropZone={false}
             onDeleteFlow={event => this.HandleDeleteFlow(event, flowElement)}
+            data-gxcf-element-id={flowElement.Name}
           />
         );
         index++;
@@ -133,10 +114,11 @@ export class ConversationalDesginer {
       mainExcepetionConsole.apply(console, [message]);
     };
 
-    window.ondragend = function(event: DragEvent) {
-      EventHandler.DisableDropZones(event);
-    };
     App.GetApp();
+
+    this.dragDropHandler = new ConversationalDesignerDragDrop(this
+      .element as HTMLGxcfConversationalDesignerElement);
+    this.dragDropHandler.initialize();
   }
 
   render() {

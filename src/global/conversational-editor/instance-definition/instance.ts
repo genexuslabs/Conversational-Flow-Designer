@@ -7,6 +7,7 @@ import { RedirectionProperty } from "./elements/redirection-property.js";
 
 export class Instance {
   public Flows: FlowElement[] = [];
+  public SourceFlow: FlowElement;
 
   //Initialize
   constructor() {
@@ -77,7 +78,6 @@ export class Instance {
     flow3.ConversationalObject = "TestCTransaction";
     flow3.ConversationalObjectType = coType;
     this.Flows[2] = flow3;
-    console.log(this.Flows);
   }
 
   public InitializeInstance(jsonInstance: CustomJSON): void {
@@ -86,9 +86,6 @@ export class Instance {
       flow.LoadFlow(initializeFlow);
       App.GetApp().Instance.AddFlow(flow);
     });
-    console.log(
-      "Instance flows: " + App.GetApp().Instance.Flows.length.toString()
-    );
   }
 
   //Instance behavior
@@ -103,10 +100,8 @@ export class Instance {
   }
 
   public GetFlowName(id: string): string {
-    console.log("Search Id: " + id);
     let elementName = "";
     this.Flows.forEach(function(element) {
-      console.log("FlowsIds: " + element.Id);
       if (id == element.Id) {
         elementName = element.Name;
       }
@@ -115,9 +110,7 @@ export class Instance {
   }
 
   public GetFlowById(id: string): FlowElement {
-    console.log("Search Id: " + id);
     this.Flows.forEach(function(element) {
-      console.log("FlowsIds: " + element.Id);
       if (id == element.Id) {
         return element;
       }
@@ -173,13 +166,10 @@ export class Instance {
     flowName: string,
     conversationalObject: string
   ): FlowElement {
-    console.log("Set: " + conversationalObject);
-    console.log("Name: " + flowName);
     let retElement: FlowElement;
     this.Flows.forEach(function(element) {
       if (element.Name == flowName) {
         element.ConversationalObject = conversationalObject;
-        console.log("Saved: " + element.ConversationalObject);
         retElement = element;
       }
     });

@@ -5,7 +5,8 @@ import {
   Listen,
   State,
   Event,
-  EventEmitter
+  EventEmitter,
+  Element
 } from "@stencil/core";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
 import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
@@ -15,12 +16,14 @@ import { App } from "../../global/conversational-editor/app";
 @Component({
   tag: "gxcf-flow-container",
   styleUrl: "flow-container.scss",
-  shadow: false
+  shadow: true
 })
 export class Flow {
   @Prop() flow: FlowElement;
-  @Prop() showDropZone: boolean;
+  @Prop() showDropZone = false;
+  @State() activeDropZone = false;
   @State() refresh = true;
+  @Element() element: HTMLElement;
 
   @Listen("expandFlow")
   HandleExpandFlow(event: CustomEvent): void {
@@ -57,11 +60,9 @@ export class Flow {
   @Listen("selectConversationalObject")
   HandleSelectConversationalObject(event: CustomEvent): void {
     console.log(event);
-    console.log("hit");
-    EventHandler.SelectConversationalObject(event).then(retFlow => {
+    EventHandler.SelectConversationalObject(this.flow).then(retFlow => {
       this.flow = retFlow;
       if (this.flow.UserInputComponent) {
-        console.log("Refresh main component");
         this.flow.UserInputComponent.refresh = !this.flow.UserInputComponent
           .refresh;
         this.flow.UserInputComponentCollapsed.refresh = !this.flow
@@ -88,6 +89,7 @@ export class Flow {
           renderingType={renderingOption}
           data-flowid={this.flow.Id}
           flow={this.flow}
+          draggable
         />
         <gxcf-drop-zone
           moveType="Down"
@@ -114,7 +116,6 @@ export class Flow {
   }
 
   render() {
-    console.log("container refresh");
     this.flow.Component = this;
     if (this.flow.RenderType == RenderingOptions.Collapsed)
       return this.renderSummary(RenderingOptions.Collapsed);
