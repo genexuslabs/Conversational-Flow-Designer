@@ -27,6 +27,7 @@ export class CollapsedUserInput {
   render() {
     return (
       <div class="CollapsedUserInput">
+        <gxcf-dot class="DotPosition" />
         <input
           type="text"
           class="CollapsedTitle"

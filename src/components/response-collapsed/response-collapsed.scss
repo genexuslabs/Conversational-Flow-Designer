@@ -4,7 +4,7 @@
   border-width: 1px;
   border-radius: 1px;
   border-style: solid;
-  padding: 12px 22px 12px 22px;
+  padding: 12px 12px 12px 12px;
   overflow: hidden;
   margin-bottom: 15px;
   -webkit-animation: var(--animation-time);
@@ -27,6 +27,7 @@
   border: none;
   background-color: var(--flow-element-background-color);
   width: 95%;
+  margin-left: 14px;
 }
 
 .CollapsedResponseTitle {
@@ -36,4 +37,9 @@
   color: var(--elements-title-font-color);
   font-size: var(--normal-font-size);
   font-weight: bold;
+}
+
+.DotPosition
+{
+  float: left;
 }

@@ -17,6 +17,7 @@ export class CollapsedResponse {
   render() {
     return (
       <div class="CollapsedResponse">
+        <gxcf-dot class="DotPosition" />
         <input
           type="text"
           class="CollapsedResponseTitle"
