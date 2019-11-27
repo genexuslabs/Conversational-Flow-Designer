@@ -29,11 +29,7 @@ export class Hint {
       <p class="HintDescription">
         {PropertiesDefinition.GetDescription(this.hintId)}
       </p>
-      <a
-        class="HintLink"
-        href={PropertiesDefinition.GetURL(this.hintId)}
-        target="_blank"
-      >
+      <a class="HintLink" href={PropertiesDefinition.GetURL(this.hintId)}>
         See more
       </a>
     </div>
