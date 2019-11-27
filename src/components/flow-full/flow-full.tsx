@@ -137,7 +137,9 @@ export class FlowFull {
             <div class="CommandsContainer">
               <gxcf-button-delete
                 class="CommandPosition"
-                onClick={event => this.TriggerDeleteFlow(event)}
+                onConfirmDelete={event => this.TriggerDeleteFlow(event)}
+                confirmationTitle="Delete flow"
+                confirmationMessage={`Do you want to delete the flow '${this.flow.Name}'?`}
               />
               <gxcf-button-edit class="CommandPosition" />
               <gxcf-select

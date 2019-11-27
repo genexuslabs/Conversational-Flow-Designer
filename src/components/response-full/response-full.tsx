@@ -80,7 +80,7 @@ export class FullResponse {
   }
 
   @Event() deleteResponseFull: EventEmitter;
-  TriggerDeleteResponseFull(event: MouseEvent): void {
+  TriggerDeleteResponseFull(event): void {
     this.deleteResponseFull.emit(event);
   }
 
@@ -230,7 +230,9 @@ export class FullResponse {
         />
         <gxcf-button-delete
           class="FullResponseCommands"
-          onClick={event => this.TriggerDeleteResponseFull(event)}
+          onConfirmDelete={event => this.TriggerDeleteResponseFull(event)}
+          confirmationTitle="Delete response"
+          confirmationMessage={`Do you want to delete the response '${this.response.Index}'?`}
         />
         <gxcf-collection
           collection={this.response.Messages}

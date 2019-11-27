@@ -247,7 +247,9 @@ export class FullUserInput {
         />
         <gxcf-button-delete
           class="UserInputCommandsPosition"
-          onClick={event => this.TriggerDeleteUserInput(event)}
+          onConfirmDelete={event => this.TriggerDeleteUserInput(event)}
+          confirmationTitle="Delete user input"
+          confirmationMessage={`Do you want to delete the user input '${this.userInput.GetName()}'?`}
         />
         <p class="DataType">Datatype: {this.userInput.DataType}</p>
         <img

@@ -14,7 +14,8 @@
     
     --common-action-background: transparent;
     --elements-header-font-color: #191919;
-    
+    --danger-zone-color: #f02031;
+
     --title-color:  var(--highlight-color);
     --selection-font-color:  var(--contrast-font-color);
     --text-color:  var(--main-color);
@@ -42,5 +43,11 @@
     --hint-color:  var(--custom-dark-gray-4);
     --welcome-color:  var(--highlight-color-2);
     --user-input-guides:  var(--highlight-color-2);
-    --show-hint-background: var(--contrast-font-color)
+    --show-hint-background: var(--contrast-font-color);
+    --confirmation-header-background-color: var(--highlight-color-2);
+    --confirmation-header-font-color: var(--contrast-font-color);
+    --confirmation-button-color: var(--highlight-color);
+    --confirmation-button-color2: var(--danger-zone-color);
+    --confirmation-background-color: var(--contrast-font-color);
+    --confirmation-button-font-color: var(--contrast-font-color);
 }
