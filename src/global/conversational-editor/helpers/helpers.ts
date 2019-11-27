@@ -243,4 +243,10 @@ export class PropertiesDefinition {
     if (hintId == HintId.SDComponent) return this.SDComponentLabel;
     return "";
   }
+
+  static GetURL(hintId: string): string {
+    if (hintId) {
+      return "https://wiki.genexus.com/commwiki/servlet/wiki?37102";
+    }
+  }
 }

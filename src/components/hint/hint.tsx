@@ -1,4 +1,4 @@
-import { Component, Prop, h, EventEmitter, Event, State } from "@stencil/core";
+import { Component, Prop, h, Element, State } from "@stencil/core";
 import { PropertiesDefinition } from "../../global/conversational-editor/helpers/helpers";
 
 @Component({
@@ -8,44 +8,45 @@ import { PropertiesDefinition } from "../../global/conversational-editor/helpers
 })
 export class Hint {
   @Prop() hintId: string;
-  @State() refresh = true;
+  @State() shouldShow = false;
 
-  @Event() showHint: EventEmitter;
-  ShowHint(event): void {
-    this.ShouldShow = true;
-    this.refresh = !this.refresh;
-    this.showHint.emit(event);
+  HandleShowHint(event): void {
+    console.log(event);
+    this.shouldShow = true;
   }
 
-  @Event() hideHint: EventEmitter;
-  HideHint(event): void {
-    this.ShouldShow = false;
-    this.refresh = !this.refresh;
-    this.showHint.emit(event);
+  HandleHideHint(event): void {
+    console.log(event);
+    this.shouldShow = false;
   }
-  private ShouldShow = false;
 
   private Show = (
     <div class="ShowHint">
       <span class="HintTitle">
         {PropertiesDefinition.GetTitle(this.hintId)}
       </span>
-      <span onClick={event => this.HideHint(event)} class="CloseHint" />
+      <span onClick={event => this.HandleHideHint(event)} class="CloseHint" />
       <p class="HintDescription">
         {PropertiesDefinition.GetDescription(this.hintId)}
       </p>
+      <a
+        class="HintLink"
+        href={PropertiesDefinition.GetURL(this.hintId)}
+        target="_blank"
+      >
+        See more
+      </a>
     </div>
   );
 
   private Hint = (
-    <span class="Hint" onClick={event => this.ShowHint(event)}>
+    <span class="Hint" onClick={event => this.HandleShowHint(event)}>
       {PropertiesDefinition.GetLabel(this.hintId)}
     </span>
   );
 
   render() {
-    if (this.ShouldShow) {
-      this.ShouldShow = false;
+    if (this.shouldShow) {
       return (
         <div>
           {this.Hint}
