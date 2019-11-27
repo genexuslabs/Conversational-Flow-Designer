@@ -61,12 +61,9 @@ export class ConversationalDesginer {
 
   private RenderizeFlows(): HTMLElement[] {
     const flows: HTMLElement[] = [];
-    let index = 0;
     App.GetApp()
       .Instance.GetFlows(this.search)
       .forEach(function(flowElement) {
-        /*if (index == 0) flowElement.RenderType = RenderingOptions.Full;
-        else flowElement.RenderType = RenderingOptions.Collapsed;*/
         flows.push(
           <gxcf-flow-container
             flow={flowElement}
@@ -75,7 +72,6 @@ export class ConversationalDesginer {
             renderType={flowElement.RenderType}
           />
         );
-        index++;
       }, this);
     return flows;
   }
