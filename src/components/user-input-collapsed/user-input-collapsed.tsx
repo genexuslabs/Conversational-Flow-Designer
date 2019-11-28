@@ -45,6 +45,7 @@ export class CollapsedUserInput {
           onChange={event =>
             this.TriggerOnModifyUserInputFirstAskMessage(event)
           }
+          placeholder="First ask message..."
         />
       </div>
     );
