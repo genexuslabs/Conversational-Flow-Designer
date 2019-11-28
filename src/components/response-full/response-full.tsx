@@ -171,7 +171,7 @@ export class FullResponse {
     if (this.response.Style == ResponseStyles.ComponentView) {
       elements.push(
         <div class="ResponseProperty">
-          <gxcf-hint hintId={HintId.ShowResponseAs} />
+          <gxcf-hint class="HintBlock" hintId={HintId.ShowResponseAs} />
           <span>Show Response as (SD Only)</span>
           {this.RenderizeComponentType()}
         </div>
@@ -180,7 +180,7 @@ export class FullResponse {
       console.log("The component: " + sdComponent);
       elements.push(
         <div class="ResponseProperty">
-          <gxcf-hint hintId={HintId.SDComponent} />
+          <gxcf-hint class="HintBlock" hintId={HintId.SDComponent} />
           <span>SD Component</span>
           <gxcf-select
             selectcaption={this.response.GetSDComponentName()}
@@ -192,7 +192,7 @@ export class FullResponse {
       );
       elements.push(
         <div class="ResponseProperty">
-          <gxcf-hint hintId={HintId.WebComponent} />
+          <gxcf-hint class="HintBlock" hintId={HintId.WebComponent} />
           <span>Web Component</span>
           <gxcf-select
             selectcaption={this.response.GetWebComponentName()}
@@ -205,7 +205,7 @@ export class FullResponse {
     } else if (this.response.Style == ResponseStyles.RedirectTo) {
       elements.push(
         <div class="ResponseProperty">
-          <gxcf-hint hintId={HintId.Redirection} />
+          <gxcf-hint class="HintBlock" hintId={HintId.Redirection} />
           <span>Redirect To</span>
           <gxcf-redirection
             requireCondition={false}
