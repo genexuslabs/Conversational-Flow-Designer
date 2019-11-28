@@ -84,7 +84,9 @@ export class Collection {
         <div class="CollectionContainer">
           <span class="CollectionHeader">{this.collectionHeader}</span>
           <gxcf-hint hintId={this.collectionHintId} class="Hint" />
-          {this.RenderizeItems(this.collection)}
+          <div class="CollectionContainer ItemsRender">
+            {this.RenderizeItems(this.collection)}
+          </div>
         </div>
         {this.AddItemElement}
       </div>
