@@ -71,3 +71,27 @@
   width: 50%;
   margin-right: 16px;
 }
+
+.TriggersArrow
+{
+  float: right;
+}
+
+.TriggersContainer
+{
+  clear:both;  
+}
+
+.TriggersContainerBorder
+{
+  border-style: solid;
+  border-width: 1px;
+  margin-top: 5px;
+  padding: 5px;
+  border-color: var(--flow-element-border-color2);
+}
+
+.FirstTriggerMessage
+{
+  font-style: italic;
+}

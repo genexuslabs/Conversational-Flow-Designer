@@ -16,6 +16,7 @@ import { ResponseElement } from "../../global/conversational-editor/instance-def
 export class FlowFull {
   @Prop() flow: FlowElement;
   @State() refresh = true;
+  @State() expandTriggers = false;
 
   @Event() collapseFlow: EventEmitter;
   TriggerOnCollapseFlow(event): void {
@@ -116,6 +117,56 @@ export class FlowFull {
     this.deleteFullFlow.emit(event);
   }
 
+  HandleExpandTriggers(event): void {
+    console.log(event);
+    this.expandTriggers = true;
+  }
+
+  HandleCollapseTriggers(event): void {
+    console.log(event);
+    this.expandTriggers = false;
+  }
+
+  private GetTriggers(): HTMLElement {
+    if (this.expandTriggers)
+      return (
+        <div class="TriggersContainer TriggersContainerBorder">
+          <div>
+            <gxcf-up-arrow
+              class="TriggersArrow"
+              onClick={event => this.HandleCollapseTriggers(event)}
+            />
+          </div>
+          <gxcf-collection
+            collection={this.flow.TriggerMessages}
+            collectionHeader={this.CollectionHeader}
+            collectionHintId={HintId.TriggerMessages}
+            collectionAddText="Add another sample trigger message"
+            onEditItem={event => this.HandleEditTriggerMessage(event)}
+            onDeleteItem={event => this.HandleDeleteTriggerMessage(event)}
+          />
+        </div>
+      );
+    else
+      return (
+        <div class="TriggersContainer TriggersContainerBorder">
+          <gxcf-down-arrow
+            class="TriggersArrow"
+            onClick={event => this.HandleExpandTriggers(event)}
+          />
+          <div class="TriggersContainer">
+            <span>
+              Sample trigger messages ({this.flow.TriggerMessages.length})
+            </span>
+            <gxcf-hint hintId={HintId.TriggerMessages} class="Hint" />
+            <p class="FirstTriggerMessage">
+              {this.flow.GetSummaryTriggerMessage()}
+            </p>
+          </div>
+        </div>
+      );
+  }
+
   render() {
     return (
       <div id={this.flow.Id} data-elementType="flow" class="FlowFull">
@@ -143,14 +194,7 @@ export class FlowFull {
                 onClick={event => this.TriggerSelectConversationalObject(event)}
               />
             </div>
-            <gxcf-collection
-              collection={this.flow.TriggerMessages}
-              collectionHeader={this.CollectionHeader}
-              collectionHintId={HintId.TriggerMessages}
-              collectionAddText="Add another sample trigger message"
-              onEditItem={event => this.HandleEditTriggerMessage(event)}
-              onDeleteItem={event => this.HandleDeleteTriggerMessage(event)}
-            />
+            {this.GetTriggers()}
           </div>
         </div>
         <hr class="Separator"></hr>
