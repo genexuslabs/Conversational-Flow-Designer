@@ -19,7 +19,8 @@
   float: right;
 }
 
-.FirstResponseMessage {
+.FirstResponseMessage
+{
   float: left;
   clear: both;
   font-style: italic;
@@ -27,7 +28,15 @@
   border: none;
   background-color: var(--flow-element-background-color);
   width: 95%;
+}
+
+.FirstResponseMessageNoTab {  
   margin-left: 14px;
+}
+
+.FirstResponseMessageTab
+{
+  margin-left: 28px;
 }
 
 .CollapsedResponseTitle {

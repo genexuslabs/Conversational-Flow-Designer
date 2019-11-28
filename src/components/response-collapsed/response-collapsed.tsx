@@ -51,6 +51,12 @@ export class CollapsedResponse {
     return title;
   }
 
+  private GetFirstResponseMessageClass(): string {
+    let tab = "FirstResponseMessageNoTab";
+    if (this.response.Condition != "") tab = "FirstResponseMessageTab";
+    return `FirstResponseMessage ${tab}`;
+  }
+
   render() {
     return (
       <div class="CollapsedResponse">
@@ -58,7 +64,7 @@ export class CollapsedResponse {
         {this.GetHeader()}
         <input
           type="text"
-          class="FirstResponseMessage"
+          class={this.GetFirstResponseMessageClass()}
           value={this.response.GetFristResponseMessage()}
           placeholder="First response message..."
         />
