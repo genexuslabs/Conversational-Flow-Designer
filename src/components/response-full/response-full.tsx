@@ -93,8 +93,7 @@ export class FullResponse {
     const elements: Array<HTMLElement> = new Array<HTMLElement>();
     const componentViewSelected =
       this.response.Style == ResponseStyles.ComponentView;
-    const redirectToSelected =
-      this.response.Style == ResponseStyles.ComponentView;
+    const redirectToSelected = this.response.Style == ResponseStyles.RedirectTo;
     const textMessageSelected =
       this.response.Style == ResponseStyles.TextMessage ||
       (!componentViewSelected && !redirectToSelected);
