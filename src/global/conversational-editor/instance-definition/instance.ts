@@ -53,20 +53,36 @@ export class Instance {
     );
     flow.ConversationalObjectType = coType;
     flow.AddUserInput(userInput);
-    const response: ResponseElement = new ResponseElement(
-      "Test Response",
-      "Test",
-      ["Test"],
-      "Test",
-      "",
-      "",
-      "",
-      "",
-      RenderingOptions.Collapsed,
-      0,
-      flow
+    flow.AddResponse(
+      new ResponseElement(
+        "Test Response",
+        "Test",
+        ["Test"],
+        "Test",
+        "",
+        "",
+        "",
+        "",
+        RenderingOptions.Collapsed,
+        0,
+        flow
+      )
     );
-    flow.AddResponse(response);
+    flow.AddResponse(
+      new ResponseElement(
+        "Test Conditional Response",
+        "Test Conditional",
+        ["Test Conditional"],
+        "Test Conditional",
+        "",
+        "",
+        "&Test = '1'",
+        "",
+        RenderingOptions.Collapsed,
+        0,
+        flow
+      )
+    );
     this.Flows[0] = flow;
 
     const flow2: FlowElement = new FlowElement("TestB");
