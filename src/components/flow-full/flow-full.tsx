@@ -1,12 +1,4 @@
-import {
-  Component,
-  Prop,
-  h,
-  EventEmitter,
-  Event,
-  Listen,
-  State
-} from "@stencil/core";
+import { Component, Prop, h, EventEmitter, Event, State } from "@stencil/core";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
 import {
   HintId,

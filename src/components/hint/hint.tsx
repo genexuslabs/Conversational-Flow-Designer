@@ -1,4 +1,4 @@
-import { Component, Prop, h, Element, State } from "@stencil/core";
+import { Component, Prop, h, State } from "@stencil/core";
 import { PropertiesDefinition } from "../../global/conversational-editor/helpers/helpers";
 
 @Component({

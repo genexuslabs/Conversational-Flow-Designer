@@ -2,10 +2,7 @@ import { Component, h, Listen, State, Element, Prop } from "@stencil/core";
 import { App } from "../../global/conversational-editor/app";
 import { EventHandler } from "../../global/conversational-editor/event-handler";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
-import {
-  Controls,
-  RenderingOptions
-} from "../../global/conversational-editor/helpers/helpers";
+import { Controls } from "../../global/conversational-editor/helpers/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
 import { Instance } from "../../global/conversational-editor/instance-definition/instance";
 

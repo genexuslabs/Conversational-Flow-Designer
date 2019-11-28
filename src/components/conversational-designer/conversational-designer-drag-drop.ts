@@ -7,11 +7,6 @@ enum DraggableComponents {
   Response
 }
 
-enum DragOverComponents {
-  Flow,
-  DropZone
-}
-
 enum DropZoneStatus {
   On,
   Off

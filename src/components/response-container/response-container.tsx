@@ -44,7 +44,7 @@ export class Response {
   }
 
   @Event() deleteResponse: EventEmitter;
-  TriggerDeleteResponse(event: any) {
+  TriggerDeleteResponse(event): void {
     this.deleteResponse.emit(event);
   }
 

@@ -57,7 +57,7 @@ export class UserInput {
   }
 
   @Event() deleteUserInput: EventEmitter;
-  TriggerDeleteUserInput(event: CustomEvent<any>): void {
+  TriggerDeleteUserInput(event): void {
     this.deleteUserInput.emit(event);
   }
 
