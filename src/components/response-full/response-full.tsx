@@ -91,36 +91,41 @@ export class FullResponse {
 
   private RenderStyleSelector(): HTMLElement[] {
     const elements: Array<HTMLElement> = new Array<HTMLElement>();
-    const textElementOption =
-      this.response.Style == ResponseStyles.TextMessage ? (
-        <option value={ResponseStyles.TextMessage} selected>
-          {ResponseStyles.PrettyTextMessage}
-        </option>
-      ) : (
-        <option value={ResponseStyles.TextMessage}>
-          {ResponseStyles.PrettyTextMessage}
-        </option>
-      );
-    const componentElementOption =
-      this.response.Style == ResponseStyles.ComponentView ? (
-        <option value={ResponseStyles.ComponentView} selected>
-          {ResponseStyles.PrettyComponentView}
-        </option>
-      ) : (
-        <option value={ResponseStyles.ComponentView}>
-          {ResponseStyles.PrettyComponentView}
-        </option>
-      );
-    const redirectElementOption =
-      this.response.Style == ResponseStyles.RedirectTo ? (
-        <option value={ResponseStyles.RedirectTo} selected>
-          {ResponseStyles.PrettyRedirectTo}
-        </option>
-      ) : (
-        <option value={ResponseStyles.RedirectTo}>
-          {ResponseStyles.PrettyRedirectTo}
-        </option>
-      );
+    const componentViewSelected =
+      this.response.Style == ResponseStyles.ComponentView;
+    const redirectToSelected =
+      this.response.Style == ResponseStyles.ComponentView;
+    const textMessageSelected =
+      this.response.Style == ResponseStyles.TextMessage ||
+      (!componentViewSelected && !redirectToSelected);
+
+    const textElementOption = textMessageSelected ? (
+      <option value={ResponseStyles.TextMessage} selected>
+        {ResponseStyles.PrettyTextMessage}
+      </option>
+    ) : (
+      <option value={ResponseStyles.TextMessage}>
+        {ResponseStyles.PrettyTextMessage}
+      </option>
+    );
+    const componentElementOption = componentViewSelected ? (
+      <option value={ResponseStyles.ComponentView} selected>
+        {ResponseStyles.PrettyComponentView}
+      </option>
+    ) : (
+      <option value={ResponseStyles.ComponentView}>
+        {ResponseStyles.PrettyComponentView}
+      </option>
+    );
+    const redirectElementOption = redirectToSelected ? (
+      <option value={ResponseStyles.RedirectTo} selected>
+        {ResponseStyles.PrettyRedirectTo}
+      </option>
+    ) : (
+      <option value={ResponseStyles.RedirectTo}>
+        {ResponseStyles.PrettyRedirectTo}
+      </option>
+    );
     elements.push(
       <select
         class="ResponseSelect"
