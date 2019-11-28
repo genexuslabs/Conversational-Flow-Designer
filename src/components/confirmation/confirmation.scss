@@ -1,9 +1,7 @@
 .ConfirmationModal
 {
-    top: var(--modal-margin);
-    right: var(--modal-margin);
-    bottom: var(--modal-margin);
-    left: var(--modal-margin);
+    top: calc(var(--modal-margin) - 125px);
+    left: calc(var(--modal-margin) - 250px);
     width: 500px;
     height: 125px;
     position:fixed;
