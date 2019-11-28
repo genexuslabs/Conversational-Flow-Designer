@@ -75,4 +75,5 @@ interface External {
   DeleteFlow(flowName: string): Function;
   DeleteUserInput(flowName: string, userInput: string): Function;
   DeleteResponse(flowName: string, index: number): Function;
+  SetResponseName(flowName: string, index: number, value: string): Function;
 }

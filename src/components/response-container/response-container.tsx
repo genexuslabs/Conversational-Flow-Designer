@@ -10,6 +10,7 @@ import {
 import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
 import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
 import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
+import { EventHandler } from "../../global/conversational-editor/event-handler";
 
 @Component({
   tag: "gxcf-response-container",
@@ -33,6 +34,13 @@ export class Response {
     console.log(event);
     this.response.SetRenderType(RenderingOptions.Collapsed);
     this.Refresh();
+  }
+
+  @Listen("changeResponseName")
+  HandleChangeResponseName(event) {
+    const value: string = EventHandler.GetValue(event);
+    console.log("New response name: " + value);
+    this.response.SetResponseName(value);
   }
 
   @Event() deleteResponse: EventEmitter;

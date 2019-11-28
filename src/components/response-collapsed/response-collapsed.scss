@@ -43,3 +43,21 @@
 {
   float: left;
 }
+
+.IfTitle
+{
+  font-style: italic;
+  color: var(--condition-label-color);
+}
+
+.ConditionTitle
+{
+  font-style: italic;
+}
+
+.ConditionHeader
+{
+  clear:both;
+  margin-left: 14px;
+  margin-bottom: 5px;;
+}

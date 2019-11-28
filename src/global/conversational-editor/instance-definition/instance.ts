@@ -54,6 +54,7 @@ export class Instance {
     flow.ConversationalObjectType = coType;
     flow.AddUserInput(userInput);
     const response: ResponseElement = new ResponseElement(
+      "Test Response",
       "Test",
       ["Test"],
       "Test",
@@ -265,4 +266,5 @@ export interface CustomJSON extends JSON {
   Templates: CustomJSON[];
   RedirectCondition: string;
   ConversationalObjectType: string;
+  ResponseName: string;
 }

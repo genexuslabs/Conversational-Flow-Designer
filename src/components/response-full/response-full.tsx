@@ -23,6 +23,11 @@ export class FullResponse {
     this.collapseResponse.emit(event);
   }
 
+  @Event() changeResponseName: EventEmitter;
+  TriggerChangeResponseName(event): void {
+    this.changeResponseName.emit(event);
+  }
+
   HandleEditResponseMessage(event: CustomEvent): void {
     const value = EventHandler.GetValue(event);
     const index = EventHandler.GetCollectionIndexFromDetail(event);
@@ -222,7 +227,9 @@ export class FullResponse {
         <input
           type="text"
           class="FullResponseTitle"
-          value={this.response.Style}
+          value={this.response.ResponseName}
+          placeholder="Response name..."
+          onChange={event => this.TriggerChangeResponseName(event)}
         />
         <gxcf-up-arrow
           class="FullResponseCommands"

@@ -14,23 +14,53 @@ export class CollapsedResponse {
     this.expandResponse.emit(event);
   }
 
+  @Event() changeResponseName: EventEmitter;
+  TriggerChangeResponseName(event): void {
+    this.changeResponseName.emit(event);
+  }
+
+  private GetDownArrow(): HTMLElement {
+    return (
+      <gxcf-down-arrow
+        class="CollapsedResponseDownArrow"
+        onClick={event => this.TriggerOnExpandResponse(event)}
+      />
+    );
+  }
+
+  private GetHeader(): HTMLElement[] {
+    const title: HTMLElement[] = new Array<HTMLElement>();
+    title.push(
+      <input
+        type="text"
+        class="CollapsedResponseTitle"
+        value={this.response.ResponseName}
+        placeholder="Response name..."
+        onChange={event => this.TriggerChangeResponseName(event)}
+      />
+    );
+    title.push(this.GetDownArrow());
+    if (this.response.Condition != "") {
+      title.push(
+        <div class="ConditionHeader">
+          <span class="IfTitle">if...</span>
+          <span class="ConditionTitle">{this.response.Condition}</span>
+        </div>
+      );
+    }
+    return title;
+  }
+
   render() {
     return (
       <div class="CollapsedResponse">
         <gxcf-dot class="DotPosition" />
-        <input
-          type="text"
-          class="CollapsedResponseTitle"
-          value={this.response.Style}
-        />
-        <gxcf-down-arrow
-          class="CollapsedResponseDownArrow"
-          onClick={event => this.TriggerOnExpandResponse(event)}
-        />
+        {this.GetHeader()}
         <input
           type="text"
           class="FirstResponseMessage"
           value={this.response.GetFristResponseMessage()}
+          placeholder="First response message..."
         />
       </div>
     );

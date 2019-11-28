@@ -118,6 +118,7 @@ export class FlowElement implements ConversationalElement {
     let index = 0;
     jsonFlow.View.Templates.forEach(function(template) {
       const response: ResponseElement = new ResponseElement(
+        template.ResponseName,
         template.Style,
         template.Format,
         template.ComponentType,
@@ -181,6 +182,7 @@ export class FlowElement implements ConversationalElement {
 
   public NewResponse(): void {
     const response: ResponseElement = new ResponseElement(
+      "",
       "text message",
       [],
       "",

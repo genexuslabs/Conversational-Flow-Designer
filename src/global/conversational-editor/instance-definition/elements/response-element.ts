@@ -2,6 +2,7 @@ import { RenderingOptions } from "../../helpers/helpers";
 import { FlowElement } from "./flow-element";
 
 export class ResponseElement {
+  public ResponseName: string;
   public Style: string;
   public Messages: string[];
   public ComponentType: string;
@@ -16,6 +17,7 @@ export class ResponseElement {
   public WebComponentType: string;
 
   public constructor(
+    responseName: string,
     style: string,
     messages: string[],
     componentType: string,
@@ -27,6 +29,7 @@ export class ResponseElement {
     index: number,
     parent: FlowElement
   ) {
+    this.ResponseName = responseName;
     this.Style = style;
     this.Messages = messages;
     this.ComponentType = componentType;
@@ -127,5 +130,11 @@ export class ResponseElement {
     )
       return `${this.Parent.ConversationalObject}Component`;
     return "NONE";
+  }
+
+  SetResponseName(value: string) {
+    this.ResponseName = value;
+    if (window.external.SetResponseName)
+      window.external.SetResponseName(this.Parent.Name, this.Index, value);
   }
 }
