@@ -48,6 +48,12 @@ export class ButtonDelete {
 
   render() {
     if (!this.askConfirmation) return this.deleteButton();
-    else return this.confirmationModal();
+    else
+      return (
+        <div>
+          {this.deleteButton()}
+          {this.confirmationModal()}
+        </div>
+      );
   }
 }
