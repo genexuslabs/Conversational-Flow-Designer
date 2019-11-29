@@ -23,7 +23,7 @@ export class SummaryTitle {
       <input
         id={this.summaryid}
         type="text"
-        class={this.classType}
+        class={`CommonTitle ${this.classType}`}
         value={this.summaryvalue}
         onChange={event => this.ChangingFlowName(event)}
       />

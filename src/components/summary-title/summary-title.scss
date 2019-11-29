@@ -1,4 +1,5 @@
-.SummaryTitle {
+.CommonTitle
+{
   color: var(--title-color);
   background-color: var(--common-action-background);
   font-weight: bold;
@@ -10,14 +11,10 @@
   font-family: var(--gxcf-font-family);
 }
 
+.SummaryTitle {
+  font-size: var(--normal-font-size);
+}
+
 .FullTitle {
-  color: var(--title-color);
-  background-color: var(--common-action-background);
-  font-weight: bold;
-  margin-bottom: 2px;
-  float: left;
-  border: none;
-  text-align: left;
-  width: 62%;
-  font-family: var(--gxcf-font-family);
+  font-family: var(--normal2-font-size);
 }
