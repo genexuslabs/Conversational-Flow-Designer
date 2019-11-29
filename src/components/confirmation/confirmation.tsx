@@ -1,5 +1,6 @@
 import { Component, h, Prop, Event } from "@stencil/core";
 import { EventEmitter } from "events";
+import "@genexus/gemini";
 
 @Component({
   tag: "gxcf-confirmation",
@@ -27,18 +28,20 @@ export class Confirmation {
         <div class="ConfirmationContent">
           <p class="ConfirmationMessage">{this.confirmationMessage}</p>
           <div class="ButtonPlaceHolder">
-            <button
-              class="ConfirmationButtonNo ConfirmationButton"
+            <gxg-button
+              type="outlined"
+              class="ConfirmationButtonPosition"
               onClick={event => this.TriggerUserCancellation(event)}
             >
-              No
-            </button>
-            <button
-              class="ConfirmationButtonYes ConfirmationButton"
+              Cancel
+            </gxg-button>
+            <gxg-button
+              type="outlined"
+              class="ConfirmationButtonPosition"
               onClick={event => this.TriggerUserConfirmation(event)}
             >
-              Yes
-            </button>
+              Delete
+            </gxg-button>
           </div>
         </div>
       </div>

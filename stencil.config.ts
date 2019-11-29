@@ -15,6 +15,7 @@ export const config: Config = {
   plugins: [
     sass({
       injectGlobalPaths: [
+        "src/global/global.scss",
         "src/global/token-animations.scss",
         "src/global/token-colors.scss",
         "src/global/token-fonts.scss",
