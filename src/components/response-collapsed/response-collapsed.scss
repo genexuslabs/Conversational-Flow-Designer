@@ -9,6 +9,7 @@
   margin-bottom: 15px;
   -webkit-animation: var(--animation-time);
   animation: var(--animation-time);
+  font-family: var(--gxcf-font-family);
 }
 
 .CollapsedResponse:hover {
@@ -28,6 +29,7 @@
   border: none;
   background-color: var(--flow-element-background-color);
   width: 95%;
+  font-family: var(--gxcf-font-family);
 }
 
 .FirstResponseMessageNoTab {  
@@ -46,6 +48,7 @@
   color: var(--elements-title-font-color);
   font-size: var(--normal-font-size);
   font-weight: bold;
+  font-family: var(--gxcf-font-family);
 }
 
 .DotPosition

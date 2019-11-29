@@ -17,6 +17,7 @@
   color: var(--elements-title-font-color);
   font-weight: bold;
   float: left;
+  font-family: var(--gxcf-font-family);
 }
 
 .UserInputCommandsPosition {
@@ -27,6 +28,7 @@
   color: var(--elements-header-font-color);
   clear: both;
   margin-top: 5px;
+  font-family: var(--gxcf-font-family);
 }
 
 .SwitchIconOn {
@@ -69,6 +71,7 @@ details[open] .UserInputPart::before {
   vertical-align: top;
   font-size: var(--small2-font-size);
   color: var(--elements-header-font-color);
+  font-family: var(--gxcf-font-family);
 }
 
 .UserInputHints {
@@ -87,6 +90,7 @@ details[open] .UserInputPart::before {
   height: 24px;
   width: 100%;
   background-color: var(--add-element-background-color);
+  font-family: var(--gxcf-font-family);
 }
 
 .SelectVP {

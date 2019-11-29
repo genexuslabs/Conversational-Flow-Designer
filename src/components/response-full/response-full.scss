@@ -7,6 +7,7 @@
     padding: 12px 22px 12px 22px;
     overflow: hidden;
     margin-bottom: 15px;
+    font-family: var(--gxcf-font-family);
   }
 
   .FullResponseCommands {
@@ -20,6 +21,7 @@
     color: var(--elements-title-font-color);
     font-size: var(--normal-font-size);
     font-weight: bold;
+    font-family: var(--gxcf-font-family);
   }
 
 .HintBlock
@@ -44,6 +46,7 @@
   border: none;
   height: 24px;
   width: 100%;
+  font-family: var(--gxcf-font-family);
 }
 
 .ResponseProperty

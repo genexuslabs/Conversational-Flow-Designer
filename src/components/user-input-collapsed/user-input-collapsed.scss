@@ -9,6 +9,7 @@
   margin-bottom: 15px;
   -webkit-animation: var(--animation-time);
   animation: var(--animation-time);
+  font-family: var(--gxcf-font-family);
 }
 
 .CollapsedUserInput:hover {
@@ -28,6 +29,7 @@
   background-color: var(--flow-element-background-color);
   width: 95%;
   margin-left: 14px;
+  font-family: var(--gxcf-font-family);
 }
 
 .CollapsedTitle {
@@ -36,6 +38,7 @@
   color: var(--elements-title-font-color);
   font-weight: bold;
   float: left;
+  font-family: var(--gxcf-font-family);
 }
 
 .DotPosition
