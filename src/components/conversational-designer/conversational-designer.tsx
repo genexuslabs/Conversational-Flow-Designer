@@ -116,8 +116,9 @@ export class ConversationalDesginer {
 
     App.GetApp();
 
-    this.dragDropHandler = new ConversationalDesignerDragDrop(this
-      .element as HTMLGxcfConversationalDesignerElement);
+    this.dragDropHandler = new ConversationalDesignerDragDrop(
+      this.element as HTMLGxcfConversationalDesignerElement
+    );
     this.dragDropHandler.initialize();
   }
 
