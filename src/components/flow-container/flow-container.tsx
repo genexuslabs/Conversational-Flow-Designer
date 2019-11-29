@@ -53,8 +53,10 @@ export class Flow {
   @Listen("selectConversationalObject")
   HandleSelectConversationalObject(event: CustomEvent): void {
     console.log(event);
-    EventHandler.SelectConversationalObject(this.flow, this
-      .element as HTMLGxcfFlowContainerElement);
+    EventHandler.SelectConversationalObject(
+      this.flow,
+      this.element as HTMLGxcfFlowContainerElement
+    );
   }
 
   @Event() deleteFlow: EventEmitter;
