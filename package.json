@@ -20,21 +20,21 @@
   },
   "dependencies": {
     "@genexus/gemini": "^0.1.4",
-    "@stencil/core": "^1.7.4",
+    "@stencil/core": "^1.8.1",
     "@stencil/router": "^1.0.1",
-    "@typescript-eslint/eslint-plugin": "^2.6.1",
-    "@typescript-eslint/parser": "^2.6.1",
-    "chokidar": "^3.2.2",
-    "eslint": "^6.6.0",
-    "eslint-config-prettier": "^6.5.0",
+    "@typescript-eslint/eslint-plugin": "^2.9.0",
+    "@typescript-eslint/parser": "^2.9.0",
+    "chokidar": "^3.3.0",
+    "eslint": "^6.7.1",
+    "eslint-config-prettier": "^6.7.0",
     "eslint-plugin-prettier": "^3.1.1",
-    "husky": "^3.0.9",
-    "lint-staged": "^9.4.2",
-    "prettier": "^1.18.2"
+    "husky": "^3.1.0",
+    "lint-staged": "^9.5.0",
+    "prettier": "^1.19.1"
   },
   "devDependencies": {
-    "@stencil/sass": "^1.1.0",
-    "@types/jest": "24.0.18",
+    "@stencil/sass": "^1.1.1",
+    "@types/jest": "^24.0.23",
     "workbox-build": "4.3.1"
   },
   "repository": {
