@@ -146,6 +146,7 @@ export class FullUserInput {
           onEditItem={event => this.HandleEditAskMessage(event)}
           onDeleteItem={event => this.HandleDeleteAskMessage(event)}
           collectionHintId={HintId.AskMessages}
+          collectionHeader="Ask Messages"
         />
       </details>
     );
