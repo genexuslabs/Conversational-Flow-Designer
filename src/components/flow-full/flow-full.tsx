@@ -52,7 +52,7 @@ export class FlowFull {
   }
 
   get CollectionHeader(): string {
-    return `Sample trigger messages (${this.flow.TriggerMessages.length.toString()})`;
+    return `Trigger Messages`;
   }
 
   HandleDeleteUserInput(event: CustomEvent, userInput: UserInputElement): void {
@@ -155,9 +155,7 @@ export class FlowFull {
             onClick={event => this.HandleExpandTriggers(event)}
           />
           <div class="TriggersContainer">
-            <span>
-              Sample trigger messages ({this.flow.TriggerMessages.length})
-            </span>
+            <span>Trigger Messages ({this.flow.TriggerMessages.length})</span>
             <gxcf-hint hintId={HintId.TriggerMessages} class="Hint" />
             <p class="FirstTriggerMessage">
               {this.flow.GetSummaryTriggerMessage()}

@@ -1,4 +1,4 @@
-import { Component, Prop, h, State, Event } from "@stencil/core";
+import { Component, Prop, h, State, Event, Element } from "@stencil/core";
 import { EventEmitter } from "events";
 
 @Component({
@@ -13,11 +13,12 @@ export class Collection {
   @Prop() collectionHintId: string;
   @Prop() currentItemIndex: number;
   @Prop() currentItemValue: string;
-
-  @State() refresh = true;
+  @State() collectionLength: number;
 
   @Event() deleteItem: EventEmitter;
   @Event() editItem: EventEmitter;
+
+  @Element() element: HTMLElement;
 
   public static readonly DataItemIndex = "data-item-index";
 
@@ -25,7 +26,7 @@ export class Collection {
     console.log(event);
     const newItem = "";
     this.collection.push(newItem);
-    this.refresh = !this.refresh;
+    this.collectionLength = this.collection.length;
   }
 
   HandleDeleteItem(event): void {
@@ -40,6 +41,13 @@ export class Collection {
     this.SetCurrentIndex(element);
     this.currentItemValue = element.value;
     this.editItem.emit(event, this.currentItemIndex);
+  }
+
+  HandleKeyPress(event: KeyboardEvent): void {
+    if (event.keyCode === 13) {
+      event.preventDefault();
+      this.AddItem(event);
+    }
   }
 
   SetCurrentIndex(element: HTMLElement): void {
@@ -66,6 +74,7 @@ export class Collection {
             type="text"
             value={items[index]}
             onChange={event => this.HandleEditItem(event)}
+            onKeyPress={event => this.HandleKeyPress(event)}
           ></input>
           <div
             data-item-index={index}
@@ -78,11 +87,20 @@ export class Collection {
     return renderedItems;
   }
 
+  componentWillLoad(): void {
+    this.collectionLength = this.collection.length;
+  }
+
+  componentDidRender(): void {
+    const inputs = this.element.shadowRoot.querySelectorAll("input");
+    if (inputs.length > 0) inputs.item(inputs.length - 1).focus();
+  }
+
   render() {
     return (
       <div class="Collection">
         <div class="CollectionContainer">
-          <span class="CollectionHeader">{this.collectionHeader}</span>
+          <span class="CollectionHeader">{`${this.collectionHeader} (${this.collectionLength})`}</span>
           <gxcf-hint hintId={this.collectionHintId} class="Hint" />
           <div class="CollectionContainer ItemsRender">
             {this.RenderizeItems(this.collection)}

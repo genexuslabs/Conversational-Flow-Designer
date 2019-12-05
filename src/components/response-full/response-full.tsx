@@ -247,7 +247,7 @@ export class FullResponse {
         />
         <gxcf-collection
           collection={this.response.Messages}
-          collectionHeader={`Response Messages (${this.response.Messages.length})`}
+          collectionHeader="Response Messages"
           collectionAddText="Add an alternative response message"
           collectionHintId={HintId.ResponseMessage}
           onEditItem={event => {
