@@ -1,4 +1,11 @@
-import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  h,
+  Event,
+  EventEmitter,
+  Element
+} from "@stencil/core";
 import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
 
 @Component({
@@ -8,6 +15,7 @@ import { ResponseElement } from "../../global/conversational-editor/instance-def
 })
 export class CollapsedResponse {
   @Prop() response: ResponseElement;
+  @Element() element: HTMLElement;
 
   @Event() expandResponse: EventEmitter;
   TriggerOnExpandResponse(event): void {
@@ -55,6 +63,11 @@ export class CollapsedResponse {
     let tab = "FirstResponseMessageNoTab";
     if (this.response.Condition != "") tab = "FirstResponseMessageTab";
     return `FirstResponseMessage ${tab}`;
+  }
+
+  componentDidLoad(): void {
+    const responseTitle = this.element.shadowRoot.querySelector("input");
+    if (responseTitle) responseTitle.focus();
   }
 
   render() {

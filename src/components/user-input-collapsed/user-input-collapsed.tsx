@@ -1,4 +1,11 @@
-import { Component, Prop, h, EventEmitter, Event } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  h,
+  EventEmitter,
+  Event,
+  Element
+} from "@stencil/core";
 import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
 
 @Component({
@@ -8,6 +15,7 @@ import { UserInputElement } from "../../global/conversational-editor/instance-de
 })
 export class CollapsedUserInput {
   @Prop() userInput: UserInputElement;
+  @Element() element: HTMLElement;
 
   @Event() expandUserInput: EventEmitter;
   TriggerOnExpandUserInput(event): void {
@@ -22,6 +30,11 @@ export class CollapsedUserInput {
   @Event() modifyUserInputFirstAskMessage: EventEmitter;
   TriggerOnModifyUserInputFirstAskMessage(event): void {
     this.modifyUserInputFirstAskMessage.emit(event);
+  }
+
+  componentDidRender(): void {
+    const title = this.element.shadowRoot.querySelector("input");
+    if (title) title.focus();
   }
 
   render() {
