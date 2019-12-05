@@ -184,7 +184,6 @@ export class FlowFull {
                 confirmationTitle="Delete flow"
                 confirmationMessage={`Do you want to delete the flow '${this.flow.Name}'?`}
               />
-              <gxcf-button-edit class="CommandPosition" />
               <gxcf-select
                 class="CustomSelectBoxing CommandPosition"
                 selectid={this.SelectId}
