@@ -13,7 +13,8 @@
 }
 
 .CollapsedResponse:hover {
-  transform: var(--animation-scale-size);
+  //transform: var(--animation-scale-size);
+  border-top: 3px solid var(--highlight-color-2)
 }
 
 .CollapsedResponseDownArrow {
