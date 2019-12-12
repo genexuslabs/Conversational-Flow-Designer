@@ -1,5 +1,5 @@
-import { MoveType } from "../../global/conversational-editor/helpers/helpers";
-import { App } from "../../global/conversational-editor/app";
+import { EventEmitter } from "@stencil/core";
+import { MoveType } from "../common/helpers";
 
 enum DraggableComponents {
   Flow,
@@ -20,9 +20,22 @@ export class ConversationalDesignerDragDrop {
   private currentTargetElementId: string;
   private element: HTMLGxcfConversationalDesignerElement;
   private readonly idAttribute: string = "data-gxcf-element-id";
+  private moveFlow: EventEmitter;
 
-  constructor(element: HTMLGxcfConversationalDesignerElement) {
+  TriggerMoveFlow(pMoveType: string): void {
+    this.moveFlow.emit.call(this, {
+      source: this.draggingElementId,
+      target: this.currentTargetElementId,
+      moveType: pMoveType
+    });
+  }
+
+  constructor(
+    element: HTMLGxcfConversationalDesignerElement,
+    moveFlow: EventEmitter
+  ) {
     this.element = element;
+    this.moveFlow = moveFlow;
   }
 
   public initialize() {
@@ -64,19 +77,8 @@ export class ConversationalDesignerDragDrop {
     const dropZoneElement: HTMLGxcfDropZoneElement = dropTarget as HTMLGxcfDropZoneElement;
 
     if (dropZoneElement.moveType == MoveType.Up)
-      App.GetApp().Instance.MoveFlows(
-        this.draggingElementId,
-        this.currentTargetElementId,
-        MoveType.Up
-      );
-    else
-      App.GetApp().Instance.MoveFlows(
-        this.draggingElementId,
-        this.currentTargetElementId,
-        MoveType.Down
-      );
-
-    this.element.instance = Object.assign({}, App.GetApp().Instance);
+      this.TriggerMoveFlow(MoveType.Up);
+    else this.TriggerMoveFlow(MoveType.Down);
     this.reset();
   }
 

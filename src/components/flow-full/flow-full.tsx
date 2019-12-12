@@ -1,12 +1,15 @@
-import { Component, Prop, h, EventEmitter, Event, State } from "@stencil/core";
-import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
 import {
-  HintId,
-  SelectTypes
-} from "../../global/conversational-editor/helpers/helpers";
-import { EventHandler } from "../../global/conversational-editor/event-handler";
-import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
-import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
+  Component,
+  Prop,
+  h,
+  EventEmitter,
+  Event,
+  State,
+  Listen
+} from "@stencil/core";
+import { HintId, SelectTypes, RenderingOptions } from "../common/helpers";
+import { EventsHelper } from "../common/events-helper";
+import { StringCollectionHelper } from "../common/string-collection-helper";
 
 @Component({
   tag: "gxcf-flow-full",
@@ -14,8 +17,8 @@ import { ResponseElement } from "../../global/conversational-editor/instance-def
   shadow: true
 })
 export class FlowFull {
-  @Prop() flow: FlowElement;
-  @State() refresh = true;
+  @Prop() flow: GXCFModel.FlowElement;
+  @Prop() instance: GXCFModel.Instance;
   @State() expandTriggers = false;
 
   @Event() collapseFlow: EventEmitter;
@@ -23,16 +26,18 @@ export class FlowFull {
     this.collapseFlow.emit(event);
   }
 
-  TriggerOnAddUserInput(event): void {
-    console.log(event);
-    this.flow.NewUserInput();
-    this.refresh = !this.refresh;
+  @Event() addUserInput: EventEmitter;
+  TriggerOnAddUserInput(): void {
+    this.addUserInput.emit.call(this, {
+      flowName: this.flow.Name
+    });
   }
 
-  TriggerOnAddResponse(event): void {
-    console.log(event);
-    this.flow.NewResponse();
-    this.refresh = !this.refresh;
+  @Event() addResponse: EventEmitter;
+  TriggerOnAddResponse(): void {
+    this.addResponse.emit.call(this, {
+      flowName: this.flow.Name
+    });
   }
 
   get SummaryId(): string {
@@ -55,21 +60,41 @@ export class FlowFull {
     return `Trigger Messages`;
   }
 
-  HandleDeleteUserInput(event: CustomEvent, userInput: UserInputElement): void {
-    console.log(event);
-    this.flow.DeleteUserInput(userInput);
-    this.refresh = !this.refresh;
+  @Listen("expandUserInputOut")
+  HandleOnExpandUserInput(event: CustomEvent): void {
+    event.preventDefault();
+    const userInput: HTMLGxcfUserInputContainerElement = event.detail
+      .source as HTMLGxcfUserInputContainerElement;
+    userInput.renderType = RenderingOptions.Full;
   }
 
-  HandleDeleteResponse(event: CustomEvent, response: ResponseElement): void {
-    console.log(event);
-    this.flow.DeleteResponse(response);
-    this.refresh = !this.refresh;
+  @Listen("collapseUserInputOut")
+  HandleCollapseUserInput(event: CustomEvent): void {
+    event.preventDefault();
+    const userInput: HTMLGxcfUserInputContainerElement = event.detail
+      .source as HTMLGxcfUserInputContainerElement;
+    userInput.renderType = RenderingOptions.Collapsed;
+  }
+
+  @Listen("expandResponseOut")
+  HandleExpandResponse(event: CustomEvent) {
+    event.preventDefault();
+    const response: HTMLGxcfResponseContainerElement = event.detail
+      .source as HTMLGxcfResponseContainerElement;
+    response.renderType = RenderingOptions.Full;
+  }
+
+  @Listen("collapseResponseOut")
+  HandleCollapseResponse(event: CustomEvent) {
+    event.preventDefault();
+    const response: HTMLGxcfResponseContainerElement = event.detail
+      .source as HTMLGxcfResponseContainerElement;
+    response.renderType = RenderingOptions.Collapsed;
   }
 
   private RenderizeUserInputs(): HTMLElement[] {
     const userInputs: HTMLElement[] = [];
-    this.flow.UserInputs.forEach(function(userInput) {
+    this.flow.Fields.forEach(function(userInput) {
       userInputs.push(
         <gxcf-user-input-container
           userInput={userInput}
@@ -77,6 +102,8 @@ export class FlowFull {
           onDeleteUserInput={event =>
             this.HandleDeleteUserInput(event, userInput)
           }
+          renderType={RenderingOptions.Collapsed}
+          instance={this.instance}
         />
       );
     }, this);
@@ -85,31 +112,53 @@ export class FlowFull {
 
   private RenderizeResponse(): HTMLElement[] {
     const responses: HTMLElement[] = [];
-    this.flow.Responses.forEach(function(response) {
+
+    this.flow.View.Templates.forEach(function(response) {
       responses.push(
         <gxcf-response-container
           response={response}
           onDeleteResponse={event => this.HandleDeleteResponse(event, response)}
+          renderType={RenderingOptions.Collapsed}
+          responseIndex={this.flow.View.Templates.indexOf(response)}
+          flow={this.flow}
+          instance={this.instance}
         />
       );
     }, this);
     return responses;
   }
 
+  @Event() setTriggers: EventEmitter;
+  TriggerSetTriggers(index: number, value: string, remove: boolean): void {
+    this.setTriggers.emit.call(this, {
+      flowName: this.flow.Name,
+      triggerMessages: StringCollectionHelper.FormatCollection(
+        this.flow.Triggers,
+        index,
+        value,
+        remove
+      )
+    });
+  }
+
   HandleEditTriggerMessage(event: CustomEvent): void {
-    const value = EventHandler.GetValue(event);
-    const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.flow.SetTrigger(+index, value);
+    const value = EventsHelper.GetValue(event);
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+
+    this.TriggerSetTriggers(+index, value, false);
   }
 
   HandleDeleteTriggerMessage(event: CustomEvent): void {
-    const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.flow.DeleteTrigger(+index);
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+    this.TriggerSetTriggers(+index, "", true);
   }
 
   @Event() selectConversationalObject: EventEmitter;
   TriggerSelectConversationalObject(event): void {
-    this.selectConversationalObject.emit(event);
+    console.log(event);
+    this.selectConversationalObject.emit.call(this, {
+      flowName: this.flow.Name
+    });
   }
 
   @Event() deleteFullFlow: EventEmitter;
@@ -127,6 +176,23 @@ export class FlowFull {
     this.expandTriggers = false;
   }
 
+  private GetSummaryTriggerMessage(): string {
+    if (this.flow.Triggers[0] != null) {
+      return this.flow.Triggers[0];
+    }
+    return "";
+  }
+
+  private GetSummaryConversationalObject(): string {
+    if (
+      this.flow.ConversationalObjectName != null &&
+      this.flow.ConversationalObjectName != ""
+    ) {
+      return this.flow.ConversationalObjectName.toUpperCase();
+    }
+    return "NONE";
+  }
+
   private GetTriggers(): HTMLElement {
     if (this.expandTriggers)
       return (
@@ -138,7 +204,7 @@ export class FlowFull {
             />
           </div>
           <gxcf-collection
-            collection={this.flow.TriggerMessages}
+            collection={this.flow.Triggers}
             collectionHeader={this.CollectionHeader}
             collectionHintId={HintId.TriggerMessages}
             collectionAddText="Add another sample trigger message"
@@ -155,11 +221,9 @@ export class FlowFull {
             onClick={event => this.HandleExpandTriggers(event)}
           />
           <div class="TriggersContainer">
-            <span>Trigger Messages ({this.flow.TriggerMessages.length})</span>
+            <span>Trigger Messages ({this.flow.Triggers.length})</span>
             <gxcf-hint hintId={HintId.TriggerMessages} class="Hint" />
-            <p class="FirstTriggerMessage">
-              {this.flow.GetSummaryTriggerMessage()}
-            </p>
+            <p class="FirstTriggerMessage">{this.GetSummaryTriggerMessage()}</p>
           </div>
         </div>
       );
@@ -185,7 +249,7 @@ export class FlowFull {
               <gxcf-select
                 class="CustomSelectBoxing CommandPosition"
                 selectid={this.SelectId}
-                selectcaption={this.flow.GetSummaryConversationalObject()}
+                selectcaption={this.GetSummaryConversationalObject()}
                 selectIconType={this.flow.ConversationalObjectType}
                 selectType={SelectTypes.Compact}
                 onClick={event => this.TriggerSelectConversationalObject(event)}
@@ -198,14 +262,14 @@ export class FlowFull {
         <div class="FullFlowContentUserInputs">
           <div class="ElementsHeader">
             <span class="LeftTab ElementsHeaderText">
-              User Inputs ({this.flow.UserInputs.length})
+              User Inputs ({this.flow.Fields.length})
             </span>
             <gxcf-hint hintId={HintId.UserInput} class="Hint" />
           </div>
           {this.RenderizeUserInputs()}
           <gxcf-add-object
             class="LeftTab"
-            onClick={event => this.TriggerOnAddUserInput(event)}
+            onClick={() => this.TriggerOnAddUserInput()}
             addText="Add another user input"
           />
         </div>
@@ -213,13 +277,13 @@ export class FlowFull {
         <div class="FullFlowContentResponses">
           <div class="ElementsHeader">
             <span class="ElementsHeaderText">
-              Responses ({this.flow.Responses.length})
+              Responses ({this.flow.View.Templates.length})
             </span>
             <gxcf-hint hintId={HintId.Responses} class="Hint" />
           </div>
           {this.RenderizeResponse()}
           <gxcf-add-object
-            onClick={event => this.TriggerOnAddResponse(event)}
+            onClick={() => this.TriggerOnAddResponse()}
             addText="Add another possible response"
           />
         </div>

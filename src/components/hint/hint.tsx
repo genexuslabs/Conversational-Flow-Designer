@@ -1,5 +1,5 @@
 import { Component, Prop, h, State } from "@stencil/core";
-import { PropertiesDefinition } from "../../global/conversational-editor/helpers/helpers";
+import { PropertiesDefinition } from "../common/helpers";
 
 @Component({
   tag: "gxcf-hint",

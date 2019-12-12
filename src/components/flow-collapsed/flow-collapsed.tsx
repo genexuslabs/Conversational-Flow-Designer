@@ -1,9 +1,5 @@
-import { Component, Prop, Event, EventEmitter, h, State } from "@stencil/core";
-import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
-import {
-  RenderingOptions,
-  SelectTypes
-} from "../../global/conversational-editor/helpers/helpers";
+import { Component, Prop, Event, EventEmitter, h } from "@stencil/core";
+import { RenderingOptions, SelectTypes } from "../common/helpers";
 
 @Component({
   tag: "gxcf-flow-collapsed",
@@ -11,18 +7,21 @@ import {
   shadow: true
 })
 export class FlowCollapsed {
-  @Prop() flow: FlowElement;
+  @Prop() flow: GXCFModel.FlowElement;
   @Prop() renderingType: RenderingOptions;
-  @State() refresh: boolean;
 
   @Event() expandFlow: EventEmitter;
   TriggerOnExpandFlow(event): void {
-    this.expandFlow.emit(event);
+    console.log(event);
+    this.expandFlow.emit.call(this, { flowName: this.flow.Name });
   }
 
   @Event() selectConversationalObject: EventEmitter;
   TriggerSelectConversationalObject(event): void {
-    this.selectConversationalObject.emit(event);
+    console.log(event);
+    this.selectConversationalObject.emit.call(this, {
+      flowName: this.flow.Name
+    });
   }
 
   get SummaryId(): string {
@@ -39,6 +38,23 @@ export class FlowCollapsed {
 
   get DescriptionId(): string {
     return `GXCFDescriptionId_${this.flow.Id}`;
+  }
+
+  private GetSummaryTriggerMessage(): string {
+    if (this.flow.Triggers[0] != null) {
+      return this.flow.Triggers[0];
+    }
+    return "";
+  }
+
+  private GetSummaryConversationalObject(): string {
+    if (
+      this.flow.ConversationalObjectName != null &&
+      this.flow.ConversationalObjectName != ""
+    ) {
+      return this.flow.ConversationalObjectName.toUpperCase();
+    }
+    return "NONE";
   }
 
   render() {
@@ -65,14 +81,14 @@ export class FlowCollapsed {
         <gxcf-select
           class="SelectBoxing"
           selectid={this.SelectId}
-          selectcaption={this.flow.GetSummaryConversationalObject()}
+          selectcaption={this.GetSummaryConversationalObject()}
           selectIconType={this.flow.ConversationalObjectType}
           selectType={SelectTypes.Compact}
           onClick={event => this.TriggerSelectConversationalObject(event)}
         />
         <gxcf-summary-description
           descriptionid={this.DescriptionId}
-          descriptionvalue={this.flow.GetSummaryTriggerMessage()}
+          descriptionvalue={this.GetSummaryTriggerMessage()}
         />
       </div>
     );

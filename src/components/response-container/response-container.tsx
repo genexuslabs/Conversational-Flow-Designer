@@ -2,15 +2,14 @@ import {
   Component,
   Prop,
   h,
-  State,
   Listen,
   Event,
-  EventEmitter
+  EventEmitter,
+  Element
 } from "@stencil/core";
-import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
-import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
-import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
-import { EventHandler } from "../../global/conversational-editor/event-handler";
+import { RenderingOptions } from "../common/helpers";
+import { EventsHelper } from "../common/events-helper";
+import { StringCollectionHelper } from "../common/string-collection-helper";
 
 @Component({
   tag: "gxcf-response-container",
@@ -18,58 +17,107 @@ import { EventHandler } from "../../global/conversational-editor/event-handler";
   shadow: true
 })
 export class Response {
-  @Prop() response: ResponseElement;
-  @Prop() flow: FlowElement;
-  @State() refresh = false;
+  @Prop() response: GXCFModel.ResponseElement;
+  @Prop() flow: GXCFModel.FlowElement;
+  @Prop() renderType: RenderingOptions;
+  @Prop() responseIndex: number;
+  @Prop() instance: GXCFModel.Instance;
+  @Element() element: HTMLElement;
+
+  @Event() expandResponseOut: EventEmitter;
+  TriggerExpandResponseOut(event): void {
+    console.log(event);
+    this.expandResponseOut.emit.call(this, { source: this.element });
+  }
+
+  @Event() collapseResponseOut: EventEmitter;
+  TriggerCollapseResponseOut(event): void {
+    console.log(event);
+    this.collapseResponseOut.emit.call(this, { source: this.element });
+  }
+
+  @Event() setResponseMessages: EventEmitter;
+  TriggerSetResponseMessages(
+    index: number,
+    value: string,
+    remove: boolean
+  ): void {
+    this.setResponseMessages.emit.call(this, {
+      flowName: this.flow.Name,
+      responseIndex: this.responseIndex,
+      responseMessages: StringCollectionHelper.FormatCollection(
+        this.response.Format,
+        index,
+        value,
+        remove
+      )
+    });
+  }
+
+  @Listen("setResponseMessagesInternal")
+  HandleSetResponseMessagesInternal(event: CustomEvent): void {
+    event.preventDefault();
+    this.TriggerSetResponseMessages(
+      event.detail.index,
+      event.detail.value,
+      event.detail.remove
+    );
+  }
 
   @Listen("expandResponse")
   HandleExpandResponse(event: CustomEvent) {
-    console.log(event);
-    this.response.SetRenderType(RenderingOptions.Full);
-    this.Refresh();
+    this.TriggerExpandResponseOut(event);
   }
 
   @Listen("collapseResponse")
   HandleCollapseResponse(event: CustomEvent) {
-    console.log(event);
-    this.response.SetRenderType(RenderingOptions.Collapsed);
-    this.Refresh();
+    this.TriggerCollapseResponseOut(event);
   }
 
-  @Listen("changeResponseName")
-  HandleChangeResponseName(event) {
-    const value: string = EventHandler.GetValue(event);
-    console.log("New response name: " + value);
-    this.response.SetResponseName(value);
+  @Event() changeResponseName: EventEmitter;
+  TriggerChangeResponseName(event: CustomEvent): void {
+    const value: string = EventsHelper.GetValue(event);
+    this.changeResponseName.emit.call(this, {
+      flowName: this.flow.Name,
+      index: this.responseIndex,
+      value: value
+    });
   }
 
   @Event() deleteResponse: EventEmitter;
-  TriggerDeleteResponse(event): void {
-    this.deleteResponse.emit(event);
-  }
-
-  private Refresh(): void {
-    this.refresh = !this.refresh;
+  TriggerDeleteResponse(): void {
+    this.deleteResponse.emit.call(this, {
+      flowName: this.flow.Name,
+      index: this.responseIndex
+    });
   }
 
   private RenderCollapsed(): HTMLElement {
-    return <gxcf-response-collapsed response={this.response} />;
+    return (
+      <gxcf-response-collapsed
+        response={this.response}
+        onChangeResponseName={event => this.TriggerChangeResponseName(event)}
+      />
+    );
   }
 
   private RenderFull(): HTMLElement {
     return (
       <gxcf-response-full
         response={this.response}
-        onDeleteResponseFull={event => this.TriggerDeleteResponse(event)}
+        responseIndex={this.responseIndex}
+        flow={this.flow}
+        onDeleteResponseFull={() => this.TriggerDeleteResponse()}
+        instance={this.instance}
+        onChangeResponseName={event => this.TriggerChangeResponseName(event)}
       />
     );
   }
 
   render() {
-    if (this.response.RenderType == RenderingOptions.Collapsed)
+    if (this.renderType == RenderingOptions.Collapsed)
       return this.RenderCollapsed();
-    if (this.response.RenderType == RenderingOptions.Full)
-      return this.RenderFull();
+    if (this.renderType == RenderingOptions.Full) return this.RenderFull();
     return <div>Unsupported render type</div>;
   }
 }

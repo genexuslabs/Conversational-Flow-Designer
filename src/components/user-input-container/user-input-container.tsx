@@ -2,15 +2,14 @@ import {
   Component,
   Prop,
   h,
-  State,
   Listen,
   Event,
-  EventEmitter
+  EventEmitter,
+  Element
 } from "@stencil/core";
-import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
-import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
-import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
-import { EventHandler } from "../../global/conversational-editor/event-handler";
+import { RenderingOptions } from "../common/helpers";
+import { EventsHelper } from "../common/events-helper";
+import { StringCollectionHelper } from "../common/string-collection-helper";
 
 @Component({
   tag: "gxcf-user-input-container",
@@ -18,47 +17,77 @@ import { EventHandler } from "../../global/conversational-editor/event-handler";
   shadow: true
 })
 export class UserInput {
-  @Prop() userInput: UserInputElement;
-  @Prop() flow: FlowElement;
-  @State() refresh = false;
+  @Prop() userInput: GXCFModel.UserInputElement;
+  @Prop() flow: GXCFModel.FlowElement;
+  @Prop() instance: GXCFModel.Instance;
+  @Prop() renderType: RenderingOptions;
+  @Element() element: HTMLElement;
 
-  @Listen("expandUserInput")
-  HandleOnExpandUserInput(event: CustomEvent): void {
-    console.log("Event: " + event.type);
-    this.userInput.SetRenderType(RenderingOptions.Full);
-    this.refresh = !this.refresh;
-  }
-
-  @Listen("collapseUserInput")
-  HandleCollapseUserInput(event: CustomEvent): void {
-    console.log(event.type);
-    this.userInput.SetRenderType(RenderingOptions.Collapsed);
-    this.refresh = !this.refresh;
+  @Event() setUserInputName: EventEmitter;
+  TriggerSetUserInputName(value: string): void {
+    this.setUserInputName.emit.call(this, {
+      flowName: this.flow.Name,
+      currentUserInputName: this.userInput.Variable,
+      newUserInputName: value
+    });
   }
 
   @Listen("modifyUserInputName")
   HandleOnModifyUserInputName(event: CustomEvent): void {
     console.log("Event: " + event.type);
-    const value = EventHandler.GetValue(event);
-    if (value != null) {
-      this.userInput.SetName(value);
-      this.refresh = !this.refresh;
-    }
+    const value = EventsHelper.GetValue(event);
+    this.TriggerSetUserInputName(value);
+  }
+
+  @Event() setAskMessages: EventEmitter;
+  TriggerSetAskMessages(index: number, value: string, remove: boolean): void {
+    this.setAskMessages.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable,
+      askMessages: StringCollectionHelper.FormatCollection(
+        this.userInput.RequiredMessages,
+        index,
+        value,
+        remove
+      )
+    });
   }
 
   @Listen("modifyUserInputFirstAskMessage")
   HandleOnModifyUserInputFirstAskMessage(event: CustomEvent): void {
     console.log("Event: " + event.type);
-    const value = EventHandler.GetValue(event);
-    if (value != null) {
-      this.userInput.SetFirstAskMessage(value);
-      this.refresh = !this.refresh;
-    }
+    const value = EventsHelper.GetValue(event);
+    this.TriggerSetAskMessages(0, value, false);
   }
 
   @Event() deleteUserInput: EventEmitter;
-  TriggerDeleteUserInput(event): void {
-    this.deleteUserInput.emit(event);
+  TriggerDeleteUserInput(): void {
+    this.deleteUserInput.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable
+    });
+  }
+
+  @Event() expandUserInputOut: EventEmitter;
+  TriggerExpandUserInputOut(event): void {
+    console.log(event);
+    this.expandUserInputOut.emit.call(this, { source: this.element });
+  }
+
+  @Event() collapseUserInputOut: EventEmitter;
+  TriggerCollapseUserInputOut(event): void {
+    console.log(event);
+    this.collapseUserInputOut.emit.call(this, { source: this.element });
+  }
+
+  @Listen("expandUserInput")
+  HandleOnExpandUserInput(event: CustomEvent): void {
+    this.TriggerExpandUserInputOut(event);
+  }
+
+  @Listen("collapseUserInput")
+  HandleCollapseUserInput(event: CustomEvent): void {
+    this.TriggerCollapseUserInputOut(event);
   }
 
   private collapsedUserInput(): HTMLElement {
@@ -70,17 +99,16 @@ export class UserInput {
       <gxcf-user-input-full
         userInput={this.userInput}
         flow={this.flow}
-        onDeleteUserInputFull={event => this.TriggerDeleteUserInput(event)}
+        instance={this.instance}
+        onDeleteUserInputFull={() => this.TriggerDeleteUserInput()}
       />
     );
   }
 
   render() {
-    console.log(this.userInput.RenderType);
-    if (this.userInput.RenderType == RenderingOptions.Collapsed)
+    if (this.renderType == RenderingOptions.Collapsed)
       return this.collapsedUserInput();
-    if (this.userInput.RenderType == RenderingOptions.Full)
-      return this.fullUserInput();
-    return <div>{this.userInput.RenderType} is not supported.</div>;
+    if (this.renderType == RenderingOptions.Full) return this.fullUserInput();
+    return <div>{this.renderType} is not supported.</div>;
   }
 }

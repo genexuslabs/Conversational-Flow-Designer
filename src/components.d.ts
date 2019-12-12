@@ -6,24 +6,17 @@
  */
 
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
-import { Instance } from "./global/conversational-editor/instance-definition/instance";
-import { FlowElement } from "./global/conversational-editor/instance-definition/elements/flow-element";
-import {
-  RenderingOptions,
-  SelectTypes
-} from "./global/conversational-editor/helpers/helpers";
-import { ConversationalElement } from "./global/conversational-editor/instance-definition/elements/iconversational-element";
-import { RedirectionProperty } from "./global/conversational-editor/instance-definition/elements/redirection-property";
-import { ResponseElement } from "./global/conversational-editor/instance-definition/elements/response-element";
-import { UserInputElement } from "./global/conversational-editor/instance-definition/elements/user-input-element";
+import { RenderingOptions, SelectTypes } from "./components/common/helpers";
 
 export namespace Components {
   interface GxcfAddElement {}
   interface GxcfAddObject {
     addText: string;
   }
-  interface GxcfButtonDelete {}
-  interface GxcfButtonEdit {}
+  interface GxcfButtonDelete {
+    confirmationMessage: string;
+    confirmationTitle: string;
+  }
   interface GxcfCollection {
     collection: string[];
     collectionAddText: string;
@@ -35,13 +28,21 @@ export namespace Components {
   interface GxcfCondition {
     currentCondition: string;
   }
-  interface GxcfConversationalDesigner {
-    instance: Instance;
+  interface GxcfConfirmation {
+    confirmationMessage: string;
+    confirmationTitle: string;
   }
-  interface GxcfConversationalObject {
-    conversationalObject: string;
+  interface GxcfConnector {
+    sourceX: number;
+    sourceY: number;
+    targetX: number;
+    targetY: number;
+  }
+  interface GxcfConversationalDesigner {
+    instance: GXCFModel.Instance;
   }
   interface GxcfDesignerWelcome {}
+  interface GxcfDot {}
   interface GxcfDownArrow {
     arrowid: string;
   }
@@ -53,34 +54,43 @@ export namespace Components {
     show: boolean;
   }
   interface GxcfFlowCollapsed {
-    flow: FlowElement;
+    flow: GXCFModel.FlowElement;
     renderingType: RenderingOptions;
   }
   interface GxcfFlowContainer {
-    flow: FlowElement;
+    flow: GXCFModel.FlowElement;
+    instance: GXCFModel.Instance;
     renderType: RenderingOptions;
     showDropZone: boolean;
   }
   interface GxcfFlowFull {
-    flow: FlowElement;
+    flow: GXCFModel.FlowElement;
+    instance: GXCFModel.Instance;
   }
   interface GxcfHint {
     hintId: string;
   }
   interface GxcfRedirection {
-    element: ConversationalElement;
-    redirectionProperty: RedirectionProperty;
+    flows: GXCFModel.FlowElement[];
+    redirectionIndex: number;
+    redirectionProperty: GXCFModel.RedirectionProperty;
     requireCondition: boolean;
   }
   interface GxcfResponseCollapsed {
-    response: ResponseElement;
+    response: GXCFModel.ResponseElement;
   }
   interface GxcfResponseContainer {
-    flow: FlowElement;
-    response: ResponseElement;
+    flow: GXCFModel.FlowElement;
+    instance: GXCFModel.Instance;
+    renderType: RenderingOptions;
+    response: GXCFModel.ResponseElement;
+    responseIndex: number;
   }
   interface GxcfResponseFull {
-    response: ResponseElement;
+    flow: GXCFModel.FlowElement;
+    instance: GXCFModel.Instance;
+    response: GXCFModel.ResponseElement;
+    responseIndex: number;
   }
   interface GxcfSearch {}
   interface GxcfSelect {
@@ -102,15 +112,18 @@ export namespace Components {
     arrowid: string;
   }
   interface GxcfUserInputCollapsed {
-    userInput: UserInputElement;
+    userInput: GXCFModel.UserInputElement;
   }
   interface GxcfUserInputContainer {
-    flow: FlowElement;
-    userInput: UserInputElement;
+    flow: GXCFModel.FlowElement;
+    instance: GXCFModel.Instance;
+    renderType: RenderingOptions;
+    userInput: GXCFModel.UserInputElement;
   }
   interface GxcfUserInputFull {
-    flow: FlowElement;
-    userInput: UserInputElement;
+    flow: GXCFModel.FlowElement;
+    instance: GXCFModel.Instance;
+    userInput: GXCFModel.UserInputElement;
   }
 }
 
@@ -139,14 +152,6 @@ declare global {
     new (): HTMLGxcfButtonDeleteElement;
   };
 
-  interface HTMLGxcfButtonEditElement
-    extends Components.GxcfButtonEdit,
-      HTMLStencilElement {}
-  var HTMLGxcfButtonEditElement: {
-    prototype: HTMLGxcfButtonEditElement;
-    new (): HTMLGxcfButtonEditElement;
-  };
-
   interface HTMLGxcfCollectionElement
     extends Components.GxcfCollection,
       HTMLStencilElement {}
@@ -163,6 +168,22 @@ declare global {
     new (): HTMLGxcfConditionElement;
   };
 
+  interface HTMLGxcfConfirmationElement
+    extends Components.GxcfConfirmation,
+      HTMLStencilElement {}
+  var HTMLGxcfConfirmationElement: {
+    prototype: HTMLGxcfConfirmationElement;
+    new (): HTMLGxcfConfirmationElement;
+  };
+
+  interface HTMLGxcfConnectorElement
+    extends Components.GxcfConnector,
+      HTMLStencilElement {}
+  var HTMLGxcfConnectorElement: {
+    prototype: HTMLGxcfConnectorElement;
+    new (): HTMLGxcfConnectorElement;
+  };
+
   interface HTMLGxcfConversationalDesignerElement
     extends Components.GxcfConversationalDesigner,
       HTMLStencilElement {}
@@ -171,20 +192,18 @@ declare global {
     new (): HTMLGxcfConversationalDesignerElement;
   };
 
-  interface HTMLGxcfConversationalObjectElement
-    extends Components.GxcfConversationalObject,
-      HTMLStencilElement {}
-  var HTMLGxcfConversationalObjectElement: {
-    prototype: HTMLGxcfConversationalObjectElement;
-    new (): HTMLGxcfConversationalObjectElement;
-  };
-
   interface HTMLGxcfDesignerWelcomeElement
     extends Components.GxcfDesignerWelcome,
       HTMLStencilElement {}
   var HTMLGxcfDesignerWelcomeElement: {
     prototype: HTMLGxcfDesignerWelcomeElement;
     new (): HTMLGxcfDesignerWelcomeElement;
+  };
+
+  interface HTMLGxcfDotElement extends Components.GxcfDot, HTMLStencilElement {}
+  var HTMLGxcfDotElement: {
+    prototype: HTMLGxcfDotElement;
+    new (): HTMLGxcfDotElement;
   };
 
   interface HTMLGxcfDownArrowElement
@@ -334,12 +353,13 @@ declare global {
     "gxcf-add-element": HTMLGxcfAddElementElement;
     "gxcf-add-object": HTMLGxcfAddObjectElement;
     "gxcf-button-delete": HTMLGxcfButtonDeleteElement;
-    "gxcf-button-edit": HTMLGxcfButtonEditElement;
     "gxcf-collection": HTMLGxcfCollectionElement;
     "gxcf-condition": HTMLGxcfConditionElement;
+    "gxcf-confirmation": HTMLGxcfConfirmationElement;
+    "gxcf-connector": HTMLGxcfConnectorElement;
     "gxcf-conversational-designer": HTMLGxcfConversationalDesignerElement;
-    "gxcf-conversational-object": HTMLGxcfConversationalObjectElement;
     "gxcf-designer-welcome": HTMLGxcfDesignerWelcomeElement;
+    "gxcf-dot": HTMLGxcfDotElement;
     "gxcf-down-arrow": HTMLGxcfDownArrowElement;
     "gxcf-drop-zone": HTMLGxcfDropZoneElement;
     "gxcf-flow-collapsed": HTMLGxcfFlowCollapsedElement;
@@ -367,8 +387,11 @@ declare namespace LocalJSX {
     addText?: string;
     onAddObject?: (event: CustomEvent<any>) => void;
   }
-  interface GxcfButtonDelete {}
-  interface GxcfButtonEdit {}
+  interface GxcfButtonDelete {
+    confirmationMessage?: string;
+    confirmationTitle?: string;
+    onConfirmDelete?: (event: CustomEvent<any>) => void;
+  }
   interface GxcfCollection {
     collection?: string[];
     collectionAddText?: string;
@@ -383,16 +406,27 @@ declare namespace LocalJSX {
     currentCondition?: string;
     onConditionChange?: (event: CustomEvent<any>) => void;
   }
-  interface GxcfConversationalDesigner {
-    instance?: Instance;
+  interface GxcfConfirmation {
+    confirmationMessage?: string;
+    confirmationTitle?: string;
+    onUserCancellation?: (event: CustomEvent<any>) => void;
+    onUserConfirmation?: (event: CustomEvent<any>) => void;
   }
-  interface GxcfConversationalObject {
-    conversationalObject?: string;
-    onSelectConversationalObject?: (event: CustomEvent<any>) => void;
+  interface GxcfConnector {
+    sourceX?: number;
+    sourceY?: number;
+    targetX?: number;
+    targetY?: number;
+  }
+  interface GxcfConversationalDesigner {
+    instance?: GXCFModel.Instance;
+    onAddFlow?: (event: CustomEvent<any>) => void;
+    onMoveFlow?: (event: CustomEvent<any>) => void;
   }
   interface GxcfDesignerWelcome {
     onOpenEditor?: (event: CustomEvent<any>) => void;
   }
+  interface GxcfDot {}
   interface GxcfDownArrow {
     arrowid?: string;
   }
@@ -403,48 +437,74 @@ declare namespace LocalJSX {
     show?: boolean;
   }
   interface GxcfFlowCollapsed {
-    flow?: FlowElement;
+    flow?: GXCFModel.FlowElement;
     onExpandFlow?: (event: CustomEvent<any>) => void;
     onSelectConversationalObject?: (event: CustomEvent<any>) => void;
     renderingType?: RenderingOptions;
   }
   interface GxcfFlowContainer {
-    flow?: FlowElement;
+    flow?: GXCFModel.FlowElement;
+    instance?: GXCFModel.Instance;
     onDeleteFlow?: (event: CustomEvent<any>) => void;
-    onRefreshFlows?: (event: CustomEvent<any>) => void;
+    onModifyFlowName?: (event: CustomEvent<any>) => void;
+    onSetTriggers?: (event: CustomEvent<any>) => void;
     renderType?: RenderingOptions;
     showDropZone?: boolean;
   }
   interface GxcfFlowFull {
-    flow?: FlowElement;
+    flow?: GXCFModel.FlowElement;
+    instance?: GXCFModel.Instance;
+    onAddResponse?: (event: CustomEvent<any>) => void;
+    onAddUserInput?: (event: CustomEvent<any>) => void;
     onCollapseFlow?: (event: CustomEvent<any>) => void;
     onDeleteFullFlow?: (event: CustomEvent<any>) => void;
     onSelectConversationalObject?: (event: CustomEvent<any>) => void;
+    onSetTriggers?: (event: CustomEvent<any>) => void;
   }
   interface GxcfHint {
     hintId?: string;
-    onHideHint?: (event: CustomEvent<any>) => void;
-    onShowHint?: (event: CustomEvent<any>) => void;
   }
   interface GxcfRedirection {
-    element?: ConversationalElement;
+    flows?: GXCFModel.FlowElement[];
+    onChangeRedirectCondition?: (event: CustomEvent<any>) => void;
     onChangeRedirectTo?: (event: CustomEvent<any>) => void;
-    redirectionProperty?: RedirectionProperty;
+    redirectionIndex?: number;
+    redirectionProperty?: GXCFModel.RedirectionProperty;
     requireCondition?: boolean;
   }
   interface GxcfResponseCollapsed {
+    onChangeResponseName?: (event: CustomEvent<any>) => void;
     onExpandResponse?: (event: CustomEvent<any>) => void;
-    response?: ResponseElement;
+    onSetResponseMessagesInternal?: (event: CustomEvent<any>) => void;
+    response?: GXCFModel.ResponseElement;
   }
   interface GxcfResponseContainer {
-    flow?: FlowElement;
+    flow?: GXCFModel.FlowElement;
+    instance?: GXCFModel.Instance;
+    onChangeResponseName?: (event: CustomEvent<any>) => void;
+    onCollapseResponseOut?: (event: CustomEvent<any>) => void;
     onDeleteResponse?: (event: CustomEvent<any>) => void;
-    response?: ResponseElement;
+    onExpandResponseOut?: (event: CustomEvent<any>) => void;
+    onSetResponseMessages?: (event: CustomEvent<any>) => void;
+    renderType?: RenderingOptions;
+    response?: GXCFModel.ResponseElement;
+    responseIndex?: number;
   }
   interface GxcfResponseFull {
+    flow?: GXCFModel.FlowElement;
+    instance?: GXCFModel.Instance;
+    onChangeComponentType?: (event: CustomEvent<any>) => void;
+    onChangeResponseCondition?: (event: CustomEvent<any>) => void;
+    onChangeResponseName?: (event: CustomEvent<any>) => void;
+    onChangeResponseRedirectTo?: (event: CustomEvent<any>) => void;
+    onChangeResponseStyle?: (event: CustomEvent<any>) => void;
+    onChangeSDComponent?: (event: CustomEvent<any>) => void;
+    onChangeWebComponent?: (event: CustomEvent<any>) => void;
     onCollapseResponse?: (event: CustomEvent<any>) => void;
     onDeleteResponseFull?: (event: CustomEvent<any>) => void;
-    response?: ResponseElement;
+    onSetResponseMessagesInternal?: (event: CustomEvent<any>) => void;
+    response?: GXCFModel.ResponseElement;
+    responseIndex?: number;
   }
   interface GxcfSearch {
     onSearch?: (event: CustomEvent<any>) => void;
@@ -473,31 +533,47 @@ declare namespace LocalJSX {
     onExpandUserInput?: (event: CustomEvent<any>) => void;
     onModifyUserInputFirstAskMessage?: (event: CustomEvent<any>) => void;
     onModifyUserInputName?: (event: CustomEvent<any>) => void;
-    userInput?: UserInputElement;
+    userInput?: GXCFModel.UserInputElement;
   }
   interface GxcfUserInputContainer {
-    flow?: FlowElement;
+    flow?: GXCFModel.FlowElement;
+    instance?: GXCFModel.Instance;
+    onCollapseUserInputOut?: (event: CustomEvent<any>) => void;
     onDeleteUserInput?: (event: CustomEvent<any>) => void;
-    userInput?: UserInputElement;
+    onExpandUserInputOut?: (event: CustomEvent<any>) => void;
+    onSetAskMessages?: (event: CustomEvent<any>) => void;
+    onSetUserInputName?: (event: CustomEvent<any>) => void;
+    renderType?: RenderingOptions;
+    userInput?: GXCFModel.UserInputElement;
   }
   interface GxcfUserInputFull {
-    flow?: FlowElement;
+    flow?: GXCFModel.FlowElement;
+    instance?: GXCFModel.Instance;
+    onAddRedirection?: (event: CustomEvent<any>) => void;
+    onChangeCondition?: (event: CustomEvent<any>) => void;
+    onChangeTryLimit?: (event: CustomEvent<any>) => void;
+    onChangeUserInputRedirectCondition?: (event: CustomEvent<any>) => void;
+    onChangeUserInputRedirectTo?: (event: CustomEvent<any>) => void;
     onCollapseUserInput?: (event: CustomEvent<any>) => void;
     onDeleteUserInputFull?: (event: CustomEvent<any>) => void;
     onModifyUserInputName?: (event: CustomEvent<any>) => void;
-    userInput?: UserInputElement;
+    onSelectValidationProcedure?: (event: CustomEvent<any>) => void;
+    onSetAskMessages?: (event: CustomEvent<any>) => void;
+    onSetOnErrorMessages?: (event: CustomEvent<any>) => void;
+    userInput?: GXCFModel.UserInputElement;
   }
 
   interface IntrinsicElements {
     "gxcf-add-element": GxcfAddElement;
     "gxcf-add-object": GxcfAddObject;
     "gxcf-button-delete": GxcfButtonDelete;
-    "gxcf-button-edit": GxcfButtonEdit;
     "gxcf-collection": GxcfCollection;
     "gxcf-condition": GxcfCondition;
+    "gxcf-confirmation": GxcfConfirmation;
+    "gxcf-connector": GxcfConnector;
     "gxcf-conversational-designer": GxcfConversationalDesigner;
-    "gxcf-conversational-object": GxcfConversationalObject;
     "gxcf-designer-welcome": GxcfDesignerWelcome;
+    "gxcf-dot": GxcfDot;
     "gxcf-down-arrow": GxcfDownArrow;
     "gxcf-drop-zone": GxcfDropZone;
     "gxcf-flow-collapsed": GxcfFlowCollapsed;
@@ -530,18 +606,19 @@ declare module "@stencil/core" {
         JSXBase.HTMLAttributes<HTMLGxcfAddObjectElement>;
       "gxcf-button-delete": LocalJSX.GxcfButtonDelete &
         JSXBase.HTMLAttributes<HTMLGxcfButtonDeleteElement>;
-      "gxcf-button-edit": LocalJSX.GxcfButtonEdit &
-        JSXBase.HTMLAttributes<HTMLGxcfButtonEditElement>;
       "gxcf-collection": LocalJSX.GxcfCollection &
         JSXBase.HTMLAttributes<HTMLGxcfCollectionElement>;
       "gxcf-condition": LocalJSX.GxcfCondition &
         JSXBase.HTMLAttributes<HTMLGxcfConditionElement>;
+      "gxcf-confirmation": LocalJSX.GxcfConfirmation &
+        JSXBase.HTMLAttributes<HTMLGxcfConfirmationElement>;
+      "gxcf-connector": LocalJSX.GxcfConnector &
+        JSXBase.HTMLAttributes<HTMLGxcfConnectorElement>;
       "gxcf-conversational-designer": LocalJSX.GxcfConversationalDesigner &
         JSXBase.HTMLAttributes<HTMLGxcfConversationalDesignerElement>;
-      "gxcf-conversational-object": LocalJSX.GxcfConversationalObject &
-        JSXBase.HTMLAttributes<HTMLGxcfConversationalObjectElement>;
       "gxcf-designer-welcome": LocalJSX.GxcfDesignerWelcome &
         JSXBase.HTMLAttributes<HTMLGxcfDesignerWelcomeElement>;
+      "gxcf-dot": LocalJSX.GxcfDot & JSXBase.HTMLAttributes<HTMLGxcfDotElement>;
       "gxcf-down-arrow": LocalJSX.GxcfDownArrow &
         JSXBase.HTMLAttributes<HTMLGxcfDownArrowElement>;
       "gxcf-drop-zone": LocalJSX.GxcfDropZone &

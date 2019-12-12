@@ -1,13 +1,11 @@
-import { Component, Prop, h, Event, EventEmitter, State } from "@stencil/core";
-import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
+import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 import {
   HintId,
   ResponseStyles,
   ComponentTypes,
   SelectTypes
-} from "../../global/conversational-editor/helpers/helpers";
-import { EventHandler } from "../../global/conversational-editor/event-handler";
-import { RedirectionProperty } from "../../global/conversational-editor/instance-definition/elements/redirection-property";
+} from "../common/helpers";
+import { EventsHelper } from "../common/events-helper";
 
 @Component({
   tag: "gxcf-response-full",
@@ -15,8 +13,10 @@ import { RedirectionProperty } from "../../global/conversational-editor/instance
   shadow: true
 })
 export class FullResponse {
-  @Prop() response: ResponseElement;
-  @State() refresh: boolean;
+  @Prop() response: GXCFModel.ResponseElement;
+  @Prop() flow: GXCFModel.FlowElement;
+  @Prop() instance: GXCFModel.Instance;
+  @Prop() responseIndex: number;
 
   @Event() collapseResponse: EventEmitter;
   TriggerCollapseResponse(event): void {
@@ -28,60 +28,86 @@ export class FullResponse {
     this.changeResponseName.emit(event);
   }
 
+  @Event() setResponseMessagesInternal: EventEmitter;
+  TriggerSetRespnseMessagesInternal(
+    index: number,
+    value: string,
+    remove: boolean
+  ): void {
+    this.setResponseMessagesInternal.emit.call(this, {
+      index: index,
+      value: value,
+      remove: remove
+    });
+  }
+
   HandleEditResponseMessage(event: CustomEvent): void {
-    const value = EventHandler.GetValue(event);
-    const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.response.EditMessage(value, +index);
+    const value = EventsHelper.GetValue(event);
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+    this.TriggerSetRespnseMessagesInternal(+index, value, false);
   }
 
   HandleDeleteResponseMessage(event: CustomEvent): void {
-    const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.response.DeleteMessage(+index);
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+    this.TriggerSetRespnseMessagesInternal(+index, "", true);
   }
 
-  HandleChangeResponseStyle(event: CustomEvent): void {
-    const value: string = EventHandler.GetValueFromSelect(event);
-    this.response.SetStyle(value);
-    this.refresh = !this.refresh;
+  @Event() changeResponseStyle: EventEmitter;
+  TriggerChangeResponseStyle(event: CustomEvent): void {
+    const value: string = EventsHelper.GetValueFromSelect(event);
+    this.changeResponseStyle.emit.call(this, {
+      flowName: this.flow.Name,
+      responseIndex: this.responseIndex,
+      style: value
+    });
   }
 
-  HandleConditionChange(event: CustomEvent): void {
-    const value: string = EventHandler.GetValue(event);
-    this.response.SetCondition(value);
+  @Event() changeResponseCondition: EventEmitter;
+  TriggerChangeResponseCondition(event: CustomEvent): void {
+    event.preventDefault();
+    const value: string = EventsHelper.GetValue(event);
+    this.changeResponseCondition.emit.call(this, {
+      flowName: this.flow.Name,
+      index: this.responseIndex,
+      condition: value
+    });
   }
 
-  HandleRedirectToChange(event: CustomEvent): void {
-    const value: string = EventHandler.GetValue(event);
-    this.response.SetRedirectTo(value);
+  @Event() changeResponseRedirectTo: EventEmitter;
+  TriggerChangeResponseRedirectTo(event: CustomEvent): void {
+    event.preventDefault();
+    this.changeResponseRedirectTo.emit.call(this, {
+      flowName: this.flow.Name,
+      index: this.responseIndex,
+      redirectTo: event.detail.value
+    });
   }
 
-  HandleChangeComponentType(event: CustomEvent): void {
-    const value: string = EventHandler.GetValueFromSelect(event);
-    this.response.SetComponentType(value);
+  @Event() changeComponentType: EventEmitter;
+  TriggerChangeComponentType(event: CustomEvent) {
+    event.preventDefault();
+    const value: string = EventsHelper.GetValueFromSelect(event);
+    this.changeComponentType.emit.call(this, {
+      flowName: this.flow.Name,
+      index: this.responseIndex,
+      componentType: value
+    });
   }
 
-  HandleChangeWebComponent(event: MouseEvent): void {
-    console.log(event);
-    if (window.external.SetWebComponent) {
-      window.external
-        .SetWebComponent(this.response.Parent.Name, this.response.Index)
-        .then(component => {
-          this.response.WebComponent = component;
-          this.refresh = !this.refresh;
-        });
-    }
+  @Event() changeWebComponent: EventEmitter;
+  TriggerChangeWebComponent(): void {
+    this.changeWebComponent.emit.call(this, {
+      flowName: this.flow.Name,
+      index: this.responseIndex
+    });
   }
 
-  HandleChangeSDComponent(event: MouseEvent) {
-    console.log(event);
-    if (window.external.SetSDComponent) {
-      window.external
-        .SetSDComponent(this.response.Parent.Name, this.response.Index)
-        .then(component => {
-          this.response.SDComponent = component;
-          this.refresh = !this.refresh;
-        });
-    }
+  @Event() changeSDComponent: EventEmitter;
+  TriggerChangeSDComponent() {
+    this.changeSDComponent.emit.call(this, {
+      flowName: this.flow.Name,
+      index: this.responseIndex
+    });
   }
 
   @Event() deleteResponseFull: EventEmitter;
@@ -128,7 +154,9 @@ export class FullResponse {
     elements.push(
       <select
         class="ResponseSelect"
-        onChange={(event: CustomEvent) => this.HandleChangeResponseStyle(event)}
+        onChange={(event: CustomEvent) =>
+          this.TriggerChangeResponseStyle(event)
+        }
       >
         {componentElementOption}
         {textElementOption}
@@ -161,7 +189,9 @@ export class FullResponse {
       );
     return (
       <select
-        onChange={(event: CustomEvent) => this.HandleChangeComponentType(event)}
+        onChange={(event: CustomEvent) =>
+          this.TriggerChangeComponentType(event)
+        }
         class="ResponseSelect"
       >
         {componentOption}
@@ -180,17 +210,15 @@ export class FullResponse {
           {this.RenderizeComponentType()}
         </div>
       );
-      const sdComponent: string = this.response.ComponentType;
-      console.log("The component: " + sdComponent);
       elements.push(
         <div class="ResponseProperty">
           <gxcf-hint class="HintBlock" hintId={HintId.SDComponent} />
           <span>SD Component</span>
           <gxcf-select
-            selectcaption={this.response.GetSDComponentName()}
+            selectcaption={this.response.SDComponentName}
             selectIconType="SDPanel"
             selectType={SelectTypes.Full}
-            onClick={event => this.HandleChangeSDComponent(event)}
+            onClick={() => this.TriggerChangeSDComponent()}
           />
         </div>
       );
@@ -199,10 +227,10 @@ export class FullResponse {
           <gxcf-hint class="HintBlock" hintId={HintId.WebComponent} />
           <span>Web Component</span>
           <gxcf-select
-            selectcaption={this.response.GetWebComponentName()}
+            selectcaption={this.response.WebComponentName}
             selectIconType="WebPanel"
             selectType={SelectTypes.Full}
-            onClick={event => this.HandleChangeWebComponent(event)}
+            onClick={() => this.TriggerChangeWebComponent()}
           />
         </div>
       );
@@ -213,10 +241,15 @@ export class FullResponse {
           <span>Redirect To</span>
           <gxcf-redirection
             requireCondition={false}
-            redirectionProperty={
-              new RedirectionProperty("", this.response.RedirectTo, 0)
+            redirectionProperty={{
+              RedirectCondition: "",
+              RedirectTo: this.response.RedirectTo,
+              Index: 0
+            }}
+            flows={this.instance.Flows}
+            onChangeRedirectTo={event =>
+              this.TriggerChangeResponseRedirectTo(event)
             }
-            onChangeRedirectTo={event => this.HandleRedirectToChange(event)}
           />
         </div>
       );
@@ -246,7 +279,7 @@ export class FullResponse {
           confirmationMessage={`Do you want to delete the response '${this.response.Index}'?`}
         />
         <gxcf-collection
-          collection={this.response.Messages}
+          collection={this.response.Format}
           collectionHeader="Response Messages"
           collectionAddText="Add an alternative response message"
           collectionHintId={HintId.ResponseMessage}
@@ -264,7 +297,9 @@ export class FullResponse {
         <gxcf-condition
           class="ConditionMargin"
           currentCondition={this.response.Condition}
-          onConditionChange={event => this.HandleConditionChange(event)}
+          onConditionChange={event =>
+            this.TriggerChangeResponseCondition(event)
+          }
         />
         <hr class="Separator"></hr>
         <div class="ConditionMargin">

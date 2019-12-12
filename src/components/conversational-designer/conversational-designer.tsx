@@ -1,10 +1,16 @@
-import { Component, h, Listen, State, Element, Prop } from "@stencil/core";
-import { App } from "../../global/conversational-editor/app";
-import { EventHandler } from "../../global/conversational-editor/event-handler";
-import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
-import { Controls } from "../../global/conversational-editor/helpers/helpers";
+import {
+  Component,
+  h,
+  Listen,
+  State,
+  Element,
+  Prop,
+  Event,
+  EventEmitter
+} from "@stencil/core";
+import { EventsHelper } from "../common/events-helper";
+import { Controls, RenderingOptions } from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
-import { Instance } from "../../global/conversational-editor/instance-definition/instance";
 
 @Component({
   tag: "gxcf-conversational-designer",
@@ -13,13 +19,13 @@ import { Instance } from "../../global/conversational-editor/instance-definition
 })
 export class ConversationalDesginer {
   @State() search: string;
-  @State() flows: FlowElement[];
+  @State() flows: GXCFModel.FlowElement[];
   @State() openEditor: boolean;
-  @State() refresh: boolean;
-  @Prop() instance: Instance;
+  @Prop() instance: GXCFModel.Instance;
+  @State() renderFull = "";
 
   @Element() element: HTMLElement;
-
+  @Event() moveFlow: EventEmitter;
   private dragDropHandler: ConversationalDesignerDragDrop;
 
   @Listen("openEditor")
@@ -27,116 +33,94 @@ export class ConversationalDesginer {
     this.openEditor = true;
   }
 
-  @Listen("refreshFlows")
-  HandleRefreshFlows(event: CustomEvent): void {
-    console.log(event);
-    this.flows = Object.assign({}, App.GetApp().Instance.Flows);
-  }
-
-  HandleAddFlowElement(): void {
-    this.flows = EventHandler.AddFlowElement();
-  }
-
   HandleSearch(event: CustomEvent): void {
-    const value: string = EventHandler.GetValue(event);
+    const value: string = EventsHelper.GetValue(event);
     this.search = value;
   }
 
-  HandleDeleteFlow(event: CustomEvent, flow: FlowElement): void {
-    console.log("Delete flow " + event);
-    App.GetApp().Instance.DeleteFlow(flow);
-    this.refresh = !this.refresh;
+  @Listen("expandFlow")
+  HandleExpandFlow(event: CustomEvent): void {
+    event.preventDefault();
+    this.renderFull = event.detail.flowName;
   }
 
-  private addFlow = (
+  @Event() addFlow: EventEmitter;
+  TriggerAddFlow(event): void {
+    this.addFlow.emit(event);
+  }
+
+  private setAddFlow = (
     <gxcf-add-object
       class="AddFlow"
-      onClick={() => this.HandleAddFlowElement()}
+      onClick={event => this.TriggerAddFlow(event)}
       addText="Add another flow"
     />
   );
 
   private RenderizeFlows(): HTMLElement[] {
     const flows: HTMLElement[] = [];
-    App.GetApp()
-      .Instance.GetFlows(this.search)
-      .forEach(function(flowElement) {
-        flows.push(
-          <gxcf-flow-container
-            flow={flowElement}
-            onDeleteFlow={event => this.HandleDeleteFlow(event, flowElement)}
-            data-gxcf-element-id={flowElement.Name}
-            renderType={flowElement.RenderType}
-          />
-        );
-      }, this);
+    let index = 0;
+    this.GetFlows().forEach(function(flowElement) {
+      let renderType: RenderingOptions = RenderingOptions.Collapsed;
+      console.log(this.renderFull);
+      if (
+        (index == 0 && this.renderFull == "") ||
+        this.renderFull == flowElement.Name
+      )
+        renderType = RenderingOptions.Full;
+
+      flows.push(
+        <gxcf-flow-container
+          flow={flowElement}
+          instance={this.instance}
+          data-gxcf-element-id={flowElement.Name}
+          renderType={renderType}
+        />
+      );
+      index++;
+    }, this);
+    return flows;
+  }
+
+  public GetFlows(): Array<GXCFModel.FlowElement> {
+    if (this.search == "" || this.search == null) return this.instance.Flows;
+
+    const flows: Array<GXCFModel.FlowElement> = new Array<
+      GXCFModel.FlowElement
+    >();
+    this.instance.Flows.forEach(function(flow) {
+      if (flow.Name.toLowerCase().includes(this.search.toLowerCase())) {
+        flows.push(flow);
+      }
+    });
+
     return flows;
   }
 
   componentWillLoad(): void {
-    const mainLogConsole = console.log;
-    console.log = function(message) {
-      if (window.external.Log) {
-        window.external.Log(message);
-      }
-      mainLogConsole.apply(console, [message]);
-    };
-
-    const mainInfoConsole = console.info;
-    console.info = function(message) {
-      if (window.external.Log) {
-        window.external.Log(message);
-      }
-      mainInfoConsole.apply(console, [message]);
-    };
-
-    const mainErrorConsole = console.error;
-    console.error = function(message) {
-      if (window.external.LogError) {
-        window.external.LogError(message);
-      }
-      mainErrorConsole.apply(console, [message]);
-    };
-
-    const mainWarnConsole = console.warn;
-    console.warn = function(message) {
-      if (window.external.LogWarning) {
-        window.external.LogWarning(message);
-      }
-      mainWarnConsole.apply(console, [message]);
-    };
-
-    const mainExcepetionConsole = console.exception;
-    console.exception = function(message) {
-      if (window.external.LogError) {
-        window.external.LogError(message);
-      }
-      mainExcepetionConsole.apply(console, [message]);
-    };
-
-    App.GetApp();
-
     this.dragDropHandler = new ConversationalDesignerDragDrop(
-      this.element as HTMLGxcfConversationalDesignerElement
+      this.element as HTMLGxcfConversationalDesignerElement,
+      this.moveFlow
     );
     this.dragDropHandler.initialize();
   }
 
   render() {
-    if (!this.openEditor && App.GetApp().InstanceIsEmpty()) {
-      return <gxcf-designer-welcome />;
+    console.log(this.instance);
+    if (this.instance) {
+      return (
+        <div class="MainTable">
+          <div class="SearchBar">
+            <gxcf-search onSearch={event => this.HandleSearch(event)} />
+          </div>
+          <div id={Controls.FlowsContainer} class="FlowsContainer">
+            {this.RenderizeFlows()}
+          </div>
+          {this.setAddFlow}
+        </div>
+      );
+    } else {
+      return <div class="MainTable"></div>;
     }
-
-    return (
-      <div class="MainTable">
-        <div class="SearchBar">
-          <gxcf-search onSearch={event => this.HandleSearch(event)} />
-        </div>
-        <div id={Controls.FlowsContainer} class="FlowsContainer">
-          {this.RenderizeFlows()}
-        </div>
-        {this.addFlow}
-      </div>
-    );
   }
 }

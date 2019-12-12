@@ -7,13 +7,9 @@ import {
   State,
   Listen
 } from "@stencil/core";
-import {
-  UserInputElement,
-  RequiredTypes
-} from "../../global/conversational-editor/instance-definition/elements/user-input-element";
-import { HintId } from "../../global/conversational-editor/helpers/helpers";
-import { EventHandler } from "../../global/conversational-editor/event-handler";
-import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
+import { HintId } from "../common/helpers";
+import { EventsHelper } from "../common/events-helper";
+import { StringCollectionHelper } from "../common/string-collection-helper";
 
 @Component({
   tag: "gxcf-user-input-full",
@@ -21,10 +17,10 @@ import { FlowElement } from "../../global/conversational-editor/instance-definit
   shadow: true
 })
 export class FullUserInput {
-  @Prop() userInput: UserInputElement;
-  @Prop() flow: FlowElement;
+  @Prop() userInput: GXCFModel.UserInputElement;
+  @Prop() flow: GXCFModel.FlowElement;
+  @Prop() instance: GXCFModel.Instance;
   @State() enableAdvancedMode = false;
-  @State() refresh = false;
 
   @Event() collapseUserInput: EventEmitter;
   TriggerOnCollapseUserInput(event): void {
@@ -36,14 +32,13 @@ export class FullUserInput {
     this.modifyUserInputName.emit(event);
   }
 
+  @Event() selectValidationProcedure: EventEmitter;
   TriggerOnChangeValidationProcedure(event): void {
     console.log(event);
-    EventHandler.SelectValidationProcedure(this.flow, this.userInput).then(
-      uInput => {
-        this.userInput = uInput;
-        this.refresh = !this.refresh;
-      }
-    );
+    this.selectValidationProcedure.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable
+    });
   }
 
   SwitchAdvancedMode(event): void {
@@ -51,16 +46,14 @@ export class FullUserInput {
     this.enableAdvancedMode = !this.enableAdvancedMode;
   }
 
-  HandleChangeCondition(event: CustomEvent): void {
-    const value = EventHandler.GetValue(event);
-    this.userInput.Required = RequiredTypes.Condition;
-    this.userInput.RequiredCondition = value;
-    if (window.external.SetUserInputRequiredCondition)
-      window.external.SetUserInputRequiredCondition(
-        this.flow.Name,
-        this.userInput.Variable,
-        value
-      );
+  @Event() changeCondition: EventEmitter;
+  TriggerChangeCondition(event: CustomEvent): void {
+    const value = EventsHelper.GetValue(event);
+    this.changeCondition.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable,
+      newCondition: value
+    });
   }
 
   @Listen("addObject")
@@ -69,39 +62,75 @@ export class FullUserInput {
     console.log("add redirection");
   }
 
-  HandleTryLimitChange(event: CustomEvent): void {
-    const value: string = EventHandler.GetValueFromInput(event);
-    this.userInput.SetTryLimit(+value);
-    console.log(value);
+  @Event() changeTryLimit: EventEmitter;
+  TriggerTryLimitChange(event: CustomEvent): void {
+    const value: string = EventsHelper.GetValueFromInput(event);
+    this.changeTryLimit.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable,
+      value: value
+    });
+  }
+  @Event() addRedirection: EventEmitter;
+  TriggerAddRedirection() {
+    this.addRedirection.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable
+    });
   }
 
-  HandleAddRedirection(event) {
-    console.log(event);
-    this.userInput.AddNewRedirection();
-    this.refresh = !this.refresh;
+  @Event() setAskMessages: EventEmitter;
+  TriggerSetAskMessages(index: number, value: string, remove: boolean): void {
+    this.setAskMessages.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable,
+      askMessages: StringCollectionHelper.FormatCollection(
+        this.userInput.RequiredMessages,
+        index,
+        value,
+        remove
+      )
+    });
   }
 
   HandleEditAskMessage(event: CustomEvent): void {
-    const value = EventHandler.GetValue(event);
-    const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.userInput.SetAskMessage(+index, value);
+    const value = EventsHelper.GetValue(event);
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+    this.TriggerSetAskMessages(+index, value, false);
   }
 
   HandleDeleteAskMessage(event: CustomEvent): void {
-    const index = EventHandler.GetCollectionIndexFromDetail(event);
-    console.log("Index: " + index);
-    this.userInput.DeleteAskMessage(+index);
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+    this.TriggerSetAskMessages(+index, "", true);
+  }
+
+  @Event() setOnErrorMessages: EventEmitter;
+  TriggerSetOnErrorMessages(
+    index: number,
+    value: string,
+    remove: boolean
+  ): void {
+    this.setOnErrorMessages.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable,
+      errorMessages: StringCollectionHelper.FormatCollection(
+        this.userInput.ErrorMessages,
+        index,
+        value,
+        remove
+      )
+    });
   }
 
   HandleEditOnErrorMessage(event: CustomEvent): void {
-    const value = EventHandler.GetValue(event);
-    const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.userInput.SetOnErrorMessage(+index, value);
+    const value = EventsHelper.GetValue(event);
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+    this.TriggerSetOnErrorMessages(+index, value, false);
   }
 
   HandleDeleteOnErrorMessage(event: CustomEvent): void {
-    const index = EventHandler.GetCollectionIndexFromDetail(event);
-    this.userInput.DeleteOnErrorMessage(+index);
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+    this.TriggerSetOnErrorMessages(+index, "", true);
   }
 
   @Event() deleteUserInputFull: EventEmitter;
@@ -109,26 +138,69 @@ export class FullUserInput {
     this.deleteUserInputFull.emit(event);
   }
 
+  @Event() changeUserInputRedirectCondition: EventEmitter;
+  TriggerChangeUserInputRedirectCondition(event: CustomEvent) {
+    event.preventDefault();
+    this.changeUserInputRedirectCondition.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable,
+      value: event.detail.value,
+      index: event.detail.index
+    });
+  }
+
+  @Event() changeUserInputRedirectTo: EventEmitter;
+  TriggerUserInputChangeRedirectTo(event: CustomEvent): void {
+    event.preventDefault();
+    this.changeUserInputRedirectTo.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable,
+      value: event.detail.value,
+      index: event.detail.index
+    });
+  }
+
   private RenderRedirections(): HTMLElement[] {
+    3;
     const redirs: HTMLElement[] = new Array<HTMLElement>();
     if (this.userInput.Redirections.length > 0) {
+      let index = 0;
       this.userInput.Redirections.forEach(function(redir) {
         redirs.push(
           <gxcf-redirection
-            element={this.userInput}
             redirectionProperty={redir}
+            flows={this.instance.Flows}
+            requireCondition={true}
+            redirectionIndex={index}
+            onChangeRedirectCondition={(event: CustomEvent) =>
+              this.TriggerChangeUserInputRedirectCondition(event)
+            }
+            onChangeRedirectTo={(event: CustomEvent) =>
+              this.TriggerUserInputChangeRedirectTo(event)
+            }
           />
         );
+        index++;
       }, this);
     } else {
       redirs.push(
-        <gxcf-redirection element={this.userInput} requireCondition={true} />
+        <gxcf-redirection
+          requireCondition={true}
+          flows={this.instance.Flows}
+          redirectionIndex={0}
+          onChangeRedirectCondition={(event: CustomEvent) =>
+            this.TriggerChangeUserInputRedirectCondition(event)
+          }
+          onChangeRedirectTo={(event: CustomEvent) =>
+            this.TriggerUserInputChangeRedirectTo(event)
+          }
+        />
       );
     }
     redirs.push(
       <gxcf-add-object
         addText="Add another redirection"
-        onClick={event => this.HandleAddRedirection(event)}
+        onClick={() => this.TriggerAddRedirection()}
       />
     );
     return redirs;
@@ -164,7 +236,7 @@ export class FullUserInput {
           <gxcf-hint hintId={HintId.Required} class="UserInputHints" />
           <gxcf-condition
             currentCondition={this.userInput.RequiredCondition}
-            onConditionChange={event => this.HandleChangeCondition(event)}
+            onConditionChange={event => this.TriggerChangeCondition(event)}
           />
         </details>
         {this.RenderBasicMode()}
@@ -190,7 +262,7 @@ export class FullUserInput {
               placeholder="0 - No limits"
               value={this.userInput.TryLimit}
               onChange={(event: CustomEvent) =>
-                this.HandleTryLimitChange(event)
+                this.TriggerTryLimitChange(event)
               }
             />
             <hr class="Separator"></hr>
@@ -250,7 +322,7 @@ export class FullUserInput {
           class="UserInputCommandsPosition"
           onConfirmDelete={event => this.TriggerDeleteUserInput(event)}
           confirmationTitle="Delete user input"
-          confirmationMessage={`Do you want to delete the user input '${this.userInput.GetName()}'?`}
+          confirmationMessage={`Do you want to delete the user input '${this.userInput.Variable}'?`}
         />
         <p class="DataType">Datatype: {this.userInput.DataType}</p>
         <img

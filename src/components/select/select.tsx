@@ -1,5 +1,5 @@
 import { Component, Prop, h } from "@stencil/core";
-import { SelectTypes } from "../../global/conversational-editor/helpers/helpers";
+import { SelectTypes } from "../common/helpers";
 
 @Component({
   tag: "gxcf-select",

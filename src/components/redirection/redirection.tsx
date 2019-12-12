@@ -1,8 +1,5 @@
 import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
-import { App } from "../../global/conversational-editor/app";
-import { RedirectionProperty } from "../../global/conversational-editor/instance-definition/elements/redirection-property";
-import { EventHandler } from "../../global/conversational-editor/event-handler";
-import { ConversationalElement } from "../../global/conversational-editor/instance-definition/elements/iconversational-element";
+import { EventsHelper } from "../common/events-helper";
 
 @Component({
   tag: "gxcf-redirection",
@@ -10,28 +7,32 @@ import { ConversationalElement } from "../../global/conversational-editor/instan
   shadow: true
 })
 export class Redirection {
-  @Prop() element: ConversationalElement;
-  @Prop() redirectionProperty: RedirectionProperty;
+  @Prop() redirectionProperty: GXCFModel.RedirectionProperty;
   @Prop() requireCondition: boolean;
+  @Prop() redirectionIndex: number;
+  @Prop() flows: GXCFModel.FlowElement[];
 
+  @Event() changeRedirectCondition: EventEmitter;
   TriggerOnChangeRedirectCondition(event): void {
-    const value = EventHandler.GetValue(event);
-    this.redirectionProperty.SetRedirectCondition(this.element, value);
+    const value = EventsHelper.GetValue(event);
+    this.changeRedirectCondition.emit.call(this, {
+      value: value,
+      index: this.redirectionIndex
+    });
   }
 
   @Event() changeRedirectTo: EventEmitter;
   TriggerOnChangeRedirectTo(event): void {
-    console.log("Trigger");
-    const value = EventHandler.GetValueFromSelect(event);
-    if (this.element != null)
-      this.redirectionProperty.SetRedirectTo(this.element, value);
-    else this.changeRedirectTo.emit(event);
+    const value = EventsHelper.GetValueFromSelect(event);
+    this.changeRedirectTo.emit.call(this, {
+      value: value,
+      index: this.redirectionIndex
+    });
   }
 
   private LoadFlowsCombo(): HTMLElement[] {
     const combo: HTMLElement[] = new Array<HTMLElement>();
-    App.GetApp().Instance.Flows.forEach(iFlow => {
-      console.log("Load: " + iFlow.Name);
+    this.flows.forEach(iFlow => {
       if (iFlow.Name == this.redirectionProperty.RedirectTo) {
         combo.push(
           <option value={iFlow.Name} selected>

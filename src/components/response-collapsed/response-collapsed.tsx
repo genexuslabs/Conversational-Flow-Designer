@@ -6,7 +6,7 @@ import {
   EventEmitter,
   Element
 } from "@stencil/core";
-import { ResponseElement } from "../../global/conversational-editor/instance-definition/elements/response-element";
+import { EventsHelper } from "../common/events-helper";
 
 @Component({
   tag: "gxcf-response-collapsed",
@@ -14,7 +14,7 @@ import { ResponseElement } from "../../global/conversational-editor/instance-def
   shadow: true
 })
 export class CollapsedResponse {
-  @Prop() response: ResponseElement;
+  @Prop() response: GXCFModel.ResponseElement;
   @Element() element: HTMLElement;
 
   @Event() expandResponse: EventEmitter;
@@ -25,6 +25,24 @@ export class CollapsedResponse {
   @Event() changeResponseName: EventEmitter;
   TriggerChangeResponseName(event): void {
     this.changeResponseName.emit(event);
+  }
+
+  @Event() setResponseMessagesInternal: EventEmitter;
+  TriggerSetResponseMessagesInternal(
+    index: number,
+    value: string,
+    remove: boolean
+  ): void {
+    this.setResponseMessagesInternal.emit.call(this, {
+      index: index,
+      value: value,
+      remove: remove
+    });
+  }
+
+  HandleEditFirstResponseMessage(event: CustomEvent): void {
+    const value = EventsHelper.GetValueFromInput(event);
+    this.TriggerSetResponseMessagesInternal(0, value, false);
   }
 
   private GetDownArrow(): HTMLElement {
@@ -70,6 +88,11 @@ export class CollapsedResponse {
     if (responseTitle) responseTitle.focus();
   }
 
+  GetFristResponseMessage(): string {
+    if (this.response.Format.length > 0) return this.response.Format[0];
+    return "";
+  }
+
   render() {
     return (
       <div class="CollapsedResponse">
@@ -78,8 +101,11 @@ export class CollapsedResponse {
         <input
           type="text"
           class={this.GetFirstResponseMessageClass()}
-          value={this.response.GetFristResponseMessage()}
+          value={this.GetFristResponseMessage()}
           placeholder="First response message..."
+          onChange={(event: CustomEvent) =>
+            this.HandleEditFirstResponseMessage(event)
+          }
         />
       </div>
     );

@@ -8,10 +8,9 @@ import {
   EventEmitter,
   Element
 } from "@stencil/core";
-import { FlowElement } from "../../global/conversational-editor/instance-definition/elements/flow-element";
-import { RenderingOptions } from "../../global/conversational-editor/helpers/helpers";
-import { EventHandler } from "../../global/conversational-editor/event-handler";
-import { App } from "../../global/conversational-editor/app";
+import { RenderingOptions } from "../common/helpers";
+import { EventsHelper } from "../common/events-helper";
+import { StringCollectionHelper } from "../common/string-collection-helper";
 
 @Component({
   tag: "gxcf-flow-container",
@@ -19,49 +18,52 @@ import { App } from "../../global/conversational-editor/app";
   shadow: true
 })
 export class Flow {
-  @Prop() flow: FlowElement;
+  @Prop() flow: GXCFModel.FlowElement;
+  @Prop() instance: GXCFModel.Instance;
   @Prop() showDropZone = false;
   @Prop() renderType: RenderingOptions;
   @State() activeDropZone = false;
-  @State() refresh = true;
   @Element() element: HTMLElement;
 
-  @Event() refreshFlows: EventEmitter;
-  TriggerRefreshFlows(event: CustomEvent): void {
-    this.refreshFlows.emit(event);
-  }
-
-  @Listen("expandFlow")
-  HandleExpandFlow(event: CustomEvent): void {
-    console.log(event.type);
-    App.GetApp().Instance.SetFlowRenderType(this.flow, RenderingOptions.Full);
-    this.TriggerRefreshFlows(event);
+  @Event() modifyFlowName: EventEmitter;
+  TriggerModifyFlowName(event, value: string): void {
+    console.log(event);
+    this.modifyFlowName.emit.call(this, {
+      currentFlowName: this.flow.Name,
+      newFlowName: value
+    });
   }
 
   @Listen("changingFlowName")
   HandleChangingFlowName(event: CustomEvent): void {
-    const value = EventHandler.GetValue(event);
-    if (value != null) this.flow.SetName(value);
+    const value = EventsHelper.GetValue(event);
+    this.TriggerModifyFlowName(event, value);
+  }
+
+  @Event() setTriggers: EventEmitter;
+  TriggerSetTriggers(value): void {
+    this.setTriggers.emit.call(this, {
+      flowName: this.flow.Name,
+      triggerMessages: StringCollectionHelper.FormatCollection(
+        this.flow.Triggers,
+        0,
+        value,
+        false
+      )
+    });
   }
 
   @Listen("changingFlowTriggerSummary")
   HandleChangingFlowTriggerSummary(event: CustomEvent): void {
-    const value = EventHandler.GetValue(event);
-    if (value != null) this.flow.SetFirstTriggerMessage(value);
-  }
-
-  @Listen("selectConversationalObject")
-  HandleSelectConversationalObject(event: CustomEvent): void {
-    console.log(event);
-    EventHandler.SelectConversationalObject(
-      this.flow,
-      this.element as HTMLGxcfFlowContainerElement
-    );
+    const value = EventsHelper.GetValue(event);
+    this.TriggerSetTriggers(value);
   }
 
   @Event() deleteFlow: EventEmitter;
-  TriggerDeleteFlow(event: CustomEvent): void {
-    this.deleteFlow.emit(event);
+  TriggerDeleteFlow(): void {
+    this.deleteFlow.emit.call(this, {
+      flowName: this.flow.Name
+    });
   }
 
   private renderSummary(renderingOption: RenderingOptions): HTMLElement {
@@ -95,7 +97,8 @@ export class Flow {
           <gxcf-flow-full
             data-flowid={this.flow.Id}
             flow={this.flow}
-            onDeleteFullFlow={event => this.TriggerDeleteFlow(event)}
+            onDeleteFullFlow={() => this.TriggerDeleteFlow()}
+            instance={this.instance}
           />
         </div>
       </div>
@@ -103,7 +106,6 @@ export class Flow {
   }
 
   render() {
-    this.flow.Component = this;
     if (this.renderType == RenderingOptions.Collapsed)
       return this.renderSummary(RenderingOptions.Collapsed);
     if (this.renderType == RenderingOptions.Full) return this.renderFull();

@@ -15,6 +15,15 @@
   <link rel="apple-touch-icon" href="/assets/icon/icon.ico">
   <link rel="icon" type="image/x-icon" href="/assets/icon/favicon.ico">
   <link rel="manifest" href="/manifest.json">
+  <script>
+    var testModel = '{"Provider":"Watson","Flows":[{"KBObjectKey":null,"ConversationalObjectName":null,"ConversationalObjectType":"","Name":"Hello World","Triggers":["Hello world","Hi chatbot","Hey there!","Chatbot","Are you there?"],"GeneralMessages":[],"CompositeFlows":[],"Fields":[{"Redirections":[],"Variable":"UserName","Description":"UserName","IsCollection":false,"RequiredMessages":["Hi...who are you?","Wait a minute...tell me your name :)"],"ErrorMessages":[],"Entity":"VARCHAR","DataType":"VARCHAR","TryLimit":2,"AskAgain":false,"CleanInContext":false,"ValidationProcedureKey":null,"Required":"Always","RequiredCondition":""}],"Action":"","View":{"Name":"response","Attributes":null,"Templates":[{"ResponseName":"Hello World Response","Style":"text message","Format":["Nice to meet you &UserName, welcome to the GeneXus Chatbots Generator, you can see all the documentation on this page: https://wiki.genexus.com/commwiki/servlet/wiki?37076,HowTo%3A%20Create%20a%20chatbot%20using%20GeneXus,.aspx"],"ComponentType":"Component","WebComponent":null,"WebComponentName":"None","SdComponent":null,"SDComponentName":"None","Condition":"","RedirectTo":""},{"ResponseName":"Hello World Conditional","Style":"text message","Format":["Ok &UserName, how are you?"],"ComponentType":"Component","WebComponent":null,"WebComponentName":"None","SdComponent":null,"SDComponentName":"None","Condition":"&UserName = \\"Diego\\"","RedirectTo":""}]},"CallWebhook":true,"UserInputFilling":false},{"KBObjectKey":null,"ConversationalObjectName":null,"ConversationalObjectType":"","Name":"Greetings","Triggers":["Hi","Hello"],"GeneralMessages":[],"CompositeFlows":[],"Fields":[],"Action":"","View":{"Name":"response","Attributes":null,"Templates":[{"ResponseName":"Greetings response","Style":"text message","Format":["Hello! Welcome to your very own chatbot!"],"ComponentType":"Component","WebComponent":null,"WebComponentName":"None","SdComponent":null,"SDComponentName":"None","Condition":"","RedirectTo":""}]},"CallWebhook":true,"UserInputFilling":false}],"Name":"ConversationalFlows2","NotUnderstoodRedirection":"","NotUnderstoodMessages":["I\'m sorry, I don\'t understand \'&GXUserInput\' yet :("],"SdGenerationUI":false,"WebGenerationUI":true,"InstanceLanguage":"English","InstanceLanguageTag":"en","InternalWebhook":{"Enabled":false,"URL":"","Headers":{},"Domains":false}}';
+    window.addEventListener("load", () => {
+      console.log("load")
+      const conversationalDesigner = document.querySelector("gxcf-conversational-designer");
+      console.log(conversationalDesigner);
+      conversationalDesigner.instance = JSON.parse(testModel);
+    });
+  </script>
 </head>
 <body>
   <gxcf-conversational-designer/>

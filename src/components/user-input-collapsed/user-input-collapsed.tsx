@@ -6,7 +6,6 @@ import {
   Event,
   Element
 } from "@stencil/core";
-import { UserInputElement } from "../../global/conversational-editor/instance-definition/elements/user-input-element";
 
 @Component({
   tag: "gxcf-user-input-collapsed",
@@ -14,7 +13,7 @@ import { UserInputElement } from "../../global/conversational-editor/instance-de
   shadow: true
 })
 export class CollapsedUserInput {
-  @Prop() userInput: UserInputElement;
+  @Prop() userInput: GXCFModel.UserInputElement;
   @Element() element: HTMLElement;
 
   @Event() expandUserInput: EventEmitter;
@@ -30,6 +29,12 @@ export class CollapsedUserInput {
   @Event() modifyUserInputFirstAskMessage: EventEmitter;
   TriggerOnModifyUserInputFirstAskMessage(event): void {
     this.modifyUserInputFirstAskMessage.emit(event);
+  }
+
+  GetFirstAskMessage(): string {
+    if (this.userInput.RequiredMessages.length > 0)
+      return this.userInput.RequiredMessages[0];
+    return "";
   }
 
   componentDidRender(): void {
@@ -54,7 +59,7 @@ export class CollapsedUserInput {
         <input
           type="text"
           class="FirstAskMessage"
-          value={this.userInput.GetFirstAskMessage()}
+          value={this.GetFirstAskMessage()}
           onChange={event =>
             this.TriggerOnModifyUserInputFirstAskMessage(event)
           }
