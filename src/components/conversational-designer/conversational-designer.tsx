@@ -20,7 +20,7 @@ import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-d
 export class ConversationalDesginer {
   @State() search: string;
   @State() flows: GXCFModel.FlowElement[];
-  @State() openEditor: boolean;
+  @State() openEditor = false;
   @Prop() instance: GXCFModel.Instance;
   @State() renderFull = "";
 
@@ -28,7 +28,6 @@ export class ConversationalDesginer {
   @Event() moveFlow: EventEmitter;
   private dragDropHandler: ConversationalDesignerDragDrop;
 
-  @Listen("openEditor")
   HandleOpenEditor(): void {
     this.openEditor = true;
   }
@@ -108,6 +107,14 @@ export class ConversationalDesginer {
   render() {
     console.log(this.instance);
     if (this.instance) {
+      if (
+        (this.instance.Flows == null || this.instance.Flows.length == 0) &&
+        !this.openEditor
+      )
+        return (
+          <gxcf-designer-welcome onOpenEditor={() => this.HandleOpenEditor()} />
+        );
+
       return (
         <div class="MainTable">
           <div class="SearchBar">
