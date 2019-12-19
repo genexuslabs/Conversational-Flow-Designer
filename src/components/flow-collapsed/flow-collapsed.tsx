@@ -1,4 +1,11 @@
-import { Component, Prop, Event, EventEmitter, h } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  Event,
+  EventEmitter,
+  h,
+  Element
+} from "@stencil/core";
 import { RenderingOptions, SelectTypes } from "../common/helpers";
 
 @Component({
@@ -9,6 +16,8 @@ import { RenderingOptions, SelectTypes } from "../common/helpers";
 export class FlowCollapsed {
   @Prop() flow: GXCFModel.FlowElement;
   @Prop() renderingType: RenderingOptions;
+
+  @Element() element: HTMLElement;
 
   @Event() expandFlow: EventEmitter;
   TriggerOnExpandFlow(event): void {
@@ -57,6 +66,11 @@ export class FlowCollapsed {
     return "NONE";
   }
 
+  switchDraggable(drag: boolean): void {
+    const element = this.element.shadowRoot.querySelector("div") as HTMLElement;
+    element.setAttribute("draggable", "" + drag);
+  }
+
   render() {
     let classProp;
     if (this.renderingType == RenderingOptions.Collapsed) {
@@ -77,6 +91,8 @@ export class FlowCollapsed {
           summaryid={this.SummaryId}
           summaryvalue={this.flow.Name}
           classType="SummaryTitle"
+          onTitleMouseDown={() => this.switchDraggable(false)}
+          onTitleMouseLeave={() => this.switchDraggable(true)}
         />
         <gxcf-select
           class="SelectBoxing"
@@ -85,10 +101,14 @@ export class FlowCollapsed {
           selectIconType={this.flow.ConversationalObjectType}
           selectType={SelectTypes.Compact}
           onClick={event => this.TriggerSelectConversationalObject(event)}
+          onTitleMouseDown={() => this.switchDraggable(false)}
+          onTitleMouseLeave={() => this.switchDraggable(true)}
         />
         <gxcf-summary-description
           descriptionid={this.DescriptionId}
           descriptionvalue={this.GetSummaryTriggerMessage()}
+          onTitleMouseDown={() => this.switchDraggable(false)}
+          onTitleMouseLeave={() => this.switchDraggable(true)}
         />
       </div>
     );

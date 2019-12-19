@@ -1,4 +1,4 @@
-import { Component, Prop, h } from "@stencil/core";
+import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 import { SelectTypes } from "../common/helpers";
 
 @Component({
@@ -28,12 +28,24 @@ export class Select {
     return `${this.compactClass} Select`;
   }
 
+  @Event() titleMouseDown: EventEmitter;
+  TriggerMouseDown(): void {
+    this.titleMouseDown.emit();
+  }
+
+  @Event() titleMouseLeave: EventEmitter;
+  TriggerMouseLeave(): void {
+    this.titleMouseLeave.emit();
+  }
+
   render() {
     return (
       <div
         id={this.selectid}
         class={this.GetSelectClass()}
         title={this.selectcaption}
+        onMouseDown={() => this.TriggerMouseDown()}
+        onMouseLeave={() => this.TriggerMouseLeave()}
       >
         <div class={this.GetIconClass()} />
         {this.selectcaption}

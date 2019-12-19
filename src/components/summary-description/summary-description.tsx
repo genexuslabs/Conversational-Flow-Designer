@@ -14,6 +14,16 @@ export class SummaryDescription {
     this.changingFlowTriggerSummary.emit(event);
   }
 
+  @Event() titleMouseDown: EventEmitter;
+  TriggerMouseDown(): void {
+    this.titleMouseDown.emit();
+  }
+
+  @Event() titleMouseLeave: EventEmitter;
+  TriggerMouseLeave(): void {
+    this.titleMouseLeave.emit();
+  }
+
   render() {
     return (
       <input
@@ -23,6 +33,8 @@ export class SummaryDescription {
         value={this.descriptionvalue}
         size={45}
         onChange={event => this.ChangingFlowTriggerSummary(event)}
+        onMouseDown={() => this.TriggerMouseDown()}
+        onMouseLeave={() => this.TriggerMouseLeave()}
       />
     );
   }

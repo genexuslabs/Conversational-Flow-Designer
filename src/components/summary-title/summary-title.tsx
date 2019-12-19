@@ -1,5 +1,4 @@
-import { Component, Prop, h, Event } from "@stencil/core";
-import { EventEmitter } from "@stencil/router/dist/types/stencil.core";
+import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 
 @Component({
   tag: "gxcf-summary-title",
@@ -17,6 +16,16 @@ export class SummaryTitle {
     this.changingFlowName.emit(event);
   }
 
+  @Event() titleMouseDown: EventEmitter;
+  TriggerMouseDown(): void {
+    this.titleMouseDown.emit();
+  }
+
+  @Event() titleMouseLeave: EventEmitter;
+  TriggerMouseLeave(): void {
+    this.titleMouseLeave.emit();
+  }
+
   render() {
     if (this.classType == "") this.classType = this.DefaultClassType;
     return (
@@ -26,6 +35,8 @@ export class SummaryTitle {
         class={`CommonTitle ${this.classType}`}
         value={this.summaryvalue}
         onChange={event => this.ChangingFlowName(event)}
+        onMouseDown={() => this.TriggerMouseDown()}
+        onMouseLeave={() => this.TriggerMouseLeave()}
       />
     );
   }
