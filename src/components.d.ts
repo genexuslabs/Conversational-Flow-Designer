@@ -510,6 +510,8 @@ declare namespace LocalJSX {
     onSearch?: (event: CustomEvent<any>) => void;
   }
   interface GxcfSelect {
+    onTitleMouseDown?: (event: CustomEvent<any>) => void;
+    onTitleMouseLeave?: (event: CustomEvent<any>) => void;
     selectIconType?: string;
     selectType?: SelectTypes;
     selectcaption?: string;
@@ -519,10 +521,14 @@ declare namespace LocalJSX {
     descriptionid?: string;
     descriptionvalue?: string;
     onChangingFlowTriggerSummary?: (event: CustomEvent<any>) => void;
+    onTitleMouseDown?: (event: CustomEvent<any>) => void;
+    onTitleMouseLeave?: (event: CustomEvent<any>) => void;
   }
   interface GxcfSummaryTitle {
     classType?: string;
     onChangingFlowName?: (event: CustomEvent<any>) => void;
+    onTitleMouseDown?: (event: CustomEvent<any>) => void;
+    onTitleMouseLeave?: (event: CustomEvent<any>) => void;
     summaryid?: string;
     summaryvalue?: string;
   }
