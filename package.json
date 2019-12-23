@@ -10,7 +10,7 @@
     "dist/"
   ],
   "publishConfig": {
-    "registry": "http://nexus.genexus.com/repository/npm-hosted/"
+    "registry": "http://nexus.genexus.com/repository/npm-prereleases/"
   },
   "scripts": {
     "build": "stencil build",
