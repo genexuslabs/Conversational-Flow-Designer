@@ -1,5 +1,4 @@
-name: Conversational Flows Designer - Validate and Build
-
+name: Conversational Flows Designer - Build and publish
 on: [push]
 
 jobs:
@@ -13,3 +12,5 @@ jobs:
       run: npm install
     - name: Run Validate Script
       run: npm run validate
+    - name: publish
+      run: npm publish
