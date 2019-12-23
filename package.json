@@ -2,7 +2,6 @@
   "name": "@genexus/conversational-flows-designer",
   "version": "1.0.0",
   "description": "Conversational Flows Designer",
-  "private": true,
   "module": "dist/esm/index.js",
   "main": "dist/index.js",
   "types": "dist/types/components.d.ts",
