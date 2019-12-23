@@ -20,7 +20,10 @@
     "test.watch": "stencil test --spec --e2e --watchAll",
     "validate": "npm run lint && npm run build"
   },
-  "dependencies": {
+  "devDependencies": {
+    "@stencil/sass": "^1.1.1",
+    "@types/jest": "^24.0.23",
+    "workbox-build": "4.3.1",
     "@genexus/gemini": "^0.1.4",
     "@stencil/core": "^1.8.1",
     "@stencil/router": "^1.0.1",
@@ -33,11 +36,6 @@
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
     "prettier": "^1.19.1"
-  },
-  "devDependencies": {
-    "@stencil/sass": "^1.1.1",
-    "@types/jest": "^24.0.23",
-    "workbox-build": "4.3.1"
   },
   "repository": {
     "type": "git",
