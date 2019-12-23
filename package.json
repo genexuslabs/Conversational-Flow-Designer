@@ -9,6 +9,9 @@
   "files": [
     "dist/"
   ],
+  "publishConfig": {
+    "registry": "http://nexus.genexus.com/repository/npm-hosted/"
+  },
   "scripts": {
     "build": "stencil build",
     "lint": "eslint ./src/**/*.ts ./src/**/*.tsx",
