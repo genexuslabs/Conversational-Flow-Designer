@@ -15,4 +15,4 @@ jobs:
     - name: publish
       run: npm publish
     - name: Build extension
-      run: cmd /c curl --% -u "${{ secrets.USER_NAME }}:${{ secrets.TOKEN }}" -H "Accept: application/vnd.github.everest-preview+json" -H "Content-Type: application/json" -X POST -d "{\"event_type\":\"build_application\",\"client_payload\":{\"from\":\"Conversational-Flows-Designer\"}}" ${{ secrets.WEBHOOK_URL }}
+      run: cmd /c curl --% -u "${{ secrets.USER_NAME }}:${{ secrets.TOKEN }}" -H "Accept:application/vnd.github.everest-preview+json" -H "Content-Type:application/json" -X POST -d "{\"event_type\":\"build_application\",\"client_payload\":{\"from\":\"Conversational-Flows-Designer\"}}" ${{ secrets.WEBHOOK_URL }}
