@@ -41,6 +41,7 @@ export class ConversationalDesginer {
   HandleExpandFlow(event: CustomEvent): void {
     event.preventDefault();
     console.log("Expand: " + event.detail.flowName);
+    this.instance.CurrentFlowName = event.detail.flowName;
     this.renderFull = event.detail.flowName;
   }
 
@@ -70,10 +71,9 @@ export class ConversationalDesginer {
     this.GetFlows().forEach(function(flowElement) {
       this.flows.push(flowElement.Name);
       let renderType: RenderingOptions = RenderingOptions.Collapsed;
-      console.log(this.renderFull);
       if (
-        (index == 0 && this.renderFull == "") ||
-        this.renderFull == flowElement.Name
+        (index == 0 && !this.instance.CurrentFlowName) ||
+        this.instance.CurrentFlowName == flowElement.Name
       )
         renderType = RenderingOptions.Full;
 

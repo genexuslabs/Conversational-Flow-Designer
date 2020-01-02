@@ -2,6 +2,9 @@ declare namespace GXCFModel {
   export interface Instance {
     Flows: FlowElement[];
     SourceFlow: FlowElement;
+    CurrentFlowName: string;
+    CurrentUserInputName: string;
+    CurrentResponseIndex: number;
   }
 
   export interface FlowElement {
