@@ -116,12 +116,10 @@ export class ConversationalDesginer {
 
   handleKeyDown(event: KeyboardEvent): void {
     let moveType: MoveType = null;
-    if (event.keyCode === 38) {
+    if (event.key === "ArrowUp") {
       moveType = MoveType.Up;
-      console.log("up");
-    } else if (event.keyCode === 40) {
+    } else if (event.key === "ArrowDown") {
       moveType = MoveType.Down;
-      console.log("down");
     }
 
     if (moveType != null) {

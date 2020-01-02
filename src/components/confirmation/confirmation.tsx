@@ -23,9 +23,8 @@ export class Confirmation {
   }
 
   handleKeyDown(event): void {
-    //Escape:
     console.log(event.keyCode);
-    if (event.keyCode === 27) {
+    if (event.key === "Escape") {
       this.userCancellation.emit(event);
     }
   }
