@@ -152,7 +152,7 @@ export class ConversationalDesginer {
   }
 
   componentDidRender(): void {
-    this.element.onkeydown = event => this.handleKeyDown(event);
+    document.onkeydown = event => this.handleKeyDown(event);
   }
 
   render() {
