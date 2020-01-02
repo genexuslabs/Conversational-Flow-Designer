@@ -101,7 +101,7 @@ export class ConversationalDesginer {
       if (flow.Name.toLowerCase().includes(this.search.toLowerCase())) {
         flows.push(flow);
       }
-    });
+    }, this);
 
     return flows;
   }
@@ -126,10 +126,16 @@ export class ConversationalDesginer {
 
     if (moveType != null) {
       const index = this.flows.indexOf(this.renderFull);
-      if (moveType == MoveType.Up && this.flows.length >= index - 1)
+      if (moveType == MoveType.Up && index - 1 >= 0)
         this.setSelectedFlow(this.flows[index - 1]);
       else if (moveType == MoveType.Down && this.flows.length >= index + 1)
         this.setSelectedFlow(this.flows[index + 1]);
+      else if (moveType == MoveType.Up) {
+        this.element
+          .querySelector("gxcf-search")
+          .shadowRoot.querySelector("input")
+          .select();
+      }
     }
   }
 
