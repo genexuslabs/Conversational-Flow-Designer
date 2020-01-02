@@ -1,4 +1,4 @@
-import { Component, h, Prop, Event } from "@stencil/core";
+import { Component, h, Prop, Event, Element } from "@stencil/core";
 import { EventEmitter } from "events";
 import "@genexus/gemini";
 
@@ -10,6 +10,7 @@ import "@genexus/gemini";
 export class Confirmation {
   @Prop() confirmationTitle: string;
   @Prop() confirmationMessage: string;
+  @Element() element: HTMLElement;
 
   @Event() userConfirmation: EventEmitter;
   TriggerUserConfirmation(event): void {
@@ -19,6 +20,18 @@ export class Confirmation {
   @Event() userCancellation: EventEmitter;
   TriggerUserCancellation(event): void {
     this.userCancellation.emit(event);
+  }
+
+  handleKeyDown(event): void {
+    //Escape:
+    console.log(event.keyCode);
+    if (event.keyCode === 27) {
+      this.userCancellation.emit(event);
+    }
+  }
+
+  componentDidRender(): void {
+    document.onkeydown = (event: KeyboardEvent) => this.handleKeyDown(event);
   }
 
   render() {
