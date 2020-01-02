@@ -40,6 +40,7 @@ export class ConversationalDesginer {
   @Listen("expandFlow")
   HandleExpandFlow(event: CustomEvent): void {
     event.preventDefault();
+    console.log("Expand: " + event.detail.flowName);
     this.renderFull = event.detail.flowName;
   }
 
@@ -78,7 +79,7 @@ export class ConversationalDesginer {
 
       flows.push(
         <gxcf-flow-container
-          id={flowElement.Name}
+          id={flowElement.Name.replace(" ", "")}
           flow={flowElement}
           instance={this.instance}
           data-gxcf-element-id={flowElement.Name}
@@ -136,7 +137,7 @@ export class ConversationalDesginer {
     console.log(this.element);
     console.log(flowName);
     const container: HTMLElement = this.element
-      .querySelector("#" + flowName)
+      .querySelector("#" + flowName.replace(" ", ""))
       .shadowRoot.querySelector("gxcf-flow-collapsed") as HTMLElement;
     console.log(container);
 
