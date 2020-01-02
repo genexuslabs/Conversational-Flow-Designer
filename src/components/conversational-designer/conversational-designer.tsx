@@ -9,7 +9,7 @@ import {
   EventEmitter
 } from "@stencil/core";
 import { EventsHelper } from "../common/events-helper";
-import { Controls, RenderingOptions } from "../common/helpers";
+import { Controls, RenderingOptions, MoveType } from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
 
 @Component({
@@ -19,7 +19,6 @@ import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-d
 })
 export class ConversationalDesginer {
   @State() search: string;
-  @State() flows: GXCFModel.FlowElement[];
   @State() openEditor = false;
   @Prop() instance: GXCFModel.Instance;
   @State() renderFull = "";
@@ -27,6 +26,7 @@ export class ConversationalDesginer {
   @Element() element: HTMLElement;
   @Event() moveFlow: EventEmitter;
   private dragDropHandler: ConversationalDesignerDragDrop;
+  private flows: Array<string>;
 
   HandleOpenEditor(): void {
     this.openEditor = true;
@@ -41,6 +41,12 @@ export class ConversationalDesginer {
   HandleExpandFlow(event: CustomEvent): void {
     event.preventDefault();
     this.renderFull = event.detail.flowName;
+  }
+
+  @Listen("clickOnInput")
+  HandleClickOnInput(event: CustomEvent): void {
+    const element: HTMLInputElement = event.detail.source;
+    element.select();
   }
 
   @Event() addFlow: EventEmitter;
@@ -58,8 +64,10 @@ export class ConversationalDesginer {
 
   private RenderizeFlows(): HTMLElement[] {
     const flows: HTMLElement[] = [];
+    this.flows = new Array<string>();
     let index = 0;
     this.GetFlows().forEach(function(flowElement) {
+      this.flows.push(flowElement.Name);
       let renderType: RenderingOptions = RenderingOptions.Collapsed;
       console.log(this.renderFull);
       if (
@@ -70,6 +78,7 @@ export class ConversationalDesginer {
 
       flows.push(
         <gxcf-flow-container
+          id={flowElement.Name}
           flow={flowElement}
           instance={this.instance}
           data-gxcf-element-id={flowElement.Name}
@@ -102,6 +111,47 @@ export class ConversationalDesginer {
       this.moveFlow
     );
     this.dragDropHandler.initialize();
+  }
+
+  handleKeyDown(event: KeyboardEvent): void {
+    let moveType: MoveType = null;
+    if (event.keyCode === 38) {
+      moveType = MoveType.Up;
+      console.log("up");
+    } else if (event.keyCode === 40) {
+      moveType = MoveType.Down;
+      console.log("down");
+    }
+
+    if (moveType != null) {
+      const index = this.flows.indexOf(this.renderFull);
+      if (moveType == MoveType.Up && this.flows.length >= index - 1)
+        this.setSelectedFlow(this.flows[index - 1]);
+      else if (moveType == MoveType.Down && this.flows.length >= index + 1)
+        this.setSelectedFlow(this.flows[index + 1]);
+    }
+  }
+
+  setSelectedFlow(flowName: string): void {
+    console.log(this.element);
+    console.log(flowName);
+    const container: HTMLElement = this.element
+      .querySelector("#" + flowName)
+      .shadowRoot.querySelector("gxcf-flow-collapsed") as HTMLElement;
+    console.log(container);
+
+    const moveToElement: HTMLElement = container.shadowRoot.querySelector(
+      "div"
+    ) as HTMLElement;
+
+    console.log(moveToElement);
+
+    moveToElement.click();
+    moveToElement.focus();
+  }
+
+  componentDidRender(): void {
+    this.element.onkeydown = event => this.handleKeyDown(event);
   }
 
   render() {

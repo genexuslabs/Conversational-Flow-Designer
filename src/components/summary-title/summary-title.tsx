@@ -26,6 +26,13 @@ export class SummaryTitle {
     this.titleMouseLeave.emit();
   }
 
+  @Event() clickOnInput;
+  TriggerOnClickTitleInputValue(event: MouseEvent): void {
+    this.clickOnInput.emit.call(this, {
+      source: event.target as HTMLInputElement
+    });
+  }
+
   render() {
     if (this.classType == "") this.classType = this.DefaultClassType;
     return (
@@ -37,6 +44,7 @@ export class SummaryTitle {
         onChange={event => this.ChangingFlowName(event)}
         onMouseDown={() => this.TriggerMouseDown()}
         onMouseLeave={() => this.TriggerMouseLeave()}
+        onClick={event => this.TriggerOnClickTitleInputValue(event)}
       />
     );
   }

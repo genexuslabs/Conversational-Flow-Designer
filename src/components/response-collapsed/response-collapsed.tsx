@@ -40,6 +40,13 @@ export class CollapsedResponse {
     });
   }
 
+  @Event() clickOnInput;
+  TriggerOnClickResponseInputName(event: MouseEvent): void {
+    this.clickOnInput.emit.call(this, {
+      source: event.target as HTMLInputElement
+    });
+  }
+
   HandleEditFirstResponseMessage(event: CustomEvent): void {
     const value = EventsHelper.GetValueFromInput(event);
     this.TriggerSetResponseMessagesInternal(0, value, false);
@@ -63,6 +70,7 @@ export class CollapsedResponse {
         value={this.response.ResponseName}
         placeholder="Response name..."
         onChange={event => this.TriggerChangeResponseName(event)}
+        onClick={event => this.TriggerOnClickResponseInputName(event)}
       />
     );
     title.push(this.GetDownArrow());

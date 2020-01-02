@@ -160,6 +160,13 @@ export class FullUserInput {
     });
   }
 
+  @Event() clickOnInput;
+  TriggerOnClickUserInputName(event: MouseEvent): void {
+    this.clickOnInput.emit.call(this, {
+      source: event.target as HTMLInputElement
+    });
+  }
+
   private RenderRedirections(): HTMLElement[] {
     3;
     const redirs: HTMLElement[] = new Array<HTMLElement>();
@@ -313,6 +320,7 @@ export class FullUserInput {
           class="UserInputTitle"
           value={this.userInput.Variable}
           onChange={event => this.TriggerOnModifyUserInputName(event)}
+          onClick={event => this.TriggerOnClickUserInputName(event)}
         />
         <gxcf-up-arrow
           class="UserInputCommandsPosition"

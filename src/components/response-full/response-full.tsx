@@ -115,6 +115,13 @@ export class FullResponse {
     this.deleteResponseFull.emit(event);
   }
 
+  @Event() clickOnInput;
+  TriggerOnClickResponseInputName(event: MouseEvent): void {
+    this.clickOnInput.emit.call(this, {
+      source: event.target as HTMLInputElement
+    });
+  }
+
   private RenderStyleSelector(): HTMLElement[] {
     const elements: Array<HTMLElement> = new Array<HTMLElement>();
     const componentViewSelected =
@@ -267,6 +274,7 @@ export class FullResponse {
           value={this.response.ResponseName}
           placeholder="Response name..."
           onChange={event => this.TriggerChangeResponseName(event)}
+          onClick={event => this.TriggerOnClickResponseInputName(event)}
         />
         <gxcf-up-arrow
           class="FullResponseCommands"
