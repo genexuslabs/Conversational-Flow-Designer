@@ -91,11 +91,6 @@ export class CollapsedResponse {
     return `FirstResponseMessage ${tab}`;
   }
 
-  componentDidLoad(): void {
-    const responseTitle = this.element.shadowRoot.querySelector("input");
-    if (responseTitle) responseTitle.focus();
-  }
-
   GetFristResponseMessage(): string {
     if (this.response.Format.length > 0) return this.response.Format[0];
     return "";

@@ -37,11 +37,6 @@ export class CollapsedUserInput {
     return "";
   }
 
-  componentDidRender(): void {
-    const title = this.element.shadowRoot.querySelector("input");
-    if (title) title.focus();
-  }
-
   @Event() clickOnInput;
   TriggerOnClickUserInputName(event: MouseEvent): void {
     this.clickOnInput.emit.call(this, {

@@ -152,11 +152,25 @@ export class ConversationalDesginer {
     console.log(moveToElement);
 
     moveToElement.click();
-    moveToElement.focus();
   }
 
   componentDidRender(): void {
     document.onkeydown = event => this.handleKeyDown(event);
+    if (this.instance.CurrentFlowName) {
+      const flowCollapsed = this.element
+        .querySelector("#" + this.instance.CurrentFlowName.replace(" ", ""))
+        .shadowRoot.querySelector("gxcf-flow-collapsed");
+
+      flowCollapsed.shadowRoot
+        .querySelector("gxcf-summary-title")
+        .shadowRoot.querySelector("input")
+        .select();
+    } else {
+      this.element
+        .querySelector("gxcf-search")
+        .shadowRoot.querySelector("input")
+        .focus();
+    }
   }
 
   render() {
