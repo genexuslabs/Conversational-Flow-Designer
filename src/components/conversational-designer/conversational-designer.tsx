@@ -120,7 +120,7 @@ export class ConversationalDesginer {
       moveType = MoveType.Up;
     } else if (event.key === "ArrowDown") {
       moveType = MoveType.Down;
-    }
+    } else if (event.ctrlKey && event.key === "f") this.setFocusOnSearch();
 
     if (moveType != null) {
       const index = this.flows.indexOf(this.renderFull);
@@ -129,12 +129,16 @@ export class ConversationalDesginer {
       else if (moveType == MoveType.Down && this.flows.length >= index + 1)
         this.setSelectedFlow(this.flows[index + 1]);
       else if (moveType == MoveType.Up) {
-        this.element
-          .querySelector("gxcf-search")
-          .shadowRoot.querySelector("input")
-          .select();
+        this.setFocusOnSearch();
       }
     }
+  }
+
+  setFocusOnSearch(): void {
+    this.element
+      .querySelector("gxcf-search")
+      .shadowRoot.querySelector("input")
+      .select();
   }
 
   setSelectedFlow(flowName: string): void {
