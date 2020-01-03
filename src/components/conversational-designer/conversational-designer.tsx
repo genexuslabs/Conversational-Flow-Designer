@@ -156,7 +156,7 @@ export class ConversationalDesginer {
 
   componentDidRender(): void {
     document.onkeydown = event => this.handleKeyDown(event);
-    if (this.instance.CurrentFlowName) {
+    if (this.instance) {
       const flowCollapsed = this.element
         .querySelector("#" + this.instance.CurrentFlowName.replace(" ", ""))
         .shadowRoot.querySelector("gxcf-flow-collapsed");
