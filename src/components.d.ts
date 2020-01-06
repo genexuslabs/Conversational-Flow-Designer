@@ -421,6 +421,9 @@ declare namespace LocalJSX {
   interface GxcfConversationalDesigner {
     instance?: GXCFModel.Instance;
     onAddFlow?: (event: CustomEvent<any>) => void;
+    onDeleteFlow?: (event: CustomEvent<any>) => void;
+    onDeleteResponse?: (event: CustomEvent<any>) => void;
+    onDeleteUserInput?: (event: CustomEvent<any>) => void;
     onMoveFlow?: (event: CustomEvent<any>) => void;
   }
   interface GxcfDesignerWelcome {
@@ -474,6 +477,7 @@ declare namespace LocalJSX {
   }
   interface GxcfResponseCollapsed {
     onChangeResponseName?: (event: CustomEvent<any>) => void;
+    onClickOnInput?: (event: CustomEvent<any>) => void;
     onExpandResponse?: (event: CustomEvent<any>) => void;
     onSetResponseMessagesInternal?: (event: CustomEvent<any>) => void;
     response?: GXCFModel.ResponseElement;
@@ -500,6 +504,7 @@ declare namespace LocalJSX {
     onChangeResponseStyle?: (event: CustomEvent<any>) => void;
     onChangeSDComponent?: (event: CustomEvent<any>) => void;
     onChangeWebComponent?: (event: CustomEvent<any>) => void;
+    onClickOnInput?: (event: CustomEvent<any>) => void;
     onCollapseResponse?: (event: CustomEvent<any>) => void;
     onDeleteResponseFull?: (event: CustomEvent<any>) => void;
     onSetResponseMessagesInternal?: (event: CustomEvent<any>) => void;
@@ -527,6 +532,7 @@ declare namespace LocalJSX {
   interface GxcfSummaryTitle {
     classType?: string;
     onChangingFlowName?: (event: CustomEvent<any>) => void;
+    onClickOnInput?: (event: CustomEvent<any>) => void;
     onTitleMouseDown?: (event: CustomEvent<any>) => void;
     onTitleMouseLeave?: (event: CustomEvent<any>) => void;
     summaryid?: string;
@@ -536,6 +542,7 @@ declare namespace LocalJSX {
     arrowid?: string;
   }
   interface GxcfUserInputCollapsed {
+    onClickOnInput?: (event: CustomEvent<any>) => void;
     onExpandUserInput?: (event: CustomEvent<any>) => void;
     onModifyUserInputFirstAskMessage?: (event: CustomEvent<any>) => void;
     onModifyUserInputName?: (event: CustomEvent<any>) => void;
@@ -560,6 +567,7 @@ declare namespace LocalJSX {
     onChangeTryLimit?: (event: CustomEvent<any>) => void;
     onChangeUserInputRedirectCondition?: (event: CustomEvent<any>) => void;
     onChangeUserInputRedirectTo?: (event: CustomEvent<any>) => void;
+    onClickOnInput?: (event: CustomEvent<any>) => void;
     onCollapseUserInput?: (event: CustomEvent<any>) => void;
     onDeleteUserInputFull?: (event: CustomEvent<any>) => void;
     onModifyUserInputName?: (event: CustomEvent<any>) => void;

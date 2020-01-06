@@ -11,6 +11,7 @@ import {
 import { EventsHelper } from "../common/events-helper";
 import { Controls, RenderingOptions, MoveType } from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
+import { Position, PositionElement } from "../common/position";
 
 @Component({
   tag: "gxcf-conversational-designer",
@@ -22,11 +23,13 @@ export class ConversationalDesginer {
   @State() openEditor = false;
   @Prop() instance: GXCFModel.Instance;
   @State() renderFull = "";
+  @State() showPopUp = false;
 
   @Element() element: HTMLElement;
   @Event() moveFlow: EventEmitter;
   private dragDropHandler: ConversationalDesignerDragDrop;
   private flows: Array<string>;
+  private popUp: HTMLElement;
 
   HandleOpenEditor(): void {
     this.openEditor = true;
@@ -64,6 +67,10 @@ export class ConversationalDesginer {
     />
   );
 
+  handleClickFlowContainer(flowName): void {
+    Position.SetFlow(flowName);
+  }
+
   private RenderizeFlows(): HTMLElement[] {
     const flows: HTMLElement[] = [];
     this.flows = new Array<string>();
@@ -84,11 +91,17 @@ export class ConversationalDesginer {
           instance={this.instance}
           data-gxcf-element-id={flowElement.Name}
           renderType={renderType}
+          onClick={() => this.handleClickFlowContainer(flowElement.Name)}
         />
       );
       index++;
     }, this);
     return flows;
+  }
+
+  private setPopUp(): HTMLElement {
+    console.log(this.popUp);
+    if (this.showPopUp) return this.popUp;
   }
 
   public GetFlows(): Array<GXCFModel.FlowElement> {
@@ -115,12 +128,14 @@ export class ConversationalDesginer {
   }
 
   handleKeyDown(event: KeyboardEvent): void {
+    console.log("Key: " + event.key);
+    if (event.key === "Tab") console.log(event);
+
     let moveType: MoveType = null;
-    if (event.key === "ArrowUp") {
-      moveType = MoveType.Up;
-    } else if (event.key === "ArrowDown") {
-      moveType = MoveType.Down;
-    } else if (event.ctrlKey && event.key === "f") this.setFocusOnSearch();
+    if (event.key === "ArrowUp") moveType = MoveType.Up;
+    else if (event.key === "ArrowDown") moveType = MoveType.Down;
+    else if (event.ctrlKey && event.key === "f") this.setFocusOnSearch();
+    else if (event.key === "Delete") this.askForFeleteElement(event);
 
     if (moveType != null) {
       const index = this.flows.indexOf(this.renderFull);
@@ -128,10 +143,88 @@ export class ConversationalDesginer {
         this.setSelectedFlow(this.flows[index - 1]);
       else if (moveType == MoveType.Down && this.flows.length >= index + 1)
         this.setSelectedFlow(this.flows[index + 1]);
-      else if (moveType == MoveType.Up) {
-        this.setFocusOnSearch();
-      }
+      else if (moveType == MoveType.Up) this.setFocusOnSearch();
     }
+  }
+
+  @Event() deleteFlow: EventEmitter;
+  triggerDeleteFlow(flowName: string): void {
+    this.deleteFlow.emit.call(this, {
+      flowName: flowName
+    });
+    this.closePopUp();
+  }
+
+  @Event() deleteUserInput: EventEmitter;
+  triggerDeleteUserInput(flowName: string, userInput: string): void {
+    this.deleteUserInput.emit.call(this, {
+      flowName: flowName,
+      userInput: userInput
+    });
+    this.closePopUp();
+  }
+
+  @Event() deleteResponse: EventEmitter;
+  triggerDeleteResponse(flowName: string, response: number): void {
+    this.deleteResponse.emit.call(this, {
+      flowName: flowName,
+      index: response
+    });
+    this.closePopUp();
+  }
+
+  closePopUp(): void {
+    this.popUp = null;
+    this.showPopUp = false;
+  }
+
+  askForFeleteElement(event: KeyboardEvent) {
+    console.log("To delete: ");
+    console.log(event);
+    //const confirmationElement: HTMLGxcfConfirmationElement = new HTMLGxcfConfirmationElement();
+    if (Position.GetPosition() == PositionElement.Flow) {
+      console.log("Delete Flow: " + Position.GetFlow());
+      this.popUp = (
+        <gxcf-confirmation
+          confirmationTitle="Delete Flow"
+          confirmationMessage={`Do you want to delete the flow '${Position.GetFlow()}'?`}
+          onUserConfirmation={() => this.triggerDeleteFlow(Position.GetFlow())}
+          onUserCancellation={() => this.closePopUp()}
+        />
+      );
+    } else if (Position.GetPosition() == PositionElement.UserInput) {
+      console.log("Delete UserInput: " + Position.GetUserInput());
+      this.popUp = (
+        <gxcf-confirmation
+          confirmationTitle="Delete user input"
+          confirmationMessage={`Do you want to delete the user input '${Position.GetUserInput()}'?`}
+          onUserConfirmation={() =>
+            this.triggerDeleteUserInput(
+              Position.GetFlow(),
+              Position.GetUserInput()
+            )
+          }
+          onUserCancellation={() => this.closePopUp()}
+        />
+      );
+    } else if (Position.GetPosition() == PositionElement.Response) {
+      console.log("Delete response: " + Position.GetResponse());
+      this.popUp = (
+        <gxcf-confirmation
+          confirmationTitle="Delete response"
+          confirmationMessage={`Do you want to delete the response '${Position.GetResponse()}'?`}
+          onUserConfirmation={() =>
+            this.triggerDeleteResponse(
+              Position.GetFlow(),
+              Position.GetResponse()
+            )
+          }
+          onUserCancellation={() => this.closePopUp()}
+        />
+      );
+    }
+
+    if (this.popUp != null) this.showPopUp = true;
   }
 
   setFocusOnSearch(): void {
@@ -197,6 +290,7 @@ export class ConversationalDesginer {
             {this.RenderizeFlows()}
           </div>
           {this.setAddFlow}
+          {this.setPopUp()}
         </div>
       );
     } else {

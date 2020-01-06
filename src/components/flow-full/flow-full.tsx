@@ -10,6 +10,7 @@ import {
 import { HintId, SelectTypes, RenderingOptions } from "../common/helpers";
 import { EventsHelper } from "../common/events-helper";
 import { StringCollectionHelper } from "../common/string-collection-helper";
+import { Position } from "../common/position";
 
 @Component({
   tag: "gxcf-flow-full",
@@ -92,6 +93,10 @@ export class FlowFull {
     response.renderType = RenderingOptions.Collapsed;
   }
 
+  handleUInputContainerClick(userInput): void {
+    Position.SetUserInput(this.flow.Name, userInput);
+  }
+
   private RenderizeUserInputs(): HTMLElement[] {
     const userInputs: HTMLElement[] = [];
     this.flow.Fields.forEach(function(userInput) {
@@ -104,10 +109,15 @@ export class FlowFull {
           }
           renderType={RenderingOptions.Collapsed}
           instance={this.instance}
+          onClick={() => this.handleUInputContainerClick(userInput.Variable)}
         />
       );
     }, this);
     return userInputs;
+  }
+
+  handleResponseContainerClick(response): void {
+    Position.SetResponse(this.flow.Name, response);
   }
 
   private RenderizeResponse(): HTMLElement[] {
@@ -122,6 +132,7 @@ export class FlowFull {
           responseIndex={this.flow.View.Templates.indexOf(response)}
           flow={this.flow}
           instance={this.instance}
+          onClick={() => this.handleResponseContainerClick(response.Index)}
         />
       );
     }, this);
