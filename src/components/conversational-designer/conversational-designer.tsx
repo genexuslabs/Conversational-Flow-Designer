@@ -235,38 +235,39 @@ export class ConversationalDesginer {
   }
 
   setSelectedFlow(flowName: string): void {
-    console.log(this.element);
-    console.log(flowName);
-    const container: HTMLElement = this.element
-      .querySelector("#" + flowName.replace(" ", ""))
-      .shadowRoot.querySelector("gxcf-flow-collapsed") as HTMLElement;
-    console.log(container);
+    if (flowName) {
+      const container: HTMLElement = this.element
+        .querySelector("#" + flowName.replace(" ", ""))
+        .shadowRoot.querySelector("gxcf-flow-collapsed") as HTMLElement;
+      console.log(container);
 
-    const moveToElement: HTMLElement = container.shadowRoot.querySelector(
-      "div"
-    ) as HTMLElement;
+      const moveToElement: HTMLElement = container.shadowRoot.querySelector(
+        "div"
+      ) as HTMLElement;
 
-    console.log(moveToElement);
+      console.log(moveToElement);
 
-    moveToElement.click();
+      moveToElement.click();
+    }
   }
 
   componentDidRender(): void {
     document.onkeydown = event => this.handleKeyDown(event);
     if (this.instance) {
-      const flowCollapsed = this.element
-        .querySelector("#" + this.instance.CurrentFlowName.replace(" ", ""))
-        .shadowRoot.querySelector("gxcf-flow-collapsed");
-
-      flowCollapsed.shadowRoot
-        .querySelector("gxcf-summary-title")
-        .shadowRoot.querySelector("input")
-        .select();
-    } else {
-      this.element
-        .querySelector("gxcf-search")
-        .shadowRoot.querySelector("input")
-        .focus();
+      if (this.instance.CurrentFlowName) {
+        const flowCollapsed = this.element
+          .querySelector("#" + this.instance.CurrentFlowName.replace(" ", ""))
+          .shadowRoot.querySelector("gxcf-flow-collapsed");
+        if (flowCollapsed) {
+          flowCollapsed.shadowRoot
+            .querySelector("gxcf-summary-title")
+            .shadowRoot.querySelector("input")
+            .select();
+        }
+      } else {
+        const search = this.element.querySelector("gxcf-search");
+        if (search) search.shadowRoot.querySelector("input").focus();
+      }
     }
   }
 
