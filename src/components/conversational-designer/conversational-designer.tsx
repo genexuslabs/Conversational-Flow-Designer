@@ -67,10 +67,6 @@ export class ConversationalDesginer {
     />
   );
 
-  handleClickFlowContainer(flowName): void {
-    Position.SetFlow(flowName);
-  }
-
   private RenderizeFlows(): HTMLElement[] {
     const flows: HTMLElement[] = [];
     this.flows = new Array<string>();
@@ -91,7 +87,6 @@ export class ConversationalDesginer {
           instance={this.instance}
           data-gxcf-element-id={flowElement.Name}
           renderType={renderType}
-          onClick={() => this.handleClickFlowContainer(flowElement.Name)}
         />
       );
       index++;
@@ -181,50 +176,53 @@ export class ConversationalDesginer {
   askForFeleteElement(event: KeyboardEvent) {
     console.log("To delete: ");
     console.log(event);
-    //const confirmationElement: HTMLGxcfConfirmationElement = new HTMLGxcfConfirmationElement();
-    if (Position.GetPosition() == PositionElement.Flow) {
-      console.log("Delete Flow: " + Position.GetFlow());
-      this.popUp = (
-        <gxcf-confirmation
-          confirmationTitle="Delete Flow"
-          confirmationMessage={`Do you want to delete the flow '${Position.GetFlow()}'?`}
-          onUserConfirmation={() => this.triggerDeleteFlow(Position.GetFlow())}
-          onUserCancellation={() => this.closePopUp()}
-        />
-      );
-    } else if (Position.GetPosition() == PositionElement.UserInput) {
-      console.log("Delete UserInput: " + Position.GetUserInput());
-      this.popUp = (
-        <gxcf-confirmation
-          confirmationTitle="Delete user input"
-          confirmationMessage={`Do you want to delete the user input '${Position.GetUserInput()}'?`}
-          onUserConfirmation={() =>
-            this.triggerDeleteUserInput(
-              Position.GetFlow(),
-              Position.GetUserInput()
-            )
-          }
-          onUserCancellation={() => this.closePopUp()}
-        />
-      );
-    } else if (Position.GetPosition() == PositionElement.Response) {
-      console.log("Delete response: " + Position.GetResponse());
-      this.popUp = (
-        <gxcf-confirmation
-          confirmationTitle="Delete response"
-          confirmationMessage={`Do you want to delete the response '${Position.GetResponse()}'?`}
-          onUserConfirmation={() =>
-            this.triggerDeleteResponse(
-              Position.GetFlow(),
-              Position.GetResponse()
-            )
-          }
-          onUserCancellation={() => this.closePopUp()}
-        />
-      );
-    }
+    if ((event.target as HTMLElement).tagName == "BODY") {
+      if (Position.GetPosition() == PositionElement.Flow) {
+        console.log("Delete Flow: " + Position.GetFlow());
+        this.popUp = (
+          <gxcf-confirmation
+            confirmationTitle="Delete Flow"
+            confirmationMessage={`Do you want to delete the flow '${Position.GetFlow()}'?`}
+            onUserConfirmation={() =>
+              this.triggerDeleteFlow(Position.GetFlow())
+            }
+            onUserCancellation={() => this.closePopUp()}
+          />
+        );
+      } else if (Position.GetPosition() == PositionElement.UserInput) {
+        console.log("Delete UserInput: " + Position.GetUserInput());
+        this.popUp = (
+          <gxcf-confirmation
+            confirmationTitle="Delete user input"
+            confirmationMessage={`Do you want to delete the user input '${Position.GetUserInput()}'?`}
+            onUserConfirmation={() =>
+              this.triggerDeleteUserInput(
+                Position.GetFlow(),
+                Position.GetUserInput()
+              )
+            }
+            onUserCancellation={() => this.closePopUp()}
+          />
+        );
+      } else if (Position.GetPosition() == PositionElement.Response) {
+        console.log("Delete response: " + Position.GetResponse());
+        this.popUp = (
+          <gxcf-confirmation
+            confirmationTitle="Delete response"
+            confirmationMessage={`Do you want to delete the response '${Position.GetResponse()}'?`}
+            onUserConfirmation={() =>
+              this.triggerDeleteResponse(
+                Position.GetFlow(),
+                Position.GetResponse()
+              )
+            }
+            onUserCancellation={() => this.closePopUp()}
+          />
+        );
+      }
 
-    if (this.popUp != null) this.showPopUp = true;
+      if (this.popUp != null) this.showPopUp = true;
+    }
   }
 
   setFocusOnSearch(): void {

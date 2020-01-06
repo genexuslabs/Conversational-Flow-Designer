@@ -11,6 +11,7 @@ import {
 import { RenderingOptions } from "../common/helpers";
 import { EventsHelper } from "../common/events-helper";
 import { StringCollectionHelper } from "../common/string-collection-helper";
+import { Position } from "../common/position";
 
 @Component({
   tag: "gxcf-flow-container",
@@ -66,6 +67,10 @@ export class Flow {
     });
   }
 
+  handleClickFlowContainer(flowName): void {
+    Position.SetFlow(flowName);
+  }
+
   private renderSummary(renderingOption: RenderingOptions): HTMLElement {
     return (
       <div>
@@ -78,6 +83,7 @@ export class Flow {
           renderingType={renderingOption}
           data-flowid={this.flow.Id}
           flow={this.flow}
+          onClick={() => this.handleClickFlowContainer(this.flow.Name)}
           draggable
         />
         <gxcf-drop-zone
