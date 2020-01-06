@@ -104,9 +104,6 @@ export class FlowFull {
         <gxcf-user-input-container
           userInput={userInput}
           flow={this.flow}
-          onDeleteUserInput={event =>
-            this.HandleDeleteUserInput(event, userInput)
-          }
           renderType={RenderingOptions.Collapsed}
           instance={this.instance}
           onClick={() => this.handleUInputContainerClick(userInput.Variable)}
@@ -127,7 +124,6 @@ export class FlowFull {
       responses.push(
         <gxcf-response-container
           response={response}
-          onDeleteResponse={event => this.HandleDeleteResponse(event, response)}
           renderType={RenderingOptions.Collapsed}
           responseIndex={this.flow.View.Templates.indexOf(response)}
           flow={this.flow}
