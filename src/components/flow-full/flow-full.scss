@@ -11,11 +11,11 @@
 }
 
 .TabFullFlowContent {
-  margin: 0px 50px 0px 50px;
+  margin: 0px 50px 0px 20px;  
 }
 
 .FullFlowContent {
-  background-color: var(--element-background-color);
+  background-color: var(--flow-element-full-header-color);
   padding: 15px 0px 15px 0px;
   margin-bottom: -10px;
 }
@@ -55,6 +55,10 @@
   margin-left: 30px;
 }
 
+.MinLeftTab{
+  margin-left: 10px;
+}
+
 .ElementsHeaderText {
   color: var(--elements-header-font-color);
 }
@@ -87,16 +91,21 @@
   clear:both;  
 }
 
-.TriggersContainerBorder
+.TriggersContainerBody
 {
   border-style: solid;
   border-width: 1px;
   margin-top: 5px;
   padding: 5px;
-  border-color: var(--flow-element-border-color2);
+  border-color: var(--flow-element-border-color);
+  background-color: var(--flow-element-background-color);
 }
 
 .FirstTriggerMessage
 {
   font-style: italic;
+}
+
+.DotPosition{
+  float: left;
 }

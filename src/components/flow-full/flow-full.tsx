@@ -203,7 +203,7 @@ export class FlowFull {
   private GetTriggers(): HTMLElement {
     if (this.expandTriggers)
       return (
-        <div class="TriggersContainer TriggersContainerBorder">
+        <div class="TriggersContainer TriggersContainerBody">
           <div>
             <gxcf-up-arrow
               class="TriggersArrow"
@@ -222,15 +222,22 @@ export class FlowFull {
       );
     else
       return (
-        <div class="TriggersContainer TriggersContainerBorder">
-          <gxcf-down-arrow
-            class="TriggersArrow"
-            onClick={event => this.HandleExpandTriggers(event)}
-          />
-          <div class="TriggersContainer">
-            <span>Trigger Messages ({this.flow.Triggers.length})</span>
-            <gxcf-hint hintId={HintId.TriggerMessages} class="Hint" />
-            <p class="FirstTriggerMessage">{this.GetSummaryTriggerMessage()}</p>
+        <div class="TriggersContainer">
+          <gxcf-dot class="DotPosition MinLeftTab" />
+          <span class="ElementsHeaderText">
+            Trigger Messages ({this.flow.Triggers.length})
+          </span>
+          <gxcf-hint hintId={HintId.TriggerMessages} class="Hint" />
+          <div class="TriggersContainer TriggersContainerBody">
+            <gxcf-down-arrow
+              class="TriggersArrow"
+              onClick={event => this.HandleExpandTriggers(event)}
+            />
+            <div class="TriggersContainer">
+              <p class="FirstTriggerMessage">
+                {this.GetSummaryTriggerMessage()}
+              </p>
+            </div>
           </div>
         </div>
       );
