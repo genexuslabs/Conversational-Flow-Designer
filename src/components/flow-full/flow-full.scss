@@ -1,34 +1,40 @@
 .FlowFull {
   background-color: var(--active-content-background);
   display: block;
-  margin: 10px 0px 20px 0px;
+  margin: var(--small-margin) 0px var(--medium-margin) 0px;
   margin-bottom: 20px;
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
-  padding-bottom: 20px;
+  padding-bottom: var(--small-margin);
   border-top: 3px solid var(--highlight-color-2);
   font-family: var(--gxcf-font-family);
 }
 
+.Content
+{
+  padding-bottom: var(--small-margin);  
+  margin-right: var(--small-margin);  
+  padding-top: var(--small-margin);  
+}
+
 .TabFullFlowContent {
-  margin: 0px 50px 0px 20px;  
+  margin-left: 20px;
 }
 
 .FullFlowContent {
   background-color: var(--flow-element-full-header-color);
-  padding: 15px 0px 15px 0px;
-  margin-bottom: -10px;
 }
 
 .FullFlowContentUserInputs {
-  margin: 15px 50px 0px 20px;
+  margin-left: 20px;
 }
 
 .FullFlowContentResponses {
-  margin: 15px 50px 0px 50px;
+  margin-left: 50px;
 }
 
 .Separator {
+  margin: 0px;
   border-top: 2px dashed var(--separator-line-color);
   border-bottom: none;
   border-left: none;
@@ -48,11 +54,11 @@
   clear: both;
   color: var(--title-color);
   font-weight: 400;
-  margin-bottom: 15px;
+  margin-bottom: var(--small-margin);
 }
 
 .LeftTab {
-  margin-left: 30px;
+  margin-left: var(--medium-margin);
 }
 
 .MinLeftTab{
@@ -108,4 +114,9 @@
 
 .DotPosition{
   float: left;
+}
+
+.UserInputsMargin
+{
+  margin-bottom: var(--small-margin);
 }

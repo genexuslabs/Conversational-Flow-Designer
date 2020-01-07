@@ -107,6 +107,7 @@ export class FlowFull {
           renderType={RenderingOptions.Collapsed}
           instance={this.instance}
           onClick={() => this.handleUInputContainerClick(userInput.Variable)}
+          class="UserInputsMargin"
         />
       );
     }, this);
@@ -247,7 +248,7 @@ export class FlowFull {
     return (
       <div id={this.flow.Id} data-elementType="flow" class="FlowFull">
         <div class="FullFlowContent">
-          <div class="TabFullFlowContent">
+          <div class="TabFullFlowContent Content">
             <gxcf-summary-title
               summaryid={this.SummaryId}
               summaryvalue={this.flow.Name}
@@ -273,7 +274,7 @@ export class FlowFull {
           </div>
         </div>
         <hr class="Separator"></hr>
-        <div class="FullFlowContentUserInputs">
+        <div class="FullFlowContentUserInputs Content">
           <div class="ElementsHeader">
             <span class="LeftTab ElementsHeaderText">
               User Inputs ({this.flow.Fields.length})
@@ -288,7 +289,7 @@ export class FlowFull {
           />
         </div>
         <hr class="Separator"></hr>
-        <div class="FullFlowContentResponses">
+        <div class="FullFlowContentResponses Content">
           <div class="ElementsHeader">
             <span class="ElementsHeaderText">
               Responses ({this.flow.View.Templates.length})

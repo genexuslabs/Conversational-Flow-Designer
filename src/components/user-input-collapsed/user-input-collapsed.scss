@@ -6,13 +6,11 @@
   border-style: solid;
   padding: 12px 12px 12px 12px;
   overflow: hidden;
-  margin-bottom: 15px;
   -webkit-animation: var(--animation-time);
   animation: var(--animation-time);
 }
 
 .CollapsedUserInput:hover {
- // transform: var(--animation-scale-size);
   border-top: 3px solid var(--highlight-color-2)
 }
 
