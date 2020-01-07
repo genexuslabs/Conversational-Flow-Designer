@@ -107,7 +107,6 @@ export class FlowFull {
           renderType={RenderingOptions.Collapsed}
           instance={this.instance}
           onClick={() => this.handleUInputContainerClick(userInput.Variable)}
-          class="UserInputsMargin"
         />
       );
     }, this);

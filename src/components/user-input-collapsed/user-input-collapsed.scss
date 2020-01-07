@@ -8,6 +8,7 @@
   overflow: hidden;
   -webkit-animation: var(--animation-time);
   animation: var(--animation-time);
+  margin: var(--small-margin);
 }
 
 .CollapsedUserInput:hover {
