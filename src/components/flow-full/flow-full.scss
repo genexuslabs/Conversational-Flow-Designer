@@ -18,7 +18,7 @@
 }
 
 .TabFullFlowContent {
-  margin-left: 20px;
+  margin-left: var(--medium-margin);
 }
 
 .FullFlowContent {
@@ -26,7 +26,7 @@
 }
 
 .FullFlowContentUserInputs {
-  margin-left: 20px;
+  margin-left: var(--small-margin);
 }
 
 .FullFlowContentResponses {
