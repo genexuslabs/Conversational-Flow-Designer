@@ -5,7 +5,7 @@ export class PositionElement {
 }
 
 export class Position {
-  private static m_Position: Position;
+  private static position: Position;
   private Flow: string;
   private UserInput: string;
   private Response: number;
@@ -16,9 +16,8 @@ export class Position {
   }
 
   private static GetInstance(): Position {
-    // eslint-disable-next-line @typescript-eslint/camelcase
-    if (this.m_Position == null) this.m_Position = new Position();
-    return this.m_Position;
+    if (this.position == null) this.position = new Position();
+    return this.position;
   }
 
   public static SetFlow(flowName: string): void {
