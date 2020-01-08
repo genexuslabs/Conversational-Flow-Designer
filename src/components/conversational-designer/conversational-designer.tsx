@@ -249,7 +249,7 @@ export class ConversationalDesginer {
     }
   }
 
-  componentDidRender(): void {
+  /* componentDidRender(): void {
     document.onkeydown = event => this.handleKeyDown(event);
     if (this.instance) {
       if (this.instance.CurrentFlowName) {
@@ -267,7 +267,7 @@ export class ConversationalDesginer {
         if (search) search.shadowRoot.querySelector("input").focus();
       }
     }
-  }
+  }*/
 
   render() {
     console.log(this.instance);
