@@ -29,9 +29,9 @@ export class Confirmation {
     }
   }
 
-  componentDidRender(): void {
+  /*componentDidRender(): void {
     document.onkeydown = (event: KeyboardEvent) => this.handleKeyDown(event);
-  }
+  }*/
 
   render() {
     return (
