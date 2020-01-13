@@ -197,7 +197,7 @@ export class FlowFull {
     ) {
       return this.flow.ConversationalObjectName.toUpperCase();
     }
-    return "NONE";
+    return "Conversational Object";
   }
 
   private GetTriggers(): HTMLElement {
@@ -244,6 +244,8 @@ export class FlowFull {
   }
 
   render() {
+    let selectType: SelectTypes = SelectTypes.Compact;
+    if (!this.flow.ConversationalObjectName) selectType = SelectTypes.Full;
     return (
       <div id={this.flow.Id} data-elementType="flow" class="FlowFull">
         <div class="FullFlowContent">
@@ -265,7 +267,7 @@ export class FlowFull {
                 selectid={this.SelectId}
                 selectcaption={this.GetSummaryConversationalObject()}
                 selectIconType={this.flow.ConversationalObjectType}
-                selectType={SelectTypes.Compact}
+                selectType={selectType}
                 onClick={event => this.TriggerSelectConversationalObject(event)}
               />
             </div>

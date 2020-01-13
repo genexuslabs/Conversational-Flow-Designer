@@ -16,6 +16,7 @@ export class Select {
   private readonly fullClass: string = "FullSelect";
 
   private GetIconClass(): string {
+    if (this.selectType == SelectTypes.Full) return "AddIconClass SelectIcon";
     let iconClass = "";
     if (this.selectIconType && this.selectIconType != "")
       iconClass = `${this.selectIconType} SelectIcon`;

@@ -12,6 +12,7 @@
     --custom-dark-gray-4: #9b9b9b;
     --highlight-color: #4A4A4A;
     --highlight-color-2: #0077DE;
+    --highlight-color-3: #005688;
     
     --common-action-background: transparent;
     --elements-header-font-color: #191919;
@@ -54,4 +55,5 @@
     --confirmation-background-color: var(--contrast-font-color);
     --confirmation-button-font-color: var(--contrast-font-color);
     --condition-label-color: var(--highlight-color);
+    --select-empty-color: var(--highlight-color-3);
 }

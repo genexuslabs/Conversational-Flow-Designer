@@ -12,17 +12,19 @@
   white-space: nowrap;
   text-overflow: ellipsis;
   background-color: var(--common-action-background);
-  font-weight: 600;
+  font-weight: var(--wide-font-weight);
   color: var(--inelement-select-color);
 }
 
 
 .FullSelect {
     text-align: left;
-    background-color: var(--active-content-background);
+    background-color: var(--common-action-background);
     padding-left: 5px;
     line-height: 24px;
-    font-size: var(--normal-font-size);
+    font-size: var(--small2-font-size);
+    color: var(--select-empty-color);
+    font-weight: var(--wide-font-weight);
 }
 
 .Select
@@ -46,7 +48,7 @@
     height:var(--medium-icon-height);
     line-height: var(--medium-icon-height);
     vertical-align: middle;
-    margin-right: 2px;
+    margin-right: 2px;    
 }
 
 .Procedure
@@ -72,4 +74,9 @@
 .DataProvider
 {
     content: var(--data-provider-icon);
+}
+
+.AddIconClass
+{
+    content: var(--add-icon);
 }

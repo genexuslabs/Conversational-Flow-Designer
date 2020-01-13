@@ -4,17 +4,22 @@
   background-color: var(--common-action-background);
   font-weight: bold;
   margin-bottom: 2px;
-  float: left;
   border: none;
-  text-align: left;
-  width: 62%;
   font-family: var(--gxcf-font-family);
 }
 
 .SummaryTitle {
   font-size: var(--normal-font-size);
+  width: 62%;
 }
 
 .FullTitle {
   font-family: var(--normal2-font-size);
+  width: 62%;
+}
+
+.MinSummaryTitle
+{
+  font-size: var(--normal-font-size);
+  width: 35%;
 }

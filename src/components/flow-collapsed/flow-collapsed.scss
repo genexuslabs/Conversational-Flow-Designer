@@ -12,7 +12,6 @@
 }
 
 .FlowSummary:hover {
- // transform: var(--animation-scale-size);
   border-top: 3px solid var(--highlight-color-2)
 }
 
@@ -27,7 +26,12 @@
 
 .SelectBoxing
 {
+  display: block;
   float: right;
   margin-right: 5%;
-  width: 28%;
+  
+}
+
+.NotEmptySelectBoxing{
+  width: 32%;
 }
