@@ -1,4 +1,5 @@
 import { Component, h, State, Prop, Event, EventEmitter } from "@stencil/core";
+import "@genexus/gemini";
 
 @Component({
   tag: "gxcf-button-delete",
@@ -27,10 +28,19 @@ export class ButtonDelete {
   }
 
   private deleteButton(): HTMLElement {
-    return (
+    /*return (
       <div
         class="DeleteFlow"
         onClick={event => this.HandleDeleteIntention(event)}
+      />
+    );*/
+    return (
+      <gxg-icon
+        color="black"
+        size="regular"
+        type="deleted"
+        onClick={event => this.HandleDeleteIntention(event)}
+        class="DeleteFlow"
       />
     );
   }
