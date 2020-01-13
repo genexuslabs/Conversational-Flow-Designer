@@ -28,12 +28,6 @@ export class ButtonDelete {
   }
 
   private deleteButton(): HTMLElement {
-    /*return (
-      <div
-        class="DeleteFlow"
-        onClick={event => this.HandleDeleteIntention(event)}
-      />
-    );*/
     return (
       <gxg-icon
         color="black"
