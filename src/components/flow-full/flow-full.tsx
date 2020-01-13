@@ -217,6 +217,7 @@ export class FlowFull {
             collectionAddText="Add another sample trigger message"
             onEditItem={event => this.HandleEditTriggerMessage(event)}
             onDeleteItem={event => this.HandleDeleteTriggerMessage(event)}
+            defaultNewItemValue={this.flow.Name}
           />
         </div>
       );

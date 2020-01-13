@@ -13,6 +13,7 @@ export class Collection {
   @Prop() collectionHintId: string;
   @Prop() currentItemIndex: number;
   @Prop() currentItemValue: string;
+  @Prop() defaultNewItemValue: string;
   @State() collectionLength: number;
 
   @Event() deleteItem: EventEmitter;
@@ -24,8 +25,8 @@ export class Collection {
 
   AddItem(event): void {
     console.log(event);
-    const newItem = "";
-    this.collection.push(newItem);
+    if (!this.defaultNewItemValue) this.defaultNewItemValue = "Sample message";
+    this.collection.push(this.defaultNewItemValue);
     this.collectionLength = this.collection.length;
   }
 
@@ -44,10 +45,7 @@ export class Collection {
   }
 
   HandleKeyPress(event: KeyboardEvent): void {
-    if (event.keyCode === 13) {
-      event.preventDefault();
-      this.AddItem(event);
-    }
+    if (event.key === "Enter") this.AddItem(event);
   }
 
   SetCurrentIndex(element: HTMLElement): void {
@@ -93,7 +91,14 @@ export class Collection {
 
   componentDidRender(): void {
     const inputs = this.element.shadowRoot.querySelectorAll("input");
-    if (inputs.length > 0) inputs.item(inputs.length - 1).focus();
+    if (inputs.length > 0) {
+      inputs.item(inputs.length - 1).select();
+      const scrollTo = inputs.item(inputs.length - 1).offsetTop;
+      const itemsRender: HTMLElement = this.element.shadowRoot.querySelector(
+        "#ItemsRender"
+      ) as HTMLElement;
+      itemsRender.scrollTop = scrollTo;
+    }
   }
 
   render() {
@@ -102,7 +107,7 @@ export class Collection {
         <div class="CollectionContainer">
           <span class="CollectionHeader">{`${this.collectionHeader} (${this.collectionLength})`}</span>
           <gxcf-hint hintId={this.collectionHintId} class="Hint" />
-          <div class="CollectionContainer ItemsRender">
+          <div class="CollectionContainer ItemsRender" id="ItemsRender">
             {this.RenderizeItems(this.collection)}
           </div>
         </div>

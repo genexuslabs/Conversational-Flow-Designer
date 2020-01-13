@@ -291,6 +291,7 @@ export class FullResponse {
           collectionHeader="Response Messages"
           collectionAddText="Add an alternative response message"
           collectionHintId={HintId.ResponseMessage}
+          defaultNewItemValue="Sample response message"
           onEditItem={event => {
             this.HandleEditResponseMessage(event);
           }}

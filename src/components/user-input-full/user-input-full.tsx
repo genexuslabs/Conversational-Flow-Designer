@@ -226,6 +226,7 @@ export class FullUserInput {
           onDeleteItem={event => this.HandleDeleteAskMessage(event)}
           collectionHintId={HintId.AskMessages}
           collectionHeader="Ask Messages"
+          defaultNewItemValue={this.userInput.Variable}
         />
       </details>
     );
@@ -259,6 +260,7 @@ export class FullUserInput {
               onEditItem={event => this.HandleEditOnErrorMessage(event)}
               onDeleteItem={event => this.HandleDeleteOnErrorMessage(event)}
               collectionHintId={HintId.ErrorMessages}
+              defaultNewItemValue={`${this.userInput.Variable} error`}
             />
           </div>
           <div class="ContainerForUserInput">
