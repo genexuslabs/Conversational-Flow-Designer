@@ -54,7 +54,8 @@ export enum RenderingOptions {
 
 export enum SelectTypes {
   Compact,
-  Full
+  Full,
+  Extended
 }
 
 export class ResponseStyles {

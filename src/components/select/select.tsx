@@ -14,6 +14,7 @@ export class Select {
 
   private readonly compactClass: string = "CompactSelect";
   private readonly fullClass: string = "FullSelect";
+  private readonly extendedClass: string = "ExtendedSelect";
 
   private GetIconClass(): string {
     if (this.selectType == SelectTypes.Full) return "AddIconClass SelectIcon";
@@ -26,6 +27,8 @@ export class Select {
 
   private GetSelectClass(): string {
     if (this.selectType == SelectTypes.Full) return `${this.fullClass} Select`;
+    if (this.selectType == SelectTypes.Extended)
+      return `${this.extendedClass} Select`;
     return `${this.compactClass} Select`;
   }
 

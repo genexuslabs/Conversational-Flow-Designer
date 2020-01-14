@@ -224,7 +224,7 @@ export class FullResponse {
           <gxcf-select
             selectcaption={this.response.SDComponentName}
             selectIconType="SDPanel"
-            selectType={SelectTypes.Full}
+            selectType={SelectTypes.Extended}
             onClick={() => this.TriggerChangeSDComponent()}
           />
         </div>
@@ -235,8 +235,8 @@ export class FullResponse {
           <span>Web Component</span>
           <gxcf-select
             selectcaption={this.response.WebComponentName}
-            selectIconType="WebPanel"
-            selectType={SelectTypes.Full}
+            selectIconType="WebComponent"
+            selectType={SelectTypes.Extended}
             onClick={() => this.TriggerChangeWebComponent()}
           />
         </div>
