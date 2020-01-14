@@ -82,7 +82,7 @@ export class ConversationalDesginer {
 
       flows.push(
         <gxcf-flow-container
-          id={flowElement.Name.replace(" ", "")}
+          id={flowElement.Name.replace(/\s/g, "")}
           flow={flowElement}
           instance={this.instance}
           data-gxcf-element-id={flowElement.Name}
@@ -235,7 +235,7 @@ export class ConversationalDesginer {
   setSelectedFlow(flowName: string): void {
     if (flowName) {
       const container: HTMLElement = this.element
-        .querySelector("#" + flowName.replace(" ", ""))
+        .querySelector("#" + flowName.replace(/\s/g, ""))
         .shadowRoot.querySelector("gxcf-flow-collapsed") as HTMLElement;
       console.log(container);
 
@@ -254,7 +254,7 @@ export class ConversationalDesginer {
     if (this.instance) {
       if (this.instance.CurrentFlowName) {
         const flowCollapsed = this.element
-          .querySelector("#" + this.instance.CurrentFlowName.replace(" ", ""))
+          .querySelector("#" + this.instance.CurrentFlowName.replace(/\s/g, ""))
           .shadowRoot.querySelector("gxcf-flow-collapsed");
         if (flowCollapsed) {
           flowCollapsed.shadowRoot
