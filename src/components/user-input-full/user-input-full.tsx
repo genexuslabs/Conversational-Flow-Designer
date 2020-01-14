@@ -93,6 +93,15 @@ export class FullUserInput {
     });
   }
 
+  @Event() setCleanContextValue: EventEmitter;
+  TriggerCleantContextChangeValue(): void {
+    this.setCleanContextValue.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable,
+      value: !this.userInput.CleanInContext
+    });
+  }
+
   HandleEditAskMessage(event: CustomEvent): void {
     const value = EventsHelper.GetValue(event);
     const index = EventsHelper.GetCollectionIndexFromDetail(event);
@@ -232,6 +241,11 @@ export class FullUserInput {
     );
   }
 
+  private GetCleanContextSwitchIconClass(): string {
+    if (this.userInput.CleanInContext) return "SwitchIconOn";
+    return "SwitchIconOff";
+  }
+
   private RenderAdvancedMode(): HTMLElement {
     return (
       <div>
@@ -245,6 +259,11 @@ export class FullUserInput {
           <gxcf-condition
             currentCondition={this.userInput.RequiredCondition}
             onConditionChange={event => this.TriggerChangeCondition(event)}
+          />
+          <p class="CleanContextLabel">Clean Context Value</p>
+          <div
+            class={`${this.GetCleanContextSwitchIconClass()} CleanContextIcon`}
+            onClick={() => this.TriggerCleantContextChangeValue()}
           />
         </details>
         {this.RenderBasicMode()}

@@ -96,3 +96,15 @@ details[open] .UserInputPart::before {
 .SelectVP {
   cursor: pointer;
 }
+
+.CleanContextIcon
+{
+  margin-top: var(--small-margin);
+  float: left;
+}
+
+.CleanContextLabel{
+  display: inline-block;
+  margin-top: var(--small-margin);
+  margin-left: 5px;
+}
