@@ -246,6 +246,16 @@ export class FullUserInput {
     return "SwitchIconOff";
   }
 
+  @Event() setUserInputEntity: EventEmitter;
+  private TriggerSetUserInputEntity(event): void {
+    const entity = EventsHelper.GetValueFromInput(event);
+    this.setUserInputEntity.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable,
+      value: entity
+    });
+  }
+
   private RenderAdvancedMode(): HTMLElement {
     return (
       <div>
@@ -354,6 +364,15 @@ export class FullUserInput {
           confirmationMessage={`Do you want to delete the user input '${this.userInput.Variable}'?`}
         />
         <p class="DataType">Datatype: {this.userInput.DataType}</p>
+        <div>
+          <span>Entity: </span>
+          <input
+            type="text"
+            placeholder="None"
+            class="EntityInput"
+            onChange={event => this.TriggerSetUserInputEntity(event)}
+          />
+        </div>
         <img
           class={switchClass}
           onClick={event => this.SwitchAdvancedMode(event)}

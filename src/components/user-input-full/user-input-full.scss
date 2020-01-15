@@ -108,3 +108,9 @@ details[open] .UserInputPart::before {
   margin-top: var(--small-margin);
   margin-left: 5px;
 }
+
+.EntityInput{
+  background-color: var(--flow-element-background-color);
+  border: none;
+  margin-bottom: 5px;
+}
