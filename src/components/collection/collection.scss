@@ -17,7 +17,7 @@
   border-color: var(--background-color);
   border-style: solid;
   background-color: var(--collection-background-color);
-  margin-bottom: 5px;
+  margin-bottom: var(--min-margin);
   clear: both;
 }
 
