@@ -22,7 +22,7 @@
   },
   "devDependencies": {
     "@genexus/gemini": "^0.1.13",
-    "@stencil/core": "^1.8.5",
+    "@stencil/core": "1.8.1",
     "@stencil/router": "^1.0.1",
     "@stencil/sass": "^1.1.1",
     "@types/jest": "^24.0.25",
