@@ -371,6 +371,7 @@ export class FullUserInput {
             placeholder="None"
             class="EntityInput"
             onChange={event => this.TriggerSetUserInputEntity(event)}
+            value={this.userInput.Entity}
           />
         </div>
         <img
