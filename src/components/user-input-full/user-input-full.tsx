@@ -198,20 +198,6 @@ export class FullUserInput {
         );
         index++;
       }, this);
-    } else {
-      redirs.push(
-        <gxcf-redirection
-          requireCondition={true}
-          flows={this.instance.Flows}
-          redirectionIndex={0}
-          onChangeRedirectCondition={(event: CustomEvent) =>
-            this.TriggerChangeUserInputRedirectCondition(event)
-          }
-          onChangeRedirectTo={(event: CustomEvent) =>
-            this.TriggerUserInputChangeRedirectTo(event)
-          }
-        />
-      );
     }
     redirs.push(
       <gxcf-add-object
