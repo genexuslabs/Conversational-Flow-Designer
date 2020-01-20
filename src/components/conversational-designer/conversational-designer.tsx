@@ -131,6 +131,7 @@ export class ConversationalDesginer {
     else if (event.key === "ArrowDown") moveType = MoveType.Down;
     else if (event.ctrlKey && event.key === "f") this.setFocusOnSearch();
     else if (event.key === "Delete") this.askForFeleteElement(event);
+    else if (event.key === "Enter") this.handleEnterKey(event);
 
     if (moveType != null) {
       const index = this.flows.indexOf(this.renderFull);
@@ -140,6 +141,10 @@ export class ConversationalDesginer {
         this.setSelectedFlow(this.flows[index + 1]);
       else if (moveType == MoveType.Up) this.setFocusOnSearch();
     }
+  }
+  handleEnterKey(event: KeyboardEvent) {
+    const element: HTMLElement = event.srcElement as HTMLElement;
+    element.blur();
   }
 
   @Event() deleteFlow: EventEmitter;
