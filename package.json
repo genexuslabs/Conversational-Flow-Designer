@@ -18,8 +18,7 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "validate": "npm run lint && npm run build --prod",
-    "custom-build-dev": "stencil build && echo f | xcopy \"dist/gxcf-conversational-flows\" \"D:/Fuentes/Trunk3/Deploy/GeneXus/Debug/Packages/Patterns/Conversational/Editor/gxcf-conversational-flows\" /S /I /Y && echo f | xcopy \"src/assets\" \"D:/Fuentes/Trunk3/Deploy/GeneXus/Debug/Packages/Patterns/Conversational/Editor/assets\" /S /I /Y"
+    "validate": "npm run lint && npm run build --prod"
   },
   "devDependencies": {
     "@genexus/gemini": "^0.1.19",
