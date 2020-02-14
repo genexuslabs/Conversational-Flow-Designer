@@ -90,6 +90,16 @@ export class UserInput {
     this.TriggerCollapseUserInputOut(event);
   }
 
+  @Event() clickOnUserInputName;
+  @Listen("clickOnUserInputNameInternal")
+  TriggerClickOnUserInputName(event: CustomEvent): void {
+    console.log(event);
+    this.clickOnUserInputName.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable
+    });
+  }
+
   private collapsedUserInput(): HTMLElement {
     return <gxcf-user-input-collapsed userInput={this.userInput} />;
   }

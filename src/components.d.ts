@@ -24,6 +24,7 @@ export namespace Components {
     collectionHintId: string;
     currentItemIndex: number;
     currentItemValue: string;
+    defaultNewItemValue: string;
   }
   interface GxcfCondition {
     currentCondition: string;
@@ -399,6 +400,7 @@ declare namespace LocalJSX {
     collectionHintId?: string;
     currentItemIndex?: number;
     currentItemValue?: string;
+    defaultNewItemValue?: string;
     onDeleteItem?: (event: CustomEvent<any>) => void;
     onEditItem?: (event: CustomEvent<any>) => void;
   }
@@ -543,6 +545,7 @@ declare namespace LocalJSX {
   }
   interface GxcfUserInputCollapsed {
     onClickOnInput?: (event: CustomEvent<any>) => void;
+    onClickOnUserInputNameInternal?: (event: CustomEvent<any>) => void;
     onExpandUserInput?: (event: CustomEvent<any>) => void;
     onModifyUserInputFirstAskMessage?: (event: CustomEvent<any>) => void;
     onModifyUserInputName?: (event: CustomEvent<any>) => void;
@@ -551,6 +554,7 @@ declare namespace LocalJSX {
   interface GxcfUserInputContainer {
     flow?: GXCFModel.FlowElement;
     instance?: GXCFModel.Instance;
+    onClickOnUserInputName?: (event: CustomEvent<any>) => void;
     onCollapseUserInputOut?: (event: CustomEvent<any>) => void;
     onDeleteUserInput?: (event: CustomEvent<any>) => void;
     onExpandUserInputOut?: (event: CustomEvent<any>) => void;
@@ -567,13 +571,16 @@ declare namespace LocalJSX {
     onChangeTryLimit?: (event: CustomEvent<any>) => void;
     onChangeUserInputRedirectCondition?: (event: CustomEvent<any>) => void;
     onChangeUserInputRedirectTo?: (event: CustomEvent<any>) => void;
-    onClickOnInput?: (event: CustomEvent<any>) => void;
+    onClickOnUserInput?: (event: CustomEvent<any>) => void;
+    onClickOnUserInputNameInternal?: (event: CustomEvent<any>) => void;
     onCollapseUserInput?: (event: CustomEvent<any>) => void;
     onDeleteUserInputFull?: (event: CustomEvent<any>) => void;
     onModifyUserInputName?: (event: CustomEvent<any>) => void;
     onSelectValidationProcedure?: (event: CustomEvent<any>) => void;
     onSetAskMessages?: (event: CustomEvent<any>) => void;
+    onSetCleanContextValue?: (event: CustomEvent<any>) => void;
     onSetOnErrorMessages?: (event: CustomEvent<any>) => void;
+    onSetUserInputEntity?: (event: CustomEvent<any>) => void;
     userInput?: GXCFModel.UserInputElement;
   }
 

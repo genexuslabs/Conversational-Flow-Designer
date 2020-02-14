@@ -169,10 +169,14 @@ export class FullUserInput {
     });
   }
 
-  @Event() clickOnInput;
+  @Event() clickOnUserInput;
+  @Event() clickOnUserInputNameInternal;
   TriggerOnClickUserInputName(event: MouseEvent): void {
-    this.clickOnInput.emit.call(this, {
-      source: event.target as HTMLInputElement
+    console.log(event);
+    this.clickOnUserInputNameInternal.emit();
+    this.clickOnUserInput.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable
     });
   }
 
@@ -336,8 +340,8 @@ export class FullUserInput {
           type="text"
           class="UserInputTitle"
           value={this.userInput.Variable}
-          onChange={event => this.TriggerOnModifyUserInputName(event)}
           onClick={event => this.TriggerOnClickUserInputName(event)}
+          readonly
         />
         <gxcf-up-arrow
           class="UserInputCommandsPosition"
