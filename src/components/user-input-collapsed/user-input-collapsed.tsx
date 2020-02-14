@@ -37,13 +37,9 @@ export class CollapsedUserInput {
     return "";
   }
 
-  @Event() clickOnInput;
   @Event() clickOnUserInputNameInternal;
-  TriggerOnClickUserInputName(event: MouseEvent): void {
+  TriggerOnClickUserInputName(): void {
     this.clickOnUserInputNameInternal.emit();
-    this.clickOnInput.emit.call(this, {
-      source: event.target as HTMLInputElement
-    });
   }
 
   render() {
@@ -54,7 +50,7 @@ export class CollapsedUserInput {
           type="text"
           class="CollapsedTitle"
           value={this.userInput.Variable}
-          onClick={event => this.TriggerOnClickUserInputName(event)}
+          onClick={event => this.TriggerOnClickUserInputName()}
           readonly
         />
         <gxcf-down-arrow
