@@ -3,7 +3,6 @@ import { sass } from "@stencil/sass";
 
 export const config: Config = {
   namespace: "gxcf-conversational-flows",
-  enableCache: false,
   outputTargets: [
     {
       type: "dist"
