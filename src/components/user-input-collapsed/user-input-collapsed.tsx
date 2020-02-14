@@ -50,7 +50,7 @@ export class CollapsedUserInput {
           type="text"
           class="CollapsedTitle"
           value={this.userInput.Variable}
-          onClick={event => this.TriggerOnClickUserInputName()}
+          onClick={() => this.TriggerOnClickUserInputName()}
           readonly
         />
         <gxcf-down-arrow
