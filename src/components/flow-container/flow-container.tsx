@@ -67,13 +67,20 @@ export class Flow {
     });
   }
 
+  @Event() selectFlow: EventEmitter;
+  TriggerSelectFlow(): void {
+    this.selectFlow.emit.call(this, {
+      flowName: this.flow.Name
+    });
+  }
+
   handleClickFlowContainer(flowName): void {
     Position.SetFlow(flowName);
   }
 
   private renderSummary(renderingOption: RenderingOptions): HTMLElement {
     return (
-      <div>
+      <div onClick={() => this.TriggerSelectFlow()}>
         <gxcf-drop-zone
           moveType="Up"
           show={this.showDropZone}

@@ -452,6 +452,7 @@ declare namespace LocalJSX {
     instance?: GXCFModel.Instance;
     onDeleteFlow?: (event: CustomEvent<any>) => void;
     onModifyFlowName?: (event: CustomEvent<any>) => void;
+    onSelectFlow?: (event: CustomEvent<any>) => void;
     onSetTriggers?: (event: CustomEvent<any>) => void;
     renderType?: RenderingOptions;
     showDropZone?: boolean;
@@ -491,6 +492,7 @@ declare namespace LocalJSX {
     onCollapseResponseOut?: (event: CustomEvent<any>) => void;
     onDeleteResponse?: (event: CustomEvent<any>) => void;
     onExpandResponseOut?: (event: CustomEvent<any>) => void;
+    onSelectResponse?: (event: CustomEvent<any>) => void;
     onSetResponseMessages?: (event: CustomEvent<any>) => void;
     renderType?: RenderingOptions;
     response?: GXCFModel.ResponseElement;
@@ -544,7 +546,6 @@ declare namespace LocalJSX {
     arrowid?: string;
   }
   interface GxcfUserInputCollapsed {
-    onClickOnInput?: (event: CustomEvent<any>) => void;
     onClickOnUserInputNameInternal?: (event: CustomEvent<any>) => void;
     onExpandUserInput?: (event: CustomEvent<any>) => void;
     onModifyUserInputFirstAskMessage?: (event: CustomEvent<any>) => void;
@@ -558,6 +559,7 @@ declare namespace LocalJSX {
     onCollapseUserInputOut?: (event: CustomEvent<any>) => void;
     onDeleteUserInput?: (event: CustomEvent<any>) => void;
     onExpandUserInputOut?: (event: CustomEvent<any>) => void;
+    onSelectUserInput?: (event: CustomEvent<any>) => void;
     onSetAskMessages?: (event: CustomEvent<any>) => void;
     onSetUserInputName?: (event: CustomEvent<any>) => void;
     renderType?: RenderingOptions;

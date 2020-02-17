@@ -100,8 +100,21 @@ export class UserInput {
     });
   }
 
+  @Event() selectUserInput: EventEmitter;
+  TriggerSelectUserInput(): void {
+    this.selectUserInput.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: this.userInput.Variable
+    });
+  }
+
   private collapsedUserInput(): HTMLElement {
-    return <gxcf-user-input-collapsed userInput={this.userInput} />;
+    return (
+      <gxcf-user-input-collapsed
+        userInput={this.userInput}
+        onClick={() => this.TriggerSelectUserInput()}
+      />
+    );
   }
 
   private fullUserInput(): HTMLElement {
@@ -111,6 +124,7 @@ export class UserInput {
         flow={this.flow}
         instance={this.instance}
         onDeleteUserInputFull={() => this.TriggerDeleteUserInput()}
+        onClick={() => this.TriggerSelectUserInput()}
       />
     );
   }

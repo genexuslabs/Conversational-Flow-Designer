@@ -92,11 +92,20 @@ export class Response {
     });
   }
 
+  @Event() selectResponse: EventEmitter;
+  TriggerSelectResponse(): void {
+    this.selectResponse.emit.call(this, {
+      flowName: this.flow.Name,
+      index: this.responseIndex
+    });
+  }
+
   private RenderCollapsed(): HTMLElement {
     return (
       <gxcf-response-collapsed
         response={this.response}
         onChangeResponseName={event => this.TriggerChangeResponseName(event)}
+        onClick={() => this.TriggerSelectResponse()}
       />
     );
   }
@@ -110,6 +119,7 @@ export class Response {
         onDeleteResponseFull={() => this.TriggerDeleteResponse()}
         instance={this.instance}
         onChangeResponseName={event => this.TriggerChangeResponseName(event)}
+        onClick={() => this.TriggerSelectResponse()}
       />
     );
   }
