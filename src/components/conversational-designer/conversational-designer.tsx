@@ -71,14 +71,10 @@ export class ConversationalDesginer {
   private RenderizeFlows(): HTMLElement[] {
     const flows: HTMLElement[] = [];
     this.flows = new Array<string>();
-    let index = 0;
     this.GetFlows().forEach(function(flowElement) {
       this.flows.push(flowElement.Name);
       let renderType: RenderingOptions = RenderingOptions.Collapsed;
-      if (
-        (index == 0 && !this.instance.CurrentFlowName) ||
-        this.instance.CurrentFlowName == flowElement.Name
-      )
+      if (this.instance.CurrentFlowName == flowElement.Name)
         renderType = RenderingOptions.Full;
 
       flows.push(
@@ -90,7 +86,6 @@ export class ConversationalDesginer {
           renderType={renderType}
         />
       );
-      index++;
     }, this);
     return flows;
   }
