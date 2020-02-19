@@ -74,9 +74,12 @@ export class Collection {
             onChange={event => this.HandleEditItem(event)}
             onKeyPress={event => this.HandleKeyPress(event)}
           ></input>
-          <div
+          <gxg-icon
+            type="close"
+            color="onbackground"
+            size="small"
             data-item-index={index}
-            class="Trash"
+            class="Delete"
             onClick={event => this.HandleDeleteItem(event)}
           />
         </div>
