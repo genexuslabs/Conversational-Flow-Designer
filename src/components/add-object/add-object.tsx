@@ -1,4 +1,5 @@
 import { Component, h, Prop, Event, EventEmitter } from "@stencil/core";
+import "@genexus/gemini";
 
 @Component({
   tag: "gxcf-add-object",
@@ -17,7 +18,7 @@ export class AddObject {
     return (
       <div>
         <div class="AddObject" onClick={event => this.TriggerAddObject(event)}>
-          <gxcf-add-element class="AddObjectText" />
+          <gxg-icon size="small" type="add" color="onbackground" />
           <span class="AddObjectText">{this.addText}</span>
         </div>
       </div>
