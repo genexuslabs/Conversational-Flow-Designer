@@ -54,7 +54,10 @@ export class CollapsedResponse {
 
   private GetDownArrow(): HTMLElement {
     return (
-      <gxcf-down-arrow
+      <gxg-icon
+        size="regular"
+        type="chevron-down"
+        color="onbackground"
         class="CollapsedResponseDownArrow"
         onClick={event => this.TriggerOnExpandResponse(event)}
       />

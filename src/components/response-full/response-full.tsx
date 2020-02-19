@@ -276,7 +276,9 @@ export class FullResponse {
           onChange={event => this.TriggerChangeResponseName(event)}
           onClick={event => this.TriggerOnClickResponseInputName(event)}
         />
-        <gxcf-up-arrow
+        <gxg-icon
+          size="regular"
+          type="chevron-up"
           class="FullResponseCommands"
           onClick={event => this.TriggerCollapseResponse(event)}
         />

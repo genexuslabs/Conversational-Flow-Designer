@@ -44,9 +44,6 @@ export namespace Components {
   }
   interface GxcfDesignerWelcome {}
   interface GxcfDot {}
-  interface GxcfDownArrow {
-    arrowid: string;
-  }
   interface GxcfDropZone {
     Hide: () => Promise<void>;
     Show: () => Promise<void>;
@@ -108,9 +105,6 @@ export namespace Components {
     classType: string;
     summaryid: string;
     summaryvalue: string;
-  }
-  interface GxcfUpArrow {
-    arrowid: string;
   }
   interface GxcfUserInputCollapsed {
     userInput: GXCFModel.UserInputElement;
@@ -205,14 +199,6 @@ declare global {
   var HTMLGxcfDotElement: {
     prototype: HTMLGxcfDotElement;
     new (): HTMLGxcfDotElement;
-  };
-
-  interface HTMLGxcfDownArrowElement
-    extends Components.GxcfDownArrow,
-      HTMLStencilElement {}
-  var HTMLGxcfDownArrowElement: {
-    prototype: HTMLGxcfDownArrowElement;
-    new (): HTMLGxcfDownArrowElement;
   };
 
   interface HTMLGxcfDropZoneElement
@@ -319,14 +305,6 @@ declare global {
     new (): HTMLGxcfSummaryTitleElement;
   };
 
-  interface HTMLGxcfUpArrowElement
-    extends Components.GxcfUpArrow,
-      HTMLStencilElement {}
-  var HTMLGxcfUpArrowElement: {
-    prototype: HTMLGxcfUpArrowElement;
-    new (): HTMLGxcfUpArrowElement;
-  };
-
   interface HTMLGxcfUserInputCollapsedElement
     extends Components.GxcfUserInputCollapsed,
       HTMLStencilElement {}
@@ -361,7 +339,6 @@ declare global {
     "gxcf-conversational-designer": HTMLGxcfConversationalDesignerElement;
     "gxcf-designer-welcome": HTMLGxcfDesignerWelcomeElement;
     "gxcf-dot": HTMLGxcfDotElement;
-    "gxcf-down-arrow": HTMLGxcfDownArrowElement;
     "gxcf-drop-zone": HTMLGxcfDropZoneElement;
     "gxcf-flow-collapsed": HTMLGxcfFlowCollapsedElement;
     "gxcf-flow-container": HTMLGxcfFlowContainerElement;
@@ -375,7 +352,6 @@ declare global {
     "gxcf-select": HTMLGxcfSelectElement;
     "gxcf-summary-description": HTMLGxcfSummaryDescriptionElement;
     "gxcf-summary-title": HTMLGxcfSummaryTitleElement;
-    "gxcf-up-arrow": HTMLGxcfUpArrowElement;
     "gxcf-user-input-collapsed": HTMLGxcfUserInputCollapsedElement;
     "gxcf-user-input-container": HTMLGxcfUserInputContainerElement;
     "gxcf-user-input-full": HTMLGxcfUserInputFullElement;
@@ -427,14 +403,12 @@ declare namespace LocalJSX {
     onDeleteResponse?: (event: CustomEvent<any>) => void;
     onDeleteUserInput?: (event: CustomEvent<any>) => void;
     onMoveFlow?: (event: CustomEvent<any>) => void;
+    onSelectRoot?: (event: CustomEvent<any>) => void;
   }
   interface GxcfDesignerWelcome {
     onOpenEditor?: (event: CustomEvent<any>) => void;
   }
   interface GxcfDot {}
-  interface GxcfDownArrow {
-    arrowid?: string;
-  }
   interface GxcfDropZone {
     moveType?: string;
     objectReferenceId?: string;
@@ -542,9 +516,6 @@ declare namespace LocalJSX {
     summaryid?: string;
     summaryvalue?: string;
   }
-  interface GxcfUpArrow {
-    arrowid?: string;
-  }
   interface GxcfUserInputCollapsed {
     onClickOnUserInputNameInternal?: (event: CustomEvent<any>) => void;
     onExpandUserInput?: (event: CustomEvent<any>) => void;
@@ -597,7 +568,6 @@ declare namespace LocalJSX {
     "gxcf-conversational-designer": GxcfConversationalDesigner;
     "gxcf-designer-welcome": GxcfDesignerWelcome;
     "gxcf-dot": GxcfDot;
-    "gxcf-down-arrow": GxcfDownArrow;
     "gxcf-drop-zone": GxcfDropZone;
     "gxcf-flow-collapsed": GxcfFlowCollapsed;
     "gxcf-flow-container": GxcfFlowContainer;
@@ -611,7 +581,6 @@ declare namespace LocalJSX {
     "gxcf-select": GxcfSelect;
     "gxcf-summary-description": GxcfSummaryDescription;
     "gxcf-summary-title": GxcfSummaryTitle;
-    "gxcf-up-arrow": GxcfUpArrow;
     "gxcf-user-input-collapsed": GxcfUserInputCollapsed;
     "gxcf-user-input-container": GxcfUserInputContainer;
     "gxcf-user-input-full": GxcfUserInputFull;
@@ -642,8 +611,6 @@ declare module "@stencil/core" {
       "gxcf-designer-welcome": LocalJSX.GxcfDesignerWelcome &
         JSXBase.HTMLAttributes<HTMLGxcfDesignerWelcomeElement>;
       "gxcf-dot": LocalJSX.GxcfDot & JSXBase.HTMLAttributes<HTMLGxcfDotElement>;
-      "gxcf-down-arrow": LocalJSX.GxcfDownArrow &
-        JSXBase.HTMLAttributes<HTMLGxcfDownArrowElement>;
       "gxcf-drop-zone": LocalJSX.GxcfDropZone &
         JSXBase.HTMLAttributes<HTMLGxcfDropZoneElement>;
       "gxcf-flow-collapsed": LocalJSX.GxcfFlowCollapsed &
@@ -670,8 +637,6 @@ declare module "@stencil/core" {
         JSXBase.HTMLAttributes<HTMLGxcfSummaryDescriptionElement>;
       "gxcf-summary-title": LocalJSX.GxcfSummaryTitle &
         JSXBase.HTMLAttributes<HTMLGxcfSummaryTitleElement>;
-      "gxcf-up-arrow": LocalJSX.GxcfUpArrow &
-        JSXBase.HTMLAttributes<HTMLGxcfUpArrowElement>;
       "gxcf-user-input-collapsed": LocalJSX.GxcfUserInputCollapsed &
         JSXBase.HTMLAttributes<HTMLGxcfUserInputCollapsedElement>;
       "gxcf-user-input-container": LocalJSX.GxcfUserInputContainer &

@@ -53,7 +53,9 @@ export class CollapsedUserInput {
           onClick={() => this.TriggerOnClickUserInputName()}
           readonly
         />
-        <gxcf-down-arrow
+        <gxg-icon
+          size="regular"
+          type="chevron-down"
           class="CollapsedUserInputDownArrow"
           onClick={event => this.TriggerOnExpandUserInput(event)}
         />

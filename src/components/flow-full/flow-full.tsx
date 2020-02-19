@@ -205,7 +205,9 @@ export class FlowFull {
       return (
         <div class="TriggersContainer TriggersContainerBody">
           <div>
-            <gxcf-up-arrow
+            <gxg-icon
+              size="regular"
+              type="chevron-up"
               class="TriggersArrow"
               onClick={event => this.HandleCollapseTriggers(event)}
             />
@@ -230,7 +232,10 @@ export class FlowFull {
           </span>
           <gxcf-hint hintId={HintId.TriggerMessages} class="Hint" />
           <div class="TriggersContainer TriggersContainerBody">
-            <gxcf-down-arrow
+            <gxg-icon
+              size="regular"
+              type="chevron-down"
+              color="onbackground"
               class="TriggersArrow"
               onClick={event => this.HandleExpandTriggers(event)}
             />

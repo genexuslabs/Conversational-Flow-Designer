@@ -343,7 +343,9 @@ export class FullUserInput {
           onClick={event => this.TriggerOnClickUserInputName(event)}
           readonly
         />
-        <gxcf-up-arrow
+        <gxg-icon
+          size="regular"
+          type="chevron-up"
           class="UserInputCommandsPosition"
           onClick={event => this.TriggerOnCollapseUserInput(event)}
         />
