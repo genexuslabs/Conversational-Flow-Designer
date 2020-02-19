@@ -17,7 +17,6 @@ export class Select {
   private readonly extendedClass: string = "ExtendedSelect";
 
   private GetIconClass(): string {
-    if (this.selectType == SelectTypes.Full) return "AddIconClass SelectIcon";
     let iconClass = "";
     if (this.selectIconType && this.selectIconType != "")
       iconClass = `${this.selectIconType} SelectIcon`;
@@ -42,6 +41,12 @@ export class Select {
     this.titleMouseLeave.emit();
   }
 
+  private renderIcon(): HTMLElement {
+    if (this.selectType == SelectTypes.Full)
+      return <gxg-icon size="small" type="add" color="onbackground" />;
+    return <div class={this.GetIconClass()} />;
+  }
+
   render() {
     return (
       <div
@@ -51,8 +56,8 @@ export class Select {
         onMouseDown={() => this.TriggerMouseDown()}
         onMouseLeave={() => this.TriggerMouseLeave()}
       >
-        <div class={this.GetIconClass()} />
-        {this.selectcaption}
+        {this.renderIcon()}
+        <span class="SelectText">{this.selectcaption}</span>
       </div>
     );
   }

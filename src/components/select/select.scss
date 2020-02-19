@@ -58,6 +58,11 @@
     margin-right: 2px;    
 }
 
+.SelectText
+{
+    vertical-align: top;
+}
+
 .Procedure
 {
     content: var(--procedure-icon);
@@ -81,9 +86,4 @@
 .DataProvider
 {
     content: var(--data-provider-icon);
-}
-
-.AddIconClass
-{
-    content: var(--add-icon);
 }
