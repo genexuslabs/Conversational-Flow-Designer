@@ -14,10 +14,20 @@ body {
   width: 34%;
 }
 
-.SearchBar
+.LeftHeader
 {
   width: 34%;
   margin-bottom: 5px;
+}
+
+.SearchBar{
+  float: left;
+  width: 92%;
+}
+
+.SettingsButton{
+  vertical-align: bottom;
+  float: right;
 }
 
 .FlowsContainer {

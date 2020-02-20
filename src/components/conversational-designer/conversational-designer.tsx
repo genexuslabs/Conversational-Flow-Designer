@@ -30,7 +30,6 @@ export class ConversationalDesginer {
   private dragDropHandler: ConversationalDesignerDragDrop;
   private flows: Array<string>;
   private popUp: HTMLElement;
-  private mainTableId = "GXCFMainTable";
 
   HandleOpenEditor(): void {
     this.openEditor = true;
@@ -170,9 +169,8 @@ export class ConversationalDesginer {
   }
 
   @Event() selectRoot: EventEmitter;
-  triggerSelectRoot(event: MouseEvent): void {
-    const mainTable = document.getElementById(this.mainTableId);
-    if (event.target == mainTable) this.selectRoot.emit();
+  triggerSelectRoot(): void {
+    this.selectRoot.emit();
   }
 
   closePopUp(): void {
@@ -288,13 +286,18 @@ export class ConversationalDesginer {
         );
 
       return (
-        <div
-          class="MainTable"
-          id={this.mainTableId}
-          onClick={event => this.triggerSelectRoot(event)}
-        >
-          <div class="SearchBar">
-            <gxcf-search onSearch={event => this.HandleSearch(event)} />
+        <div class="MainTable">
+          <div class="LeftHeader">
+            <div class="SearchBar">
+              <gxcf-search onSearch={event => this.HandleSearch(event)} />
+            </div>
+            <div class="SettingsButton">
+              <gxg-icon
+                type="settings"
+                color="onbackground"
+                onClick={() => this.triggerSelectRoot()}
+              />
+            </div>
           </div>
           <div id={Controls.FlowsContainer} class="FlowsContainer">
             {this.RenderizeFlows()}
