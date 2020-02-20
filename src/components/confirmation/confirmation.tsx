@@ -36,7 +36,16 @@ export class Confirmation {
   render() {
     return (
       <div class="ConfirmationModal">
-        <div class="ConfirmationTitle">{this.confirmationTitle}</div>
+        <div class="ConfirmationHeader">
+          <span class="ConfirmationTitleText">{this.confirmationTitle}</span>
+          <gxg-icon
+            type="close"
+            size="small"
+            color="negative"
+            class="CloseComponent"
+            onClick={event => this.TriggerUserCancellation(event)}
+          />
+        </div>
         <div class="ConfirmationContent">
           <p class="ConfirmationMessage">{this.confirmationMessage}</p>
           <div class="ButtonPlaceHolder">

@@ -18,7 +18,7 @@
     padding: 10px;
 }
 
-.ConfirmationTitle
+.ConfirmationHeader
 {
     height: 24px;
     background-color: var(--confirmation-header-background-color);
@@ -26,6 +26,10 @@
     padding: 6px 0px 0px 6px;
 }
 
+.ConfirmationTitleText
+{
+    vertical-align: middle;
+}
 .ConfirmationMessage
 {
     color: var(--main-color);
@@ -42,4 +46,15 @@
 {
     float: right;
     margin-left: 10px;
+}
+
+.CloseComponent
+{
+    float:right;
+    vertical-align: top;
+}
+
+.CloseComponent:hover
+{
+    cursor: pointer;
 }
