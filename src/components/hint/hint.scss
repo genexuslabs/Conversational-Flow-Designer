@@ -40,11 +40,7 @@
 
 .CloseHint {
   float: right;
-  font-size: var(--normal-font-size);
   cursor: pointer;
-  width: var(--medium-icon-width);
-  height: var(--medium-icon-height);
-  content: var(--close-icon);
 }
 
 .HintLink
