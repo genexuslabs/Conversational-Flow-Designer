@@ -4,22 +4,18 @@
     background-color: var(--active-content-background);
     border-radius: 1px;
     border-style: solid;
-    line-height: 24px;
     border-width: 1px;    
 }
 
 .SearchIcon
 {
-    width: var(--medium-icon-width);
-    height: var(--medium-icon-height);
-    content: var(--search-icon);
-    display: inline-block;
+    vertical-align: middle;
 }
 
 .SearchText
 {
     height: 24px;
-    vertical-align: middle;
+    vertical-align: top;
     width: 90%;
     border:none;
     font-family: var(--gxcf-font-family);
