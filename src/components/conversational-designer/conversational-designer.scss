@@ -18,11 +18,12 @@ body {
 {
   width: 34%;
   margin-bottom: 5px;
+  float:left; 
 }
 
 .SearchBar{
-  float: left;
   width: 92%;
+  float: left;
 }
 
 .SettingsButton{
@@ -36,6 +37,7 @@ body {
   max-height: 87vh;
   width: 34%;
   left: 0;
+  clear: left;
 }
 
 .FlowsContainer::-webkit-scrollbar {
