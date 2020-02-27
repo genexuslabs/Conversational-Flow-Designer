@@ -27,10 +27,13 @@ body {
 }
 
 .SettingsButton{
-  vertical-align: bottom;
   width: 10%;
   display: inline-block;
   text-align: center;
+}
+
+.SettingsIcon{
+  vertical-align: middle;
 }
 
 .FlowsContainer {
