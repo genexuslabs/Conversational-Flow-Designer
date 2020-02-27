@@ -14,8 +14,13 @@ export class Search {
   render() {
     return (
       <div class="Search">
-        <div class="SearchIcon">
-          <gxg-icon type="search" color="onbackground" size="small" />
+        <div class="SearchIconDiv">
+          <gxg-icon
+            type="search"
+            color="onbackground"
+            size="small"
+            class="SearchIcon"
+          />
         </div>
         <input
           type="text"

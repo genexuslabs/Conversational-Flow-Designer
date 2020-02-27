@@ -7,19 +7,22 @@
     border-width: 1px;    
 }
 
-.SearchIcon
+.SearchIconDiv
 {
-    vertical-align: middle;
-    width: 9%;
+    width: 8%;
     display: inline-block;
-    margin-right: 1%;
+    text-align: center;
+}
+
+.SearchIcon{
+    vertical-align: middle;    
 }
 
 .SearchText
 {
     height: 24px;
     vertical-align: top;
-    width: 90%;
+    width: 92%;
     border:none;
     font-family: var(--gxcf-font-family);
     font-size: var(--small2-font-size);
