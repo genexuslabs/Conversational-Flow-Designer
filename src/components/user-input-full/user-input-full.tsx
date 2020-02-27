@@ -354,6 +354,7 @@ export class FullUserInput {
           onConfirmDelete={event => this.TriggerDeleteUserInput(event)}
           confirmationTitle="Delete user input"
           confirmationMessage={`Do you want to delete the user input '${this.userInput.Variable}'?`}
+          type="close"
         />
         <p class="DataType">Datatype: {this.userInput.DataType}</p>
         <div>

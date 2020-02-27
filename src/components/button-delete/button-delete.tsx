@@ -10,6 +10,7 @@ export class ButtonDelete {
   @State() askConfirmation = false;
   @Prop() confirmationTitle: string;
   @Prop() confirmationMessage: string;
+  @Prop() type: "deleted" | "close" = "deleted";
 
   @Event() confirmDelete: EventEmitter;
   TriggerConfirmDelete(event): void {
@@ -27,11 +28,16 @@ export class ButtonDelete {
     this.askConfirmation = false;
   }
 
+  private getSize() {
+    if (this.type == "close") return "small";
+    return "regular";
+  }
+
   private deleteButton(): HTMLElement {
     return (
       <gxg-icon
-        size="regular"
-        type="deleted"
+        size={this.getSize()}
+        type={this.type}
         onClick={event => this.HandleDeleteIntention(event)}
         class="DeleteFlow"
       />

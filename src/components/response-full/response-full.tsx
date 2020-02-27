@@ -287,6 +287,7 @@ export class FullResponse {
           onConfirmDelete={event => this.TriggerDeleteResponseFull(event)}
           confirmationTitle="Delete response"
           confirmationMessage={`Do you want to delete the response '${this.response.Index}'?`}
+          type="close"
         />
         <gxcf-collection
           collection={this.response.Format}
