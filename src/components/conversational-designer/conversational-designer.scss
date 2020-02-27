@@ -22,13 +22,15 @@ body {
 }
 
 .SearchBar{
-  width: 92%;
-  float: left;
+  width: 90%;
+  display: inline-block;
 }
 
 .SettingsButton{
   vertical-align: bottom;
-  float: right;
+  width: 10%;
+  display: inline-block;
+  text-align: center;
 }
 
 .FlowsContainer {

@@ -10,6 +10,9 @@
 .SearchIcon
 {
     vertical-align: middle;
+    width: 9%;
+    display: inline-block;
+    margin-right: 1%;
 }
 
 .SearchText
@@ -20,4 +23,5 @@
     border:none;
     font-family: var(--gxcf-font-family);
     font-size: var(--small2-font-size);
+    display: inline-block;    
 }
