@@ -4,7 +4,7 @@
     background-color: var(--active-content-background);
     border-radius: 1px;
     border-style: solid;
-    border-width: 1px;    
+    border-width: 1px;   
 }
 
 .SearchIconDiv
@@ -15,16 +15,16 @@
 }
 
 .SearchIcon{
-    vertical-align: middle;    
+    vertical-align: middle;
 }
 
 .SearchText
 {
-    height: 24px;
+    height: 22px;
     vertical-align: top;
     width: 92%;
     border:none;
     font-family: var(--gxcf-font-family);
     font-size: var(--small2-font-size);
-    display: inline-block;    
+    float:right;
 }
