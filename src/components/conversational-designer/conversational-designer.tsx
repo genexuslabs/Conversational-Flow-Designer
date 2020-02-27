@@ -296,6 +296,7 @@ export class ConversationalDesginer {
                 type="settings"
                 color="onbackground"
                 onClick={() => this.triggerSelectRoot()}
+                class="SettingsIcon"
               />
             </div>
           </div>
