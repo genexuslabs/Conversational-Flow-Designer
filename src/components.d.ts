@@ -43,7 +43,6 @@ export namespace Components {
   interface GxcfConversationalDesigner {
     instance: GXCFModel.Instance;
   }
-  interface GxcfDesignerWelcome {}
   interface GxcfDot {}
   interface GxcfDropZone {
     Hide: () => Promise<void>;
@@ -188,14 +187,6 @@ declare global {
     new (): HTMLGxcfConversationalDesignerElement;
   };
 
-  interface HTMLGxcfDesignerWelcomeElement
-    extends Components.GxcfDesignerWelcome,
-      HTMLStencilElement {}
-  var HTMLGxcfDesignerWelcomeElement: {
-    prototype: HTMLGxcfDesignerWelcomeElement;
-    new (): HTMLGxcfDesignerWelcomeElement;
-  };
-
   interface HTMLGxcfDotElement extends Components.GxcfDot, HTMLStencilElement {}
   var HTMLGxcfDotElement: {
     prototype: HTMLGxcfDotElement;
@@ -338,7 +329,6 @@ declare global {
     "gxcf-confirmation": HTMLGxcfConfirmationElement;
     "gxcf-connector": HTMLGxcfConnectorElement;
     "gxcf-conversational-designer": HTMLGxcfConversationalDesignerElement;
-    "gxcf-designer-welcome": HTMLGxcfDesignerWelcomeElement;
     "gxcf-dot": HTMLGxcfDotElement;
     "gxcf-drop-zone": HTMLGxcfDropZoneElement;
     "gxcf-flow-collapsed": HTMLGxcfFlowCollapsedElement;
@@ -406,9 +396,6 @@ declare namespace LocalJSX {
     onDeleteUserInput?: (event: CustomEvent<any>) => void;
     onMoveFlow?: (event: CustomEvent<any>) => void;
     onSelectRoot?: (event: CustomEvent<any>) => void;
-  }
-  interface GxcfDesignerWelcome {
-    onOpenEditor?: (event: CustomEvent<any>) => void;
   }
   interface GxcfDot {}
   interface GxcfDropZone {
@@ -568,7 +555,6 @@ declare namespace LocalJSX {
     "gxcf-confirmation": GxcfConfirmation;
     "gxcf-connector": GxcfConnector;
     "gxcf-conversational-designer": GxcfConversationalDesigner;
-    "gxcf-designer-welcome": GxcfDesignerWelcome;
     "gxcf-dot": GxcfDot;
     "gxcf-drop-zone": GxcfDropZone;
     "gxcf-flow-collapsed": GxcfFlowCollapsed;
@@ -610,8 +596,6 @@ declare module "@stencil/core" {
         JSXBase.HTMLAttributes<HTMLGxcfConnectorElement>;
       "gxcf-conversational-designer": LocalJSX.GxcfConversationalDesigner &
         JSXBase.HTMLAttributes<HTMLGxcfConversationalDesignerElement>;
-      "gxcf-designer-welcome": LocalJSX.GxcfDesignerWelcome &
-        JSXBase.HTMLAttributes<HTMLGxcfDesignerWelcomeElement>;
       "gxcf-dot": LocalJSX.GxcfDot & JSXBase.HTMLAttributes<HTMLGxcfDotElement>;
       "gxcf-drop-zone": LocalJSX.GxcfDropZone &
         JSXBase.HTMLAttributes<HTMLGxcfDropZoneElement>;

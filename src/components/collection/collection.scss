@@ -42,15 +42,15 @@
 }
 
 .CollectionContainer::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px var(--element-background-color);
-  box-shadow: inset 0 0 6px var(--element-background-color);
+  -webkit-box-shadow: inset 0 0 6px var(--gray-01);
+  box-shadow: inset 0 0 6px var(--gray-01);
   border-radius: 5px;
 }
 
 .CollectionContainer::-webkit-scrollbar-thumb {
   border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px var(--selection-color);
-  box-shadow: inset 0 0 6px var(--selection-color);
+  -webkit-box-shadow: inset 0 0 6px var(--color-on-secondary);
+  box-shadow: inset 0 0 6px var(--color-on-secondary);
 }
 
 .Delete:hover {
@@ -58,7 +58,6 @@
 }
 
 .CollectionHeader {
-  color: var(--title-color);
   float: left;
   clear: left;
   margin-bottom: 15px;
