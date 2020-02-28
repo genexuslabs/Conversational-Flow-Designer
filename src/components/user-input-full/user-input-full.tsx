@@ -262,7 +262,7 @@ export class FullUserInput {
             currentCondition={this.userInput.RequiredCondition}
             onConditionChange={event => this.TriggerChangeCondition(event)}
           />
-          <p class="CleanContextLabel">Clean Context Value</p>
+          <p class="CleanContextLabel gxg-text">Clean Context Value</p>
           <div
             class={`${this.GetCleanContextSwitchIconClass()} CleanContextIcon`}
             onClick={() => this.TriggerCleantContextChangeValue()}
@@ -288,9 +288,9 @@ export class FullUserInput {
           </div>
           <div class="ContainerForUserInput">
             <gxcf-hint hintId={HintId.TryLimit} class="UserInputHints" />
-            <span>Try Limit</span>
+            <span class="gxg-title-01">Try Limit</span>
             <input
-              class="UserInputLine"
+              class="UserInputLine gxg-text"
               placeholder="0 - No limits"
               value={this.userInput.TryLimit}
               onChange={(event: CustomEvent) =>
@@ -304,9 +304,9 @@ export class FullUserInput {
               hintId={HintId.ValidateUserInput}
               class="UserInputHints"
             />
-            <span>Validation Procedure</span>
+            <span class="gxg-title-01">Validation Procedure</span>
             <input
-              class="UserInputLine SelectVP"
+              class="UserInputLine SelectVP gxg-text"
               placeholder="Select a Validation Procedure"
               value={this.userInput.ValidationProcedure}
               onClick={event => this.TriggerOnChangeValidationProcedure(event)}
@@ -344,7 +344,7 @@ export class FullUserInput {
       <div class="FullUserInput">
         <input
           type="text"
-          class="UserInputTitle"
+          class="UserInputTitle gxg-title-01"
           value={this.userInput.Variable}
           onClick={event => this.TriggerOnClickUserInputName(event)}
           readonly
