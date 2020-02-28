@@ -160,7 +160,7 @@ export class FullResponse {
     );
     elements.push(
       <select
-        class="ResponseSelect"
+        class="ResponseSelect gxg-text"
         onChange={(event: CustomEvent) =>
           this.TriggerChangeResponseStyle(event)
         }
@@ -270,7 +270,7 @@ export class FullResponse {
       <div class="FullResponse">
         <input
           type="text"
-          class="FullResponseTitle"
+          class="FullResponseTitle gxg-title-01"
           value={this.response.ResponseName}
           placeholder="Response name..."
           onChange={event => this.TriggerChangeResponseName(event)}
@@ -303,7 +303,7 @@ export class FullResponse {
           }}
         />
         <div class="ConditionMargin">
-          <span class="ConditionLabel">Condition</span>
+          <span class="ConditionLabel gxg-title-03">Condition</span>
           <gxcf-hint class="HintBlock" hintId={HintId.ResponseCondition} />
         </div>
         <gxcf-condition
@@ -315,7 +315,7 @@ export class FullResponse {
         />
         <hr class="Separator"></hr>
         <div class="ConditionMargin">
-          <span class="ConditionLabel">Response Style</span>
+          <span class="ConditionLabel gxg-title-03">Response Style</span>
           <gxcf-hint class="HintBlock" hintId={HintId.ResponseStyle} />
         </div>
         {this.RenderStyleSelector()}

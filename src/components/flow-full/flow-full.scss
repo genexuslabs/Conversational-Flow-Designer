@@ -1,13 +1,12 @@
 .FlowFull {
-  background-color: var(--active-content-background);
+  background-color: var(--color-background);
   display: block;
   margin: var(--small-margin) 0px var(--medium-margin) 0px;
   margin-bottom: 20px;
   -webkit-animation: fadeIn 1s;
   animation: fadeIn 1s;
   padding-bottom: var(--small-margin);
-  border-top: 3px solid var(--highlight-color-2);
-  font-family: var(--gxcf-font-family);
+  border-top: 3px solid var(--color-primary-active);
 }
 
 .Content
@@ -22,7 +21,7 @@
 }
 
 .FullFlowContent {
-  background-color: var(--flow-element-full-header-color);
+  background-color: var(--color-background);
 }
 
 .FullFlowContentUserInputs {
@@ -35,7 +34,7 @@
 
 .Separator {
   margin: 0px;
-  border-top: 2px dashed var(--separator-line-color);
+  border-top: 2px dashed var(--gray-03);
   border-bottom: none;
   border-left: none;
   border-right: none;
@@ -52,7 +51,6 @@
 
 .ElementsHeader {
   clear: both;
-  color: var(--title-color);
   font-weight: 400;
   margin-bottom: var(--small-margin);
 }
@@ -65,9 +63,6 @@
   margin-left: 10px;
 }
 
-.ElementsHeaderText {
-  color: var(--elements-header-font-color);
-}
 
 .CommandsContainer
 {
@@ -99,18 +94,14 @@
 
 .TriggersContainerBody
 {
+  background-color: var(--gray-01);
   border-style: solid;
   border-width: 1px;
   margin-top: 5px;
   padding: 5px;
-  border-color: var(--flow-element-border-color);
-  background-color: var(--flow-element-background-color);
+  border-color: var(--gray-04);
 }
 
-.FirstTriggerMessage
-{
-  font-style: italic;
-}
 
 .DotPosition{
   float: left;

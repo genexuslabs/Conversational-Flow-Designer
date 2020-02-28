@@ -17,7 +17,6 @@ export const config: Config = {
       injectGlobalPaths: [
         "src/global/global.scss",
         "src/global/token-animations.scss",
-        "src/global/token-colors.scss",
         "src/global/token-fonts.scss",
         "src/global/token-icons.scss",
         "src/global/token-boxing.scss"

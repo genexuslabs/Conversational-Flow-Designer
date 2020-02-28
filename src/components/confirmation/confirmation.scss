@@ -5,12 +5,11 @@
     width: 500px;
     height: 125px;
     position:fixed;
-    background-color: var(--confirmation-background-color);
+    background-color: var(--color-background);
     box-shadow: 0px 3px 4px 0px rgba(0, 0, 0, 0.14),
   0px 3px 3px -2px rgba(0, 0, 0, 0.12),
   0px 1px 8px 0px rgba(0, 0, 0, 0.2);
     z-index: 2;
-    font-family: var(--gxcf-font-family);
 }
 
 .ConfirmationContent
@@ -21,18 +20,13 @@
 .ConfirmationHeader
 {
     height: 24px;
-    background-color: var(--confirmation-header-background-color);
-    color: var(--confirmation-header-font-color);
+    background-color: var(--color-primary-active);
     padding: 6px 0px 0px 6px;
 }
 
 .ConfirmationTitleText
 {
     vertical-align: middle;
-}
-.ConfirmationMessage
-{
-    color: var(--main-color);
 }
 
 .ButtonPlaceHolder

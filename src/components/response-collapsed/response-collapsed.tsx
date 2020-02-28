@@ -69,7 +69,7 @@ export class CollapsedResponse {
     title.push(
       <input
         type="text"
-        class="CollapsedResponseTitle"
+        class="CollapsedResponseTitle gxg-title-01"
         value={this.response.ResponseName}
         placeholder="Response name..."
         onChange={event => this.TriggerChangeResponseName(event)}
@@ -80,8 +80,8 @@ export class CollapsedResponse {
     if (this.response.Condition != "") {
       title.push(
         <div class="ConditionHeader">
-          <span class="IfTitle">if...</span>
-          <span class="ConditionTitle">{this.response.Condition}</span>
+          <span class="gxg-label">if...</span>
+          <span class="gxg-text">{this.response.Condition}</span>
         </div>
       );
     }
@@ -91,7 +91,7 @@ export class CollapsedResponse {
   private GetFirstResponseMessageClass(): string {
     let tab = "FirstResponseMessageNoTab";
     if (this.response.Condition != "") tab = "FirstResponseMessageTab";
-    return `FirstResponseMessage ${tab}`;
+    return `FirstResponseMessage ${tab} gxg-quote`;
   }
 
   GetFristResponseMessage(): string {

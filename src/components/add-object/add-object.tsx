@@ -19,7 +19,7 @@ export class AddObject {
       <div>
         <div class="AddObject" onClick={event => this.TriggerAddObject(event)}>
           <gxg-icon size="small" type="add" color="onbackground" />
-          <span class="AddObjectText">{this.addText}</span>
+          <span class="AddObjectText gxg-text">{this.addText}</span>
         </div>
       </div>
     );

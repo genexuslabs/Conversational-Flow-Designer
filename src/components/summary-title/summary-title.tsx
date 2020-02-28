@@ -33,13 +33,18 @@ export class SummaryTitle {
     });
   }
 
-  render() {
+  private getClasType(): string {
+    const ret = "CommonTitle ";
     if (this.classType == "") this.classType = this.DefaultClassType;
+    return ret + this.classType + " gxg-title-01";
+  }
+
+  render() {
     return (
       <input
         id={this.summaryid}
         type="text"
-        class={`CommonTitle ${this.classType}`}
+        class={this.getClasType()}
         value={this.summaryvalue}
         onChange={event => this.ChangingFlowName(event)}
         onMouseDown={() => this.TriggerMouseDown()}

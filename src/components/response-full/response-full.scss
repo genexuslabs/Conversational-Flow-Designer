@@ -1,13 +1,12 @@
 .FullResponse {
-    border-color: var(--flow-element-border-color);
-    background-color: var(--flow-element-background-color);
+    border-color: var(--gray-01r);
+    background-color: var(--gray-01);
     border-width: 1px;
     border-radius: 1px;
     border-style: solid;
     padding: 12px 22px 12px 22px;
     overflow: hidden;
     margin-bottom: 15px;
-    font-family: var(--gxcf-font-family);
   }
 
   .FullResponseCommands {
@@ -15,15 +14,11 @@
     cursor: pointer;
   }
 
-  .FullResponseTitle {
-    background-color: var(--flow-element-background-color);
-    border: none;
-    float: left;
-    color: var(--elements-title-font-color);
-    font-size: var(--normal-font-size);
-    font-weight: bold;
-    font-family: var(--gxcf-font-family);
-  }
+.FullResponseTitle {
+  background-color: var(--gray-01);
+  border: none;
+  float: left;
+}
 
 .HintBlock
 {
@@ -47,7 +42,7 @@
   border: none;
   height: 24px;
   width: 100%;
-  font-family: var(--gxcf-font-family);
+  background-color: var(--gray-01);
 }
 
 .ResponseProperty

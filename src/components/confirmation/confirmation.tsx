@@ -35,8 +35,8 @@ export class Confirmation {
 
   render() {
     return (
-      <div class="ConfirmationModal">
-        <div class="ConfirmationHeader">
+      <div class="ConfirmationModal gxg-text">
+        <div class="ConfirmationHeader gxg-text--negative">
           <span class="ConfirmationTitleText">{this.confirmationTitle}</span>
           <gxg-icon
             type="close"
@@ -47,7 +47,7 @@ export class Confirmation {
           />
         </div>
         <div class="ConfirmationContent">
-          <p class="ConfirmationMessage">{this.confirmationMessage}</p>
+          <p class="gxg-text">{this.confirmationMessage}</p>
           <div class="ButtonPlaceHolder">
             <gxg-button
               type="outlined"

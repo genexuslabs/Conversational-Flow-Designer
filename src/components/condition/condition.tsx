@@ -16,9 +16,9 @@ export class Condition {
   render() {
     return (
       <div class="ContainerConditon">
-        <span class="LabelConditon">If...</span>
+        <span class="LabelConditon gxg-label">If...</span>
         <input
-          class="InputCondition"
+          class="InputCondition gxg-text"
           placeholder="always"
           value={this.currentCondition}
           onChange={event => this.TriggerOnConditionChange(event)}

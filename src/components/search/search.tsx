@@ -24,7 +24,7 @@ export class Search {
         </div>
         <input
           type="text"
-          class="SearchText"
+          class="SearchText gxg-text"
           placeholder="Search"
           onInput={event => {
             this.TriggerSearch(event);

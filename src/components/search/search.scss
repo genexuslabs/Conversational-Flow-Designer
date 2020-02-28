@@ -1,7 +1,7 @@
 .Search
 {
-    border-color: var(--action-border-color);
-    background-color: var(--active-content-background);
+    border-color: var(--gray-04);
+    background-color: var(--color-background);
     border-radius: 1px;
     border-style: solid;
     border-width: 1px;   
@@ -24,7 +24,6 @@
     vertical-align: top;
     width: 92%;
     border:none;
-    font-family: var(--gxcf-font-family);
-    font-size: var(--small2-font-size);
     float:right;
+    background-color: var(--color-background);
 }

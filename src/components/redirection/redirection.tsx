@@ -64,7 +64,7 @@ export class Redirection {
 
     elements.push(
       <select
-        class="RedirectToSelect"
+        class="RedirectToSelect gxg-text"
         required
         onChange={event => this.TriggerOnChangeRedirectTo(event)}
       >

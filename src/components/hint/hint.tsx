@@ -22,7 +22,7 @@ export class Hint {
 
   private Show = (
     <div class="ShowHint">
-      <span class="HintTitle">
+      <span class="gxg-title-03">
         {PropertiesDefinition.GetTitle(this.hintId)}
       </span>
       <gxg-icon
@@ -32,17 +32,15 @@ export class Hint {
         onClick={event => this.HandleHideHint(event)}
         class="CloseHint"
       />
-      <p class="HintDescription">
-        {PropertiesDefinition.GetDescription(this.hintId)}
-      </p>
-      <a class="HintLink" href={PropertiesDefinition.GetURL(this.hintId)}>
+      <p class="gxg-text">{PropertiesDefinition.GetDescription(this.hintId)}</p>
+      <a class="gxg-link" href={PropertiesDefinition.GetURL(this.hintId)}>
         See more
       </a>
     </div>
   );
 
   private Hint = (
-    <span class="Hint" onClick={event => this.HandleShowHint(event)}>
+    <span class="Hint gxg-link" onClick={event => this.HandleShowHint(event)}>
       {PropertiesDefinition.GetLabel(this.hintId)}
     </span>
   );

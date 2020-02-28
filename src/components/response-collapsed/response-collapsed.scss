@@ -1,6 +1,6 @@
 .CollapsedResponse {
-  border-color: var(--flow-element-border-color);
-  background-color: var(--flow-element-background-color);
+  border-color: var(--gray-01);
+  background-color: var(--gray-01);
   border-width: 1px;
   border-radius: 1px;
   border-style: solid;
@@ -9,12 +9,11 @@
   margin-bottom: 15px;
   -webkit-animation: var(--animation-time);
   animation: var(--animation-time);
-  font-family: var(--gxcf-font-family);
+  border-top: 3px solid var(--gray-01);
 }
 
 .CollapsedResponse:hover {
-  //transform: var(--animation-scale-size);
-  border-top: 3px solid var(--highlight-color-2)
+  border-top: 3px solid var(--color-primary-active);
 }
 
 .CollapsedResponseDownArrow {
@@ -26,12 +25,9 @@
 {
   float: left;
   clear: both;
-  font-style: italic;
-  color: var(--elements-messages-font-color);
   border: none;
-  background-color: var(--flow-element-background-color);
+  background-color: var(--gray-01);
   width: 95%;
-  font-family: var(--gxcf-font-family);
 }
 
 .FirstResponseMessageNoTab {  
@@ -44,30 +40,15 @@
 }
 
 .CollapsedResponseTitle {
-  background-color: var(--flow-element-background-color);
+  background-color: var(--gray-01);
   border: none;
   float: left;
-  color: var(--elements-title-font-color);
-  font-size: var(--normal-font-size);
-  font-weight: bold;
-  font-family: var(--gxcf-font-family);
   width: 90%;
 }
 
 .DotPosition
 {
   float: left;
-}
-
-.IfTitle
-{
-  font-style: italic;
-  color: var(--condition-label-color);
-}
-
-.ConditionTitle
-{
-  font-style: italic;
 }
 
 .ConditionHeader
