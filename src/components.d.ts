@@ -519,6 +519,7 @@ declare namespace LocalJSX {
     onCollapseUserInputOut?: (event: CustomEvent<any>) => void;
     onDeleteUserInput?: (event: CustomEvent<any>) => void;
     onExpandUserInputOut?: (event: CustomEvent<any>) => void;
+    onRefreshConnectors?: (event: CustomEvent<any>) => void;
     onSelectUserInput?: (event: CustomEvent<any>) => void;
     onSetAskMessages?: (event: CustomEvent<any>) => void;
     onSetUserInputName?: (event: CustomEvent<any>) => void;
