@@ -29,7 +29,7 @@ export class SummaryDescription {
       <input
         id={this.descriptionid}
         type="text"
-        class="SummaryDescription"
+        class="SummaryDescription gxg-quote"
         value={this.descriptionvalue}
         size={45}
         onChange={event => this.ChangingFlowTriggerSummary(event)}

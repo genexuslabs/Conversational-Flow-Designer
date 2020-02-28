@@ -48,7 +48,7 @@ export class CollapsedUserInput {
         <gxcf-dot class="DotPosition" />
         <input
           type="text"
-          class="CollapsedTitle"
+          class="CollapsedTitle gxg-title-01"
           value={this.userInput.Variable}
           onClick={() => this.TriggerOnClickUserInputName()}
           readonly
@@ -61,7 +61,7 @@ export class CollapsedUserInput {
         />
         <input
           type="text"
-          class="FirstAskMessage"
+          class="FirstAskMessage gxg-quote"
           value={this.GetFirstAskMessage()}
           onChange={event =>
             this.TriggerOnModifyUserInputFirstAskMessage(event)

@@ -68,7 +68,7 @@ export class Collection {
         <div class="Item">
           <input
             data-item-index={index}
-            class="ItemInput"
+            class="ItemInput gxg-quote"
             type="text"
             value={items[index]}
             onChange={event => this.HandleEditItem(event)}
@@ -108,7 +108,7 @@ export class Collection {
     return (
       <div class="Collection">
         <div class="CollectionContainer">
-          <span class="CollectionHeader">{`${this.collectionHeader} (${this.collectionLength})`}</span>
+          <span class="CollectionHeader gxg-title-03">{`${this.collectionHeader} (${this.collectionLength})`}</span>
           <gxcf-hint hintId={this.collectionHintId} class="Hint" />
           <div class="CollectionContainer ItemsRender" id="ItemsRender">
             {this.RenderizeItems(this.collection)}

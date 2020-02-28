@@ -1,6 +1,6 @@
 .CollapsedUserInput {
-  border-color: var(--flow-element-border-color);
-  background-color: var(--flow-element-background-color);
+  border-color: var(--gray-01);
+  background-color: var(--gray-01);
   border-width: 1px;
   border-radius: 1px;
   border-style: solid;
@@ -9,10 +9,11 @@
   -webkit-animation: var(--animation-time);
   animation: var(--animation-time);
   margin: var(--small-margin);
+  border-top: 3px solid var(--gray-01);
 }
 
 .CollapsedUserInput:hover {
-  border-top: 3px solid var(--highlight-color-2)
+  border-top: 3px solid var(--color-primary-active);
 }
 
 .CollapsedUserInputDownArrow {
@@ -23,24 +24,15 @@
 .FirstAskMessage {
   float: left;
   clear: both;
-  font-style: italic;
-  color: var(--elements-messages-font-color);
   border: none;
-  background-color: var(--flow-element-background-color);
+  background-color: var(--gray-01);
   width: 95%;
   margin-left: 14px;
-  font-family: var(--gxcf-font-family);
-  font-size: var(--normal-font-size);
 }
 
 .CollapsedTitle {
-  background-color: var(--flow-element-background-color);
+  background-color: var(--gray-01);
   border: none;
-  color: var(--elements-title-font-color);
-  font-weight: bold;
-  float: left;
-  font-family: var(--gxcf-font-family);
-  font-size: var(--normal-font-size);
   width: 90%;
 }
 

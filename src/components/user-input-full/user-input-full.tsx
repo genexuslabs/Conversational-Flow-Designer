@@ -216,7 +216,9 @@ export class FullUserInput {
     return (
       <details open>
         <summary class="UserInputPart">
-          <span class="UserInputPartSummaryText">Ask messages</span>
+          <span class="UserInputPartSummaryText gxg-title-03">
+            Ask messages
+          </span>
         </summary>
         <gxcf-collection
           collection={this.userInput.RequiredMessages}
@@ -251,7 +253,7 @@ export class FullUserInput {
       <div>
         <details>
           <summary class="UserInputPart">
-            <span class="UserInputPartSummaryText">
+            <span class="UserInputPartSummaryText gxg-title-03">
               Condition to be required
             </span>
           </summary>
@@ -269,7 +271,9 @@ export class FullUserInput {
         {this.RenderBasicMode()}
         <details>
           <summary class="UserInputPart">
-            <span class="UserInputPartSummaryText">Validate User Input</span>
+            <span class="UserInputPartSummaryText gxg-title-03">
+              Validate User Input
+            </span>
           </summary>
           <div>
             <gxcf-collection
@@ -311,7 +315,9 @@ export class FullUserInput {
         </details>
         <details>
           <summary class="UserInputPart">
-            <span class="UserInputPartSummaryText">Redirection</span>
+            <span class="UserInputPartSummaryText gxg-title-03">
+              Redirection
+            </span>
           </summary>
           <gxcf-hint hintId={HintId.Redirection} class="UserInputHints" />
           {this.RenderRedirections()}
@@ -356,13 +362,12 @@ export class FullUserInput {
           confirmationMessage={`Do you want to delete the user input '${this.userInput.Variable}'?`}
           type="close"
         />
-        <p class="DataType">Datatype: {this.userInput.DataType}</p>
-        <div>
-          <span>Entity: </span>
+        <div class="Entity">
+          <span class="gxg-title-03">Entity: </span>
           <input
             type="text"
             placeholder="None"
-            class="EntityInput"
+            class="EntityInput gxg-text"
             onChange={event => this.TriggerSetUserInputEntity(event)}
             value={this.userInput.Entity}
           />
@@ -371,7 +376,9 @@ export class FullUserInput {
           class={switchClass}
           onClick={event => this.SwitchAdvancedMode(event)}
         />
-        <span class="TextMode">Advanced mode {advancedEditionStatus}</span>
+        <span class="TextMode gxg-label">
+          Advanced mode {advancedEditionStatus}
+        </span>
         {editionMode}
       </div>
     );

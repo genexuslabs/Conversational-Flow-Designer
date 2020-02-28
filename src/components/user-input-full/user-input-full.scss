@@ -1,6 +1,6 @@
 .FullUserInput {
-  border-color: var(--user-input-border-color);
-  background-color: var(--flow-element-background-color);
+  border-color: var(--gray-01);
+  background-color: var(--gray-01);
   border-width: 2px;
   border-radius: 2px;
   border-style: solid;
@@ -12,28 +12,22 @@
 }
 
 .UserInputTitle {
-  background-color: var(--flow-element-background-color);
+  background-color: var(--gray-01);
   border: none;
-  color: var(--elements-title-font-color);
-  font-weight: bold;
   float: left;
-  font-family: var(--gxcf-font-family);
 }
 
 .UserInputTitle:hover{
   cursor: pointer;
 }
 
+.Entity{
+  clear:both;
+}
+
 .UserInputCommandsPosition {
   float: right;
   cursor: pointer;
-}
-
-.DataType {
-  color: var(--elements-header-font-color);
-  clear: both;
-  margin-top: 5px;
-  font-family: var(--gxcf-font-family);
 }
 
 .SwitchIconOn {
@@ -47,7 +41,6 @@
 }
 
 .TextMode {
-  color: var(--user-input-guides);
   margin-left: 5px;
 }
 
@@ -74,9 +67,6 @@ details[open] .UserInputPart::before {
 
 .UserInputPartSummaryText {
   vertical-align: top;
-  font-size: var(--small2-font-size);
-  color: var(--elements-header-font-color);
-  font-family: var(--gxcf-font-family);
 }
 
 .UserInputHints {
@@ -94,8 +84,7 @@ details[open] .UserInputPart::before {
   border: none;
   height: 24px;
   width: 100%;
-  background-color: var(--add-element-background-color);
-  font-family: var(--gxcf-font-family);
+  background-color: var(--color-background);
 }
 
 .SelectVP {
@@ -115,7 +104,7 @@ details[open] .UserInputPart::before {
 }
 
 .EntityInput{
-  background-color: var(--flow-element-background-color);
+  background-color: var(--gray-01);
   border: none;
   margin-bottom: 5px;
 }

@@ -1,11 +1,8 @@
 .CommonTitle
 {
-  color: var(--title-color);
-  background-color: var(--common-action-background);
-  font-weight: bold;
+  background-color: transparent;
   margin-bottom: 2px;
   border: none;
-  font-family: var(--gxcf-font-family);
 }
 
 .SummaryTitle {
@@ -14,7 +11,7 @@
 }
 
 .FullTitle {
-  font-family: var(--normal2-font-size);
+  font-size: var(--normal2-font-size);
   width: 62%;
 }
 

@@ -227,7 +227,7 @@ export class FlowFull {
       return (
         <div class="TriggersContainer">
           <gxcf-dot class="DotPosition MinLeftTab" />
-          <span class="ElementsHeaderText">
+          <span class="ElementsHeaderText gxg-title-03">
             Trigger Messages ({this.flow.Triggers.length})
           </span>
           <gxcf-hint hintId={HintId.TriggerMessages} class="Hint" />
@@ -240,9 +240,7 @@ export class FlowFull {
               onClick={event => this.HandleExpandTriggers(event)}
             />
             <div class="TriggersContainer">
-              <p class="FirstTriggerMessage">
-                {this.GetSummaryTriggerMessage()}
-              </p>
+              <p class="gxg-quote">{this.GetSummaryTriggerMessage()}</p>
             </div>
           </div>
         </div>
@@ -283,7 +281,7 @@ export class FlowFull {
         <hr class="Separator"></hr>
         <div class="FullFlowContentUserInputs Content">
           <div class="ElementsHeader">
-            <span class="LeftTab ElementsHeaderText">
+            <span class="LeftTab ElementsHeaderText gxg-title-03">
               User Inputs ({this.flow.Fields.length})
             </span>
             <gxcf-hint hintId={HintId.UserInput} class="Hint" />
@@ -298,7 +296,7 @@ export class FlowFull {
         <hr class="Separator"></hr>
         <div class="FullFlowContentResponses Content">
           <div class="ElementsHeader">
-            <span class="ElementsHeaderText">
+            <span class="ElementsHeaderText gxg-title-03">
               Responses ({this.flow.View.Templates.length})
             </span>
             <gxcf-hint hintId={HintId.Responses} class="Hint" />

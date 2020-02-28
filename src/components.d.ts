@@ -16,6 +16,7 @@ export namespace Components {
   interface GxcfButtonDelete {
     confirmationMessage: string;
     confirmationTitle: string;
+    type: "deleted" | "close";
   }
   interface GxcfCollection {
     collection: string[];
@@ -368,6 +369,7 @@ declare namespace LocalJSX {
     confirmationMessage?: string;
     confirmationTitle?: string;
     onConfirmDelete?: (event: CustomEvent<any>) => void;
+    type?: "deleted" | "close";
   }
   interface GxcfCollection {
     collection?: string[];

@@ -1,7 +1,5 @@
 .ItemInput {
-  font-size: var(--normal-font-size);
   width: calc(100% - (var(--medium-icon-width) + (var(--medium-icon-width))));
-  font-style: italic;
   padding-left: 5px;
   border-style: none;
   height: 24px;
@@ -9,25 +7,25 @@
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  font-family: var(--gxcf-font-family);
+  background-color: var(--color-background);
 }
 
 .Item {
   border-width: 1px;
-  border-color: var(--background-color);
+  border-color: var(--gray-04);
   border-style: solid;
-  background-color: var(--collection-background-color);
-  margin-bottom: var(--min-margin);
+  margin-bottom: var(--min-margin);  
   clear: both;
+  background-color: var(--color-background);
 }
 
 .Collection {
-  background-color: var(--common-action-background);
+  background-color: var(--gray-01);
   font-family: var(--gxcf-font-family);
 }
 
 .CollectionContainer {
-  background-color: transparent;  
+  background-color: var(--gray-01);
   width: 100%;
   overflow-y: auto;
 }
@@ -61,12 +59,9 @@
 
 .CollectionHeader {
   color: var(--title-color);
-  font-size: var(--normal-font-size);
   float: left;
   clear: left;
   margin-bottom: 15px;
-  font-weight: 400;
-  font-family: var(--gxcf-font-family);
 }
 
 .Hint {

@@ -4,15 +4,15 @@
 .ShowZone {
   display: block;
   text-align: center;
-  color: var(--selection-color);
+  color: var(--color-on-primary);
   width: 8%;
   margin: auto;
   padding-left: 100px;
   padding-right: 100px;
 }
 .ActiveDropZone {
-  color: var(--selection-font-color);
-  background-color: var(--selection-color);
+  color: var(--color-on-secondary);
+  background-color: var(--color-on-primary);
   padding-left: 100px;
   padding-right: 100px;
   border-radius: 14px;

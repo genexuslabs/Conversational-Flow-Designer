@@ -12,16 +12,17 @@
 }
 
 .FlowSummary:hover {
-  border-top: 3px solid var(--highlight-color-2)
+  border-top: 3px solid var(--color-primary-active)
 }
 
 .ActiveContent {
-  background-color: var(--active-content-background);
-  border-top: 3px solid var(--highlight-color-2)
+  background-color: var(--color-background);
+  border-top: 3px solid var(--color-primary-active)
 }
 
 .NoActiveContent {
-  background-color: var(--element-background-color);
+  background-color: var(--gray-01);
+  border-top: 3px solid var(--gray-01)
 }
 
 .SelectBoxing

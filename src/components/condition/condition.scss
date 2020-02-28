@@ -2,18 +2,17 @@
   margin-top: 20px;
   clear: both;
   line-height: 24px;
-  background-color: var(--add-element-background-color);
+  background-color: var(--color-background);
 }
 
 .InputCondition {
   border: none;
   height: 24px;
   width: 92%;
-  font-family: var(--gxcf-font-family);
+  background-color: var(--color-background);
 }
 
-.LabelConditon {
-  color: var(--add-element-font-color);
+.LabelConditon {  
   height: 24px;
   padding: 0px 5px 0px 5px;
 }
