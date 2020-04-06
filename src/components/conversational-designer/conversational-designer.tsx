@@ -173,6 +173,13 @@ export class ConversationalDesginer {
     this.selectRoot.emit();
   }
 
+  @Event() selectFlow: EventEmitter;
+  TriggerSelectCurrentFlow(): void {
+    this.selectFlow.emit.call(this, {
+      flowName: this.instance.CurrentFlowName
+    });
+  }
+
   closePopUp(): void {
     this.popUp = null;
     this.showPopUp = false;
@@ -267,7 +274,11 @@ export class ConversationalDesginer {
             .shadowRoot.querySelector("input")
             .select();
         }
+        if (this.instance.CurrentUserInputName != "")
+          this.TriggerSelectCurrentFlow();
+        else this.triggerSelectRoot();
       } else {
+        this.triggerSelectRoot();
         const search = this.element.querySelector("gxcf-search");
         if (search) search.shadowRoot.querySelector("input").focus();
       }
