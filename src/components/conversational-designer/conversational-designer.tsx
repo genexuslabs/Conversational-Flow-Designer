@@ -263,26 +263,9 @@ export class ConversationalDesginer {
 
   componentDidRender(): void {
     document.onkeydown = event => this.handleKeyDown(event);
-    if (this.instance) {
-      if (this.instance.CurrentFlowName) {
-        const flowCollapsed = this.element
-          .querySelector("#" + this.instance.CurrentFlowName.replace(/\s/g, ""))
-          .shadowRoot.querySelector("gxcf-flow-collapsed");
-        if (flowCollapsed) {
-          flowCollapsed.shadowRoot
-            .querySelector("gxcf-summary-title")
-            .shadowRoot.querySelector("input")
-            .select();
-        }
-        if (this.instance.CurrentUserInputName != "")
-          this.TriggerSelectCurrentFlow();
-        else this.triggerSelectRoot();
-      } else {
-        this.triggerSelectRoot();
-        const search = this.element.querySelector("gxcf-search");
-        if (search) search.shadowRoot.querySelector("input").focus();
-      }
-    }
+    this.triggerSelectRoot();
+    const search = this.element.querySelector("gxcf-search");
+    if (search) search.shadowRoot.querySelector("input").focus();
   }
 
   render() {
