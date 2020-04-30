@@ -299,6 +299,7 @@ export class ConversationalDesginer {
           </div>
           {this.setAddFlow}
           {this.setPopUp()}
+          <gxcf-confirmation visible={false} />
         </div>
       );
     } else {
