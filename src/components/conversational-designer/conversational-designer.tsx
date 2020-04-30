@@ -36,7 +36,7 @@ export class ConversationalDesginer {
   }
 
   HandleSearch(event: CustomEvent): void {
-    const value: string = EventsHelper.GetValue(event);
+    const value: string = EventsHelper.GetValueFromInput(event);
     this.search = value;
   }
 
@@ -283,7 +283,14 @@ export class ConversationalDesginer {
         <div class="MainTable">
           <div class="LeftHeader">
             <div class="SearchBar">
-              <gxcf-search onSearch={event => this.HandleSearch(event)} />
+              <gxg-form-text
+                placeholder="Search"
+                icon="search"
+                icon-position="left"
+                role="textbox"
+                onInput={event => this.HandleSearch(event)}
+                width="100%"
+              />
             </div>
             <div class="SettingsButton">
               <gxg-icon
