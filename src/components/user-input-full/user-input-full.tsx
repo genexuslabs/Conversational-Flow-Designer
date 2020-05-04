@@ -262,9 +262,10 @@ export class FullUserInput {
             currentCondition={this.userInput.RequiredCondition}
             onConditionChange={event => this.TriggerChangeCondition(event)}
           />
-          <gxg-toggle
+          <p class="CleanContextLabel gxg-text">Clean Context Value</p>
+          <div
+            class={`${this.GetCleanContextSwitchIconClass()} CleanContextIcon`}
             onClick={() => this.TriggerCleantContextChangeValue()}
-            label="Clean Context Value"
           />
         </details>
         {this.RenderBasicMode()}
