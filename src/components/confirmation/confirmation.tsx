@@ -4,12 +4,12 @@ import "@genexus/gemini";
 
 @Component({
   tag: "gxcf-confirmation",
-  styleUrl: "confirmation.scss",
   shadow: true
 })
 export class Confirmation {
   @Prop() confirmationTitle: string;
   @Prop() confirmationMessage: string;
+  @Prop() visible = false;
   @Element() element: HTMLElement;
 
   @Event() userConfirmation: EventEmitter;
@@ -35,37 +35,27 @@ export class Confirmation {
 
   render() {
     return (
-      <div class="ConfirmationModal gxg-text">
-        <div class="ConfirmationHeader gxg-text--negative">
-          <span class="ConfirmationTitleText">{this.confirmationTitle}</span>
-          <gxg-icon
-            type="close"
-            size="small"
-            color="negative"
-            class="CloseComponent"
-            onClick={event => this.TriggerUserCancellation(event)}
-          />
-        </div>
-        <div class="ConfirmationContent">
-          <p class="gxg-text">{this.confirmationMessage}</p>
-          <div class="ButtonPlaceHolder">
-            <gxg-button
-              type="outlined"
-              class="ConfirmationButtonPosition"
-              onClick={event => this.TriggerUserCancellation(event)}
-            >
-              Cancel
-            </gxg-button>
-            <gxg-button
-              type="outlined"
-              class="ConfirmationButtonPosition"
-              onClick={event => this.TriggerUserConfirmation(event)}
-            >
-              Delete
-            </gxg-button>
-          </div>
-        </div>
-      </div>
+      <gxg-modal
+        modalTitle={this.confirmationTitle}
+        footerAlignment="right"
+        visible={this.visible}
+      >
+        {this.confirmationMessage}
+        <gxg-button
+          type="outlined"
+          slot="footer"
+          onClick={event => this.TriggerUserCancellation(event)}
+        >
+          Cancel
+        </gxg-button>
+        <gxg-button
+          type="outlined"
+          slot="footer"
+          onClick={event => this.TriggerUserConfirmation(event)}
+        >
+          Delete
+        </gxg-button>
+      </gxg-modal>
     );
   }
 }
