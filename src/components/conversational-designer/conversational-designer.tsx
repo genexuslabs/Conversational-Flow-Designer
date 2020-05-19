@@ -261,9 +261,12 @@ export class ConversationalDesginer {
     }
   }
 
+  componentDidLoad(): void {
+    this.triggerSelectRoot();
+  }
+
   componentDidRender(): void {
     document.onkeydown = event => this.handleKeyDown(event);
-    this.triggerSelectRoot();
     const search = this.element.querySelector("gxcf-search");
     if (search) search.shadowRoot.querySelector("input").focus();
   }
