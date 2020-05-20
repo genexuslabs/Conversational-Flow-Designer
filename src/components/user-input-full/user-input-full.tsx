@@ -198,6 +198,7 @@ export class FullUserInput {
             onChangeRedirectTo={(event: CustomEvent) =>
               this.TriggerUserInputChangeRedirectTo(event)
             }
+            label="Redirect To"
           />
         );
         index++;

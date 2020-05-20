@@ -122,88 +122,42 @@ export class FullResponse {
     });
   }
 
-  private RenderStyleSelector(): HTMLElement[] {
-    const elements: Array<HTMLElement> = new Array<HTMLElement>();
-    const componentViewSelected =
-      this.response.Style == ResponseStyles.ComponentView;
-    const redirectToSelected = this.response.Style == ResponseStyles.RedirectTo;
-    const textMessageSelected =
-      this.response.Style == ResponseStyles.TextMessage ||
-      (!componentViewSelected && !redirectToSelected);
-
-    const textElementOption = textMessageSelected ? (
-      <option value={ResponseStyles.TextMessage} selected>
-        {ResponseStyles.PrettyTextMessage}
-      </option>
-    ) : (
-      <option value={ResponseStyles.TextMessage}>
-        {ResponseStyles.PrettyTextMessage}
-      </option>
-    );
-    const componentElementOption = componentViewSelected ? (
-      <option value={ResponseStyles.ComponentView} selected>
-        {ResponseStyles.PrettyComponentView}
-      </option>
-    ) : (
-      <option value={ResponseStyles.ComponentView}>
-        {ResponseStyles.PrettyComponentView}
-      </option>
-    );
-    const redirectElementOption = redirectToSelected ? (
-      <option value={ResponseStyles.RedirectTo} selected>
-        {ResponseStyles.PrettyRedirectTo}
-      </option>
-    ) : (
-      <option value={ResponseStyles.RedirectTo}>
-        {ResponseStyles.PrettyRedirectTo}
-      </option>
-    );
-    elements.push(
-      <select
-        class="ResponseSelect gxg-text"
-        onChange={(event: CustomEvent) =>
-          this.TriggerChangeResponseStyle(event)
-        }
+  private RenderStyleSelector(): HTMLElement {
+    return (
+      <gxg-form-select
+        label="Response Style:"
+        onInput={(event: CustomEvent) => this.TriggerChangeResponseStyle(event)}
+        fullWidth
+        value={this.response.Style}
       >
-        {componentElementOption}
-        {textElementOption}
-        {redirectElementOption}
-      </select>
+        <option value={ResponseStyles.RedirectTo}>
+          {ResponseStyles.PrettyRedirectTo}
+        </option>
+        <option value={ResponseStyles.ComponentView}>
+          {ResponseStyles.PrettyComponentView}
+        </option>
+        <option value={ResponseStyles.TextMessage}>
+          {ResponseStyles.PrettyTextMessage}
+        </option>
+      </gxg-form-select>
     );
-    return elements;
   }
 
   private RenderizeComponentType(): HTMLElement {
-    const componentOption =
-      this.response.ComponentType == ComponentTypes.Component ? (
-        <option value={ComponentTypes.Component} selected>
-          {ComponentTypes.Component}
-        </option>
-      ) : (
-        <option value={ComponentTypes.Component}>
-          {ComponentTypes.Component}
-        </option>
-      );
-    const callPanelOption =
-      this.response.ComponentType == ComponentTypes.CallPanel ? (
-        <option value={ComponentTypes.CallPanel} selected>
-          {ComponentTypes.CallPanel}
-        </option>
-      ) : (
+    return (
+      <gxg-form-select
+        onInput={(event: CustomEvent) => this.TriggerChangeComponentType(event)}
+        label="Show Response as (SD Only)"
+        fullWidth
+        value={this.response.ComponentType}
+      >
         <option value={ComponentTypes.CallPanel}>
           {ComponentTypes.CallPanel}
         </option>
-      );
-    return (
-      <select
-        onChange={(event: CustomEvent) =>
-          this.TriggerChangeComponentType(event)
-        }
-        class="ResponseSelect"
-      >
-        {componentOption}
-        {callPanelOption}
-      </select>
+        <option value={ComponentTypes.Component}>
+          {ComponentTypes.Component}
+        </option>
+      </gxg-form-select>
     );
   }
 
@@ -213,7 +167,6 @@ export class FullResponse {
       elements.push(
         <div class="ResponseProperty">
           <gxcf-hint class="HintBlock" hintId={HintId.ShowResponseAs} />
-          <span>Show Response as (SD Only)</span>
           {this.RenderizeComponentType()}
         </div>
       );
@@ -245,7 +198,6 @@ export class FullResponse {
       elements.push(
         <div class="ResponseProperty">
           <gxcf-hint class="HintBlock" hintId={HintId.Redirection} />
-          <span>Redirect To</span>
           <gxcf-redirection
             requireCondition={false}
             redirectionProperty={{
@@ -257,6 +209,7 @@ export class FullResponse {
             onChangeRedirectTo={event =>
               this.TriggerChangeResponseRedirectTo(event)
             }
+            label="Redirect To"
           />
         </div>
       );
@@ -315,7 +268,6 @@ export class FullResponse {
         />
         <hr class="Separator"></hr>
         <div class="ConditionMargin">
-          <span class="ConditionLabel gxg-title-03">Response Style</span>
           <gxcf-hint class="HintBlock" hintId={HintId.ResponseStyle} />
         </div>
         {this.RenderStyleSelector()}

@@ -11,6 +11,7 @@ export class Redirection {
   @Prop() requireCondition: boolean;
   @Prop() redirectionIndex: number;
   @Prop() flows: GXCFModel.FlowElement[];
+  @Prop() label: string;
 
   @Event() changeRedirectCondition: EventEmitter;
   TriggerOnChangeRedirectCondition(event): void {
@@ -63,13 +64,14 @@ export class Redirection {
     if (this.requireCondition) elements.push(this.RenderCondition());
 
     elements.push(
-      <select
-        class="RedirectToSelect gxg-text"
+      <gxg-form-select
         required
-        onChange={event => this.TriggerOnChangeRedirectTo(event)}
+        onInput={event => this.TriggerOnChangeRedirectTo(event)}
+        label={this.label}
+        fullWidth
       >
         {this.LoadFlowsCombo()}
-      </select>
+      </gxg-form-select>
     );
 
     return elements;
