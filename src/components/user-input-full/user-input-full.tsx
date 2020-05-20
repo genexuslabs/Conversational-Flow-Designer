@@ -329,14 +329,11 @@ export class FullUserInput {
   render() {
     let editionMode: HTMLElement;
     let advancedEditionStatus: string;
-    let switchClass: string;
     if (this.enableAdvancedMode) {
-      switchClass = "SwitchIconOn";
       editionMode = this.RenderAdvancedMode();
-      advancedEditionStatus = "ON";
+      advancedEditionStatus = "Advanced mode ON";
     } else {
-      switchClass = "SwitchIconOff";
-      advancedEditionStatus = "OFF";
+      advancedEditionStatus = "Advanced mode OFF";
       editionMode = this.RenderBasicMode();
     }
 
@@ -372,13 +369,12 @@ export class FullUserInput {
             value={this.userInput.Entity}
           />
         </div>
-        <img
-          class={switchClass}
+        <gxg-toggle
+          size="small"
+          label={advancedEditionStatus}
           onClick={event => this.SwitchAdvancedMode(event)}
+          class="ToggleColor"
         />
-        <span class="TextMode gxg-label">
-          Advanced mode {advancedEditionStatus}
-        </span>
         {editionMode}
       </div>
     );
