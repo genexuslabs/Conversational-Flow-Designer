@@ -39,7 +39,6 @@ export class Confirmation {
         modalTitle={this.confirmationTitle}
         footerAlignment="right"
         visible={this.visible}
-        zIndex={this.visible ? "10" : "-1"}
       >
         {this.confirmationMessage}
         <gxg-button

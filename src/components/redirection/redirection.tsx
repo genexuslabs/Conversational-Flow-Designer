@@ -11,6 +11,7 @@ export class Redirection {
   @Prop() requireCondition: boolean;
   @Prop() redirectionIndex: number;
   @Prop() flows: GXCFModel.FlowElement[];
+  @Prop() label: string;
 
   @Event() changeRedirectCondition: EventEmitter;
   TriggerOnChangeRedirectCondition(event): void {
@@ -33,15 +34,14 @@ export class Redirection {
   private LoadFlowsCombo(): HTMLElement[] {
     const combo: HTMLElement[] = new Array<HTMLElement>();
     this.flows.forEach(iFlow => {
-      if (iFlow.Name == this.redirectionProperty.RedirectTo) {
-        combo.push(
-          <option value={iFlow.Name} selected>
-            {iFlow.Name}
-          </option>
-        );
-      } else {
-        combo.push(<option value={iFlow.Name}>{iFlow.Name}</option>);
-      }
+      combo.push(
+        <gxg-option
+          value={iFlow.Name}
+          selected={iFlow.Name == this.redirectionProperty.RedirectTo}
+        >
+          {iFlow.Name}
+        </gxg-option>
+      );
     }, this);
     return combo;
   }
@@ -63,13 +63,14 @@ export class Redirection {
     if (this.requireCondition) elements.push(this.RenderCondition());
 
     elements.push(
-      <select
-        class="RedirectToSelect gxg-text"
+      <gxg-select
         required
         onChange={event => this.TriggerOnChangeRedirectTo(event)}
+        label={this.label}
+        fullWidth
       >
         {this.LoadFlowsCombo()}
-      </select>
+      </gxg-select>
     );
 
     return elements;

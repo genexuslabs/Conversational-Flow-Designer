@@ -5,7 +5,6 @@
     border-radius: 1px;
     border-style: solid;
     padding: 12px 22px 12px 22px;
-    overflow: hidden;
     margin-bottom: 15px;
   }
 
@@ -34,15 +33,6 @@
 .ConditionMargin
 {
   margin-top: 15px;
-}
-
-.ResponseSelect
-{
-  margin-top: 5px;
-  border: none;
-  height: 24px;
-  width: 100%;
-  background-color: var(--gray-01);
 }
 
 .ResponseProperty

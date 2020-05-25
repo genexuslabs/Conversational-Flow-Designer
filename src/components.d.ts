@@ -71,6 +71,7 @@ export namespace Components {
     }
     interface GxcfRedirection {
         "flows": GXCFModel.FlowElement[];
+        "label": string;
         "redirectionIndex": number;
         "redirectionProperty": GXCFModel.RedirectionProperty;
         "requireCondition": boolean;
@@ -383,6 +384,7 @@ declare namespace LocalJSX {
     }
     interface GxcfRedirection {
         "flows"?: GXCFModel.FlowElement[];
+        "label"?: string;
         "onChangeRedirectCondition"?: (event: CustomEvent<any>) => void;
         "onChangeRedirectTo"?: (event: CustomEvent<any>) => void;
         "redirectionIndex"?: number;

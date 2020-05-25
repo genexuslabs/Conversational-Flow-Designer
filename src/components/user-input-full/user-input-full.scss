@@ -5,7 +5,6 @@
   border-radius: 2px;
   border-style: solid;
   padding: 12px 22px 12px 22px;
-  overflow: hidden;
   -webkit-animation: var(--animation-time);
   animation: var(--animation-time);
   margin: var(--small-margin);
@@ -28,20 +27,6 @@
 .UserInputCommandsPosition {
   float: right;
   cursor: pointer;
-}
-
-.SwitchIconOn {
-  content: var(--switch-icon-on);
-  vertical-align: bottom;
-}
-
-.SwitchIconOff {
-  content: var(--switch-icon-off);
-  vertical-align: bottom;
-}
-
-.TextMode {
-  margin-left: 5px;
 }
 
 .UserInputPart {
@@ -91,16 +76,9 @@ details[open] .UserInputPart::before {
   cursor: pointer;
 }
 
-.CleanContextIcon
+.CleanContextToggle
 {
   margin-top: var(--small-margin);
-  float: left;
-}
-
-.CleanContextLabel{
-  display: inline-block;
-  margin-top: var(--small-margin);
-  margin-left: 5px;
 }
 
 .EntityInput{
