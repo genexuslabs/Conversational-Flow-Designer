@@ -124,40 +124,58 @@ export class FullResponse {
 
   private RenderStyleSelector(): HTMLElement {
     return (
-      <gxg-form-select
+      <gxg-select
         label="Response Style:"
-        onInput={(event: CustomEvent) => this.TriggerChangeResponseStyle(event)}
+        onChange={(event: CustomEvent) =>
+          this.TriggerChangeResponseStyle(event)
+        }
         fullWidth
-        value={this.response.Style}
       >
-        <option value={ResponseStyles.RedirectTo}>
+        <gxg-option
+          value={ResponseStyles.RedirectTo}
+          selected={this.response.Style == ResponseStyles.RedirectTo}
+        >
           {ResponseStyles.PrettyRedirectTo}
-        </option>
-        <option value={ResponseStyles.ComponentView}>
+        </gxg-option>
+        <gxg-option
+          value={ResponseStyles.ComponentView}
+          selected={this.response.Style == ResponseStyles.ComponentView}
+        >
           {ResponseStyles.PrettyComponentView}
-        </option>
-        <option value={ResponseStyles.TextMessage}>
+        </gxg-option>
+        <gxg-option
+          value={ResponseStyles.TextMessage}
+          selected={this.response.Style == ResponseStyles.TextMessage}
+        >
           {ResponseStyles.PrettyTextMessage}
-        </option>
-      </gxg-form-select>
+        </gxg-option>
+      </gxg-select>
     );
   }
 
   private RenderizeComponentType(): HTMLElement {
     return (
-      <gxg-form-select
-        onInput={(event: CustomEvent) => this.TriggerChangeComponentType(event)}
+      <gxg-select
+        onChange={(event: CustomEvent) =>
+          this.TriggerChangeComponentType(event)
+        }
         label="Show Response as (SD Only)"
         fullWidth
         value={this.response.ComponentType}
       >
-        <option value={ComponentTypes.CallPanel}>
+        <gxg-option
+          value={ComponentTypes.CallPanel}
+          selected={this.response.ComponentType == ComponentTypes.CallPanel}
+        >
           {ComponentTypes.CallPanel}
-        </option>
-        <option value={ComponentTypes.Component}>
+        </gxg-option>
+        <gxg-option
+          value={ComponentTypes.Component}
+          selected={this.response.ComponentType == ComponentTypes.Component}
+        >
           {ComponentTypes.Component}
-        </option>
-      </gxg-form-select>
+        </gxg-option>
+      </gxg-select>
     );
   }
 

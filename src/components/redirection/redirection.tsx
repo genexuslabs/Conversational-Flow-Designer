@@ -34,15 +34,14 @@ export class Redirection {
   private LoadFlowsCombo(): HTMLElement[] {
     const combo: HTMLElement[] = new Array<HTMLElement>();
     this.flows.forEach(iFlow => {
-      if (iFlow.Name == this.redirectionProperty.RedirectTo) {
-        combo.push(
-          <option value={iFlow.Name} selected>
-            {iFlow.Name}
-          </option>
-        );
-      } else {
-        combo.push(<option value={iFlow.Name}>{iFlow.Name}</option>);
-      }
+      combo.push(
+        <gxg-option
+          value={iFlow.Name}
+          selected={iFlow.Name == this.redirectionProperty.RedirectTo}
+        >
+          {iFlow.Name}
+        </gxg-option>
+      );
     }, this);
     return combo;
   }
@@ -64,14 +63,14 @@ export class Redirection {
     if (this.requireCondition) elements.push(this.RenderCondition());
 
     elements.push(
-      <gxg-form-select
+      <gxg-select
         required
-        onInput={event => this.TriggerOnChangeRedirectTo(event)}
+        onChange={event => this.TriggerOnChangeRedirectTo(event)}
         label={this.label}
         fullWidth
       >
         {this.LoadFlowsCombo()}
-      </gxg-form-select>
+      </gxg-select>
     );
 
     return elements;

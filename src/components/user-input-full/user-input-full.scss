@@ -76,16 +76,9 @@ details[open] .UserInputPart::before {
   cursor: pointer;
 }
 
-.CleanContextIcon
+.CleanContextToggle
 {
   margin-top: var(--small-margin);
-  float: left;
-}
-
-.CleanContextLabel{
-  display: inline-block;
-  margin-top: var(--small-margin);
-  margin-left: 5px;
 }
 
 .EntityInput{
