@@ -6,17 +6,20 @@ import {
   Element,
   Prop,
   Event,
-  EventEmitter
+  EventEmitter,
+  getAssetPath
 } from "@stencil/core";
 import { EventsHelper } from "../common/events-helper";
 import { Controls, RenderingOptions, MoveType } from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
 import { Position, PositionElement } from "../common/position";
+import { Locale } from "../common/locale";
 
 @Component({
   tag: "gxcf-conversational-designer",
   styleUrl: "conversational-designer.scss",
-  shadow: false
+  shadow: false,
+  assetsDirs: ["assets/gxcf-conversational-designer-lang"]
 })
 export class ConversationalDesginer {
   @State() search: string;
@@ -30,6 +33,7 @@ export class ConversationalDesginer {
   private dragDropHandler: ConversationalDesignerDragDrop;
   private flows: Array<string>;
   private popUp: HTMLElement;
+  private componentLocale: any;
 
   HandleOpenEditor(): void {
     this.openEditor = true;
@@ -59,13 +63,15 @@ export class ConversationalDesginer {
     this.addFlow.emit(event);
   }
 
-  private setAddFlow = (
-    <gxcf-add-object
-      class="AddFlow"
-      onClick={event => this.TriggerAddFlow(event)}
-      addText="Add another flow"
-    />
-  );
+  private setAddFlow() {
+    return (
+      <gxcf-add-object
+        class="AddFlow"
+        onClick={event => this.TriggerAddFlow(event)}
+        addText={this.componentLocale.addFlow}
+      />
+    );
+  }
 
   private RenderizeFlows(): HTMLElement[] {
     const flows: HTMLElement[] = [];
@@ -109,7 +115,9 @@ export class ConversationalDesginer {
     return flows;
   }
 
-  componentWillLoad(): void {
+  async componentWillLoad(): Promise<void> {
+    Locale.commonAssetsPath = getAssetPath("");
+    this.componentLocale = await Locale.getComponentStrings(this.element);
     this.dragDropHandler = new ConversationalDesignerDragDrop(
       this.element as HTMLGxcfConversationalDesignerElement,
       this.moveFlow
@@ -193,8 +201,11 @@ export class ConversationalDesginer {
         console.log("Delete Flow: " + Position.GetFlow());
         this.popUp = (
           <gxcf-confirmation
-            confirmationTitle="Delete Flow"
-            confirmationMessage={`Do you want to delete the flow '${Position.GetFlow()}'?`}
+            confirmationTitle={this.componentLocale.deleteFlow}
+            confirmationMessage={Locale.format(
+              this.componentLocale.deleteFlowConfirmation,
+              [Position.GetFlow()]
+            )}
             onUserConfirmation={() =>
               this.triggerDeleteFlow(Position.GetFlow())
             }
@@ -205,8 +216,11 @@ export class ConversationalDesginer {
         console.log("Delete UserInput: " + Position.GetUserInput());
         this.popUp = (
           <gxcf-confirmation
-            confirmationTitle="Delete user input"
-            confirmationMessage={`Do you want to delete the user input '${Position.GetUserInput()}'?`}
+            confirmationTitle={this.componentLocale.deleteUserInput}
+            confirmationMessage={Locale.format(
+              this.componentLocale.deleteUserInputConfirmation,
+              [Position.GetUserInput()]
+            )}
             onUserConfirmation={() =>
               this.triggerDeleteUserInput(
                 Position.GetFlow(),
@@ -220,8 +234,11 @@ export class ConversationalDesginer {
         console.log("Delete response: " + Position.GetResponse());
         this.popUp = (
           <gxcf-confirmation
-            confirmationTitle="Delete response"
-            confirmationMessage={`Do you want to delete the response '${Position.GetResponse()}'?`}
+            confirmationTitle={this.componentLocale.deleteResponse}
+            confirmationMessage={Locale.format(
+              this.componentLocale.deleteResponseConfirmation,
+              [Position.GetResponse() + ""]
+            )}
             onUserConfirmation={() =>
               this.triggerDeleteResponse(
                 Position.GetFlow(),
@@ -287,7 +304,7 @@ export class ConversationalDesginer {
           <div class="LeftHeader">
             <div class="SearchBar">
               <gxg-form-text
-                placeholder="Search"
+                placeholder={this.componentLocale.searchPlaceHolder}
                 icon="search"
                 icon-position="left"
                 role="textbox"
@@ -307,7 +324,7 @@ export class ConversationalDesginer {
           <div id={Controls.FlowsContainer} class="FlowsContainer">
             {this.RenderizeFlows()}
           </div>
-          {this.setAddFlow}
+          {this.setAddFlow()}
           {this.setPopUp()}
           <gxcf-confirmation visible={false} />
         </div>

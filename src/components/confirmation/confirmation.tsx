@@ -1,16 +1,20 @@
 import { Component, h, Prop, Event, Element } from "@stencil/core";
 import { EventEmitter } from "events";
 import "@genexus/gemini";
+import { Locale } from "../common/locale";
 
 @Component({
   tag: "gxcf-confirmation",
-  shadow: true
+  shadow: true,
+  assetsDirs: ["assets/gxcf-confirmation-lang"]
 })
 export class Confirmation {
   @Prop() confirmationTitle: string;
   @Prop() confirmationMessage: string;
   @Prop() visible = false;
   @Element() element: HTMLElement;
+
+  private componentLocale: any;
 
   @Event() userConfirmation: EventEmitter;
   TriggerUserConfirmation(event): void {
@@ -33,6 +37,10 @@ export class Confirmation {
     document.onkeydown = (event: KeyboardEvent) => this.handleKeyDown(event);
   }
 
+  async componentWillLoad(): Promise<void> {
+    this.componentLocale = await Locale.getComponentStrings(this.element);
+  }
+
   render() {
     return (
       <gxg-modal
@@ -46,14 +54,14 @@ export class Confirmation {
           slot="footer"
           onClick={event => this.TriggerUserCancellation(event)}
         >
-          Cancel
+          {this.componentLocale.cancel}
         </gxg-button>
         <gxg-button
           type="outlined"
           slot="footer"
           onClick={event => this.TriggerUserConfirmation(event)}
         >
-          Delete
+          {this.componentLocale.delete}
         </gxg-button>
       </gxg-modal>
     );

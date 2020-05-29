@@ -1,4 +1,11 @@
-import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  h,
+  Event,
+  EventEmitter,
+  Element
+} from "@stencil/core";
 import {
   HintId,
   ResponseStyles,
@@ -6,17 +13,22 @@ import {
   SelectTypes
 } from "../common/helpers";
 import { EventsHelper } from "../common/events-helper";
+import { Locale } from "../common/locale";
 
 @Component({
   tag: "gxcf-response-full",
   styleUrl: "response-full.scss",
-  shadow: true
+  shadow: true,
+  assetsDirs: ["assets/gxcf-response-full-lang"]
 })
 export class FullResponse {
   @Prop() response: GXCFModel.ResponseElement;
   @Prop() flow: GXCFModel.FlowElement;
   @Prop() instance: GXCFModel.Instance;
   @Prop() responseIndex: number;
+  @Element() element: HTMLElement;
+
+  private componentLocale: any;
 
   @Event() collapseResponse: EventEmitter;
   TriggerCollapseResponse(event): void {
@@ -122,10 +134,14 @@ export class FullResponse {
     });
   }
 
+  async componentWillLoad(): Promise<void> {
+    this.componentLocale = await Locale.getComponentStrings(this.element);
+  }
+
   private RenderStyleSelector(): HTMLElement {
     return (
       <gxg-select
-        label="Response Style:"
+        label={this.componentLocale.responseStyleLabel}
         onChange={(event: CustomEvent) =>
           this.TriggerChangeResponseStyle(event)
         }
@@ -159,7 +175,7 @@ export class FullResponse {
         onChange={(event: CustomEvent) =>
           this.TriggerChangeComponentType(event)
         }
-        label="Show Response as (SD Only)"
+        label={this.componentLocale.showResponseLabel}
         fullWidth
         value={this.response.ComponentType}
       >
@@ -191,7 +207,7 @@ export class FullResponse {
       elements.push(
         <div class="ResponseProperty">
           <gxcf-hint class="HintBlock" hintId={HintId.SDComponent} />
-          <span>SD Component</span>
+          <span>{this.componentLocale.sdComponent}</span>
           <gxcf-select
             selectcaption={this.response.SDComponentName}
             selectIconType="SDPanel"
@@ -203,7 +219,7 @@ export class FullResponse {
       elements.push(
         <div class="ResponseProperty">
           <gxcf-hint class="HintBlock" hintId={HintId.WebComponent} />
-          <span>Web Component</span>
+          <span>{this.componentLocale.wenComponent}</span>
           <gxcf-select
             selectcaption={this.response.WebComponentName}
             selectIconType="WebComponent"
@@ -227,7 +243,7 @@ export class FullResponse {
             onChangeRedirectTo={event =>
               this.TriggerChangeResponseRedirectTo(event)
             }
-            label="Redirect To"
+            label={this.componentLocale.redirectTo}
           />
         </div>
       );
@@ -243,7 +259,7 @@ export class FullResponse {
           type="text"
           class="FullResponseTitle gxg-title-01"
           value={this.response.ResponseName}
-          placeholder="Response name..."
+          placeholder={this.componentLocale.responseName}
           onChange={event => this.TriggerChangeResponseName(event)}
           onClick={event => this.TriggerOnClickResponseInputName(event)}
         />
@@ -256,16 +272,19 @@ export class FullResponse {
         <gxcf-button-delete
           class="FullResponseCommands"
           onConfirmDelete={event => this.TriggerDeleteResponseFull(event)}
-          confirmationTitle="Delete response"
-          confirmationMessage={`Do you want to delete the response '${this.response.Index}'?`}
+          confirmationTitle={this.componentLocale.deleteResponse}
+          confirmationMessage={Locale.format(
+            this.componentLocale.askDeleteResponse,
+            [this.response.Index + ""]
+          )}
           type="close"
         />
         <gxcf-collection
           collection={this.response.Format}
-          collectionHeader="Response Messages"
-          collectionAddText="Add an alternative response message"
+          collectionHeader={this.componentLocale.responseMessages}
+          collectionAddText={this.componentLocale.addAlternativeMessage}
           collectionHintId={HintId.ResponseMessage}
-          defaultNewItemValue="Sample response message"
+          defaultNewItemValue={this.componentLocale.sampleResponseMessage}
           onEditItem={event => {
             this.HandleEditResponseMessage(event);
           }}
@@ -274,7 +293,9 @@ export class FullResponse {
           }}
         />
         <div class="ConditionMargin">
-          <span class="ConditionLabel gxg-title-03">Condition</span>
+          <span class="ConditionLabel gxg-title-03">
+            {this.componentLocale.condition}
+          </span>
           <gxcf-hint class="HintBlock" hintId={HintId.ResponseCondition} />
         </div>
         <gxcf-condition

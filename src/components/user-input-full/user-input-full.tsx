@@ -5,22 +5,28 @@ import {
   EventEmitter,
   Event,
   State,
-  Listen
+  Listen,
+  Element
 } from "@stencil/core";
 import { HintId } from "../common/helpers";
 import { EventsHelper } from "../common/events-helper";
 import { StringCollectionHelper } from "../common/string-collection-helper";
+import { Locale } from "../common/locale";
 
 @Component({
   tag: "gxcf-user-input-full",
   styleUrl: "user-input-full.scss",
-  shadow: true
+  shadow: true,
+  assetsDirs: ["assets/gxcf-user-input-full-lang"]
 })
 export class FullUserInput {
   @Prop() userInput: GXCFModel.UserInputElement;
   @Prop() flow: GXCFModel.FlowElement;
   @Prop() instance: GXCFModel.Instance;
   @State() enableAdvancedMode = false;
+  @Element() element: HTMLElement;
+
+  private componentLocale: any;
 
   @Event() collapseUserInput: EventEmitter;
   TriggerOnCollapseUserInput(event): void {
@@ -198,7 +204,7 @@ export class FullUserInput {
             onChangeRedirectTo={(event: CustomEvent) =>
               this.TriggerUserInputChangeRedirectTo(event)
             }
-            label="Redirect To"
+            label={this.componentLocale.redirectToLabel}
           />
         );
         index++;
@@ -206,7 +212,7 @@ export class FullUserInput {
     }
     redirs.push(
       <gxcf-add-object
-        addText="Add another redirection"
+        addText={this.componentLocale.addRedirection}
         onClick={() => this.TriggerAddRedirection()}
       />
     );
@@ -218,16 +224,16 @@ export class FullUserInput {
       <details open>
         <summary class="UserInputPart">
           <span class="UserInputPartSummaryText gxg-title-03">
-            Ask messages
+            {this.componentLocale.askMessages}
           </span>
         </summary>
         <gxcf-collection
           collection={this.userInput.RequiredMessages}
-          collectionAddText="Add another ask message"
+          collectionAddText={this.componentLocale.addAskMessage}
           onEditItem={event => this.HandleEditAskMessage(event)}
           onDeleteItem={event => this.HandleDeleteAskMessage(event)}
           collectionHintId={HintId.AskMessages}
-          collectionHeader="Ask Messages"
+          collectionHeader={this.componentLocale.askMessages}
           defaultNewItemValue={this.userInput.Variable}
         />
       </details>
@@ -255,7 +261,7 @@ export class FullUserInput {
         <details>
           <summary class="UserInputPart">
             <span class="UserInputPartSummaryText gxg-title-03">
-              Condition to be required
+              {this.componentLocale.conditionRequired}
             </span>
           </summary>
           <gxcf-hint hintId={HintId.Required} class="UserInputHints" />
@@ -274,18 +280,21 @@ export class FullUserInput {
         <details>
           <summary class="UserInputPart">
             <span class="UserInputPartSummaryText gxg-title-03">
-              Validate User Input
+              {this.componentLocale.validateUserInput}
             </span>
           </summary>
           <div>
             <gxcf-collection
               collection={this.userInput.ErrorMessages}
-              collectionAddText="Add another error message"
-              collectionHeader="Entity or Data Type Error messages"
+              collectionAddText={this.componentLocale.addErrorMessage}
+              collectionHeader={this.componentLocale.errorMessagesHeader}
               onEditItem={event => this.HandleEditOnErrorMessage(event)}
               onDeleteItem={event => this.HandleDeleteOnErrorMessage(event)}
               collectionHintId={HintId.ErrorMessages}
-              defaultNewItemValue={`${this.userInput.Variable} error`}
+              defaultNewItemValue={Locale.format(
+                this.componentLocale.defaultErrorMessage,
+                [this.userInput.Variable]
+              )}
             />
           </div>
           <div class="ContainerForUserInput">
@@ -293,7 +302,7 @@ export class FullUserInput {
             <span class="gxg-title-01">Try Limit</span>
             <input
               class="UserInputLine gxg-text"
-              placeholder="0 - No limits"
+              placeholder={this.componentLocale.noLimitsPlaceHolder}
               value={this.userInput.TryLimit}
               onChange={(event: CustomEvent) =>
                 this.TriggerTryLimitChange(event)
@@ -309,7 +318,7 @@ export class FullUserInput {
             <span class="gxg-title-01">Validation Procedure</span>
             <input
               class="UserInputLine SelectVP gxg-text"
-              placeholder="Select a Validation Procedure"
+              placeholder={this.componentLocale.validationProcedurePlaceHolder}
               value={this.userInput.ValidationProcedure}
               onClick={event => this.TriggerOnChangeValidationProcedure(event)}
             />
@@ -328,14 +337,18 @@ export class FullUserInput {
     );
   }
 
+  async componentWillLoad(): Promise<void> {
+    this.componentLocale = await Locale.getComponentStrings(this.element);
+  }
+
   render() {
     let editionMode: HTMLElement;
     let advancedEditionStatus: string;
     if (this.enableAdvancedMode) {
       editionMode = this.RenderAdvancedMode();
-      advancedEditionStatus = "Advanced mode ON";
+      advancedEditionStatus = this.componentLocale.advancedModeOn;
     } else {
-      advancedEditionStatus = "Advanced mode OFF";
+      advancedEditionStatus = this.componentLocale.advancedModeOff;
       editionMode = this.RenderBasicMode();
     }
 
@@ -357,15 +370,18 @@ export class FullUserInput {
         <gxcf-button-delete
           class="UserInputCommandsPosition"
           onConfirmDelete={event => this.TriggerDeleteUserInput(event)}
-          confirmationTitle="Delete user input"
-          confirmationMessage={`Do you want to delete the user input '${this.userInput.Variable}'?`}
+          confirmationTitle={this.componentLocale.deleteUserInput}
+          confirmationMessage={Locale.format(
+            this.componentLocale.deleteUserInputConfirmation,
+            [this.userInput.Variable]
+          )}
           type="close"
         />
         <div class="Entity">
           <span class="gxg-title-03">Entity: </span>
           <input
             type="text"
-            placeholder="None"
+            placeholder={this.componentLocale.noneEntity}
             class="EntityInput gxg-text"
             onChange={event => this.TriggerSetUserInputEntity(event)}
             value={this.userInput.Entity}

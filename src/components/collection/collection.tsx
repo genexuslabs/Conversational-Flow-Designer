@@ -1,10 +1,12 @@
 import { Component, Prop, h, State, Event, Element } from "@stencil/core";
 import { EventEmitter } from "events";
+import { Locale } from "../common/locale";
 
 @Component({
   tag: "gxcf-collection",
   styleUrl: "collection.scss",
-  shadow: true
+  shadow: true,
+  assetsDirs: ["assets/gxcf-collection-lang"]
 })
 export class Collection {
   @Prop() collection: string[];
@@ -21,11 +23,14 @@ export class Collection {
 
   @Element() element: HTMLElement;
 
+  private componentLocale: any;
+
   public static readonly DataItemIndex = "data-item-index";
 
   AddItem(event): void {
     console.log(event);
-    if (!this.defaultNewItemValue) this.defaultNewItemValue = "Sample message";
+    if (!this.defaultNewItemValue)
+      this.defaultNewItemValue = this.componentLocale.sampleMessage;
     this.collection.push(this.defaultNewItemValue);
     this.collectionLength = this.collection.length;
   }
@@ -88,8 +93,9 @@ export class Collection {
     return renderedItems;
   }
 
-  componentWillLoad(): void {
+  async componentWillLoad(): Promise<void> {
     this.collectionLength = this.collection.length;
+    this.componentLocale = await Locale.getComponentStrings(this.element);
   }
 
   componentDidRender(): void {
