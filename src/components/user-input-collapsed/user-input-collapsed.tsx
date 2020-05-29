@@ -6,15 +6,19 @@ import {
   Event,
   Element
 } from "@stencil/core";
+import { Locale } from "../common/locale";
 
 @Component({
   tag: "gxcf-user-input-collapsed",
   styleUrl: "user-input-collapsed.scss",
-  shadow: true
+  shadow: true,
+  assetsDirs: ["assets/gxcf-user-input-collapsed-lang"]
 })
 export class CollapsedUserInput {
   @Prop() userInput: GXCFModel.UserInputElement;
   @Element() element: HTMLElement;
+
+  private componentLocale: any;
 
   @Event() expandUserInput: EventEmitter;
   TriggerOnExpandUserInput(event): void {
@@ -42,6 +46,10 @@ export class CollapsedUserInput {
     this.clickOnUserInputNameInternal.emit();
   }
 
+  async componentWillLoad(): Promise<void> {
+    this.componentLocale = await Locale.getComponentStrings(this.element);
+  }
+
   render() {
     return (
       <div class="CollapsedUserInput">
@@ -66,7 +74,7 @@ export class CollapsedUserInput {
           onChange={event =>
             this.TriggerOnModifyUserInputFirstAskMessage(event)
           }
-          placeholder="First ask message..."
+          placeholder={this.componentLocale.firstAskMessagePlaceHolder}
         />
       </div>
     );

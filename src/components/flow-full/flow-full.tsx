@@ -5,22 +5,28 @@ import {
   EventEmitter,
   Event,
   State,
-  Listen
+  Listen,
+  Element
 } from "@stencil/core";
 import { HintId, SelectTypes, RenderingOptions } from "../common/helpers";
 import { EventsHelper } from "../common/events-helper";
 import { StringCollectionHelper } from "../common/string-collection-helper";
 import { Position } from "../common/position";
+import { Locale } from "../common/locale";
 
 @Component({
   tag: "gxcf-flow-full",
   styleUrl: "flow-full.scss",
-  shadow: true
+  shadow: true,
+  assetsDirs: ["assets/gxcf-flow-full-lang"]
 })
 export class FlowFull {
   @Prop() flow: GXCFModel.FlowElement;
   @Prop() instance: GXCFModel.Instance;
   @State() expandTriggers = false;
+  @Element() element: HTMLElement;
+
+  private componentLocale: any;
 
   @Event() collapseFlow: EventEmitter;
   TriggerOnCollapseFlow(event): void {
@@ -216,7 +222,7 @@ export class FlowFull {
             collection={this.flow.Triggers}
             collectionHeader={this.CollectionHeader}
             collectionHintId={HintId.TriggerMessages}
-            collectionAddText="Add another sample trigger message"
+            collectionAddText={this.componentLocale.addTriggerMessage}
             onEditItem={event => this.HandleEditTriggerMessage(event)}
             onDeleteItem={event => this.HandleDeleteTriggerMessage(event)}
             defaultNewItemValue={this.flow.Name}
@@ -228,7 +234,9 @@ export class FlowFull {
         <div class="TriggersContainer">
           <gxcf-dot class="DotPosition MinLeftTab" />
           <span class="ElementsHeaderText gxg-title-03">
-            Trigger Messages ({this.flow.Triggers.length})
+            {Locale.format(this.componentLocale.triggerMessagesCount, [
+              this.flow.Triggers.length + ""
+            ])}
           </span>
           <gxcf-hint hintId={HintId.TriggerMessages} class="Hint" />
           <div class="TriggersContainer TriggersContainerBody">
@@ -247,6 +255,10 @@ export class FlowFull {
       );
   }
 
+  async componentWillLoad(): Promise<void> {
+    this.componentLocale = await Locale.getComponentStrings(this.element);
+  }
+
   render() {
     let selectType: SelectTypes = SelectTypes.Compact;
     if (!this.flow.ConversationalObjectName) selectType = SelectTypes.Full;
@@ -263,8 +275,11 @@ export class FlowFull {
               <gxcf-button-delete
                 class="CommandPosition"
                 onConfirmDelete={event => this.TriggerDeleteFlow(event)}
-                confirmationTitle="Delete flow"
-                confirmationMessage={`Do you want to delete the flow '${this.flow.Name}'?`}
+                confirmationTitle={this.componentLocale.deleteFlow}
+                confirmationMessage={Locale.format(
+                  this.componentLocale.deleteFlowConfirmation,
+                  [this.flow.Name]
+                )}
               />
               <gxcf-select
                 class="CustomSelectBoxing CommandPosition"
@@ -282,7 +297,9 @@ export class FlowFull {
         <div class="FullFlowContentUserInputs Content">
           <div class="ElementsHeader">
             <span class="LeftTab ElementsHeaderText gxg-title-03">
-              User Inputs ({this.flow.Fields.length})
+              {Locale.format(this.componentLocale.userInputsCount, [
+                this.flow.Fields.length + ""
+              ])}
             </span>
             <gxcf-hint hintId={HintId.UserInput} class="Hint" />
           </div>
@@ -290,21 +307,23 @@ export class FlowFull {
           <gxcf-add-object
             class="LeftTab"
             onClick={() => this.TriggerOnAddUserInput()}
-            addText="Add another user input"
+            addText={this.componentLocale.addUserInput}
           />
         </div>
         <hr class="Separator"></hr>
         <div class="FullFlowContentResponses Content">
           <div class="ElementsHeader">
             <span class="ElementsHeaderText gxg-title-03">
-              Responses ({this.flow.View.Templates.length})
+              {Locale.format(this.componentLocale.responsesCount, [
+                this.flow.View.Templates.length + ""
+              ])}
             </span>
             <gxcf-hint hintId={HintId.Responses} class="Hint" />
           </div>
           {this.RenderizeResponse()}
           <gxcf-add-object
             onClick={() => this.TriggerOnAddResponse()}
-            addText="Add another possible response"
+            addText={this.componentLocale.addResponse}
           />
         </div>
       </div>

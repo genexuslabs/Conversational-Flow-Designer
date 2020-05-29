@@ -7,15 +7,19 @@ import {
   Element
 } from "@stencil/core";
 import { EventsHelper } from "../common/events-helper";
+import { Locale } from "../common/locale";
 
 @Component({
   tag: "gxcf-response-collapsed",
   styleUrl: "response-collapsed.scss",
-  shadow: true
+  shadow: true,
+  assetsDirs: ["assets/gxcf-response-collapsed-lang"]
 })
 export class CollapsedResponse {
   @Prop() response: GXCFModel.ResponseElement;
   @Element() element: HTMLElement;
+
+  private componentLocale: any;
 
   @Event() expandResponse: EventEmitter;
   TriggerOnExpandResponse(event): void {
@@ -71,7 +75,7 @@ export class CollapsedResponse {
         type="text"
         class="CollapsedResponseTitle gxg-title-01"
         value={this.response.ResponseName}
-        placeholder="Response name..."
+        placeholder={this.componentLocale.responseNamePlaceHolder}
         onChange={event => this.TriggerChangeResponseName(event)}
         onClick={event => this.TriggerOnClickResponseInputName(event)}
       />
@@ -99,6 +103,10 @@ export class CollapsedResponse {
     return "";
   }
 
+  async componentWillLoad(): Promise<void> {
+    this.componentLocale = await Locale.getComponentStrings(this.element);
+  }
+
   render() {
     return (
       <div class="CollapsedResponse">
@@ -108,7 +116,7 @@ export class CollapsedResponse {
           type="text"
           class={this.GetFirstResponseMessageClass()}
           value={this.GetFristResponseMessage()}
-          placeholder="First response message..."
+          placeholder={this.componentLocale.firsResponsePlaceHolder}
           onChange={(event: CustomEvent) =>
             this.HandleEditFirstResponseMessage(event)
           }
