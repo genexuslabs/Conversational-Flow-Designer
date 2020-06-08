@@ -55,5 +55,11 @@ declare namespace GXCFModel {
 
   export interface ViewElement {
     Templates: ResponseElement[];
+    Attributes: ResponseParametersElement[];
+  }
+
+  export interface ResponseParametersElement {
+    Description: string;
+    Variable: string;
   }
 }

@@ -10,5 +10,6 @@
   "responseMessages": "Response Messages",
   "addAlternativeMessage": "Add an alternative response message",
   "sampleResponseMessage": "Sample response message",
-  "condition": "Condition"
+  "condition": "Condition",
+  "responseParameters": "Response Parameters"
 }

@@ -53,6 +53,14 @@ export class FullResponse {
     });
   }
 
+  @Event() switchResponseParameter: EventEmitter;
+  TriggerSwitchResponseParameter(responseParameter: string): void {
+    this.switchResponseParameter.emit.call(this, {
+      flowName: this.flow.Name,
+      responseParameter: responseParameter
+    });
+  }
+
   HandleEditResponseMessage(event: CustomEvent): void {
     const value = EventsHelper.GetValue(event);
     const index = EventsHelper.GetCollectionIndexFromDetail(event);
@@ -252,6 +260,29 @@ export class FullResponse {
     return elements;
   }
 
+  private renderResponseParameters(): HTMLElement[] {
+    const elements: Array<HTMLElement> = new Array<HTMLElement>();
+    if (this.flow.View.Attributes) {
+      if (this.flow.View.Attributes.length > 0)
+        elements.push(<span>{this.componentLocale.responseParameters}</span>);
+
+      this.flow.View.Attributes.forEach(variable => {
+        elements.push(
+          <gxg-toggle
+            label={variable.Variable}
+            size="small"
+            on={true}
+            onClick={() =>
+              this.TriggerSwitchResponseParameter(variable.Variable)
+            }
+          />
+        );
+      });
+    }
+
+    return elements;
+  }
+
   render() {
     return (
       <div class="FullResponse">
@@ -311,6 +342,8 @@ export class FullResponse {
         </div>
         {this.RenderStyleSelector()}
         {this.RenderStyleContent()}
+        <hr class="Separator"></hr>
+        {this.renderResponseParameters()}
       </div>
     );
   }
