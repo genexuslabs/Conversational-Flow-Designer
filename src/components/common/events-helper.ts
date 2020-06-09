@@ -54,6 +54,11 @@ export class EventsHelper {
     return null;
   }
 
+  static GetValueFromGxgSelect(customEvent: CustomEvent): string {
+    customEvent = this.PreventEvent(customEvent);
+    return customEvent.detail ? customEvent.detail /*.selectedValue*/ : "";
+  }
+
   static GetValueFromInput(customEvent: CustomEvent): string {
     customEvent = this.PreventEvent(customEvent);
     if (customEvent.currentTarget) {

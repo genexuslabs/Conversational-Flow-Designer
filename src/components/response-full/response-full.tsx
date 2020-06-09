@@ -74,7 +74,7 @@ export class FullResponse {
 
   @Event() changeResponseStyle: EventEmitter;
   TriggerChangeResponseStyle(event: CustomEvent): void {
-    const value: string = EventsHelper.GetValueFromSelect(event);
+    const value: string = EventsHelper.GetValueFromGxgSelect(event);
     this.changeResponseStyle.emit.call(this, {
       flowName: this.flow.Name,
       responseIndex: this.responseIndex,
@@ -106,7 +106,7 @@ export class FullResponse {
   @Event() changeComponentType: EventEmitter;
   TriggerChangeComponentType(event: CustomEvent) {
     event.preventDefault();
-    const value: string = EventsHelper.GetValueFromSelect(event);
+    const value: string = EventsHelper.GetValueFromGxgSelect(event);
     this.changeComponentType.emit.call(this, {
       flowName: this.flow.Name,
       index: this.responseIndex,

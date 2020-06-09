@@ -24,7 +24,7 @@ export class Redirection {
 
   @Event() changeRedirectTo: EventEmitter;
   TriggerOnChangeRedirectTo(event): void {
-    const value = EventsHelper.GetValueFromSelect(event);
+    const value = EventsHelper.GetValueFromGxgSelect(event);
     this.changeRedirectTo.emit.call(this, {
       value: value,
       index: this.redirectionIndex
