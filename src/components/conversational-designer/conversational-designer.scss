@@ -9,9 +9,9 @@ body {
 }
 .AddFlow {
   display: block;
-  margin-top: 5px;
+  margin-top: var(--spacing-comp-01);
   width: 34%;
-  bottom: 5px;
+  bottom: var(--spacing-comp-01);
   position: sticky;
 }
 
