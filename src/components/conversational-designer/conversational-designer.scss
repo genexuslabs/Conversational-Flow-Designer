@@ -11,6 +11,8 @@ body {
   display: block;
   margin-top: 5px;
   width: 34%;
+  bottom: 5px;
+  position: sticky;
 }
 
 .LeftHeader
@@ -38,7 +40,7 @@ body {
 .FlowsContainer {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 87vh;
+  max-height: 85vh;
   width: 34%;
   left: 0;
   clear: left;
