@@ -257,6 +257,11 @@ export class FlowFull {
 
   async componentWillLoad(): Promise<void> {
     this.componentLocale = await Locale.getComponentStrings(this.element);
+    let index = 0;
+    this.flow.View.Templates.forEach(temp => {
+      temp.Index = index;
+      index++;
+    });
   }
 
   render() {

@@ -185,7 +185,6 @@ export class FullResponse {
         }
         label={this.componentLocale.showResponseLabel}
         fullWidth
-        value={this.response.ComponentType}
       >
         <gxg-option
           value={ComponentTypes.CallPanel}
@@ -306,7 +305,11 @@ export class FullResponse {
           confirmationTitle={this.componentLocale.deleteResponse}
           confirmationMessage={Locale.format(
             this.componentLocale.askDeleteResponse,
-            [this.response.Index + ""]
+            [
+              this.response.ResponseName
+                ? this.response.ResponseName
+                : this.response.Index + ""
+            ]
           )}
           type="close"
         />
