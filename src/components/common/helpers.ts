@@ -95,25 +95,18 @@ export class HintId {
 export class PropertiesDefinition {
   //For Test
   public static readonly ResponseMessageTitle: string = "Response Messages";
-  public static readonly ResponseMessageDescription: string =
-    "Response Messages";
   public static readonly ResponseMessageLabel: string =
     "What's a Response Message?";
 
   public static readonly ResponseConditionTitle: string = "Response Condition";
-  public static readonly ResponseConditionDescription: string =
-    "Response Condition";
   public static readonly ResponseConditionLabel: string =
     "What's a Response Condition?";
 
   public static readonly ResponseStyleTitle: string = "Response Style";
-  public static readonly ResponseStyleDescription: string = "Response Style";
   public static readonly ResponseStyleLabel: string =
     "What's a Response Style?";
 
   public static readonly TriggerMessagesTitle: string = "Trigger Messages";
-  public static readonly TriggerMessagesDescription: string =
-    "Specifies the trigger messages for this flow. You can type multiple messages using the ';' delimiter";
   public static readonly TriggerMessagesLabel: string =
     "What's a Trigger Message?";
 
@@ -129,56 +122,39 @@ export class PropertiesDefinition {
 
   public static readonly ConversationalObjectTitle: string =
     "Conversational Object";
-  public static readonly ConversationalObjectDescription: string =
-    "GeneXus object that will resolve the flow’s action. In the case of web objects, it has to be a Web Component. It's called automatically after the User inputs are entered. If the Message of the Flow has a Component view Style, and the SD Component or Web Component property is set, you have to call the Conversational Flows object from the Start Event of the corresponding component.";
   public static readonly UConversationalObjectLabel: string =
     "What's a Conversational Object?";
 
   public static readonly RequiredTitle: string = "Required";
-  public static readonly RequiredDescription: string =
-    "The user input is required if the Required Condition property is true. Only for Watson.";
   public static readonly RequiredLabel: string =
     "What's the condition to be required?";
 
   public static readonly AskMessagesTitle: string = "Ask Messages";
-  public static readonly AskMessagesDescription: string =
-    "Specify the ask messages for this parameter. You can type multiple messages using the ‘;’ delimiter and you can reference any context parameter using the '&' character.";
   public static readonly AskMessagesLabel: string = "What're the ask messages?";
 
   public static readonly ValidateUserInputTitle: string = "Validate User Input";
-  public static readonly ValidateUserInputDescription: string =
-    "The Validation Procedure is available for any Chatbot User Input and is triggered as soon the user enters data for that user input.";
   public static readonly ValidateUserInputLabel: string =
     "What's validate user input?";
 
   public static readonly RedirectionTitle: string = "Redirection";
-  public static readonly RedirectionDescription: string =
-    "Select an existing flow to redirect the conversation when the current condition is true.";
   public static readonly RedirectionLabel: string = "What's a redirection?";
 
   public static readonly ErrorMessagesTitle: string = "On Error Messages";
-  public static readonly ErrorMessagesDescription: string =
-    "Specifies the On Error Messages for this parameter. You can type multiple messages using the ‘;’ delimiter and reference any context parameter using the '&' character.";
   public static readonly ErrorMessagesLabel: string =
     "What're the On Error Messages?";
 
   public static readonly TryLimitTitle: string = "Try Limit";
-  public static readonly TryLimitDescription: string =
-    "When Ask again property is set to TRUE, you can establish the number of times the user is asked to re-try.";
   public static readonly TryLimitLabel: string = "What's the Try Limit?";
 
   public static readonly ShowResponseAsTitle: string = "Show Response As";
-  public static readonly ShowResponseAsDescription: string = "Show Response As";
   public static readonly ShowResponseAsLabel: string =
     "What's Show Response As?";
 
   public static readonly WebComponentTitle: string = "Web Compoennt";
-  public static readonly WebComponentDescription: string = "Web Component";
   public static readonly WebComponentLabel: string =
     "What's the Web Component?";
 
   public static readonly SDComponentTitle: string = "SD Compoennt";
-  public static readonly SDComponentDescription: string = "SD Component";
   public static readonly SDComponentLabel: string = "What's the SD Component?";
 
   public static GetTitle(hintId: HintId): string {
@@ -203,24 +179,8 @@ export class PropertiesDefinition {
   }
 
   public static GetDescription(hintId: HintId): string {
-    if (hintId == HintId.TriggerMessages)
-      return this.TriggerMessagesDescription;
     if (hintId == HintId.Responses) return this.ResponseDescription;
     if (hintId == HintId.UserInput) return this.UserInputDescription;
-    if (hintId == HintId.ConversationalObject)
-      return this.ConversationalObjectDescription;
-    if (hintId == HintId.Required) return this.RequiredDescription;
-    if (hintId == HintId.AskMessages) return this.AskMessagesDescription;
-    if (hintId == HintId.ValidateUserInput)
-      return this.ValidateUserInputDescription;
-    if (hintId == HintId.ResponseMessage)
-      return this.ResponseMessageDescription;
-    if (hintId == HintId.ResponseCondition)
-      return this.ResponseConditionDescription;
-    if (hintId == HintId.ResponseStyle) return this.ResponseStyleDescription;
-    if (hintId == HintId.ShowResponseAs) return this.ShowResponseAsDescription;
-    if (hintId == HintId.WebComponent) return this.WebComponentDescription;
-    if (hintId == HintId.SDComponent) return this.SDComponentDescription;
     return "";
   }
 

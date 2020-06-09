@@ -1,3 +1,5 @@
+import { PropertiesDefinition } from "./helpers";
+
 export class Locale {
   private static defaultLanguage = "en";
   private static folder = "assets/";
@@ -52,5 +54,14 @@ export class Locale {
       ret = ret.replace(`{${parms.indexOf(parm)}}`, parm);
     });
     return ret;
+  }
+
+  public static async getHint(property: string): Promise<string> {
+    const external: any = window.external;
+    let hint = await external.GetHint(property);
+
+    if (hint == "") hint = PropertiesDefinition.GetDescription(property);
+
+    return hint;
   }
 }

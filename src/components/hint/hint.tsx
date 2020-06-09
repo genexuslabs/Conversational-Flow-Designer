@@ -13,6 +13,7 @@ export class Hint {
   @State() shouldShow = false;
   @Element() element: HTMLElement;
   private componentLocale: any;
+  private hintDescription: string;
 
   HandleShowHint(event): void {
     console.log(event);
@@ -37,9 +38,7 @@ export class Hint {
           onClick={event => this.HandleHideHint(event)}
           class="CloseHint"
         />
-        <p class="gxg-text">
-          {PropertiesDefinition.GetDescription(this.hintId)}
-        </p>
+        <p class="gxg-text">{this.hintDescription}</p>
         <a class="gxg-link" href={PropertiesDefinition.GetURL(this.hintId)}>
           {this.componentLocale.more}
         </a>
@@ -55,6 +54,11 @@ export class Hint {
 
   async componentWillLoad(): Promise<void> {
     this.componentLocale = await Locale.getComponentStrings(this.element);
+  }
+
+  async componentWillRender(): Promise<void> {
+    if (this.shouldShow)
+      this.hintDescription = await Locale.getHint(this.hintId);
   }
 
   render() {
