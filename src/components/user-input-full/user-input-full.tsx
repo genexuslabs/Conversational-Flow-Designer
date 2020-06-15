@@ -70,11 +70,12 @@ export class FullUserInput {
 
   @Event() changeTryLimit: EventEmitter;
   TriggerTryLimitChange(event: CustomEvent): void {
-    const value: string = EventsHelper.GetValueFromInput(event);
+    event.preventDefault();
+    const newValue: string = event.detail + "";
     this.changeTryLimit.emit.call(this, {
       flowName: this.flow.Name,
       userInput: this.userInput.Variable,
-      value: value
+      value: newValue
     });
   }
   @Event() addRedirection: EventEmitter;
@@ -299,14 +300,13 @@ export class FullUserInput {
           </div>
           <div class="ContainerForUserInput">
             <gxcf-hint hintId={HintId.TryLimit} class="UserInputHints" />
-            <span class="gxg-title-01">Try Limit</span>
-            <input
-              class="UserInputLine gxg-text"
-              placeholder={this.componentLocale.noLimitsPlaceHolder}
+            <gxg-stepper
               value={this.userInput.TryLimit}
-              onChange={(event: CustomEvent) =>
+              onInput={(event: CustomEvent) =>
                 this.TriggerTryLimitChange(event)
               }
+              label="Try Limit"
+              inlineFlex={true}
             />
             <hr class="Separator"></hr>
           </div>
