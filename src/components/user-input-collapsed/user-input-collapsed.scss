@@ -4,12 +4,11 @@
   border-width: 1px;
   border-radius: 1px;
   border-style: solid;
-  padding: 12px 12px 12px 12px;
   overflow: hidden;
   -webkit-animation: var(--animation-time);
   animation: var(--animation-time);
-  margin: var(--small-margin);
   border-top: 3px solid var(--gray-01);
+  padding: var(--spacing-comp-01);
 }
 
 .CollapsedUserInput:hover {
@@ -27,7 +26,6 @@
   border: none;
   background-color: var(--gray-01);
   width: 95%;
-  margin-left: 14px;
 }
 
 .CollapsedTitle {

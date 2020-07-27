@@ -52,8 +52,7 @@ export class CollapsedUserInput {
 
   render() {
     return (
-      <div class="CollapsedUserInput">
-        <gxcf-dot class="DotPosition" />
+      <gxg-box class="CollapsedUserInput">
         <input
           type="text"
           class="CollapsedTitle gxg-title-01"
@@ -76,7 +75,7 @@ export class CollapsedUserInput {
           }
           placeholder={this.componentLocale.firstAskMessagePlaceHolder}
         />
-      </div>
+      </gxg-box>
     );
   }
 }

@@ -193,7 +193,7 @@ export class FlowFull {
     if (this.flow.Triggers[0] != null) {
       return this.flow.Triggers[0];
     }
-    return "";
+    return this.componentLocale.emptyTriggers;
   }
 
   private GetSummaryConversationalObject(): string {
@@ -201,7 +201,7 @@ export class FlowFull {
       this.flow.ConversationalObjectName != null &&
       this.flow.ConversationalObjectName != ""
     ) {
-      return this.flow.ConversationalObjectName.toUpperCase();
+      return this.flow.ConversationalObjectName;
     }
     return "Conversational Object";
   }
@@ -232,7 +232,6 @@ export class FlowFull {
     else
       return (
         <div class="TriggersContainer">
-          <gxcf-dot class="DotPosition MinLeftTab" />
           <span class="ElementsHeaderText gxg-title-03">
             {Locale.format(this.componentLocale.triggerMessagesCount, [
               this.flow.Triggers.length + ""
@@ -247,7 +246,7 @@ export class FlowFull {
               class="TriggersArrow"
               onClick={event => this.HandleExpandTriggers(event)}
             />
-            <div class="TriggersContainer">
+            <div>
               <p class="gxg-quote">{this.GetSummaryTriggerMessage()}</p>
             </div>
           </div>
@@ -268,40 +267,40 @@ export class FlowFull {
     let selectType: SelectTypes = SelectTypes.Compact;
     if (!this.flow.ConversationalObjectName) selectType = SelectTypes.Full;
     return (
-      <div id={this.flow.Id} data-elementType="flow" class="FlowFull">
-        <div class="FullFlowContent">
-          <div class="TabFullFlowContent Content">
-            <gxcf-summary-title
-              summaryid={this.SummaryId}
-              summaryvalue={this.flow.Name}
-              classType="FullTitle"
-            />
-            <div class="CommandsContainer">
-              <gxcf-button-delete
-                class="CommandPosition"
-                onConfirmDelete={event => this.TriggerDeleteFlow(event)}
-                confirmationTitle={this.componentLocale.deleteFlow}
-                confirmationMessage={Locale.format(
-                  this.componentLocale.deleteFlowConfirmation,
-                  [this.flow.Name]
-                )}
-              />
-              <gxcf-select
-                class="CustomSelectBoxing CommandPosition"
-                selectid={this.SelectId}
-                selectcaption={this.GetSummaryConversationalObject()}
-                selectIconType={this.flow.ConversationalObjectType}
-                selectType={selectType}
-                onClick={event => this.TriggerSelectConversationalObject(event)}
-              />
-            </div>
-            {this.GetTriggers()}
-          </div>
+      <gxg-box class="FlowFull">
+        <gxcf-summary-title
+          summaryid={this.SummaryId}
+          summaryvalue={this.flow.Name}
+          fullWidth={true}
+        />
+        <div class="CommandsContainer">
+          <gxcf-button-delete
+            class="CommandPosition"
+            onConfirmDelete={event => this.TriggerDeleteFlow(event)}
+            confirmationTitle={this.componentLocale.deleteFlow}
+            confirmationMessage={Locale.format(
+              this.componentLocale.deleteFlowConfirmation,
+              [this.flow.Name]
+            )}
+          />
+          <gxcf-select
+            class="CustomSelectBoxing CommandPosition"
+            selectid={this.SelectId}
+            selectcaption={this.GetSummaryConversationalObject()}
+            selectIconType={this.flow.ConversationalObjectType}
+            selectType={selectType}
+            onClick={event => this.TriggerSelectConversationalObject(event)}
+          />
         </div>
-        <hr class="Separator"></hr>
-        <div class="FullFlowContentUserInputs Content">
-          <div class="ElementsHeader">
-            <span class="LeftTab ElementsHeaderText gxg-title-03">
+        {this.GetTriggers()}
+        <gxg-separator margin="xs" type="dashed" />
+        <gxg-spacer-layout
+          space="xs"
+          orientation="vertical"
+          justify-content="flex-start"
+        >
+          <div>
+            <span class="ElementsHeaderText gxg-title-03">
               {Locale.format(this.componentLocale.userInputsCount, [
                 this.flow.Fields.length + ""
               ])}
@@ -310,14 +309,11 @@ export class FlowFull {
           </div>
           {this.RenderizeUserInputs()}
           <gxcf-add-object
-            class="LeftTab"
             onClick={() => this.TriggerOnAddUserInput()}
             addText={this.componentLocale.addUserInput}
           />
-        </div>
-        <hr class="Separator"></hr>
-        <div class="FullFlowContentResponses Content">
-          <div class="ElementsHeader">
+          <gxg-separator margin="xs" type="dashed" />
+          <div>
             <span class="ElementsHeaderText gxg-title-03">
               {Locale.format(this.componentLocale.responsesCount, [
                 this.flow.View.Templates.length + ""
@@ -330,8 +326,8 @@ export class FlowFull {
             onClick={() => this.TriggerOnAddResponse()}
             addText={this.componentLocale.addResponse}
           />
-        </div>
-      </div>
+        </gxg-spacer-layout>
+      </gxg-box>
     );
   }
 }

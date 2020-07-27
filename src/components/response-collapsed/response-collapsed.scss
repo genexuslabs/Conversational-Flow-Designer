@@ -4,9 +4,8 @@
   border-width: 1px;
   border-radius: 1px;
   border-style: solid;
-  padding: 12px 12px 12px 12px;
+  padding: var(--spacing-comp-01);
   overflow: hidden;
-  margin-bottom: 15px;
   -webkit-animation: var(--animation-time);
   animation: var(--animation-time);
   border-top: 3px solid var(--gray-01);
@@ -30,13 +29,9 @@
   width: 95%;
 }
 
-.FirstResponseMessageNoTab {  
-  margin-left: 14px;
-}
-
 .FirstResponseMessageTab
 {
-  margin-left: 28px;
+  margin-left: 14px;
 }
 
 .CollapsedResponseTitle {
@@ -54,6 +49,5 @@
 .ConditionHeader
 {
   clear:both;
-  margin-left: 14px;
-  margin-bottom: 5px;;
+  margin-bottom: var(--spacing-comp-01);
 }

@@ -44,14 +44,6 @@ export class ConversationalDesginer {
     this.search = value;
   }
 
-  @Listen("expandFlow")
-  HandleExpandFlow(event: CustomEvent): void {
-    event.preventDefault();
-    console.log("Expand: " + event.detail.flowName);
-    this.instance.CurrentFlowName = event.detail.flowName;
-    this.renderFull = event.detail.flowName;
-  }
-
   @Listen("clickOnInput")
   HandleClickOnInput(event: CustomEvent): void {
     const element: HTMLInputElement = event.detail.source;
@@ -61,6 +53,12 @@ export class ConversationalDesginer {
   @Event() addFlow: EventEmitter;
   TriggerAddFlow(event): void {
     this.addFlow.emit(event);
+  }
+
+  handleClickFlowCollapsed(flowName): void {
+    this.instance.CurrentFlowName = flowName;
+    this.renderFull = flowName;
+    Position.SetFlow(flowName);
   }
 
   private setAddFlow() {
@@ -73,7 +71,7 @@ export class ConversationalDesginer {
     );
   }
 
-  private RenderizeFlows(): HTMLElement[] {
+  /*private RenderizeFlows(): HTMLElement[] {
     const flows: HTMLElement[] = [];
     this.flows = new Array<string>();
     this.GetFlows().forEach(function(flowElement) {
@@ -94,8 +92,65 @@ export class ConversationalDesginer {
     }, this);
     return flows;
   }
+*/
+
+  private RenderizeFlows(): HTMLElement[] {
+    const flows: HTMLElement[] = [];
+    this.flows = new Array<string>();
+    this.GetFlows().forEach(function(flowElement) {
+      this.flows.push(flowElement.Name);
+      flows.push(
+        <gxg-drag-box
+          border={this.instance.CurrentFlowName == flowElement.Name}
+        >
+          <gxcf-flow-collapsed
+            id={flowElement.Name.replace(/\s/g, "")}
+            data-flowid={flowElement.Id}
+            flow={flowElement}
+            //sdraggable
+            onClick={() => this.handleClickFlowCollapsed(flowElement.Name)}
+            renderingType={
+              this.instance.CurrentFlowName == flowElement.Name
+                ? RenderingOptions.Full
+                : RenderingOptions.Collapsed
+            }
+          />
+        </gxg-drag-box>
+      );
+    }, this);
+    return flows;
+  }
+
+  private renderizeActiveFlow(): HTMLElement {
+    let retFlow: HTMLElement;
+    const activeFlow: GXCFModel.FlowElement = this.getActiveFlow();
+    if (activeFlow != null) {
+      retFlow = (
+        <gxcf-flow-full
+          data-flowid={activeFlow.Id}
+          flow={activeFlow}
+          instance={this.instance}
+          onDeleteFullFlow={() => this.triggerDeleteFlow(activeFlow.Name)}
+        />
+      );
+    }
+    return retFlow;
+  }
+
+  private getActiveFlow(): GXCFModel.FlowElement {
+    if (this.GetFlows().length > 0) {
+      let ret = this.GetFlows()[0];
+      this.GetFlows().forEach(function(flowElement) {
+        if (this.instance.CurrentFlowName == flowElement.Name)
+          ret = flowElement;
+      }, this);
+      return ret;
+    }
+    return null;
+  }
 
   private setPopUp(): HTMLElement {
+    console.log("setPopUp");
     console.log(this.popUp);
     if (this.showPopUp) return this.popUp;
   }
@@ -133,20 +188,22 @@ export class ConversationalDesginer {
     if (event.key === "ArrowUp") moveType = MoveType.Up;
     else if (event.key === "ArrowDown") moveType = MoveType.Down;
     else if (event.ctrlKey && event.key === "f") this.setFocusOnSearch();
-    else if (event.key === "Delete") this.askForFeleteElement(event);
+    else if (event.key === "Delete") this.askForDeleteElement(event);
     else if (event.key === "Enter") this.handleEnterKey(event);
 
     if (moveType != null) {
       const index = this.flows.indexOf(this.renderFull);
       if (moveType == MoveType.Up && index - 1 >= 0)
-        this.setSelectedFlow(this.flows[index - 1]);
+        this.setSelectedFlow(this.flows[index - 1], moveType);
       else if (moveType == MoveType.Down && this.flows.length >= index + 1)
-        this.setSelectedFlow(this.flows[index + 1]);
+        this.setSelectedFlow(this.flows[index + 1], moveType);
       else if (moveType == MoveType.Up) this.setFocusOnSearch();
     }
   }
   handleEnterKey(event: KeyboardEvent) {
     const element: HTMLElement = event.srcElement as HTMLElement;
+    console.log("Before blur");
+    console.log(event);
     element.blur();
   }
 
@@ -182,9 +239,9 @@ export class ConversationalDesginer {
   }
 
   @Event() selectFlow: EventEmitter;
-  TriggerSelectCurrentFlow(): void {
+  triggerSelectCurrentFlow(flowName: string): void {
     this.selectFlow.emit.call(this, {
-      flowName: this.instance.CurrentFlowName
+      flowName: flowName
     });
   }
 
@@ -193,14 +250,14 @@ export class ConversationalDesginer {
     this.showPopUp = false;
   }
 
-  askForFeleteElement(event: KeyboardEvent) {
-    console.log("To delete: ");
+  askForDeleteElement(event: KeyboardEvent) {
     console.log(event);
     if ((event.target as HTMLElement).tagName == "BODY") {
       if (Position.GetPosition() == PositionElement.Flow) {
         console.log("Delete Flow: " + Position.GetFlow());
         this.popUp = (
           <gxcf-confirmation
+            visible={true}
             confirmationTitle={this.componentLocale.deleteFlow}
             confirmationMessage={Locale.format(
               this.componentLocale.deleteFlowConfirmation,
@@ -216,6 +273,7 @@ export class ConversationalDesginer {
         console.log("Delete UserInput: " + Position.GetUserInput());
         this.popUp = (
           <gxcf-confirmation
+            visible={true}
             confirmationTitle={this.componentLocale.deleteUserInput}
             confirmationMessage={Locale.format(
               this.componentLocale.deleteUserInputConfirmation,
@@ -234,6 +292,7 @@ export class ConversationalDesginer {
         console.log("Delete response: " + Position.GetResponse());
         this.popUp = (
           <gxcf-confirmation
+            visible={true}
             confirmationTitle={this.componentLocale.deleteResponse}
             confirmationMessage={Locale.format(
               this.componentLocale.deleteResponseConfirmation,
@@ -249,33 +308,71 @@ export class ConversationalDesginer {
           />
         );
       }
-
+      console.log("PopUp");
+      console.log(this.popUp);
       if (this.popUp != null) this.showPopUp = true;
     }
   }
 
-  setFocusOnSearch(): void {
-    this.element
-      .querySelector("gxcf-search")
-      .shadowRoot.querySelector("input")
-      .select();
+  getSearch(): HTMLInputElement {
+    return this.getSpacer()
+      .querySelector("gxg-form-text")
+      .shadowRoot.querySelector("div")
+      .querySelector("div")
+      .querySelector("input");
   }
 
-  setSelectedFlow(flowName: string): void {
+  blurSearch(): void {
+    this.getSearch().blur();
+  }
+
+  setFocusOnSearch(): void {
+    this.getSearch().select();
+  }
+
+  setSelectedFlow(flowName: string, moveType: MoveType): void {
+    console.log("Set selected flow");
     if (flowName) {
-      const container: HTMLElement = this.element
-        .querySelector("#" + flowName.replace(/\s/g, ""))
-        .shadowRoot.querySelector("gxcf-flow-collapsed") as HTMLElement;
-      console.log(container);
-
-      const moveToElement: HTMLElement = container.shadowRoot.querySelector(
-        "div"
+      const dragContainer: HTMLGxgDragContainerElement = this.getSpacer().querySelector(
+        "gxg-drag-container"
+      );
+      const element: HTMLElement = dragContainer.querySelector(
+        "#" + flowName.replace(/\s/g, "")
       ) as HTMLElement;
+      element.click();
 
-      console.log(moveToElement);
+      const viewport = dragContainer.getBoundingClientRect().height;
+      let offset = element.getBoundingClientRect().top;
+      const elementHeight = element.getBoundingClientRect().height;
+      if (offset < elementHeight) offset = 0;
 
-      moveToElement.click();
+      if (moveType == MoveType.Down && offset + elementHeight > viewport) {
+        let scrollDownTo = elementHeight;
+        if (
+          dragContainer.scrollHeight <=
+          dragContainer.scrollTop + elementHeight
+        )
+          scrollDownTo = dragContainer.scrollHeight;
+        dragContainer.scrollBy({
+          top: scrollDownTo,
+          behavior: "smooth"
+        });
+      } else if (moveType == MoveType.Up)
+        dragContainer.scrollBy({
+          top: -elementHeight,
+          behavior: "smooth"
+        });
+
+      this.blurSearch();
     }
+  }
+
+  getSpacer(): HTMLElement {
+    return this.element
+      .querySelector("gxg-stack")
+      .querySelector("gxg-columns")
+      .querySelector("gxg-column")
+      .querySelector("gxg-spacer-layout");
   }
 
   componentDidLoad(): void {
@@ -287,7 +384,7 @@ export class ConversationalDesginer {
     const search = this.element.querySelector("gxcf-search");
     if (search) search.shadowRoot.querySelector("input").focus();
   }
-
+  /*
   render() {
     console.log(this.instance);
     if (this.instance) {
@@ -328,6 +425,54 @@ export class ConversationalDesginer {
           {this.setPopUp()}
           <gxcf-confirmation visible={false} />
         </div>
+      );
+    } else {
+      return <div class="MainTable"></div>;
+    }
+  }
+*/
+
+  render() {
+    console.log(this.instance);
+    if (this.instance) {
+      if (
+        (this.instance.Flows == null || this.instance.Flows.length == 0) &&
+        !this.openEditor
+      )
+        return (
+          <gxcf-designer-welcome onOpenEditor={() => this.HandleOpenEditor()} />
+        );
+
+      return (
+        <gxg-stack>
+          <gxg-columns space="s" alignY="top">
+            <gxg-column width="1/3">
+              <gxg-spacer-layout
+                space="xs"
+                orientation="vertical"
+                justify-content="flex-start"
+              >
+                <gxg-form-text
+                  placeholder={this.componentLocale.searchPlaceHolder}
+                  icon="search"
+                  icon-position="left"
+                  full-width={true}
+                  role="textbox"
+                  onInput={event => this.HandleSearch(event)}
+                />
+                <gxg-spacer-one space="s"></gxg-spacer-one>
+                <gxg-drag-container class="FlowsContainer">
+                  {this.RenderizeFlows()}
+                </gxg-drag-container>
+
+                {this.setAddFlow()}
+              </gxg-spacer-layout>
+            </gxg-column>
+            <gxg-column>{this.renderizeActiveFlow()}</gxg-column>
+          </gxg-columns>
+          {this.setPopUp()}
+          <gxcf-confirmation visible={false} />
+        </gxg-stack>
       );
     } else {
       return <div class="MainTable"></div>;

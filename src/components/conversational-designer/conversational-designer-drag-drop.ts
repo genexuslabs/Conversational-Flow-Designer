@@ -7,11 +7,6 @@ enum DraggableComponents {
   Response
 }
 
-enum DropZoneStatus {
-  On,
-  Off
-}
-
 export class ConversationalDesignerDragDrop {
   private draggingElement: HTMLElement;
   private draggingElementType: DraggableComponents;
@@ -41,27 +36,16 @@ export class ConversationalDesignerDragDrop {
   public initialize() {
     this.element.addEventListener("dragstart", this.handleDragStart.bind(this));
 
-    this.element.addEventListener("dragleave", this.handleDragLeave.bind(this));
-
-    this.element.addEventListener("dropOnDropZone", this.handleDrop.bind(this));
-
-    this.element.addEventListener("dragover", this.handleOver.bind(this));
+    this.element.addEventListener("drop", this.handleDrop.bind(this));
 
     this.element.addEventListener("dragend", this.handleDragEnd.bind(this));
   }
 
   private handleDragStart(event: DragEvent) {
-    const dataTransfer = event.dataTransfer;
+    event.dataTransfer.effectAllowed = "move";
     this.draggingElement = this.getElement(event);
     this.setElementId();
     this.setDraggingElementType();
-    dataTransfer.dropEffect = "copy";
-    dataTransfer.setData("text/plain", this.draggingElementId);
-  }
-
-  private handleDragLeave(event: DragEvent) {
-    if (this.draggingElementType == DraggableComponents.Flow)
-      this.handleDrageLeaveFlow(event);
   }
 
   private handleDragEnd(event: DragEvent) {
@@ -70,25 +54,27 @@ export class ConversationalDesignerDragDrop {
   }
 
   private handleDrop(event: DragEvent) {
-    this.setDropZoneStatus(DropZoneStatus.Off);
+    console.log("Drop!");
     event.preventDefault();
-    const path: EventTarget[] = event.composedPath();
-    const dropTarget: HTMLElement = path[0] as HTMLElement;
-    const dropZoneElement: HTMLGxcfDropZoneElement = dropTarget as HTMLGxcfDropZoneElement;
+    console.log("Dragging:");
+    console.log(event);
+    const dragging: HTMLGxcfFlowCollapsedElement = (event.target as HTMLElement).getElementsByTagName(
+      "gxcf-flow-collapsed"
+    )[0];
+    const target: HTMLGxcfFlowCollapsedElement = this.draggingElement.getElementsByTagName(
+      "gxcf-flow-collapsed"
+    )[0];
 
-    if (dropZoneElement.moveType == MoveType.Up)
-      this.TriggerMoveFlow(MoveType.Up);
-    else this.TriggerMoveFlow(MoveType.Down);
+    const auxFlow = dragging.flow;
+    dragging.flow = target.flow;
+    target.flow = auxFlow;
+    this.moveFlow.emit.call(this, {
+      source: dragging.id,
+      target: target.id,
+      moveType: MoveType.Down
+    });
+
     this.reset();
-  }
-
-  private handleOver(event: DragEvent) {
-    if (!this.draggingElement) return;
-
-    event.preventDefault();
-
-    if (this.draggingElementType == DraggableComponents.Flow)
-      this.handleOverFlow(event);
   }
 
   private getElement(event: DragEvent): HTMLElement {
@@ -106,56 +92,6 @@ export class ConversationalDesignerDragDrop {
     if (this.draggingElement) {
       if (this.draggingElement.tagName.toLowerCase() == "gxcf-flow-container")
         this.draggingElementType = DraggableComponents.Flow;
-    }
-  }
-
-  private getCurrentTarget(event: DragEvent): HTMLElement {
-    return event.target as HTMLElement;
-  }
-
-  private getCurrentTargetId(element: HTMLElement): string {
-    return element.getAttribute(this.idAttribute);
-  }
-
-  private handleOverFlow(event: DragEvent): void {
-    if (!this.draggingElement) return;
-
-    event.preventDefault();
-
-    this.currentTargetElement = this.getCurrentTarget(event);
-    const lastCurrentTargetElementId: string = this.currentTargetElementId;
-    this.currentTargetElementId = this.getCurrentTargetId(
-      this.currentTargetElement
-    );
-
-    if (
-      this.draggingElementId != this.currentTargetElementId &&
-      this.currentTargetElementId != lastCurrentTargetElementId
-    )
-      this.showDropZones();
-  }
-
-  private showDropZones(): void {
-    this.setDropZoneStatus(DropZoneStatus.On);
-  }
-
-  private handleDrageLeaveFlow(event: DragEvent) {
-    if (!this.draggingElement) return;
-    console.log(event);
-    this.setDropZoneStatus(DropZoneStatus.Off);
-  }
-
-  private setDropZoneStatus(status: DropZoneStatus): void {
-    const shadow = this.currentTargetElement.shadowRoot;
-    if (shadow != null) {
-      shadow.childNodes[0].childNodes.forEach(function(node) {
-        const hNode: HTMLElement = node as HTMLElement;
-        if (hNode.tagName.toLowerCase() == "gxcf-drop-zone") {
-          const dropZoneElement: HTMLGxcfDropZoneElement = hNode as HTMLGxcfDropZoneElement;
-          if (status == DropZoneStatus.On) dropZoneElement.Show();
-          else dropZoneElement.Hide();
-        }
-      });
     }
   }
 

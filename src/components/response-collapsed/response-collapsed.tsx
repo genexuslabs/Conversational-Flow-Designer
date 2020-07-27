@@ -93,7 +93,7 @@ export class CollapsedResponse {
   }
 
   private GetFirstResponseMessageClass(): string {
-    let tab = "FirstResponseMessageNoTab";
+    let tab = "";
     if (this.response.Condition != "") tab = "FirstResponseMessageTab";
     return `FirstResponseMessage ${tab} gxg-quote`;
   }
@@ -110,7 +110,6 @@ export class CollapsedResponse {
   render() {
     return (
       <div class="CollapsedResponse">
-        <gxcf-dot class="DotPosition" />
         {this.GetHeader()}
         <input
           type="text"

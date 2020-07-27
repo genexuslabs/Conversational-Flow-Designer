@@ -153,7 +153,6 @@ export class FullResponse {
         onChange={(event: CustomEvent) =>
           this.TriggerChangeResponseStyle(event)
         }
-        fullWidth
       >
         <gxg-option
           value={ResponseStyles.RedirectTo}
@@ -184,7 +183,6 @@ export class FullResponse {
           this.TriggerChangeComponentType(event)
         }
         label={this.componentLocale.showResponseLabel}
-        fullWidth
       >
         <gxg-option
           value={ComponentTypes.CallPanel}

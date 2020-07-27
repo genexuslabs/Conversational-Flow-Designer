@@ -67,7 +67,6 @@ export class Redirection {
         required
         onChange={event => this.TriggerOnChangeRedirectTo(event)}
         label={this.label}
-        fullWidth
       >
         {this.LoadFlowsCombo()}
       </gxg-select>

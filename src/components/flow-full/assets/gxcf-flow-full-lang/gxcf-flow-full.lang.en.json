@@ -6,5 +6,6 @@
   "userInputsCount": "User Inputs ({0})",
   "addUserInput": "Add another user input",
   "responsesCount": "Responses ({0})",
-  "addResponse": "Add another possible response"
+  "addResponse": "Add another possible response",
+  "emptyTriggers": "The trigger messages collection is empty"
 }

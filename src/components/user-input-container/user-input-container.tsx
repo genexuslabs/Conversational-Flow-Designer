@@ -13,7 +13,6 @@ import { StringCollectionHelper } from "../common/string-collection-helper";
 
 @Component({
   tag: "gxcf-user-input-container",
-  styleUrl: "user-input-container.scss",
   shadow: true
 })
 export class UserInput {

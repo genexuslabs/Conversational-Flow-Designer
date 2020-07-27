@@ -306,7 +306,7 @@ export class FullUserInput {
                 this.TriggerTryLimitChange(event)
               }
               label="Try Limit"
-              inlineFlex={true}
+              //   inlineFlex={true}
             />
             <hr class="Separator"></hr>
           </div>

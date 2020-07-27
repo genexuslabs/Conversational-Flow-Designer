@@ -15,7 +15,6 @@ import { Position } from "../common/position";
 
 @Component({
   tag: "gxcf-flow-container",
-  styleUrl: "flow-container.scss",
   shadow: true
 })
 export class Flow {
