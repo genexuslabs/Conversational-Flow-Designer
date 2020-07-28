@@ -247,7 +247,9 @@ export class FlowFull {
               onClick={event => this.HandleExpandTriggers(event)}
             />
             <div>
-              <p class="gxg-quote">{this.GetSummaryTriggerMessage()}</p>
+              <p class="gxg-quote SmallSize">
+                {this.GetSummaryTriggerMessage()}
+              </p>
             </div>
           </div>
         </div>
