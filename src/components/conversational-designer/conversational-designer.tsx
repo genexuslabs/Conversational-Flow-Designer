@@ -384,6 +384,10 @@ export class ConversationalDesginer {
     const search = this.element.querySelector("gxcf-search");
     if (search) search.shadowRoot.querySelector("input").focus();
   }
+
+  handleDropFlow(event: any): void {
+    event.preventDefault();
+  }
   /*
   render() {
     console.log(this.instance);
@@ -461,7 +465,10 @@ export class ConversationalDesginer {
                   onInput={event => this.HandleSearch(event)}
                 />
                 <gxg-spacer-one space="s"></gxg-spacer-one>
-                <gxg-drag-container class="FlowsContainer">
+                <gxg-drag-container
+                  class="FlowsContainer"
+                  onItemDrop={event => this.handleDropFlow(event)}
+                >
                   {this.RenderizeFlows()}
                 </gxg-drag-container>
 

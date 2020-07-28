@@ -69,8 +69,8 @@ export class ConversationalDesignerDragDrop {
     dragging.flow = target.flow;
     target.flow = auxFlow;
     this.moveFlow.emit.call(this, {
-      source: dragging.id,
-      target: target.id,
+      source: dragging.flow.Name,
+      target: target.flow.Name,
       moveType: MoveType.Down
     });
 
