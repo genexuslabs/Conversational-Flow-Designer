@@ -2,6 +2,7 @@
 {
     //SVG icons:
     --dot-icon: url("assets/images/dot.svg");
+    --dot-off-icon: url("assets/images/dotOff.svg");
     --switch-userinputpart-off: url("assets/images/minus.svg");
     --switch-userinputpart-on: url("assets/images/plus.svg");
     --procedure-icon: url("assets/images/procedure.svg");
@@ -11,6 +12,8 @@
     --data-provider-icon: url("assets/images/dataProvider.svg");
 
     //Icons sizes
+    --small-icon-widh: 6px;
+    --small-icon-height: 6px;
     --medium-icon-width: 16px;
     --medium-icon-height: 16px;
     --long-icon-width: 24px;

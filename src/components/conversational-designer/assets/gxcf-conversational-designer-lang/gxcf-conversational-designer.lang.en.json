@@ -6,5 +6,8 @@
   "deleteUserInputConfirmation": "Do you want to delete the user input '{0}'?",
   "deleteResponse": "Delete response",
   "deleteResponseConfirmation": "Do you want to delete the response '{0}'?",
-  "searchPlaceHolder": "Search"
+  "searchPlaceHolder": "Search",
+  "all": "All",
+  "public": "Public",
+  "private": "Private"
 }

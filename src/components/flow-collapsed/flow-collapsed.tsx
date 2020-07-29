@@ -77,7 +77,7 @@ export class FlowCollapsed {
   }
 
   render() {
-    let classProp;
+    let classProp = "";
     if (this.renderingType == RenderingOptions.Collapsed) {
       classProp = "FlowSummary NoActiveContent";
     } else {
@@ -88,30 +88,41 @@ export class FlowCollapsed {
     if (!this.flow.ConversationalObjectName) selectType = SelectTypes.Full;
 
     return (
-      <div>
-        <gxcf-select
-          selectid={this.SelectId}
-          selectcaption={this.GetSummaryConversationalObject()}
-          class={this.GetSelectCOClass()}
-          selectIconType={this.flow.ConversationalObjectType}
-          selectType={selectType}
-          onClick={event => this.TriggerSelectConversationalObject(event)}
-        />
-        <gxg-spacer-layout
-          space="xs"
-          orientation="vertical"
-          justify-content="flex-start"
-        >
-          <gxcf-summary-title
-            summaryid={this.SummaryId}
-            summaryvalue={this.flow.Name}
+      <gxg-columns space="s" padding="xs" alignY="center">
+        <gxg-column width="fluid">
+          <gxg-spacer-layout
+            space="xs"
+            orientation="vertical"
+            justify-content="flex-start"
+          >
+            <gxg-spacer-layout
+              space="xs"
+              orientation="horizontal"
+              justify-content="flex-start"
+            >
+              <gxcf-dot on={this.flow.Triggers.length > 0} class="Dot" />
+              <gxcf-summary-title
+                summaryid={this.SummaryId}
+                summaryvalue={this.flow.Name}
+              />
+            </gxg-spacer-layout>
+
+            <gxcf-summary-description
+              descriptionid={this.DescriptionId}
+              descriptionvalue={this.GetSummaryTriggerMessage()}
+            />
+          </gxg-spacer-layout>
+        </gxg-column>
+        <gxg-column width="content">
+          <gxcf-select
+            selectid={this.SelectId}
+            selectcaption={this.GetSummaryConversationalObject()}
+            selectIconType={this.flow.ConversationalObjectType}
+            selectType={selectType}
+            onClick={event => this.TriggerSelectConversationalObject(event)}
           />
-          <gxcf-summary-description
-            descriptionid={this.DescriptionId}
-            descriptionvalue={this.GetSummaryTriggerMessage()}
-          />
-        </gxg-spacer-layout>
-      </div>
+        </gxg-column>
+      </gxg-columns>
     );
   }
 }

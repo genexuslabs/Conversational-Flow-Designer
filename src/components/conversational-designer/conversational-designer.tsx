@@ -41,6 +41,8 @@ export class ConversationalDesginer {
 
   HandleSearch(event: CustomEvent): void {
     const value: string = EventsHelper.GetValueFromInput(event);
+    console.log("Search: ");
+    console.log(event);
     this.search = value;
   }
 
@@ -71,54 +73,76 @@ export class ConversationalDesginer {
     );
   }
 
-  /*private RenderizeFlows(): HTMLElement[] {
-    const flows: HTMLElement[] = [];
-    this.flows = new Array<string>();
-    this.GetFlows().forEach(function(flowElement) {
-      this.flows.push(flowElement.Name);
-      let renderType: RenderingOptions = RenderingOptions.Collapsed;
-      if (this.instance.CurrentFlowName == flowElement.Name)
-        renderType = RenderingOptions.Full;
-
-      flows.push(
-        <gxcf-flow-container
+  private renderizeFlow(flowElement: GXCFModel.FlowElement): HTMLElement {
+    return (
+      <gxg-drag-box border={this.instance.CurrentFlowName == flowElement.Name}>
+        <gxcf-flow-collapsed
           id={flowElement.Name.replace(/\s/g, "")}
+          data-flowid={flowElement.Id}
           flow={flowElement}
-          instance={this.instance}
-          data-gxcf-element-id={flowElement.Name}
-          renderType={renderType}
+          onClick={() => this.handleClickFlowCollapsed(flowElement.Name)}
+          renderingType={
+            this.instance.CurrentFlowName == flowElement.Name
+              ? RenderingOptions.Full
+              : RenderingOptions.Collapsed
+          }
         />
-      );
-    }, this);
-    return flows;
+      </gxg-drag-box>
+    );
   }
-*/
 
-  private RenderizeFlows(): HTMLElement[] {
-    const flows: HTMLElement[] = [];
-    this.flows = new Array<string>();
-    this.GetFlows().forEach(function(flowElement) {
-      this.flows.push(flowElement.Name);
-      flows.push(
-        <gxg-drag-box
-          border={this.instance.CurrentFlowName == flowElement.Name}
-        >
-          <gxcf-flow-collapsed
-            id={flowElement.Name.replace(/\s/g, "")}
-            data-flowid={flowElement.Id}
-            flow={flowElement}
-            //sdraggable
-            onClick={() => this.handleClickFlowCollapsed(flowElement.Name)}
-            renderingType={
-              this.instance.CurrentFlowName == flowElement.Name
-                ? RenderingOptions.Full
-                : RenderingOptions.Collapsed
-            }
-          />
-        </gxg-drag-box>
-      );
+  private renderizeFlowsFromArray(
+    flows: Array<GXCFModel.FlowElement>
+  ): HTMLElement[] {
+    const flowsHTML: HTMLElement[] = [];
+    flows.forEach(function(flowElement) {
+      flowsHTML.push(this.renderizeFlow(flowElement));
     }, this);
-    return flows;
+    return flowsHTML;
+  }
+
+  private renderizeCategories(): HTMLElement[] {
+    let elements: HTMLElement[] = [];
+    this.flows = new Array<string>();
+    const woCategoryFlows: Array<GXCFModel.FlowElement> = new Array<
+      GXCFModel.FlowElement
+    >();
+    const categorizedFlows: {
+      [category: string]: Array<GXCFModel.FlowElement>;
+    } = {};
+    this.GetFlows().forEach(function(flowElement) {
+      if (flowElement.Category != null && flowElement.Category != "") {
+        if (categorizedFlows[flowElement.Category] == null)
+          categorizedFlows[flowElement.Category] = new Array<
+            GXCFModel.FlowElement
+          >();
+        categorizedFlows[flowElement.Category].push(flowElement);
+      } else woCategoryFlows.push(flowElement);
+    });
+    console.log(woCategoryFlows);
+    for (const key in categorizedFlows) {
+      const innerFlows: HTMLElement[] = this.renderizeFlowsFromArray(
+        categorizedFlows[key]
+      );
+      elements.push(
+        <gxg-accordion-item itemId={key} itemTitle={key}>
+          {innerFlows}
+        </gxg-accordion-item>
+      );
+    }
+    const woCategoryFlowsElements = this.renderizeFlowsFromArray(
+      woCategoryFlows
+    );
+    console.log(woCategoryFlowsElements);
+    elements = elements.concat(woCategoryFlowsElements);
+    console.log(elements);
+    return elements;
+  }
+
+  private RenderizeFlows(): HTMLElement {
+    const elements = this.renderizeCategories();
+    const element = <gxg-accordion>{elements}</gxg-accordion>;
+    return element;
   }
 
   private renderizeActiveFlow(): HTMLElement {
@@ -388,53 +412,6 @@ export class ConversationalDesginer {
   handleDropFlow(event: any): void {
     event.preventDefault();
   }
-  /*
-  render() {
-    console.log(this.instance);
-    if (this.instance) {
-      if (
-        (this.instance.Flows == null || this.instance.Flows.length == 0) &&
-        !this.openEditor
-      )
-        return (
-          <gxcf-designer-welcome onOpenEditor={() => this.HandleOpenEditor()} />
-        );
-
-      return (
-        <div class="MainTable">
-          <div class="LeftHeader">
-            <div class="SearchBar">
-              <gxg-form-text
-                placeholder={this.componentLocale.searchPlaceHolder}
-                icon="search"
-                icon-position="left"
-                role="textbox"
-                onInput={event => this.HandleSearch(event)}
-                width="100%"
-              />
-            </div>
-            <div class="SettingsButton">
-              <gxg-icon
-                type="settings"
-                color="onbackground"
-                onClick={() => this.triggerSelectRoot()}
-                class="SettingsIcon"
-              />
-            </div>
-          </div>
-          <div id={Controls.FlowsContainer} class="FlowsContainer">
-            {this.RenderizeFlows()}
-          </div>
-          {this.setAddFlow()}
-          {this.setPopUp()}
-          <gxcf-confirmation visible={false} />
-        </div>
-      );
-    } else {
-      return <div class="MainTable"></div>;
-    }
-  }
-*/
 
   render() {
     console.log(this.instance);
@@ -456,14 +433,40 @@ export class ConversationalDesginer {
                 orientation="vertical"
                 justify-content="flex-start"
               >
-                <gxg-form-text
-                  placeholder={this.componentLocale.searchPlaceHolder}
-                  icon="search"
-                  icon-position="left"
-                  full-width={true}
-                  role="textbox"
-                  onInput={event => this.HandleSearch(event)}
-                />
+                <gxg-spacer-layout
+                  space="xs"
+                  orientation="horizontal"
+                  justify-content="flex-start"
+                >
+                  <gxg-button type="outlined">Variables</gxg-button>
+                  <gxg-button type="outlined">Entities</gxg-button>
+                  <gxg-button type="outlined">Propiedades</gxg-button>
+                </gxg-spacer-layout>
+
+                <gxg-columns space="s" alignY="bottom">
+                  <gxg-column width="fluid">
+                    <gxg-form-text
+                      placeholder={this.componentLocale.searchPlaceHolder}
+                      icon="search"
+                      icon-position="left"
+                      role="textbox"
+                      onInput={event => this.HandleSearch(event)}
+                    />
+                  </gxg-column>
+                  <gxg-column width="content">
+                    <gxg-button-group default-selected-btn-id="all">
+                      <button id="all" value="all">
+                        {this.componentLocale.all}
+                      </button>
+                      <button id="public" value="public">
+                        {this.componentLocale.public}
+                      </button>
+                      <button id="private" value="private">
+                        {this.componentLocale.private}
+                      </button>
+                    </gxg-button-group>
+                  </gxg-column>
+                </gxg-columns>
                 <gxg-spacer-one space="s"></gxg-spacer-one>
                 <gxg-drag-container
                   class="FlowsContainer"

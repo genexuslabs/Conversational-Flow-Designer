@@ -269,7 +269,7 @@ export class FlowFull {
     let selectType: SelectTypes = SelectTypes.Compact;
     if (!this.flow.ConversationalObjectName) selectType = SelectTypes.Full;
     return (
-      <gxg-box class="FlowFull">
+      <gxg-box class="FlowFull" border>
         <gxcf-summary-title
           summaryid={this.SummaryId}
           summaryvalue={this.flow.Name}
