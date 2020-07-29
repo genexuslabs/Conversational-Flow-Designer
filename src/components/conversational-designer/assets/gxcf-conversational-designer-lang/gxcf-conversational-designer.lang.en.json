@@ -9,5 +9,8 @@
   "searchPlaceHolder": "Search",
   "all": "All",
   "public": "Public",
-  "private": "Private"
+  "private": "Private",
+  "variables": "Variables",
+  "entities": "Entities",
+  "properties": "Properties"
 }

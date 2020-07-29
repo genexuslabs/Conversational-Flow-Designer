@@ -439,13 +439,17 @@ export class ConversationalDesginer {
                   justify-content="flex-start"
                 >
                   <gxg-button type="outlined" fullWidth>
-                    Variables
+                    {this.componentLocale.variables}
                   </gxg-button>
                   <gxg-button type="outlined" fullWidth>
-                    Entities
+                    {this.componentLocale.entities}
                   </gxg-button>
-                  <gxg-button type="outlined" fullWidth>
-                    Propiedades
+                  <gxg-button
+                    type="outlined"
+                    fullWidth
+                    onClick={() => this.triggerSelectRoot()}
+                  >
+                    {this.componentLocale.properties}
                   </gxg-button>
                 </gxg-spacer-layout>
 
