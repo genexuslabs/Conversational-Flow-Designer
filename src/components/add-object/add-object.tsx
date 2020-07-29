@@ -15,10 +15,7 @@ export class AddObject {
 
   render() {
     return (
-      <gxg-button
-        type="secondary-text-icon"
-        onClick={event => this.TriggerAddObject(event)}
-      >
+      <gxg-button type="secondary-text-icon">
         <gxg-icon slot="icon" type="add" size="small" />
         {this.addText}
       </gxg-button>
