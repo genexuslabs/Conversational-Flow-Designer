@@ -3,7 +3,6 @@ import "@genexus/gemini";
 
 @Component({
   tag: "gxcf-add-object",
-  styleUrl: "add-object.scss",
   shadow: true
 })
 export class AddObject {
@@ -16,12 +15,13 @@ export class AddObject {
 
   render() {
     return (
-      <div>
-        <div class="AddObject" onClick={event => this.TriggerAddObject(event)}>
-          <gxg-icon size="small" type="add" color="onbackground" />
-          <span class="AddObjectText gxg-text">{this.addText}</span>
-        </div>
-      </div>
+      <gxg-button
+        type="secondary-text-icon"
+        onClick={event => this.TriggerAddObject(event)}
+      >
+        <gxg-icon slot="icon" type="add" size="small"></gxg-icon>
+        {this.addText}
+      </gxg-button>
     );
   }
 }
