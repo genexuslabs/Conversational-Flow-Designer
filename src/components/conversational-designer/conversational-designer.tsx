@@ -426,7 +426,7 @@ export class ConversationalDesginer {
 
       return (
         <gxg-stack>
-          <gxg-columns space="s" alignY="top">
+          <gxg-columns space="m" alignY="top">
             <gxg-column width="1/3">
               <gxg-spacer-layout
                 space="xs"
