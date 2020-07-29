@@ -438,9 +438,15 @@ export class ConversationalDesginer {
                   orientation="horizontal"
                   justify-content="flex-start"
                 >
-                  <gxg-button type="outlined">Variables</gxg-button>
-                  <gxg-button type="outlined">Entities</gxg-button>
-                  <gxg-button type="outlined">Propiedades</gxg-button>
+                  <gxg-button type="outlined" fullWidth>
+                    Variables
+                  </gxg-button>
+                  <gxg-button type="outlined" fullWidth>
+                    Entities
+                  </gxg-button>
+                  <gxg-button type="outlined" fullWidth>
+                    Propiedades
+                  </gxg-button>
                 </gxg-spacer-layout>
 
                 <gxg-columns space="s" alignY="bottom">
