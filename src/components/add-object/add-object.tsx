@@ -19,7 +19,7 @@ export class AddObject {
         type="secondary-text-icon"
         onClick={event => this.TriggerAddObject(event)}
       >
-        <gxg-icon slot="icon" type="add" size="small"></gxg-icon>
+        <gxg-icon slot="icon" type="add" size="small" />
         {this.addText}
       </gxg-button>
     );
