@@ -61,6 +61,7 @@ export class ConversationalDesginer {
     this.instance.CurrentFlowName = flowName;
     this.renderFull = flowName;
     Position.SetFlow(flowName);
+    this.triggerSelectCurrentFlow(flowName);
   }
 
   private setAddFlow() {
@@ -477,7 +478,6 @@ export class ConversationalDesginer {
                     </gxg-button-group>
                   </gxg-column>
                 </gxg-columns>
-                <gxg-spacer-one space="s"></gxg-spacer-one>
                 <gxg-drag-container
                   class="FlowsContainer"
                   onItemDrop={event => this.handleDropFlow(event)}
