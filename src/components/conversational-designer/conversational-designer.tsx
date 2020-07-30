@@ -14,6 +14,7 @@ import { Controls, RenderingOptions, MoveType } from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
 import { Position, PositionElement } from "../common/position";
 import { Locale } from "../common/locale";
+import "@genexus/gemini";
 
 @Component({
   tag: "gxcf-conversational-designer",
@@ -454,7 +455,7 @@ export class ConversationalDesginer {
                   </gxg-button>
                 </gxg-spacer-layout>
 
-                <gxg-columns space="s" alignY="bottom">
+                <gxg-columns space="s" alignY="center">
                   <gxg-column width="fluid">
                     <gxg-form-text
                       placeholder={this.componentLocale.searchPlaceHolder}
