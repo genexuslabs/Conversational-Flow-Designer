@@ -15,8 +15,7 @@ export class AddObject {
 
   render() {
     return (
-      <gxg-button type="secondary-text-icon">
-        <gxg-icon slot="icon" type="add" size="small" />
+      <gxg-button type="secondary-text-icon" icon="add">
         {this.addText}
       </gxg-button>
     );
