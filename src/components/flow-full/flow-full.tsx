@@ -103,7 +103,7 @@ export class FlowFull {
     Position.SetUserInput(this.flow.Name, userInput);
   }
 
-  private RenderizeUserInputs(): HTMLElement[] {
+  /*  private RenderizeUserInputs(): HTMLElement[] {
     const userInputs: HTMLElement[] = [];
     this.flow.Fields.forEach(function(userInput) {
       userInputs.push(
@@ -114,10 +114,11 @@ export class FlowFull {
           instance={this.instance}
           onClick={() => this.handleUInputContainerClick(userInput.Variable)}
         />
+
       );
     }, this);
     return userInputs;
-  }
+  }*/
 
   handleResponseContainerClick(response): void {
     Position.SetResponse(this.flow.Name, response);
@@ -309,7 +310,7 @@ export class FlowFull {
             </span>
             <gxcf-hint hintId={HintId.UserInput} class="Hint" />
           </div>
-          {this.RenderizeUserInputs()}
+          <gxcf-user-input flow={this.flow} />
           <gxcf-add-object
             onClick={() => this.TriggerOnAddUserInput()}
             addText={this.componentLocale.addUserInput}
