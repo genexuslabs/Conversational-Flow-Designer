@@ -10,7 +10,7 @@ import {
   getAssetPath
 } from "@stencil/core";
 import { EventsHelper } from "../common/events-helper";
-import { Controls, RenderingOptions, MoveType } from "../common/helpers";
+import { RenderingOptions, MoveType } from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
 import { Position, PositionElement } from "../common/position";
 import { Locale } from "../common/locale";
@@ -25,6 +25,8 @@ import "@genexus/gemini";
 export class ConversationalDesginer {
   @State() search: string;
   @State() openEditor = false;
+  @State() showPublic = true;
+  @State() showPrivate = true;
   @Prop() instance: GXCFModel.Instance;
   @State() renderFull = "";
   @State() showPopUp = false;
@@ -35,6 +37,21 @@ export class ConversationalDesginer {
   private flows: Array<string>;
   private popUp: HTMLElement;
   private componentLocale: any;
+
+  private enableShowPublic() {
+    this.showPublic = true;
+    this.showPrivate = false;
+  }
+
+  private enableShowPrivate() {
+    this.showPrivate = true;
+    this.showPublic = false;
+  }
+
+  private enableShowAll() {
+    this.showPrivate = true;
+    this.showPublic = true;
+  }
 
   HandleOpenEditor(): void {
     this.openEditor = true;
@@ -77,7 +94,7 @@ export class ConversationalDesginer {
 
   private renderizeFlow(flowElement: GXCFModel.FlowElement): HTMLElement {
     return (
-      <gxg-drag-box border={this.instance.CurrentFlowName == flowElement.Name}>
+      <gxg-drag-box>
         <gxcf-flow-collapsed
           id={flowElement.Name.replace(/\s/g, "")}
           data-flowid={flowElement.Id}
@@ -98,7 +115,11 @@ export class ConversationalDesginer {
   ): HTMLElement[] {
     const flowsHTML: HTMLElement[] = [];
     flows.forEach(function(flowElement) {
-      flowsHTML.push(this.renderizeFlow(flowElement));
+      if (
+        (flowElement.Triggers.length == 0 && this.showPrivate) ||
+        (flowElement.Triggers.length > 0 && this.showPublic)
+      )
+        flowsHTML.push(this.renderizeFlow(flowElement));
     }, this);
     return flowsHTML;
   }
@@ -126,11 +147,13 @@ export class ConversationalDesginer {
       const innerFlows: HTMLElement[] = this.renderizeFlowsFromArray(
         categorizedFlows[key]
       );
-      elements.push(
-        <gxg-accordion-item itemId={key} itemTitle={key}>
-          {innerFlows}
-        </gxg-accordion-item>
-      );
+      if (innerFlows.length > 0) {
+        elements.push(
+          <gxg-accordion-item itemId={key} itemTitle={key}>
+            {innerFlows}
+          </gxg-accordion-item>
+        );
+      }
     }
     const woCategoryFlowsElements = this.renderizeFlowsFromArray(
       woCategoryFlows
@@ -467,13 +490,25 @@ export class ConversationalDesginer {
                   </gxg-column>
                   <gxg-column width="content">
                     <gxg-button-group default-selected-btn-id="all">
-                      <button id="all" value="all">
+                      <button
+                        id="all"
+                        value="all"
+                        onClick={() => this.enableShowAll()}
+                      >
                         {this.componentLocale.all}
                       </button>
-                      <button id="public" value="public">
+                      <button
+                        id="public"
+                        value="public"
+                        onClick={() => this.enableShowPublic()}
+                      >
                         {this.componentLocale.public}
                       </button>
-                      <button id="private" value="private">
+                      <button
+                        id="private"
+                        value="private"
+                        onClick={() => this.enableShowPrivate()}
+                      >
                         {this.componentLocale.private}
                       </button>
                     </gxg-button-group>
