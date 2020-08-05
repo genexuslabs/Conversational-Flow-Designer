@@ -135,6 +135,14 @@ export class Response {
     });
   }
 
+  @Event() switchResponseParameter: EventEmitter;
+  triggerSwitchResponseParameter(responseParameter: string): void {
+    this.switchResponseParameter.emit.call(this, {
+      flowName: this.flow.Name,
+      responseParameter: responseParameter
+    });
+  }
+
   handleEditResponseMessage(
     event: CustomEvent,
     response: GXCFModel.ResponseElement
@@ -253,6 +261,29 @@ export class Response {
     return elements;
   }
 
+  renderResponseParameters(): HTMLElement[] {
+    const elements: Array<HTMLElement> = new Array<HTMLElement>();
+    if (this.flow.View.Attributes) {
+      if (this.flow.View.Attributes.length > 0)
+        elements.push(<span>{this.componentLocale.responseParameters}</span>);
+
+      this.flow.View.Attributes.forEach(variable => {
+        elements.push(
+          <gxg-toggle
+            label={variable.Variable}
+            size="small"
+            on={true}
+            onClick={() =>
+              this.triggerSwitchResponseParameter(variable.Variable)
+            }
+          />
+        );
+      });
+    }
+
+    return elements;
+  }
+
   renderResponseSubtitle(response: GXCFModel.ResponseElement) {
     const elements: HTMLElement[] = [];
     const showMsg = response.Format.length > 0 ? response.Format[0] : "";
@@ -315,6 +346,8 @@ export class Response {
           <gxcf-hint class="HintBlock" hintId={HintId.ResponseStyle} />
           {this.renderStyleSelector(response)}
           {this.renderStyleContent(response)}
+          <gxg-separator type="dashed" margin="m" />
+          {this.renderResponseParameters()}
         </gxg-accordion-item>
       );
     }, this);
