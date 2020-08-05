@@ -17,5 +17,6 @@
   "deleteUserInputConfirmation": "Do you want to delete the user input '{0}'?",
   "noneEntity": "None",
   "entity": "Entity: ",
-  "redirection": "Redirection"
+  "redirection": "Redirection",
+  "selectValidationProcedure": "Select Validation Procedure"
 }
