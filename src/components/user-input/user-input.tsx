@@ -172,6 +172,14 @@ export class UserInput {
     });
   }
 
+  @Event() deleteUserInput: EventEmitter;
+  triggerDeleteUserInput(userInput: GXCFModel.UserInputElement) {
+    this.deleteUserInput.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: userInput.Variable
+    });
+  }
+
   handleEditOnErrorMessage(
     event: CustomEvent,
     userInput: GXCFModel.UserInputElement
@@ -410,6 +418,15 @@ export class UserInput {
               ? userInput.RequiredMessages[0]
               : ""}
           </div>
+          <gxcf-button-delete
+            onConfirmDelete={() => this.triggerDeleteUserInput(userInput)}
+            confirmationTitle={this.componentLocale.deleteUserInput}
+            confirmationMessage={Locale.format(
+              this.componentLocale.deleteUserInputConfirmation,
+              [userInput.Variable]
+            )}
+            slot="meta"
+          />
           <gxg-spacer-layout
             space="xs"
             orientation="vertical"

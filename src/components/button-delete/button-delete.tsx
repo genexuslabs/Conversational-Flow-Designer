@@ -57,6 +57,7 @@ export class ButtonDelete {
         type={this.type}
         onClick={event => this.HandleDeleteIntention(event)}
         class="DeleteFlow"
+        color="primary"
       />
     );
   }
