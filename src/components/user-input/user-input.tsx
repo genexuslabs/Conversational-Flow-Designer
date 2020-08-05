@@ -9,7 +9,7 @@ import {
 } from "@stencil/core";
 import { Locale } from "../common/locale";
 import { EventsHelper } from "../common/events-helper";
-import { HintId } from "../common/helpers";
+import { HintId, SelectTypes } from "../common/helpers";
 import { StringCollectionHelper } from "../common/string-collection-helper";
 
 @Component({
@@ -74,7 +74,7 @@ export class UserInput {
     event: CustomEvent,
     userInput: GXCFModel.UserInputElement
   ): void {
-    const value = EventsHelper.GetValue(event);
+    const value = EventsHelper.GetConditionValue(event);
     this.changeCondition.emit.call(this, {
       flowName: this.flow.Name,
       userInput: userInput.Variable,
@@ -293,6 +293,13 @@ export class UserInput {
     );
   }
 
+  hasValidationProcedure(userInput: GXCFModel.UserInputElement) {
+    return (
+      userInput.ValidationProcedure != null &&
+      userInput.ValidationProcedure != ""
+    );
+  }
+
   renderValidateUserInput(userInput: GXCFModel.UserInputElement): HTMLElement {
     return (
       <gxg-accordion-item
@@ -300,7 +307,7 @@ export class UserInput {
         itemTitle={this.componentLocale.validateUserInput}
         itemId={this.componentLocale.validateUserInput}
       >
-        <div>
+        <gxg-spacer-layout orientation="vertical" space="xs">
           <gxcf-collection
             collection={userInput.ErrorMessages}
             collectionAddText={this.componentLocale.addErrorMessage}
@@ -317,8 +324,7 @@ export class UserInput {
               [userInput.Variable]
             )}
           />
-        </div>
-        <div class="ContainerForUserInput">
+
           <gxcf-hint hintId={HintId.TryLimit} class="UserInputHints" />
           <gxg-stepper
             value={userInput.TryLimit}
@@ -327,20 +333,28 @@ export class UserInput {
             }
             label="Try Limit"
           />
-          <hr class="Separator"></hr>
-        </div>
-        <div class="ContainerForUserInput">
+          <gxg-separator type="dashed" margin="s" />
           <gxcf-hint hintId={HintId.ValidateUserInput} class="UserInputHints" />
-          <span class="gxg-title-01">Validation Procedure</span>
-          <input
-            class="UserInputLine SelectVP gxg-text"
-            placeholder={this.componentLocale.validationProcedurePlaceHolder}
-            value={userInput.ValidationProcedure}
+          <gxg-title type="04">Validation Procedure</gxg-title>
+          <gxcf-select
+            selectcaption={
+              this.hasValidationProcedure(userInput)
+                ? userInput.ValidationProcedure
+                : this.componentLocale.selectValidationProcedure
+            }
+            selectIconType={
+              this.hasValidationProcedure(userInput) ? "Procedure" : ""
+            }
+            selectType={
+              this.hasValidationProcedure(userInput)
+                ? SelectTypes.Compact
+                : SelectTypes.Full
+            }
             onClick={event =>
               this.triggerOnChangeValidationProcedure(event, userInput)
             }
           />
-        </div>
+        </gxg-spacer-layout>
       </gxg-accordion-item>
     );
   }
