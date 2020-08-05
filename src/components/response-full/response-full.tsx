@@ -85,7 +85,7 @@ export class FullResponse {
   @Event() changeResponseCondition: EventEmitter;
   TriggerChangeResponseCondition(event: CustomEvent): void {
     event.preventDefault();
-    const value: string = EventsHelper.GetValue(event);
+    const value: string = EventsHelper.GetConditionValue(event);
     this.changeResponseCondition.emit.call(this, {
       flowName: this.flow.Name,
       index: this.responseIndex,

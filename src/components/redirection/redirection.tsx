@@ -15,7 +15,7 @@ export class Redirection {
 
   @Event() changeRedirectCondition: EventEmitter;
   TriggerOnChangeRedirectCondition(event): void {
-    const value = EventsHelper.GetValue(event);
+    const value = EventsHelper.GetConditionValue(event);
     this.changeRedirectCondition.emit.call(this, {
       value: value,
       index: this.redirectionIndex
