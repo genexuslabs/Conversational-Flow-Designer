@@ -310,7 +310,7 @@ export class FlowFull {
             </span>
             <gxcf-hint hintId={HintId.UserInput} class="Hint" />
           </div>
-          <gxcf-user-input flow={this.flow} />
+          <gxcf-user-input flow={this.flow} instance={this.instance} />
           <gxcf-add-object
             onClick={() => this.TriggerOnAddUserInput()}
             addText={this.componentLocale.addUserInput}

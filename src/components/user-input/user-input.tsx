@@ -9,6 +9,8 @@ import {
 } from "@stencil/core";
 import { Locale } from "../common/locale";
 import { EventsHelper } from "../common/events-helper";
+import { HintId } from "../common/helpers";
+import { StringCollectionHelper } from "../common/string-collection-helper";
 
 @Component({
   tag: "gxcf-user-input",
@@ -17,6 +19,7 @@ import { EventsHelper } from "../common/events-helper";
 })
 export class UserInput {
   @Prop() flow: GXCFModel.FlowElement;
+  @Prop() instance: GXCFModel.Instance;
   @Element() element: HTMLElement;
   @State() advanced = false;
   private componentLocale: any;
@@ -47,51 +50,326 @@ export class UserInput {
     });
   }
 
-  getFirstAskMessage(userInput: GXCFModel.UserInputElement): string {
-    if (userInput.RequiredMessages.length > 0)
-      return userInput.RequiredMessages[0];
-    return "";
+  @Event() setAskMessages: EventEmitter;
+  triggerSetAskMessages(
+    userInput: GXCFModel.UserInputElement,
+    index: number,
+    value: string,
+    remove: boolean
+  ): void {
+    this.setAskMessages.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: userInput.Variable,
+      askMessages: StringCollectionHelper.FormatCollection(
+        userInput.RequiredMessages,
+        index,
+        value,
+        remove
+      )
+    });
+  }
+
+  @Event() changeCondition: EventEmitter;
+  triggerChangeCondition(
+    event: CustomEvent,
+    userInput: GXCFModel.UserInputElement
+  ): void {
+    const value = EventsHelper.GetValue(event);
+    this.changeCondition.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: userInput.Variable,
+      newCondition: value
+    });
+  }
+
+  @Event() setCleanContextValue: EventEmitter;
+  triggerCleantContextChangeValue(userInput: GXCFModel.UserInputElement): void {
+    this.setCleanContextValue.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: userInput.Variable,
+      value: !userInput.CleanInContext
+    });
+  }
+
+  @Event() changeTryLimit: EventEmitter;
+  triggerTryLimitChange(
+    event: CustomEvent,
+    userInput: GXCFModel.UserInputElement
+  ): void {
+    event.preventDefault();
+    const newValue: string = event.detail + "";
+    this.changeTryLimit.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: userInput.Variable,
+      value: newValue
+    });
+  }
+
+  @Event() setOnErrorMessages: EventEmitter;
+  triggerSetOnErrorMessages(
+    userInput: GXCFModel.UserInputElement,
+    index: number,
+    value: string,
+    remove: boolean
+  ): void {
+    this.setOnErrorMessages.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: userInput.Variable,
+      errorMessages: StringCollectionHelper.FormatCollection(
+        userInput.ErrorMessages,
+        index,
+        value,
+        remove
+      )
+    });
+  }
+
+  @Event() selectValidationProcedure: EventEmitter;
+  triggerOnChangeValidationProcedure(
+    event,
+    userInput: GXCFModel.UserInputElement
+  ): void {
+    console.log(event);
+    this.selectValidationProcedure.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: userInput.Variable
+    });
+  }
+
+  @Event() changeUserInputRedirectCondition: EventEmitter;
+  triggerChangeUserInputRedirectCondition(
+    event: CustomEvent,
+    userInput: GXCFModel.UserInputElement
+  ) {
+    event.preventDefault();
+    this.changeUserInputRedirectCondition.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: userInput.Variable,
+      value: event.detail.value,
+      index: event.detail.index
+    });
+  }
+
+  @Event() changeUserInputRedirectTo: EventEmitter;
+  triggerUserInputChangeRedirectTo(
+    event: CustomEvent,
+    userInput: GXCFModel.UserInputElement
+  ): void {
+    event.preventDefault();
+    this.changeUserInputRedirectTo.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: userInput.Variable,
+      value: event.detail.value,
+      index: event.detail.index
+    });
+  }
+
+  @Event() addRedirection: EventEmitter;
+  triggerAddRedirection(userInput: GXCFModel.UserInputElement) {
+    this.addRedirection.emit.call(this, {
+      flowName: this.flow.Name,
+      userInput: userInput.Variable
+    });
+  }
+
+  handleEditOnErrorMessage(
+    event: CustomEvent,
+    userInput: GXCFModel.UserInputElement
+  ): void {
+    const value = EventsHelper.GetValue(event);
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+    this.triggerSetOnErrorMessages(userInput, +index, value, false);
+  }
+
+  handleDeleteOnErrorMessage(
+    event: CustomEvent,
+    userInput: GXCFModel.UserInputElement
+  ): void {
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+    this.triggerSetOnErrorMessages(userInput, +index, "", true);
   }
 
   switchAdvancedMode(): void {
     this.advanced = !this.advanced;
   }
 
-  renderBasicMode() {
+  handleEditAskMessage(
+    event: CustomEvent,
+    userInput: GXCFModel.UserInputElement
+  ): void {
+    const value = EventsHelper.GetValue(event);
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+    this.triggerSetAskMessages(userInput, +index, value, false);
+  }
+
+  handleDeleteAskMessage(
+    event: CustomEvent,
+    userInput: GXCFModel.UserInputElement
+  ): void {
+    const index = EventsHelper.GetCollectionIndexFromDetail(event);
+    this.triggerSetAskMessages(userInput, +index, "", true);
+  }
+
+  private renderRedirections(
+    userInput: GXCFModel.UserInputElement
+  ): HTMLElement[] {
+    3;
+    const redirs: HTMLElement[] = new Array<HTMLElement>();
+    if (userInput.Redirections.length > 0) {
+      let index = 0;
+      userInput.Redirections.forEach(function(redir, userInput) {
+        redirs.push(
+          <gxcf-redirection
+            redirectionProperty={redir}
+            flows={this.instance.Flows}
+            requireCondition={true}
+            redirectionIndex={index}
+            onChangeRedirectCondition={(event: CustomEvent) =>
+              this.triggerChangeUserInputRedirectCondition(event, userInput)
+            }
+            onChangeRedirectTo={(event: CustomEvent) =>
+              this.triggerUserInputChangeRedirectTo(event, userInput)
+            }
+            label={this.componentLocale.redirectToLabel}
+          />
+        );
+        index++;
+      }, this);
+    }
+    redirs.push(
+      <gxcf-add-object
+        addText={this.componentLocale.addRedirection}
+        onClick={() => this.triggerAddRedirection(userInput)}
+      />
+    );
+    return redirs;
+  }
+
+  renderConditionToBeRequired(
+    userInput: GXCFModel.UserInputElement
+  ): HTMLElement {
+    return (
+      <gxg-accordion-item
+        mode="slim"
+        itemTitle={this.componentLocale.conditionRequired}
+        itemId={this.componentLocale.conditionRequired}
+        padding="xs"
+      >
+        <gxcf-condition
+          currentCondition={userInput.RequiredCondition}
+          onConditionChange={event =>
+            this.triggerChangeCondition(event, userInput)
+          }
+        />
+        <gxcf-hint hintId={HintId.Required} class="UserInputHints" />
+        <gxg-toggle
+          label="Clean Context Value"
+          onClick={() => this.triggerCleantContextChangeValue(userInput)}
+          size="small"
+          class="CleanContextToggle"
+        />
+      </gxg-accordion-item>
+    );
+  }
+
+  renderAskMessages(userInput: GXCFModel.UserInputElement): HTMLElement {
     return (
       <gxg-accordion-item
         status="open"
         mode="slim"
         itemTitle={this.componentLocale.askMessages}
         itemId={this.componentLocale.askMessages}
-      ></gxg-accordion-item>
+      >
+        <gxcf-collection
+          collection={userInput.RequiredMessages}
+          collectionAddText={this.componentLocale.addAskMessage}
+          onEditItem={event => this.handleEditAskMessage(event, userInput)}
+          onDeleteItem={event => this.handleDeleteAskMessage(event, userInput)}
+          collectionHintId={HintId.AskMessages}
+          collectionHeader={this.componentLocale.askMessages}
+          defaultNewItemValue={userInput.Variable}
+        />
+      </gxg-accordion-item>
     );
   }
 
-  renderAdvancedMode() {
-    const elements: HTMLElement[] = [];
-    elements.push(
-      <gxg-accordion-item
-        mode="slim"
-        itemTitle={this.componentLocale.conditionRequired}
-        itemId={this.componentLocale.conditionRequired}
-      ></gxg-accordion-item>
-    );
-    elements.push(this.renderBasicMode());
-    elements.push(
+  renderValidateUserInput(userInput: GXCFModel.UserInputElement): HTMLElement {
+    return (
       <gxg-accordion-item
         mode="slim"
         itemTitle={this.componentLocale.validateUserInput}
         itemId={this.componentLocale.validateUserInput}
-      ></gxg-accordion-item>
+      >
+        <div>
+          <gxcf-collection
+            collection={userInput.ErrorMessages}
+            collectionAddText={this.componentLocale.addErrorMessage}
+            collectionHeader={this.componentLocale.errorMessagesHeader}
+            onEditItem={event =>
+              this.handleEditOnErrorMessage(event, userInput)
+            }
+            onDeleteItem={event =>
+              this.handleDeleteOnErrorMessage(event, userInput)
+            }
+            collectionHintId={HintId.ErrorMessages}
+            defaultNewItemValue={Locale.format(
+              this.componentLocale.defaultErrorMessage,
+              [userInput.Variable]
+            )}
+          />
+        </div>
+        <div class="ContainerForUserInput">
+          <gxcf-hint hintId={HintId.TryLimit} class="UserInputHints" />
+          <gxg-stepper
+            value={userInput.TryLimit}
+            onInput={(event: CustomEvent) =>
+              this.triggerTryLimitChange(event, userInput)
+            }
+            label="Try Limit"
+          />
+          <hr class="Separator"></hr>
+        </div>
+        <div class="ContainerForUserInput">
+          <gxcf-hint hintId={HintId.ValidateUserInput} class="UserInputHints" />
+          <span class="gxg-title-01">Validation Procedure</span>
+          <input
+            class="UserInputLine SelectVP gxg-text"
+            placeholder={this.componentLocale.validationProcedurePlaceHolder}
+            value={userInput.ValidationProcedure}
+            onClick={event =>
+              this.triggerOnChangeValidationProcedure(event, userInput)
+            }
+          />
+        </div>
+      </gxg-accordion-item>
     );
-    elements.push(
+  }
+
+  renderUserInputRedirections(
+    userInput: GXCFModel.UserInputElement
+  ): HTMLElement {
+    return (
       <gxg-accordion-item
         mode="slim"
         itemTitle={this.componentLocale.redirection}
         itemId={this.componentLocale.redirection}
-      ></gxg-accordion-item>
+      >
+        <gxcf-hint hintId={HintId.Redirection} class="UserInputHints" />
+        {this.renderRedirections(userInput)}
+      </gxg-accordion-item>
     );
+  }
+
+  renderBasicMode(userInput: GXCFModel.UserInputElement) {
+    return this.renderAskMessages(userInput);
+  }
+
+  renderAdvancedMode(userInput: GXCFModel.UserInputElement) {
+    const elements: HTMLElement[] = [];
+    elements.push(this.renderConditionToBeRequired(userInput));
+    elements.push(this.renderBasicMode(userInput));
+    elements.push(this.renderValidateUserInput(userInput));
+    elements.push(this.renderUserInputRedirections(userInput));
     return elements;
   }
 
@@ -113,7 +391,11 @@ export class UserInput {
           }
           onClick={() => this.triggerSelectUserInput(userInput)}
         >
-          <div slot="subtitle">{this.getFirstAskMessage(userInput)}</div>
+          <div slot="subtitle">
+            {userInput.RequiredMessages.length > 0
+              ? userInput.RequiredMessages[0]
+              : ""}
+          </div>
           <gxg-spacer-layout
             space="xs"
             orientation="vertical"
@@ -130,12 +412,13 @@ export class UserInput {
                   : this.componentLocale.advancedModeOff
               }
               onClick={() => this.switchAdvancedMode()}
+              on={this.advanced}
               class="ToggleColor"
             />
             <gxg-accordion mode="slim" padding="s">
               {this.advanced
-                ? this.renderAdvancedMode()
-                : this.renderBasicMode()}
+                ? this.renderAdvancedMode(userInput)
+                : this.renderBasicMode(userInput)}
             </gxg-accordion>
           </gxg-spacer-layout>
         </gxg-accordion-item>
@@ -146,7 +429,7 @@ export class UserInput {
 
   render() {
     return (
-      <gxg-accordion /*single-item-open*/ mode="boxed" padding="m">
+      <gxg-accordion single-item-open mode="boxed" padding="m">
         {this.renderUserInputs()}
       </gxg-accordion>
     );

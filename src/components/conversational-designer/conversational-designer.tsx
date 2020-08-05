@@ -94,7 +94,7 @@ export class ConversationalDesginer {
 
   private renderizeFlow(flowElement: GXCFModel.FlowElement): HTMLElement {
     return (
-      <gxg-drag-box>
+      <gxg-drag-box padding="xs">
         <gxcf-flow-collapsed
           id={flowElement.Name.replace(/\s/g, "")}
           data-flowid={flowElement.Id}
@@ -149,7 +149,7 @@ export class ConversationalDesginer {
       );
       if (innerFlows.length > 0) {
         elements.push(
-          <gxg-accordion-item itemId={key} itemTitle={key}>
+          <gxg-accordion-item itemId={key} itemTitle={key} padding="l">
             {innerFlows}
           </gxg-accordion-item>
         );
