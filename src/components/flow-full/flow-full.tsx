@@ -87,43 +87,8 @@ export class FlowFull {
     Position.SetUserInput(this.flow.Name, userInput);
   }
 
-  /*  private RenderizeUserInputs(): HTMLElement[] {
-    const userInputs: HTMLElement[] = [];
-    this.flow.Fields.forEach(function(userInput) {
-      userInputs.push(
-        <gxcf-user-input-container
-          userInput={userInput}
-          flow={this.flow}
-          renderType={RenderingOptions.Collapsed}
-          instance={this.instance}
-          onClick={() => this.handleUInputContainerClick(userInput.Variable)}
-        />
-
-      );
-    }, this);
-    return userInputs;
-  }*/
-
   handleResponseContainerClick(response): void {
     Position.SetResponse(this.flow.Name, response);
-  }
-
-  private RenderizeResponse(): HTMLElement[] {
-    const responses: HTMLElement[] = [];
-
-    this.flow.View.Templates.forEach(function(response) {
-      responses.push(
-        <gxcf-response-container
-          response={response}
-          renderType={RenderingOptions.Collapsed}
-          responseIndex={this.flow.View.Templates.indexOf(response)}
-          flow={this.flow}
-          instance={this.instance}
-          onClick={() => this.handleResponseContainerClick(response.Index)}
-        />
-      );
-    }, this);
-    return responses;
   }
 
   @Event() setTriggers: EventEmitter;
@@ -308,7 +273,7 @@ export class FlowFull {
             </span>
             <gxcf-hint hintId={HintId.Responses} class="Hint" />
           </div>
-          {this.RenderizeResponse()}
+          <gxcf-response flow={this.flow} instance={this.instance} />
           <gxcf-add-object
             onClick={() => this.TriggerOnAddResponse()}
             addText={this.componentLocale.addResponse}
