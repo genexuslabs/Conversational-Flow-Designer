@@ -67,22 +67,6 @@ export class FlowFull {
     return `Trigger Messages`;
   }
 
-  @Listen("expandUserInputOut")
-  HandleOnExpandUserInput(event: CustomEvent): void {
-    event.preventDefault();
-    const userInput: HTMLGxcfUserInputContainerElement = event.detail
-      .source as HTMLGxcfUserInputContainerElement;
-    userInput.renderType = RenderingOptions.Full;
-  }
-
-  @Listen("collapseUserInputOut")
-  HandleCollapseUserInput(event: CustomEvent): void {
-    event.preventDefault();
-    const userInput: HTMLGxcfUserInputContainerElement = event.detail
-      .source as HTMLGxcfUserInputContainerElement;
-    userInput.renderType = RenderingOptions.Collapsed;
-  }
-
   @Listen("expandResponseOut")
   HandleExpandResponse(event: CustomEvent) {
     event.preventDefault();
