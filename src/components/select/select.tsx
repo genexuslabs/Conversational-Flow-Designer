@@ -48,23 +48,25 @@ export class Select {
   }
 
   render() {
-    return (
-      <gxg-box
-        id={this.selectid}
-        class={this.GetSelectClass()}
-        title={this.selectcaption}
-        onMouseDown={() => this.TriggerMouseDown()}
-        onMouseLeave={() => this.TriggerMouseLeave()}
-      >
-        <gxg-spacer-layout
-          space="xs"
-          orientation="horizontal"
-          justify-content="flex-start"
+    if (this.selectType == SelectTypes.Compact)
+      return (
+        <gxg-box
+          id={this.selectid}
+          class={this.GetSelectClass()}
+          title={this.selectcaption}
+          onMouseDown={() => this.TriggerMouseDown()}
+          onMouseLeave={() => this.TriggerMouseLeave()}
         >
-          {this.renderIcon()}
-          <span class="SelectText">{this.selectcaption}</span>
-        </gxg-spacer-layout>
-      </gxg-box>
-    );
+          <gxg-spacer-layout
+            space="xs"
+            orientation="horizontal"
+            justify-content="flex-start"
+          >
+            {this.renderIcon()}
+            <span class="SelectText">{this.selectcaption}</span>
+          </gxg-spacer-layout>
+        </gxg-box>
+      );
+    else return <gxcf-add-object addText={this.selectcaption} />;
   }
 }
