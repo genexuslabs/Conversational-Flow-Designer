@@ -253,6 +253,10 @@ export class UserInput {
     return redirs;
   }
 
+  cancelBubble(event: CustomEvent) {
+    event.cancelBubble = true;
+  }
+
   renderConditionToBeRequired(
     userInput: GXCFModel.UserInputElement
   ): HTMLElement {
@@ -262,6 +266,9 @@ export class UserInput {
         itemTitle={this.componentLocale.conditionRequired}
         itemId={this.componentLocale.conditionRequired}
         padding="xs"
+        onAccordionTitleClicked={(event: CustomEvent) =>
+          this.cancelBubble(event)
+        }
       >
         <gxcf-condition
           currentCondition={userInput.RequiredCondition}
@@ -287,6 +294,9 @@ export class UserInput {
         mode="slim"
         itemTitle={this.componentLocale.askMessages}
         itemId={this.componentLocale.askMessages}
+        onAccordionTitleClicked={(event: CustomEvent) =>
+          this.cancelBubble(event)
+        }
       >
         <gxcf-collection
           collection={userInput.RequiredMessages}
@@ -314,6 +324,9 @@ export class UserInput {
         mode="slim"
         itemTitle={this.componentLocale.validateUserInput}
         itemId={this.componentLocale.validateUserInput}
+        onAccordionTitleClicked={(event: CustomEvent) =>
+          this.cancelBubble(event)
+        }
       >
         <gxg-spacer-layout orientation="vertical" space="xs">
           <gxcf-collection
@@ -375,6 +388,9 @@ export class UserInput {
         mode="slim"
         itemTitle={this.componentLocale.redirection}
         itemId={this.componentLocale.redirection}
+        onAccordionTitleClicked={(event: CustomEvent) =>
+          this.cancelBubble(event)
+        }
       >
         <gxcf-hint hintId={HintId.Redirection} class="UserInputHints" />
         {this.renderRedirections(userInput)}
