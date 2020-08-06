@@ -207,12 +207,16 @@ export class FlowFull {
       const innerElements: HTMLElement[] = this.getPillsForFlow(flow, true);
       elements = elements.concat(innerElements);
     }, this);
-
+    if (elements.length > 0)
+      elements.splice(0, 0, <gxg-text>{this.componentLocale.from}</gxg-text>);
     return elements;
   }
 
   redirectionsToOtherFlows() {
-    return this.getPillsForFlow(this.flow, false);
+    const elements: HTMLElement[] = this.getPillsForFlow(this.flow, false);
+    if (elements.length > 0)
+      elements.push(<gxg-text>{this.componentLocale.from}</gxg-text>);
+    return elements;
   }
 
   async componentWillLoad(): Promise<void> {

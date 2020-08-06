@@ -7,5 +7,7 @@
   "addUserInput": "Add another user input",
   "responsesCount": "Responses ({0})",
   "addResponse": "Add another possible response",
-  "emptyTriggers": "The trigger messages collection is empty"
+  "emptyTriggers": "The trigger messages collection is empty",
+  "from": "From: ",
+  "to": "To: "
 }
