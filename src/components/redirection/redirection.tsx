@@ -3,7 +3,6 @@ import { EventsHelper } from "../common/events-helper";
 
 @Component({
   tag: "gxcf-redirection",
-  styleUrl: "redirection.scss",
   shadow: true
 })
 export class Redirection {
@@ -76,10 +75,6 @@ export class Redirection {
   }
 
   render() {
-    return (
-      <div class="RedirectionContainer">
-        <div>{this.RenderRedirectionBody()}</div>
-      </div>
-    );
+    return this.RenderRedirectionBody();
   }
 }
