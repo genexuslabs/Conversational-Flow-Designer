@@ -10,16 +10,16 @@ export class ButtonDelete {
   @Prop() confirmationMessage: string;
   @Prop() type: "deleted" | "close" = "deleted";
 
-  private confirmListener = this.TriggerConfirmDelete.bind(this);
-  private closeListener = this.HandleCloseConfirmation.bind(this);
+  private confirmListener = this.triggerConfirmDelete.bind(this);
+  private closeListener = this.handleCloseConfirmation.bind(this);
 
   @Event() confirmDelete: EventEmitter;
-  TriggerConfirmDelete(event): void {
-    this.HandleCloseConfirmation(event);
+  triggerConfirmDelete(event): void {
+    this.handleCloseConfirmation(event);
     this.confirmDelete.emit(event);
   }
 
-  HandleDeleteIntention(event): void {
+  handleDeleteIntention(event): void {
     console.log(event);
     const confirmation: HTMLGxcfConfirmationElement = document.querySelector(
       "gxcf-confirmation"
@@ -31,7 +31,7 @@ export class ButtonDelete {
     confirmation.visible = true;
   }
 
-  HandleCloseConfirmation(event): void {
+  handleCloseConfirmation(event): void {
     console.log(event);
     const confirmation: HTMLGxcfConfirmationElement = document.querySelector(
       "gxcf-confirmation"
@@ -49,7 +49,7 @@ export class ButtonDelete {
       <gxg-button
         icon="deleted"
         type="secondary-icon-only"
-        onClick={event => this.HandleDeleteIntention(event)}
+        onClick={event => this.handleDeleteIntention(event)}
       />
     );
   }
