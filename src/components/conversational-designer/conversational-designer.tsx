@@ -70,6 +70,13 @@ export class ConversationalDesginer {
     element.select();
   }
 
+  @Listen("setSelectedFlow")
+  handleSetSelectedFlow(event): void {
+    this.instance.CurrentFlowName = event.detail;
+    this.triggerSelectCurrentFlow(this.instance.CurrentFlowName);
+    this.renderFull = this.instance.CurrentFlowName;
+  }
+
   @Event() addFlow: EventEmitter;
   TriggerAddFlow(event): void {
     this.addFlow.emit(event);
@@ -93,6 +100,7 @@ export class ConversationalDesginer {
   }
 
   private renderizeFlow(flowElement: GXCFModel.FlowElement): HTMLElement {
+    const active: boolean = this.instance.CurrentFlowName === flowElement.Name;
     return (
       <gxg-drag-box padding="xs">
         <gxcf-flow-collapsed
@@ -101,9 +109,7 @@ export class ConversationalDesginer {
           flow={flowElement}
           onClick={() => this.handleClickFlowCollapsed(flowElement.Name)}
           renderingType={
-            this.instance.CurrentFlowName == flowElement.Name
-              ? RenderingOptions.Full
-              : RenderingOptions.Collapsed
+            active ? RenderingOptions.Full : RenderingOptions.Collapsed
           }
         />
       </gxg-drag-box>
