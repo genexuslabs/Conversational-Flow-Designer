@@ -4,17 +4,16 @@ import { Locale } from "../common/locale";
 
 @Component({
   tag: "gxcf-collection",
-  styleUrl: "collection.scss",
   shadow: true,
+  styleUrl: "collection.scss",
   assetsDirs: ["assets/gxcf-collection-lang"]
 })
 export class Collection {
   @Prop() collection: string[];
   @Prop() collectionHeader: string;
+  @Prop() collectionSummary: string;
   @Prop() collectionAddText: string;
   @Prop() collectionHintId: string;
-  @Prop() currentItemIndex: number;
-  @Prop() currentItemValue: string;
   @Prop() defaultNewItemValue: string;
   @State() collectionLength: number;
 
@@ -27,7 +26,7 @@ export class Collection {
 
   public static readonly DataItemIndex = "data-item-index";
 
-  AddItem(event): void {
+  addItem(event): void {
     console.log(event);
     if (!this.defaultNewItemValue)
       this.defaultNewItemValue = this.componentLocale.sampleMessage;
@@ -35,59 +34,40 @@ export class Collection {
     this.collectionLength = this.collection.length;
   }
 
-  HandleDeleteItem(event): void {
-    const element: HTMLDivElement = event.srcElement as HTMLDivElement;
-    this.SetCurrentIndex(element);
-    this.collection.splice(this.currentItemIndex, 1);
-    this.deleteItem.emit(event, this.currentItemIndex);
+  handleClearButton(index) {
+    this.deleteItem.emit.call(this, index);
   }
 
-  HandleEditItem(event): void {
-    const element: HTMLInputElement = event.srcElement as HTMLInputElement;
-    this.SetCurrentIndex(element);
-    this.currentItemValue = element.value;
-    this.editItem.emit(event, this.currentItemIndex);
+  handleEditItem(event, index): void {
+    this.editItem.emit.call(this, {
+      index: index,
+      value: event.detail
+    });
   }
 
-  HandleKeyPress(event: KeyboardEvent): void {
-    if (event.key === "Enter") this.AddItem(event);
+  handleKeyPress(event: KeyboardEvent): void {
+    if (event.key === "Enter") this.addItem(event);
   }
 
-  SetCurrentIndex(element: HTMLElement): void {
-    this.currentItemIndex = parseInt(
-      element.getAttribute(Collection.DataItemIndex)
-    );
-  }
-
-  private AddItemElement = (
+  addItemElement = (
     <gxcf-add-object
       addText={this.collectionAddText}
-      onClick={event => this.AddItem(event)}
+      onClick={event => this.addItem(event)}
     />
   );
 
-  private RenderizeItems(items: string[]): HTMLElement[] {
+  renderizeItems(items: string[]): HTMLElement[] {
     const renderedItems: HTMLElement[] = [];
     for (let index = 0; index < items.length; index++) {
       renderedItems.push(
-        <div class="Item">
-          <input
-            data-item-index={index}
-            class="ItemInput gxg-quote"
-            type="text"
-            value={items[index]}
-            onChange={event => this.HandleEditItem(event)}
-            onKeyPress={event => this.HandleKeyPress(event)}
-          ></input>
-          <gxg-icon
-            type="close"
-            color="onbackground"
-            size="small"
-            data-item-index={index}
-            class="Delete"
-            onClick={event => this.HandleDeleteItem(event)}
-          />
-        </div>
+        <gxg-form-text
+          data-item-index={index}
+          value={items[index]}
+          onChange={event => this.handleEditItem(event, index)}
+          onKeyPress={event => this.handleKeyPress(event)}
+          clearButton
+          onClearButtonClicked={() => this.handleClearButton(index)}
+        />
       );
     }
     return renderedItems;
@@ -112,16 +92,24 @@ export class Collection {
 
   render() {
     return (
-      <div class="Collection">
-        <div class="CollectionContainer">
-          <span class="CollectionHeader gxg-title-03">{`${this.collectionHeader} (${this.collectionLength})`}</span>
-          <gxcf-hint hintId={this.collectionHintId} class="Hint" />
-          <div class="CollectionContainer ItemsRender" id="ItemsRender">
-            {this.RenderizeItems(this.collection)}
-          </div>
-        </div>
-        {this.AddItemElement}
-      </div>
+      <gxg-accordion mode="boxed">
+        <gxg-accordion-item
+          mode="boxed"
+          itemTitle={`${this.collectionHeader} (${this.collectionLength})`}
+          itemId="triggers"
+          padding="xs"
+        >
+          <gxg-text slot="subtitle">{this.collectionSummary}</gxg-text>
+          <gxg-spacer-layout
+            orientation="vertical"
+            space="xs"
+            class="ScrollableMediumHeight"
+          >
+            {this.renderizeItems(this.collection)}
+          </gxg-spacer-layout>
+          {this.addItemElement}
+        </gxg-accordion-item>
+      </gxg-accordion>
     );
   }
 }

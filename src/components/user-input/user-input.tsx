@@ -184,17 +184,19 @@ export class UserInput {
     event: CustomEvent,
     userInput: GXCFModel.UserInputElement
   ): void {
-    const value = EventsHelper.GetValue(event);
-    const index = EventsHelper.GetCollectionIndexFromDetail(event);
-    this.triggerSetOnErrorMessages(userInput, +index, value, false);
+    this.triggerSetOnErrorMessages(
+      userInput,
+      event.detail.index,
+      event.detail.value,
+      false
+    );
   }
 
   handleDeleteOnErrorMessage(
     event: CustomEvent,
     userInput: GXCFModel.UserInputElement
   ): void {
-    const index = EventsHelper.GetCollectionIndexFromDetail(event);
-    this.triggerSetOnErrorMessages(userInput, +index, "", true);
+    this.triggerSetOnErrorMessages(userInput, event.detail, "", true);
   }
 
   switchAdvancedMode(): void {
@@ -205,17 +207,19 @@ export class UserInput {
     event: CustomEvent,
     userInput: GXCFModel.UserInputElement
   ): void {
-    const value = EventsHelper.GetValue(event);
-    const index = EventsHelper.GetCollectionIndexFromDetail(event);
-    this.triggerSetAskMessages(userInput, +index, value, false);
+    this.triggerSetAskMessages(
+      userInput,
+      event.detail.index,
+      event.detail.value,
+      false
+    );
   }
 
   handleDeleteAskMessage(
     event: CustomEvent,
     userInput: GXCFModel.UserInputElement
   ): void {
-    const index = EventsHelper.GetCollectionIndexFromDetail(event);
-    this.triggerSetAskMessages(userInput, +index, "", true);
+    this.triggerSetAskMessages(userInput, event.detail, "", true);
   }
 
   private renderRedirections(

@@ -105,15 +105,11 @@ export class FlowFull {
   }
 
   HandleEditTriggerMessage(event: CustomEvent): void {
-    const value = EventsHelper.GetValue(event);
-    const index = EventsHelper.GetCollectionIndexFromDetail(event);
-
-    this.TriggerSetTriggers(+index, value, false);
+    this.TriggerSetTriggers(event.detail.index, event.detail.value, false);
   }
 
   HandleDeleteTriggerMessage(event: CustomEvent): void {
-    const index = EventsHelper.GetCollectionIndexFromDetail(event);
-    this.TriggerSetTriggers(+index, "", true);
+    this.TriggerSetTriggers(event.detail, "", true);
   }
 
   @Event() selectConversationalObject: EventEmitter;
@@ -162,53 +158,20 @@ export class FlowFull {
   }
 
   private GetTriggers(): HTMLElement {
-    if (this.expandTriggers)
-      return (
-        <div class="TriggersContainer TriggersContainerBody">
-          <div>
-            <gxg-icon
-              size="regular"
-              type="chevron-up"
-              class="TriggersArrow"
-              onClick={event => this.HandleCollapseTriggers(event)}
-            />
-          </div>
-          <gxcf-collection
-            collection={this.flow.Triggers}
-            collectionHeader={this.CollectionHeader}
-            collectionHintId={HintId.TriggerMessages}
-            collectionAddText={this.componentLocale.addTriggerMessage}
-            onEditItem={event => this.HandleEditTriggerMessage(event)}
-            onDeleteItem={event => this.HandleDeleteTriggerMessage(event)}
-            defaultNewItemValue={this.flow.Name}
-          />
-        </div>
-      );
-    else
-      return (
-        <div class="TriggersContainer">
-          <span class="ElementsHeaderText gxg-title-03">
-            {Locale.format(this.componentLocale.triggerMessagesCount, [
-              this.flow.Triggers.length + ""
-            ])}
-          </span>
-          <gxcf-hint hintId={HintId.TriggerMessages} class="Hint" />
-          <div class="TriggersContainer TriggersContainerBody">
-            <gxg-icon
-              size="regular"
-              type="chevron-down"
-              color="onbackground"
-              class="TriggersArrow"
-              onClick={event => this.HandleExpandTriggers(event)}
-            />
-            <div>
-              <p class="gxg-quote SmallSize">
-                {this.GetSummaryTriggerMessage()}
-              </p>
-            </div>
-          </div>
-        </div>
-      );
+    return (
+      <div class="TriggersContainer TriggersContainerBody">
+        <gxcf-collection
+          collection={this.flow.Triggers}
+          collectionHeader={this.CollectionHeader}
+          collectionHintId={HintId.TriggerMessages}
+          collectionAddText={this.componentLocale.addTriggerMessage}
+          collectionSummary={this.GetSummaryTriggerMessage()}
+          onEditItem={event => this.HandleEditTriggerMessage(event)}
+          onDeleteItem={event => this.HandleDeleteTriggerMessage(event)}
+          defaultNewItemValue={this.flow.Name}
+        />
+      </div>
+    );
   }
 
   getPill(flowName: string, iconFilled: boolean) {

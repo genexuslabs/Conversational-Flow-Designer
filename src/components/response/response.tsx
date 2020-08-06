@@ -123,7 +123,7 @@ export class Response {
     event.preventDefault();
     this.changeResponseRedirectTo.emit.call(this, {
       flowName: this.flow.Name,
-      index: response,
+      index: response.Index,
       redirectTo: event.detail.value
     });
   }
@@ -140,17 +140,19 @@ export class Response {
     event: CustomEvent,
     response: GXCFModel.ResponseElement
   ): void {
-    const value = EventsHelper.GetValue(event);
-    const index = EventsHelper.GetCollectionIndexFromDetail(event);
-    this.triggerSetResponseMessages(response, +index, value, false);
+    this.triggerSetResponseMessages(
+      response,
+      event.detail.index,
+      event.detail.value,
+      false
+    );
   }
 
   handleDeleteResponseMessage(
     event: CustomEvent,
     response: GXCFModel.ResponseElement
   ): void {
-    const index = EventsHelper.GetCollectionIndexFromDetail(event);
-    this.triggerSetResponseMessages(response, +index, "", true);
+    this.triggerSetResponseMessages(response, event.detail, "", true);
   }
 
   renderStyleSelector(response: GXCFModel.ResponseElement): HTMLElement {
