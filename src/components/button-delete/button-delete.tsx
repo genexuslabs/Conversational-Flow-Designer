@@ -3,7 +3,6 @@ import "@genexus/gemini";
 
 @Component({
   tag: "gxcf-button-delete",
-  styleUrl: "button-delete.scss",
   shadow: true
 })
 export class ButtonDelete {
@@ -45,19 +44,12 @@ export class ButtonDelete {
     confirmation.visible = false;
   }
 
-  private getSize() {
-    if (this.type == "close") return "small";
-    return "regular";
-  }
-
   render() {
     return (
-      <gxg-icon
-        size={this.getSize()}
-        type={this.type}
+      <gxg-button
+        icon="deleted"
+        type="secondary-icon-only"
         onClick={event => this.HandleDeleteIntention(event)}
-        class="DeleteFlow"
-        color="primary"
       />
     );
   }
