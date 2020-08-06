@@ -273,10 +273,13 @@ export class FlowFull {
               <gxcf-hint hintId={HintId.UserInput} class="Hint" />
             </div>
             <gxcf-user-input flow={this.flow} instance={this.instance} />
-            <gxcf-add-object
+            <gxg-button
+              type="secondary-text-icon"
+              icon="add"
               onClick={() => this.TriggerOnAddUserInput()}
-              addText={this.componentLocale.addUserInput}
-            />
+            >
+              {this.componentLocale.addUserInput}
+            </gxg-button>
             <gxg-separator margin="xs" type="dashed" />
             <div>
               <span class="ElementsHeaderText gxg-title-03">
@@ -287,10 +290,13 @@ export class FlowFull {
               <gxcf-hint hintId={HintId.Responses} class="Hint" />
             </div>
             <gxcf-response flow={this.flow} instance={this.instance} />
-            <gxcf-add-object
+            <gxg-button
+              type="secondary-text-icon"
+              icon="add"
               onClick={() => this.TriggerOnAddResponse()}
-              addText={this.componentLocale.addResponse}
-            />
+            >
+              {this.componentLocale.addResponse}
+            </gxg-button>
           </gxg-spacer-layout>
         </gxg-box>
         <gxg-spacer-layout orientation="horizontal" space="xs">

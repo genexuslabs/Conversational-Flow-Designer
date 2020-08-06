@@ -26,8 +26,7 @@ export class Collection {
 
   public static readonly DataItemIndex = "data-item-index";
 
-  addItem(event): void {
-    console.log(event);
+  addItem(): void {
     if (!this.defaultNewItemValue)
       this.defaultNewItemValue = this.componentLocale.sampleMessage;
     this.collection.push(this.defaultNewItemValue);
@@ -46,14 +45,17 @@ export class Collection {
   }
 
   handleKeyPress(event: KeyboardEvent): void {
-    if (event.key === "Enter") this.addItem(event);
+    if (event.key === "Enter") this.addItem();
   }
 
   addItemElement = (
-    <gxcf-add-object
-      addText={this.collectionAddText}
-      onClick={event => this.addItem(event)}
-    />
+    <gxg-button
+      type="secondary-text-icon"
+      icon="add"
+      onClick={() => this.addItem()}
+    >
+      {this.collectionAddText}
+    </gxg-button>
   );
 
   renderizeItems(items: string[]): HTMLElement[] {

@@ -91,11 +91,13 @@ export class ConversationalDesginer {
 
   private setAddFlow() {
     return (
-      <gxcf-add-object
-        class="AddFlow"
+      <gxg-button
+        type="secondary-text-icon"
+        icon="add"
         onClick={event => this.TriggerAddFlow(event)}
-        addText={this.componentLocale.addFlow}
-      />
+      >
+        {this.componentLocale.addFlow}
+      </gxg-button>
     );
   }
 

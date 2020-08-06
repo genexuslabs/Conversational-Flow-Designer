@@ -67,6 +67,11 @@ export class Select {
           </gxg-spacer-layout>
         </gxg-box>
       );
-    else return <gxcf-add-object addText={this.selectcaption} />;
+    else
+      return (
+        <gxg-button type="secondary-text-icon" icon="add">
+          {this.selectcaption}
+        </gxg-button>
+      );
   }
 }

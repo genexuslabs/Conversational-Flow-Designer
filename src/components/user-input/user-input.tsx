@@ -249,10 +249,13 @@ export class UserInput {
       }, this);
     }
     redirs.push(
-      <gxcf-add-object
-        addText={this.componentLocale.addRedirection}
+      <gxg-button
+        type="secondary-text-icon"
+        icon="add"
         onClick={() => this.triggerAddRedirection(userInput)}
-      />
+      >
+        {this.componentLocale.addRedirection}
+      </gxg-button>
     );
     return redirs;
   }
