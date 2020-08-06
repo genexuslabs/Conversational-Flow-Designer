@@ -26,14 +26,9 @@ export class Response {
   @Prop() instance: GXCFModel.Instance;
   @Element() element: HTMLElement;
   private componentLocale: any;
-  private firstLoad = true;
 
   async componentWillLoad(): Promise<void> {
     this.componentLocale = await Locale.getComponentStrings(this.element);
-  }
-
-  componentDidLoad() {
-    this.firstLoad = false;
   }
 
   @Event() deleteResponse: EventEmitter;
@@ -82,14 +77,12 @@ export class Response {
     event: CustomEvent,
     response: GXCFModel.ResponseElement
   ): void {
-    if (!this.firstLoad) {
-      const value: string = EventsHelper.GetValueFromGxgSelect(event);
-      this.changeResponseStyle.emit.call(this, {
-        flowName: this.flow.Name,
-        responseIndex: response.Index,
-        style: value
-      });
-    }
+    const value: string = EventsHelper.GetValueFromGxgSelect(event);
+    this.changeResponseStyle.emit.call(this, {
+      flowName: this.flow.Name,
+      responseIndex: response.Index,
+      style: value
+    });
   }
 
   @Event() changeComponentType: EventEmitter;
@@ -213,34 +206,38 @@ export class Response {
   }
 
   renderStyleContent(response: GXCFModel.ResponseElement): HTMLElement[] {
-    const elements: Array<HTMLElement> = new Array<HTMLElement>();
+    let elements: Array<HTMLElement> = new Array<HTMLElement>();
     if (response.Style == ResponseStyles.ComponentView) {
-      elements.concat([
+      elements = elements.concat([
         <gxcf-hint class="HintBlock" hintId={HintId.ShowResponseAs} />,
         this.renderizeComponentType(response)
       ]);
-      elements.concat([
-        <gxcf-hint class="HintBlock" hintId={HintId.SDComponent} />,
-        <span>{this.componentLocale.sdComponent}</span>,
-        <gxcf-select
-          selectcaption={response.SDComponentName}
-          selectIconType="SDPanel"
-          selectType={SelectTypes.Extended}
-          onClick={() => this.triggerChangeSDComponent(response)}
-        />
-      ]);
-      elements.concat([
-        <gxcf-hint class="HintBlock" hintId={HintId.WebComponent} />,
-        <span>{this.componentLocale.wenComponent}</span>,
-        <gxcf-select
-          selectcaption={response.WebComponentName}
-          selectIconType="WebComponent"
-          selectType={SelectTypes.Extended}
-          onClick={() => this.triggerChangeWebComponent(response)}
-        />
-      ]);
+      elements.push(
+        <gxg-spacer-layout orientation="vertical" space="xs">
+          <span>{this.componentLocale.sdComponent}</span>
+          <gxcf-hint class="HintBlock" hintId={HintId.SDComponent} />
+          <gxcf-select
+            selectcaption={response.SDComponentName}
+            selectIconType="SDPanel"
+            selectType={SelectTypes.Extended}
+            onClick={() => this.triggerChangeSDComponent(response)}
+          />
+        </gxg-spacer-layout>
+      );
+      elements.push(
+        <gxg-spacer-layout orientation="vertical" space="xs">
+          <span>{this.componentLocale.webComponent}</span>
+          <gxcf-hint class="HintBlock" hintId={HintId.WebComponent} />
+          <gxcf-select
+            selectcaption={response.WebComponentName}
+            selectIconType="WebComponent"
+            selectType={SelectTypes.Extended}
+            onClick={() => this.triggerChangeWebComponent(response)}
+          />
+        </gxg-spacer-layout>
+      );
     } else if (response.Style == ResponseStyles.RedirectTo) {
-      elements.concat([
+      elements = elements.concat([
         <gxcf-hint class="HintBlock" hintId={HintId.Redirection} />,
         <gxcf-redirection
           requireCondition={false}
