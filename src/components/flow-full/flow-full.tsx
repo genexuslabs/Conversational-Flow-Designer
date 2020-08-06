@@ -129,6 +129,11 @@ export class FlowFull {
     this.deleteFullFlow.emit(event);
   }
 
+  @Event() setSelectedFlow: EventEmitter;
+  triggerSetSelectedFlow(flowName: string) {
+    this.setSelectedFlow.emit(flowName);
+  }
+
   HandleExpandTriggers(event): void {
     console.log(event);
     this.expandTriggers = true;
@@ -206,6 +211,63 @@ export class FlowFull {
       );
   }
 
+  getPill(flowName: string, iconFilled: boolean) {
+    return (
+      <gxg-pill
+        label={flowName}
+        onClick={() => this.triggerSetSelectedFlow(flowName)}
+        icon={iconFilled ? "pill-filled" : "pill-outlined"}
+      />
+    );
+  }
+
+  getPillsForFlow(flow: GXCFModel.FlowElement, from: boolean) {
+    const elements: HTMLElement[] = [];
+    const flowPills: string[] = [];
+
+    flow.Fields.forEach(function(userInput) {
+      userInput.Redirections.forEach(function(redirection) {
+        if (redirection.RedirectTo != "") {
+          if (from && redirection.RedirectTo == this.flow.Name) {
+            return elements.push(this.getPill(flow.Name));
+          }
+          if (!from && !flowPills.includes(redirection.RedirectTo)) {
+            elements.push(this.getPill(redirection.RedirectTo, false));
+            flowPills.push(redirection.RedirectTo);
+          }
+        }
+      }, this);
+    }, this);
+
+    flow.View.Templates.forEach(function(response) {
+      if (response.RedirectTo != "") {
+        if (from && response.RedirectTo == this.flow.Name) {
+          return elements.push(this.getPill(flow.Name));
+        }
+        if (!from && !flowPills.includes(response.RedirectTo)) {
+          elements.push(this.getPill(response.RedirectTo, true));
+          flowPills.push(response.RedirectTo);
+        }
+      }
+    }, this);
+
+    return elements;
+  }
+
+  redirectionsFromOtherFlows() {
+    let elements: HTMLElement[] = [];
+    this.instance.Flows.forEach(function(flow) {
+      const innerElements: HTMLElement[] = this.getPillsForFlow(flow, true);
+      elements = elements.concat(innerElements);
+    }, this);
+
+    return elements;
+  }
+
+  redirectionsToOtherFlows() {
+    return this.getPillsForFlow(this.flow, false);
+  }
+
   async componentWillLoad(): Promise<void> {
     this.componentLocale = await Locale.getComponentStrings(this.element);
     let index = 0;
@@ -219,67 +281,75 @@ export class FlowFull {
     let selectType: SelectTypes = SelectTypes.Compact;
     if (!this.flow.ConversationalObjectName) selectType = SelectTypes.Full;
     return (
-      <gxg-box class="FlowFull" border>
-        <gxcf-summary-title
-          summaryid={this.SummaryId}
-          summaryvalue={this.flow.Name}
-          fullWidth={true}
-        />
-        <div class="CommandsContainer">
-          <gxcf-button-delete
-            class="CommandPosition"
-            onConfirmDelete={event => this.TriggerDeleteFlow(event)}
-            confirmationTitle={this.componentLocale.deleteFlow}
-            confirmationMessage={Locale.format(
-              this.componentLocale.deleteFlowConfirmation,
-              [this.flow.Name]
-            )}
-          />
-          <gxcf-select
-            class="CustomSelectBoxing CommandPosition"
-            selectid={this.SelectId}
-            selectcaption={this.GetSummaryConversationalObject()}
-            selectIconType={this.flow.ConversationalObjectType}
-            selectType={selectType}
-            onClick={event => this.TriggerSelectConversationalObject(event)}
-          />
-        </div>
-        {this.GetTriggers()}
-        <gxg-separator margin="xs" type="dashed" />
-        <gxg-spacer-layout
-          space="xs"
-          orientation="vertical"
-          justify-content="flex-start"
-        >
-          <div>
-            <span class="ElementsHeaderText gxg-title-03">
-              {Locale.format(this.componentLocale.userInputsCount, [
-                this.flow.Fields.length + ""
-              ])}
-            </span>
-            <gxcf-hint hintId={HintId.UserInput} class="Hint" />
-          </div>
-          <gxcf-user-input flow={this.flow} instance={this.instance} />
-          <gxcf-add-object
-            onClick={() => this.TriggerOnAddUserInput()}
-            addText={this.componentLocale.addUserInput}
-          />
-          <gxg-separator margin="xs" type="dashed" />
-          <div>
-            <span class="ElementsHeaderText gxg-title-03">
-              {Locale.format(this.componentLocale.responsesCount, [
-                this.flow.View.Templates.length + ""
-              ])}
-            </span>
-            <gxcf-hint hintId={HintId.Responses} class="Hint" />
-          </div>
-          <gxcf-response flow={this.flow} instance={this.instance} />
-          <gxcf-add-object
-            onClick={() => this.TriggerOnAddResponse()}
-            addText={this.componentLocale.addResponse}
-          />
+      <gxg-spacer-layout orientation="vertical" space="xs">
+        <gxg-spacer-layout orientation="horizontal" space="xs">
+          {this.redirectionsFromOtherFlows()}
         </gxg-spacer-layout>
-      </gxg-box>
+        <gxg-box class="FlowFull" border>
+          <gxcf-summary-title
+            summaryid={this.SummaryId}
+            summaryvalue={this.flow.Name}
+            fullWidth={true}
+          />
+          <div class="CommandsContainer">
+            <gxcf-button-delete
+              class="CommandPosition"
+              onConfirmDelete={event => this.TriggerDeleteFlow(event)}
+              confirmationTitle={this.componentLocale.deleteFlow}
+              confirmationMessage={Locale.format(
+                this.componentLocale.deleteFlowConfirmation,
+                [this.flow.Name]
+              )}
+            />
+            <gxcf-select
+              class="CustomSelectBoxing CommandPosition"
+              selectid={this.SelectId}
+              selectcaption={this.GetSummaryConversationalObject()}
+              selectIconType={this.flow.ConversationalObjectType}
+              selectType={selectType}
+              onClick={event => this.TriggerSelectConversationalObject(event)}
+            />
+          </div>
+          {this.GetTriggers()}
+          <gxg-separator margin="xs" type="dashed" />
+          <gxg-spacer-layout
+            space="xs"
+            orientation="vertical"
+            justify-content="flex-start"
+          >
+            <div>
+              <span class="ElementsHeaderText gxg-title-03">
+                {Locale.format(this.componentLocale.userInputsCount, [
+                  this.flow.Fields.length + ""
+                ])}
+              </span>
+              <gxcf-hint hintId={HintId.UserInput} class="Hint" />
+            </div>
+            <gxcf-user-input flow={this.flow} instance={this.instance} />
+            <gxcf-add-object
+              onClick={() => this.TriggerOnAddUserInput()}
+              addText={this.componentLocale.addUserInput}
+            />
+            <gxg-separator margin="xs" type="dashed" />
+            <div>
+              <span class="ElementsHeaderText gxg-title-03">
+                {Locale.format(this.componentLocale.responsesCount, [
+                  this.flow.View.Templates.length + ""
+                ])}
+              </span>
+              <gxcf-hint hintId={HintId.Responses} class="Hint" />
+            </div>
+            <gxcf-response flow={this.flow} instance={this.instance} />
+            <gxcf-add-object
+              onClick={() => this.TriggerOnAddResponse()}
+              addText={this.componentLocale.addResponse}
+            />
+          </gxg-spacer-layout>
+        </gxg-box>
+        <gxg-spacer-layout orientation="horizontal" space="xs">
+          {this.redirectionsToOtherFlows()}
+        </gxg-spacer-layout>
+      </gxg-spacer-layout>
     );
   }
 }
