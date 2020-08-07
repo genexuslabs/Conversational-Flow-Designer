@@ -33,6 +33,7 @@ export class ConversationalDesginer {
 
   @Element() element: HTMLElement;
   @Event() moveFlow: EventEmitter;
+  @Event() setFlowCategory: EventEmitter;
   private dragDropHandler: ConversationalDesignerDragDrop;
   private flows: Array<string>;
   private popUp: HTMLElement;
@@ -101,6 +102,12 @@ export class ConversationalDesginer {
     );
   }
 
+  allowDropOverAccordion(event: DragEvent) {
+    event.preventDefault();
+    event.dataTransfer.effectAllowed = "move";
+    event.dataTransfer.dropEffect = "move";
+  }
+
   private renderizeFlow(flowElement: GXCFModel.FlowElement): HTMLElement {
     const active: boolean = this.instance.CurrentFlowName === flowElement.Name;
     return (
@@ -157,7 +164,12 @@ export class ConversationalDesginer {
       );
       if (innerFlows.length > 0) {
         elements.push(
-          <gxg-accordion-item itemId={key} itemTitle={key} padding="l">
+          <gxg-accordion-item
+            itemId={key}
+            itemTitle={key}
+            padding="l"
+            onDragOver={event => this.allowDropOverAccordion(event)}
+          >
             {innerFlows}
           </gxg-accordion-item>
         );
@@ -232,7 +244,8 @@ export class ConversationalDesginer {
     this.componentLocale = await Locale.getComponentStrings(this.element);
     this.dragDropHandler = new ConversationalDesignerDragDrop(
       this.element as HTMLGxcfConversationalDesignerElement,
-      this.moveFlow
+      this.moveFlow,
+      this.setFlowCategory
     );
     this.dragDropHandler.initialize();
   }

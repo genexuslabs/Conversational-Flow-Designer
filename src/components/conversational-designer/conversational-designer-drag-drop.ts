@@ -16,6 +16,9 @@ export class ConversationalDesignerDragDrop {
   private element: HTMLGxcfConversationalDesignerElement;
   private readonly idAttribute: string = "data-gxcf-element-id";
   private moveFlow: EventEmitter;
+  private setFlowCategory: EventEmitter;
+  private accordionItem = "GXG-ACCORDION-ITEM";
+  private dragBox = "GXG-DRAG-BOX";
 
   TriggerMoveFlow(pMoveType: string): void {
     this.moveFlow.emit.call(this, {
@@ -27,10 +30,12 @@ export class ConversationalDesignerDragDrop {
 
   constructor(
     element: HTMLGxcfConversationalDesignerElement,
-    moveFlow: EventEmitter
+    moveFlow: EventEmitter,
+    setFlowCategory: EventEmitter
   ) {
     this.element = element;
     this.moveFlow = moveFlow;
+    this.setFlowCategory = setFlowCategory;
   }
 
   public initialize() {
@@ -53,26 +58,31 @@ export class ConversationalDesignerDragDrop {
     this.reset();
   }
 
-  private handleDrop(event: DragEvent) {
-    console.log("Drop!");
+  handleDrop(event: DragEvent) {
     event.preventDefault();
-    console.log("Dragging:");
-    console.log(event);
-    const dragging: HTMLGxcfFlowCollapsedElement = (event.target as HTMLElement).getElementsByTagName(
-      "gxcf-flow-collapsed"
-    )[0];
-    const target: HTMLGxcfFlowCollapsedElement = this.draggingElement.getElementsByTagName(
+
+    const source: HTMLGxcfFlowCollapsedElement = this.draggingElement.getElementsByTagName(
       "gxcf-flow-collapsed"
     )[0];
 
-    const auxFlow = dragging.flow;
-    dragging.flow = target.flow;
-    target.flow = auxFlow;
-    this.moveFlow.emit.call(this, {
-      source: dragging.flow.Name,
-      target: target.flow.Name,
-      moveType: MoveType.Down
-    });
+    const targetHTMLElement: HTMLElement = event.target as HTMLElement;
+    if (targetHTMLElement.tagName == this.accordionItem) {
+      const target: HTMLGxgAccordionItemElement = targetHTMLElement as HTMLGxgAccordionItemElement;
+      const category = target.itemId;
+      this.setFlowCategory.emit.call(this, {
+        flowName: source.flow.Name,
+        category: category
+      });
+    } else if (targetHTMLElement.tagName == this.dragBox) {
+      const target: HTMLGxcfFlowCollapsedElement = (event.target as HTMLElement).getElementsByTagName(
+        "gxcf-flow-collapsed"
+      )[0];
+      this.moveFlow.emit.call(this, {
+        source: source.flow.Name,
+        target: target.flow.Name,
+        moveType: MoveType.Down
+      });
+    }
 
     this.reset();
   }
