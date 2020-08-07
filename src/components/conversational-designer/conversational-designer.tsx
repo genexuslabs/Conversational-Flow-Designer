@@ -479,25 +479,17 @@ export class ConversationalDesginer {
                 orientation="vertical"
                 justify-content="flex-start"
               >
-                <gxg-spacer-layout
-                  space="xs"
-                  orientation="horizontal"
-                  justify-content="flex-start"
-                >
-                  <gxg-button type="outlined" fullWidth>
-                    {this.componentLocale.variables}
-                  </gxg-button>
-                  <gxg-button type="outlined" fullWidth>
-                    {this.componentLocale.entities}
-                  </gxg-button>
-                  <gxg-button
-                    type="outlined"
-                    fullWidth
-                    onClick={() => this.triggerSelectRoot()}
-                  >
-                    {this.componentLocale.properties}
-                  </gxg-button>
-                </gxg-spacer-layout>
+                <gxg-columns>
+                  <gxg-column width="1/3">
+                    <gxg-button
+                      type="outlined"
+                      fullWidth
+                      onClick={() => this.triggerSelectRoot()}
+                    >
+                      {this.componentLocale.properties}
+                    </gxg-button>
+                  </gxg-column>
+                </gxg-columns>
 
                 <gxg-columns space="s" alignY="center">
                   <gxg-column width="fluid">
@@ -510,7 +502,7 @@ export class ConversationalDesginer {
                     />
                   </gxg-column>
                   <gxg-column width="content">
-                    <gxg-button-group default-selected-btn-id="all">
+                    <gxg-button-group default-selected-btn-id="all" outlined>
                       <button
                         id="all"
                         value="all"
