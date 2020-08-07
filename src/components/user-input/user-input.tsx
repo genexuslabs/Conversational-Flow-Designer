@@ -363,7 +363,7 @@ export class UserInput {
           />
           <gxg-separator type="dashed" margin="s" />
           <gxcf-hint hintId={HintId.ValidateUserInput} class="UserInputHints" />
-          <gxg-title type="04">Validation Procedure</gxg-title>
+          <gxg-title type="title-04">Validation Procedure</gxg-title>
           <gxcf-select
             selectcaption={
               this.hasValidationProcedure(userInput)

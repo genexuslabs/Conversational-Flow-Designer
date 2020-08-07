@@ -237,6 +237,7 @@ declare namespace LocalJSX {
     onMoveFlow?: (event: CustomEvent<any>) => void;
     onSelectFlow?: (event: CustomEvent<any>) => void;
     onSelectRoot?: (event: CustomEvent<any>) => void;
+    onSetFlowCategory?: (event: CustomEvent<any>) => void;
   }
   interface GxcfDot {
     on?: boolean;

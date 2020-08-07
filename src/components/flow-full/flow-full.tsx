@@ -161,10 +161,12 @@ export class FlowFull {
   getPill(flowName: string, iconFilled: boolean) {
     return (
       <gxg-pill
-        label={flowName}
         onClick={() => this.triggerSetSelectedFlow(flowName)}
         icon={iconFilled ? "pill-filled" : "pill-outlined"}
-      />
+        type="button"
+      >
+        {flowName}
+      </gxg-pill>
     );
   }
 
@@ -215,7 +217,7 @@ export class FlowFull {
   redirectionsToOtherFlows() {
     const elements: HTMLElement[] = this.getPillsForFlow(this.flow, false);
     if (elements.length > 0)
-      elements.push(<gxg-text>{this.componentLocale.from}</gxg-text>);
+      elements.splice(0, 0, <gxg-text>{this.componentLocale.to}</gxg-text>);
     return elements;
   }
 
@@ -236,7 +238,7 @@ export class FlowFull {
         <gxg-spacer-layout orientation="horizontal" space="xs">
           {this.redirectionsFromOtherFlows()}
         </gxg-spacer-layout>
-        <gxg-box class="FlowFull" border>
+        <gxg-box class="FlowFull" border="gray-03">
           <gxcf-summary-title
             summaryid={this.SummaryId}
             summaryvalue={this.flow.Name}

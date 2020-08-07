@@ -111,7 +111,7 @@ export class ConversationalDesginer {
   private renderizeFlow(flowElement: GXCFModel.FlowElement): HTMLElement {
     const active: boolean = this.instance.CurrentFlowName === flowElement.Name;
     return (
-      <gxg-drag-box padding="xs">
+      <gxg-drag-box padding="xs" deletable>
         <gxcf-flow-collapsed
           id={flowElement.Name.replace(/\s/g, "")}
           data-flowid={flowElement.Id}
