@@ -111,7 +111,12 @@ export class ConversationalDesginer {
   private renderizeFlow(flowElement: GXCFModel.FlowElement): HTMLElement {
     const active: boolean = this.instance.CurrentFlowName === flowElement.Name;
     return (
-      <gxg-drag-box padding="xs" deletable>
+      <gxg-drag-box
+        padding="xs"
+        deletable
+        id={"drag-box-" + flowElement.Name}
+        active={active}
+      >
         <gxcf-flow-collapsed
           id={flowElement.Name.replace(/\s/g, "")}
           data-flowid={flowElement.Id}
@@ -170,13 +175,23 @@ export class ConversationalDesginer {
             padding="l"
             onDragOver={event => this.allowDropOverAccordion(event)}
           >
-            {innerFlows}
+            <gxg-drag-container
+              class="FlowsContainer"
+              onItemDrop={event => this.handleDropFlow(event)}
+            >
+              {innerFlows}
+            </gxg-drag-container>
           </gxg-accordion-item>
         );
       }
     }
-    const woCategoryFlowsElements = this.renderizeFlowsFromArray(
-      woCategoryFlows
+    const woCategoryFlowsElements = (
+      <gxg-drag-container
+        class="FlowsContainer"
+        onItemDrop={event => this.handleDropFlow(event)}
+      >
+        {this.renderizeFlowsFromArray(woCategoryFlows)}
+      </gxg-drag-container>
     );
     console.log(woCategoryFlowsElements);
     elements = elements.concat(woCategoryFlowsElements);
@@ -527,13 +542,7 @@ export class ConversationalDesginer {
                     </gxg-button-group>
                   </gxg-column>
                 </gxg-columns>
-                <gxg-drag-container
-                  class="FlowsContainer"
-                  onItemDrop={event => this.handleDropFlow(event)}
-                >
-                  {this.RenderizeFlows()}
-                </gxg-drag-container>
-
+                {this.RenderizeFlows()}
                 {this.setAddFlow()}
               </gxg-spacer-layout>
             </gxg-column>
