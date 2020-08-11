@@ -10,7 +10,11 @@ import {
   getAssetPath
 } from "@stencil/core";
 import { EventsHelper } from "../common/events-helper";
-import { RenderingOptions, MoveType } from "../common/helpers";
+import {
+  RenderingOptions,
+  MoveType,
+  FlowElementHelpers
+} from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
 import { Position, PositionElement } from "../common/position";
 import { Locale } from "../common/locale";
@@ -35,7 +39,7 @@ export class ConversationalDesginer {
   @Event() moveFlow: EventEmitter;
   @Event() setFlowCategory: EventEmitter;
   private dragDropHandler: ConversationalDesignerDragDrop;
-  private flows: Array<string>;
+  private flows: GXCFModel.FlowElement[];
   private popUp: HTMLElement;
   private componentLocale: any;
 
@@ -110,18 +114,19 @@ export class ConversationalDesginer {
 
   private renderizeFlow(flowElement: GXCFModel.FlowElement): HTMLElement {
     const active: boolean = this.instance.CurrentFlowName === flowElement.Name;
+    const flowId = flowElement.Name.replace(/\s/g, "");
     return (
       <gxg-drag-box
         padding="xs"
         deletable
-        id={"drag-box-" + flowElement.Name}
+        id={"drag-box-" + flowId}
         active={active}
+        onClick={() => this.handleClickFlowCollapsed(flowElement.Name)}
       >
         <gxcf-flow-collapsed
-          id={flowElement.Name.replace(/\s/g, "")}
+          id={flowId}
           data-flowid={flowElement.Id}
           flow={flowElement}
-          onClick={() => this.handleClickFlowCollapsed(flowElement.Name)}
           renderingType={
             active ? RenderingOptions.Full : RenderingOptions.Collapsed
           }
@@ -146,7 +151,7 @@ export class ConversationalDesginer {
 
   private renderizeCategories(): HTMLElement[] {
     let elements: HTMLElement[] = [];
-    this.flows = new Array<string>();
+    this.flows = [];
     const woCategoryFlows: Array<GXCFModel.FlowElement> = new Array<
       GXCFModel.FlowElement
     >();
@@ -164,6 +169,7 @@ export class ConversationalDesginer {
     });
     console.log(woCategoryFlows);
     for (const key in categorizedFlows) {
+      this.flows = this.flows.concat(categorizedFlows[key]);
       const innerFlows: HTMLElement[] = this.renderizeFlowsFromArray(
         categorizedFlows[key]
       );
@@ -185,6 +191,7 @@ export class ConversationalDesginer {
         );
       }
     }
+    this.flows = this.flows.concat(woCategoryFlows);
     const woCategoryFlowsElements = (
       <gxg-drag-container
         class="FlowsContainer"
@@ -193,9 +200,7 @@ export class ConversationalDesginer {
         {this.renderizeFlowsFromArray(woCategoryFlows)}
       </gxg-drag-container>
     );
-    console.log(woCategoryFlowsElements);
     elements = elements.concat(woCategoryFlowsElements);
-    console.log(elements);
     return elements;
   }
 
@@ -277,7 +282,15 @@ export class ConversationalDesginer {
     else if (event.key === "Enter") this.handleEnterKey(event);
 
     if (moveType != null) {
-      const index = this.flows.indexOf(this.renderFull);
+      console.log(this.instance.CurrentFlowName);
+      let index = 0;
+      console.log(this.flows);
+      this.flows.forEach(flow => {
+        if (flow.Name == this.instance.CurrentFlowName) {
+          index = this.flows.indexOf(flow);
+          return;
+        }
+      }, this);
       if (moveType == MoveType.Up && index - 1 >= 0)
         this.setSelectedFlow(this.flows[index - 1], moveType);
       else if (moveType == MoveType.Down && this.flows.length >= index + 1)
@@ -415,38 +428,56 @@ export class ConversationalDesginer {
     this.getSearch().select();
   }
 
-  setSelectedFlow(flowName: string, moveType: MoveType): void {
-    console.log("Set selected flow");
-    if (flowName) {
-      const dragContainer: HTMLGxgDragContainerElement = this.getSpacer().querySelector(
-        "gxg-drag-container"
-      );
-      const element: HTMLElement = dragContainer.querySelector(
-        "#" + flowName.replace(/\s/g, "")
-      ) as HTMLElement;
-      element.click();
+  clickOnSelectedFlow(
+    moveType: MoveType,
+    element: HTMLElement,
+    dragContainer: HTMLGxgDragContainerElement
+  ): void {
+    element.click();
 
-      const viewport = dragContainer.getBoundingClientRect().height;
-      let offset = element.getBoundingClientRect().top;
-      const elementHeight = element.getBoundingClientRect().height;
-      if (offset < elementHeight) offset = 0;
+    const viewport = dragContainer.getBoundingClientRect().height;
+    let offset = element.getBoundingClientRect().top;
+    const elementHeight = element.getBoundingClientRect().height;
+    if (offset < elementHeight) offset = 0;
 
-      if (moveType == MoveType.Down && offset + elementHeight > viewport) {
-        let scrollDownTo = elementHeight;
-        if (
-          dragContainer.scrollHeight <=
-          dragContainer.scrollTop + elementHeight
-        )
-          scrollDownTo = dragContainer.scrollHeight;
-        dragContainer.scrollBy({
-          top: scrollDownTo,
-          behavior: "smooth"
-        });
-      } else if (moveType == MoveType.Up)
-        dragContainer.scrollBy({
-          top: -elementHeight,
-          behavior: "smooth"
-        });
+    if (moveType == MoveType.Down && offset + elementHeight > viewport) {
+      let scrollDownTo = elementHeight;
+      if (dragContainer.scrollHeight <= dragContainer.scrollTop + elementHeight)
+        scrollDownTo = dragContainer.scrollHeight;
+      dragContainer.scrollBy({
+        top: scrollDownTo,
+        behavior: "smooth"
+      });
+    } else if (moveType == MoveType.Up)
+      dragContainer.scrollBy({
+        top: -elementHeight,
+        behavior: "smooth"
+      });
+  }
+
+  private getDragBoxItem(element, flowId) {
+    return element.querySelector(flowId) as HTMLElement;
+  }
+
+  setSelectedFlow(flow: GXCFModel.FlowElement, moveType: MoveType): void {
+    if (flow) {
+      this.instance.CurrentFlowName = flow.Name;
+      const mainAccordion = this.getMainAccordion();
+      const dragBoxId = "#drag-box-" + flow.Name.replace(/\s/g, "");
+      mainAccordion
+        .querySelectorAll("gxg-drag-container")
+        .forEach(function(dragContainer) {
+          const element: HTMLElement = this.getDragBoxItem(
+            dragContainer,
+            dragBoxId
+          );
+
+          if (element != null) {
+            dragContainer.parentElement.click();
+            this.clickOnSelectedFlow(moveType, element, dragContainer);
+            return;
+          }
+        }, this);
 
       this.blurSearch();
     }
@@ -458,6 +489,10 @@ export class ConversationalDesginer {
       .querySelector("gxg-columns")
       .querySelector("gxg-column")
       .querySelector("gxg-spacer-layout");
+  }
+
+  getMainAccordion(): HTMLElement {
+    return this.getSpacer().querySelector("gxg-accordion");
   }
 
   componentDidLoad(): void {
