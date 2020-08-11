@@ -62,11 +62,8 @@ export class ConversationalDesginer {
     this.openEditor = true;
   }
 
-  HandleSearch(event: CustomEvent): void {
-    const value: string = EventsHelper.GetValueFromInput(event);
-    console.log("Search: ");
-    console.log(event);
-    this.search = value;
+  handleSearch(event: CustomEvent): void {
+    this.search = event.detail;
   }
 
   @Listen("clickOnInput")
@@ -227,9 +224,10 @@ export class ConversationalDesginer {
   }
 
   private getActiveFlow(): GXCFModel.FlowElement {
-    if (this.GetFlows().length > 0) {
-      let ret = this.GetFlows()[0];
-      this.GetFlows().forEach(function(flowElement) {
+    const flows = this.GetFlows();
+    if (flows.length > 0) {
+      let ret = flows[0];
+      flows.forEach(function(flowElement) {
         if (this.instance.CurrentFlowName == flowElement.Name)
           ret = flowElement;
       }, this);
@@ -512,14 +510,6 @@ export class ConversationalDesginer {
   render() {
     console.log(this.instance);
     if (this.instance) {
-      if (
-        (this.instance.Flows == null || this.instance.Flows.length == 0) &&
-        !this.openEditor
-      )
-        return (
-          <gxcf-designer-welcome onOpenEditor={() => this.HandleOpenEditor()} />
-        );
-
       return (
         <gxg-stack>
           <gxg-columns space="m" alignY="top">
@@ -548,7 +538,7 @@ export class ConversationalDesginer {
                       icon="search"
                       icon-position="left"
                       role="textbox"
-                      onInput={event => this.HandleSearch(event)}
+                      onChange={event => this.handleSearch(event)}
                     />
                   </gxg-column>
                   <gxg-column width="content">
@@ -587,8 +577,6 @@ export class ConversationalDesginer {
           <gxcf-confirmation visible={false} />
         </gxg-stack>
       );
-    } else {
-      return <div class="MainTable"></div>;
     }
   }
 }
