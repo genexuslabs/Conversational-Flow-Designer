@@ -210,22 +210,31 @@ export class FlowFull {
     return elements;
   }
 
+  formatPillElements(elements: HTMLElement[], text: string) {
+    if (elements.length > 0) {
+      return (
+        <gxg-spacer-layout orientation="horizontal" space="xs">
+          <gxg-icon size="small" type="chevron-right" color="onbackground" />
+          <gxg-text>{text}</gxg-text>
+          {elements}
+        </gxg-spacer-layout>
+      );
+    }
+    return elements;
+  }
+
   redirectionsFromOtherFlows() {
     let elements: HTMLElement[] = [];
     this.instance.Flows.forEach(function(flow) {
       const innerElements: HTMLElement[] = this.getPillsForFlow(flow, true);
       elements = elements.concat(innerElements);
     }, this);
-    if (elements.length > 0)
-      elements.splice(0, 0, <gxg-text>{this.componentLocale.from}</gxg-text>);
-    return elements;
+    return this.formatPillElements(elements, this.componentLocale.from);
   }
 
   redirectionsToOtherFlows() {
     const elements: HTMLElement[] = this.getPillsForFlow(this.flow, false);
-    if (elements.length > 0)
-      elements.splice(0, 0, <gxg-text>{this.componentLocale.to}</gxg-text>);
-    return elements;
+    return this.formatPillElements(elements, this.componentLocale.to);
   }
 
   async componentWillLoad(): Promise<void> {
