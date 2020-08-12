@@ -283,13 +283,15 @@ export class UserInput {
             this.triggerChangeCondition(event, userInput)
           }
         />
-        <gxcf-hint hintId={HintId.Required} class="UserInputHints" />
-        <gxg-toggle
-          label="Clean Context Value"
-          onClick={() => this.triggerCleantContextChangeValue(userInput)}
-          size="small"
-          class="CleanContextToggle"
-        />
+        <gxg-spacer-layout orientation="horizontal" space="xs">
+          <gxg-toggle
+            label="Clean Context Value"
+            onClick={() => this.triggerCleantContextChangeValue(userInput)}
+            size="small"
+            class="CleanContextToggle"
+          />
+          <gxcf-hint hintId={HintId.Required} class="UserInputHints" />
+        </gxg-spacer-layout>
       </gxg-accordion-item>
     );
   }
@@ -352,36 +354,44 @@ export class UserInput {
               [userInput.Variable]
             )}
           />
+          <gxg-spacer-layout orientation="horizontal" space="xs">
+            <gxg-stepper
+              value={userInput.TryLimit}
+              onInput={(event: CustomEvent) =>
+                this.triggerTryLimitChange(event, userInput)
+              }
+              label="Try Limit"
+            />
+            <gxcf-hint hintId={HintId.TryLimit} class="UserInputHints" />
+          </gxg-spacer-layout>
 
-          <gxcf-hint hintId={HintId.TryLimit} class="UserInputHints" />
-          <gxg-stepper
-            value={userInput.TryLimit}
-            onInput={(event: CustomEvent) =>
-              this.triggerTryLimitChange(event, userInput)
-            }
-            label="Try Limit"
-          />
           <gxg-separator type="dashed" margin="s" />
-          <gxcf-hint hintId={HintId.ValidateUserInput} class="UserInputHints" />
+
           <gxg-title type="title-04">Validation Procedure</gxg-title>
-          <gxcf-select
-            selectcaption={
-              this.hasValidationProcedure(userInput)
-                ? userInput.ValidationProcedure
-                : this.componentLocale.selectValidationProcedure
-            }
-            selectIconType={
-              this.hasValidationProcedure(userInput) ? "Procedure" : ""
-            }
-            selectType={
-              this.hasValidationProcedure(userInput)
-                ? SelectTypes.Compact
-                : SelectTypes.Full
-            }
-            onClick={event =>
-              this.triggerOnChangeValidationProcedure(event, userInput)
-            }
-          />
+          <gxg-spacer-layout orientation="horizontal" space="xs">
+            <gxcf-select
+              selectcaption={
+                this.hasValidationProcedure(userInput)
+                  ? userInput.ValidationProcedure
+                  : this.componentLocale.selectValidationProcedure
+              }
+              selectIconType={
+                this.hasValidationProcedure(userInput) ? "Procedure" : ""
+              }
+              selectType={
+                this.hasValidationProcedure(userInput)
+                  ? SelectTypes.Compact
+                  : SelectTypes.Full
+              }
+              onClick={event =>
+                this.triggerOnChangeValidationProcedure(event, userInput)
+              }
+            />
+            <gxcf-hint
+              hintId={HintId.ValidateUserInput}
+              class="UserInputHints"
+            />
+          </gxg-spacer-layout>
         </gxg-spacer-layout>
       </gxg-accordion-item>
     );

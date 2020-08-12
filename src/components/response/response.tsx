@@ -160,6 +160,7 @@ export class Response {
       <gxg-select
         label={this.componentLocale.responseStyleLabel}
         onChange={event => this.triggerChangeResponseStyle(event, response)}
+        style={{ width: "100%" }}
       >
         <gxg-option
           value={ResponseStyles.RedirectTo}
@@ -190,6 +191,7 @@ export class Response {
           this.triggerChangeComponentType(event, response)
         }
         label={this.componentLocale.showResponseLabel}
+        style={{ width: "100%" }}
       >
         <gxg-option
           value={ComponentTypes.CallPanel}
@@ -208,53 +210,62 @@ export class Response {
   }
 
   renderStyleContent(response: GXCFModel.ResponseElement): HTMLElement[] {
-    let elements: Array<HTMLElement> = new Array<HTMLElement>();
+    const elements: Array<HTMLElement> = new Array<HTMLElement>();
     if (response.Style == ResponseStyles.ComponentView) {
-      elements = elements.concat([
-        <gxcf-hint class="HintBlock" hintId={HintId.ShowResponseAs} />,
-        this.renderizeComponentType(response)
-      ]);
+      elements.push(
+        <gxg-spacer-layout orientation="horizontal" space="xs">
+          {this.renderizeComponentType(response)}
+          <gxcf-hint class="HintBlock" hintId={HintId.ShowResponseAs} />
+        </gxg-spacer-layout>
+      );
       elements.push(
         <gxg-spacer-layout orientation="vertical" space="xs">
           <span>{this.componentLocale.sdComponent}</span>
-          <gxcf-hint class="HintBlock" hintId={HintId.SDComponent} />
-          <gxcf-select
-            selectcaption={response.SDComponentName}
-            selectIconType="SDPanel"
-            selectType={SelectTypes.Extended}
-            onClick={() => this.triggerChangeSDComponent(response)}
-          />
+          <gxg-spacer-layout orientation="horizontal" space="xs">
+            <gxcf-select
+              selectcaption={response.SDComponentName}
+              selectIconType="SDPanel"
+              selectType={SelectTypes.Extended}
+              onClick={() => this.triggerChangeSDComponent(response)}
+            />
+            <gxcf-hint class="HintBlock" hintId={HintId.SDComponent} />
+          </gxg-spacer-layout>
         </gxg-spacer-layout>
       );
       elements.push(
         <gxg-spacer-layout orientation="vertical" space="xs">
           <span>{this.componentLocale.webComponent}</span>
-          <gxcf-hint class="HintBlock" hintId={HintId.WebComponent} />
-          <gxcf-select
-            selectcaption={response.WebComponentName}
-            selectIconType="WebComponent"
-            selectType={SelectTypes.Extended}
-            onClick={() => this.triggerChangeWebComponent(response)}
-          />
+          <gxg-spacer-layout orientation="horizontal" space="xs">
+            <gxcf-select
+              selectcaption={response.WebComponentName}
+              selectIconType="WebComponent"
+              selectType={SelectTypes.Extended}
+              onClick={() => this.triggerChangeWebComponent(response)}
+            />
+            <gxcf-hint class="HintBlock" hintId={HintId.WebComponent} />
+          </gxg-spacer-layout>
         </gxg-spacer-layout>
       );
     } else if (response.Style == ResponseStyles.RedirectTo) {
-      elements = elements.concat([
-        <gxcf-hint class="HintBlock" hintId={HintId.Redirection} />,
-        <gxcf-redirection
-          requireCondition={false}
-          redirectionProperty={{
-            RedirectCondition: "",
-            RedirectTo: response.RedirectTo,
-            Index: 0
-          }}
-          flows={this.instance.Flows}
-          onChangeRedirectTo={event =>
-            this.triggerChangeResponseRedirectTo(event, response)
-          }
-          label={this.componentLocale.redirectTo}
-        />
-      ]);
+      elements.push(
+        <gxg-spacer-layout orientation="horizontal" space="xs">
+          <gxcf-redirection
+            requireCondition={false}
+            redirectionProperty={{
+              RedirectCondition: "",
+              RedirectTo: response.RedirectTo,
+              Index: 0
+            }}
+            flows={this.instance.Flows}
+            onChangeRedirectTo={event =>
+              this.triggerChangeResponseRedirectTo(event, response)
+            }
+            label={this.componentLocale.redirectTo}
+            style={{ width: "100%" }}
+          />
+          <gxcf-hint class="HintBlock" hintId={HintId.Redirection} />
+        </gxg-spacer-layout>
+      );
     }
 
     return elements;
@@ -342,8 +353,10 @@ export class Response {
             }
           />
           <gxg-separator type="dashed" margin="m" />
-          <gxcf-hint class="HintBlock" hintId={HintId.ResponseStyle} />
-          {this.renderStyleSelector(response)}
+          <gxg-spacer-layout orientation="horizontal">
+            {this.renderStyleSelector(response)}
+            <gxcf-hint class="HintBlock" hintId={HintId.ResponseStyle} />
+          </gxg-spacer-layout>
           {this.renderStyleContent(response)}
           <gxg-separator type="dashed" margin="m" />
           {this.renderResponseParameters()}

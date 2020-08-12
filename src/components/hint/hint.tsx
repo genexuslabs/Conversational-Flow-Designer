@@ -31,7 +31,7 @@ export class Hint {
         type="notice"
         color="primary"
         onClick={() => this.handleShowHint()}
-        style={{ verticalAlign: "middle" }}
+        style={{ verticalAlign: "middle", display: "inline-block" }}
       />
     );
   }
