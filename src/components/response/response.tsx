@@ -279,14 +279,24 @@ export class Response {
 
       this.flow.View.Attributes.forEach(variable => {
         elements.push(
-          <gxg-toggle
-            label={variable.Variable}
-            size="small"
-            on={true}
-            onClick={() =>
-              this.triggerSwitchResponseParameter(variable.Variable)
-            }
-          />
+          <gxg-spacer-layout orientation="vertical" space="xs">
+            <gxg-columns>
+              <gxg-column width="fluid">
+                <gxg-text>{variable.Variable}</gxg-text>
+              </gxg-column>
+              <gxg-column width="content">
+                <gxg-toggle
+                  label=""
+                  size="small"
+                  on={true}
+                  onClick={() =>
+                    this.triggerSwitchResponseParameter(variable.Variable)
+                  }
+                />
+              </gxg-column>
+            </gxg-columns>
+            <gxg-separator />
+          </gxg-spacer-layout>
         );
       });
     }
