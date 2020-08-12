@@ -9,12 +9,7 @@ import {
   EventEmitter,
   getAssetPath
 } from "@stencil/core";
-import { EventsHelper } from "../common/events-helper";
-import {
-  RenderingOptions,
-  MoveType,
-  FlowElementHelpers
-} from "../common/helpers";
+import { RenderingOptions, MoveType } from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
 import { Position, PositionElement } from "../common/position";
 import { Locale } from "../common/locale";

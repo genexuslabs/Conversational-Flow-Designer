@@ -5,11 +5,9 @@ import {
   EventEmitter,
   Event,
   State,
-  Listen,
   Element
 } from "@stencil/core";
-import { HintId, SelectTypes, RenderingOptions } from "../common/helpers";
-import { EventsHelper } from "../common/events-helper";
+import { HintId, SelectTypes } from "../common/helpers";
 import { StringCollectionHelper } from "../common/string-collection-helper";
 import { Position } from "../common/position";
 import { Locale } from "../common/locale";
