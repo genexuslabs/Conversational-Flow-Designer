@@ -58,7 +58,9 @@ export class ConversationalDesginer {
   }
 
   handleSearch(event: CustomEvent): void {
-    this.search = event.detail;
+    if (event instanceof CustomEvent) {
+      this.search = event.detail;
+    }
   }
 
   @Listen("clickOnInput")
@@ -540,7 +542,7 @@ export class ConversationalDesginer {
                       icon="search"
                       icon-position="left"
                       role="textbox"
-                      onChange={event => this.handleSearch(event)}
+                      onInput={event => this.handleSearch(event)}
                     />
                   </gxg-column>
                   <gxg-column width="content">
