@@ -109,6 +109,11 @@ export class ConversationalDesginer {
     event.dataTransfer.dropEffect = "move";
   }
 
+  askForDeleteFlow(event, flowElement: GXCFModel.FlowElement) {
+    this.setSelectedFlow(flowElement, MoveType.Down);
+    this.askForDeleteElement(event);
+  }
+
   private renderizeFlow(flowElement: GXCFModel.FlowElement): HTMLElement {
     const active: boolean = this.instance.CurrentFlowName === flowElement.Name;
     const flowId = flowElement.Name.replace(/\s/g, "");
@@ -119,6 +124,7 @@ export class ConversationalDesginer {
         id={"drag-box-" + flowId}
         active={active}
         onClick={() => this.handleClickFlowCollapsed(flowElement.Name)}
+        onDeleted={event => this.askForDeleteFlow(event, flowElement)}
       >
         <gxcf-flow-collapsed
           id={flowId}
@@ -346,9 +352,10 @@ export class ConversationalDesginer {
     this.showPopUp = false;
   }
 
-  askForDeleteElement(event: KeyboardEvent) {
-    console.log(event);
-    if ((event.target as HTMLElement).tagName == "BODY") {
+  askForDeleteElement(event) {
+    event.preventDefault();
+    const tagName = (event.target as HTMLElement).tagName;
+    if (tagName == "BODY" || tagName == "GXG-DRAG-BOX") {
       if (Position.GetPosition() == PositionElement.Flow) {
         console.log("Delete Flow: " + Position.GetFlow());
         this.popUp = (
