@@ -156,14 +156,21 @@ export class FlowFull {
     );
   }
 
-  getPill(flowName: string, iconFilled: boolean) {
+  getFlow(flowName: string): GXCFModel.FlowElement {
+    for (const flow of this.instance.Flows) {
+      if (flow.Name == flowName) return flow;
+    }
+    return null;
+  }
+
+  getPill(flowElement: GXCFModel.FlowElement) {
     return (
       <gxg-pill
-        onClick={() => this.triggerSetSelectedFlow(flowName)}
-        icon={iconFilled ? "pill-filled" : "pill-outlined"}
+        onClick={() => this.triggerSetSelectedFlow(flowElement.Name)}
+        icon={flowElement.Triggers.length > 0 ? "pill-filled" : "pill-outlined"}
         type="button"
       >
-        {flowName}
+        {flowElement.Name}
       </gxg-pill>
     );
   }
@@ -176,10 +183,11 @@ export class FlowFull {
       userInput.Redirections.forEach(function(redirection) {
         if (redirection.RedirectTo != "") {
           if (from && redirection.RedirectTo == this.flow.Name) {
-            return elements.push(this.getPill(flow.Name));
+            return elements.push(this.getPill(flow));
           }
           if (!from && !flowPills.includes(redirection.RedirectTo)) {
-            elements.push(this.getPill(redirection.RedirectTo, false));
+            const rFlow = this.getFlow(redirection.RedirectTo);
+            elements.push(this.getPill(rFlow, false));
             flowPills.push(redirection.RedirectTo);
           }
         }
@@ -189,10 +197,11 @@ export class FlowFull {
     flow.View.Templates.forEach(function(response) {
       if (response.RedirectTo != "") {
         if (from && response.RedirectTo == this.flow.Name) {
-          return elements.push(this.getPill(flow.Name));
+          return elements.push(this.getPill(flow));
         }
         if (!from && !flowPills.includes(response.RedirectTo)) {
-          elements.push(this.getPill(response.RedirectTo, true));
+          const rFlow = this.getFlow(response.RedirectTo);
+          elements.push(this.getPill(rFlow, true));
           flowPills.push(response.RedirectTo);
         }
       }
