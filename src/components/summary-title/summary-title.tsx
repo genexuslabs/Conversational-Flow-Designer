@@ -1,4 +1,12 @@
-import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
+import {
+  Component,
+  Prop,
+  h,
+  Event,
+  EventEmitter,
+  Method,
+  Element
+} from "@stencil/core";
 
 @Component({
   tag: "gxcf-summary-title",
@@ -8,8 +16,9 @@ import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 export class SummaryTitle {
   @Prop() summaryid: string;
   @Prop() summaryvalue: string;
-  @Prop() classType: string;
-  public readonly DefaultClassType = "SummaryTitle";
+  @Prop() fullWidth: boolean;
+
+  @Element() element: HTMLElement;
 
   @Event() changingFlowName: EventEmitter;
   ChangingFlowName(event): void {
@@ -33,10 +42,16 @@ export class SummaryTitle {
     });
   }
 
-  private getClasType(): string {
-    const ret = "CommonTitle ";
-    if (this.classType == "") this.classType = this.DefaultClassType;
-    return ret + this.classType + " gxg-title-01";
+  @Method()
+  async setInputFocus() {
+    this.element.shadowRoot.querySelector("input").select();
+  }
+
+  getClass(): string {
+    let cls = "CommonTitle gxg-title-01";
+    if (this.fullWidth) cls += " FullTitle";
+    else cls += " SummaryTitle";
+    return cls;
   }
 
   render() {
@@ -44,7 +59,7 @@ export class SummaryTitle {
       <input
         id={this.summaryid}
         type="text"
-        class={this.getClasType()}
+        class={this.getClass()}
         value={this.summaryvalue}
         onChange={event => this.ChangingFlowName(event)}
         onMouseDown={() => this.TriggerMouseDown()}

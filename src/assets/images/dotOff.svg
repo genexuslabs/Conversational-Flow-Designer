@@ -5,6 +5,6 @@
     <desc>Created with Sketch.</desc>
     <g id="Dot" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <circle id="Oval" fill="#FFFFFF" cx="8" cy="8" r="3"></circle>
-        <circle id="Oval" fill="#00a99d" cx="8" cy="8" r="6"></circle>
+        <circle id="Oval" fill="#FFFFFF" cx="8" cy="8" r="6" stroke="#00a99d"></circle>
     </g>
 </svg>

@@ -58,10 +58,11 @@ export class Locale {
 
   public static async getHint(property: string): Promise<string> {
     const external: any = window.external;
-    let hint = await external.GetHint(property);
-
+    let hint = "";
+    if (external.GetHint) {
+      hint = await external.GetHint(property);
+    }
     if (hint == "") hint = PropertiesDefinition.GetDescription(property);
-
     return hint;
   }
 }

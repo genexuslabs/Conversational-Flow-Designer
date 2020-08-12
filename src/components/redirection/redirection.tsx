@@ -3,7 +3,6 @@ import { EventsHelper } from "../common/events-helper";
 
 @Component({
   tag: "gxcf-redirection",
-  styleUrl: "redirection.scss",
   shadow: true
 })
 export class Redirection {
@@ -15,7 +14,7 @@ export class Redirection {
 
   @Event() changeRedirectCondition: EventEmitter;
   TriggerOnChangeRedirectCondition(event): void {
-    const value = EventsHelper.GetValue(event);
+    const value = EventsHelper.GetConditionValue(event);
     this.changeRedirectCondition.emit.call(this, {
       value: value,
       index: this.redirectionIndex
@@ -67,7 +66,6 @@ export class Redirection {
         required
         onChange={event => this.TriggerOnChangeRedirectTo(event)}
         label={this.label}
-        fullWidth
       >
         {this.LoadFlowsCombo()}
       </gxg-select>
@@ -77,10 +75,6 @@ export class Redirection {
   }
 
   render() {
-    return (
-      <div class="RedirectionContainer">
-        <div>{this.RenderRedirectionBody()}</div>
-      </div>
-    );
+    return this.RenderRedirectionBody();
   }
 }

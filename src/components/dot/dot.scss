@@ -1,6 +1,14 @@
-.Dot
+.DotOn
 {
   content: var(--dot-icon);
-  height: var(--medium-icon-width);
-  width: var(--medium-icon-height);
+}
+
+.DotOff
+{
+  content: var(--dot-off-icon);
+}
+
+.Dot{
+  height: var(--small-icon-width);
+  width: var(--small-icon-height);
 }

@@ -4,7 +4,8 @@ import {
   Event,
   EventEmitter,
   h,
-  Element
+  Element,
+  Method
 } from "@stencil/core";
 import { RenderingOptions, SelectTypes } from "../common/helpers";
 
@@ -19,18 +20,13 @@ export class FlowCollapsed {
 
   @Element() element: HTMLElement;
 
-  @Event() expandFlow: EventEmitter;
-  TriggerOnExpandFlow(event): void {
-    console.log(event);
-    this.expandFlow.emit.call(this, { flowName: this.flow.Name });
-  }
-
-  @Event() selectConversationalObject: EventEmitter;
-  TriggerSelectConversationalObject(event): void {
-    console.log(event);
-    this.selectConversationalObject.emit.call(this, {
-      flowName: this.flow.Name
-    });
+  @Method()
+  async setTitleFocus() {
+    const summary: any = this.element
+      .querySelector("gxg-box")
+      .querySelector("gxg-spacer-layout")
+      .querySelector("gxcf-summary-title");
+    summary.setInputFocus();
   }
 
   get SummaryId(): string {
@@ -56,30 +52,12 @@ export class FlowCollapsed {
     return "";
   }
 
-  private GetSummaryConversationalObject(): string {
-    if (this.flow.ConversationalObjectName)
-      return this.flow.ConversationalObjectName.toUpperCase();
-    return "Conversational Object";
-  }
-
-  private GetSummaryTitleClass(): string {
-    if (this.flow.ConversationalObjectName) return "SummaryTitle";
-    return "MinSummaryTitle";
-  }
-
-  switchDraggable(drag: boolean): void {
-    const element = this.element.shadowRoot.querySelector("div") as HTMLElement;
-    element.setAttribute("draggable", "" + drag);
-  }
-
-  private GetSelectCOClass(): string {
-    if (this.flow.ConversationalObjectName)
-      return "NotEmptySelectBoxing SelectBoxing";
-    return "SelectBoxing";
+  hasTriggers(): boolean {
+    return this.flow.Triggers.length > 0;
   }
 
   render() {
-    let classProp;
+    let classProp = "";
     if (this.renderingType == RenderingOptions.Collapsed) {
       classProp = "FlowSummary NoActiveContent";
     } else {
@@ -90,37 +68,28 @@ export class FlowCollapsed {
     if (!this.flow.ConversationalObjectName) selectType = SelectTypes.Full;
 
     return (
-      <div
-        id={this.flow.Id}
-        data-elementType="flow"
-        class={classProp}
-        draggable
-        onClick={event => this.TriggerOnExpandFlow(event)}
+      <gxg-spacer-layout
+        space="xs"
+        orientation="vertical"
+        justify-content="flex-start"
       >
-        <gxcf-select
-          selectid={this.SelectId}
-          selectcaption={this.GetSummaryConversationalObject()}
-          class={this.GetSelectCOClass()}
-          selectIconType={this.flow.ConversationalObjectType}
-          selectType={selectType}
-          onClick={event => this.TriggerSelectConversationalObject(event)}
-          onTitleMouseDown={() => this.switchDraggable(false)}
-          onTitleMouseLeave={() => this.switchDraggable(true)}
-        />
-        <gxcf-summary-title
-          summaryid={this.SummaryId}
-          summaryvalue={this.flow.Name}
-          classType={this.GetSummaryTitleClass()}
-          onTitleMouseDown={() => this.switchDraggable(false)}
-          onTitleMouseLeave={() => this.switchDraggable(true)}
-        />
+        <gxg-spacer-layout
+          space="xs"
+          orientation="horizontal"
+          justify-content="flex-start"
+        >
+          <gxcf-dot on={this.flow.Triggers.length > 0} class="Dot" />
+          <gxcf-summary-title
+            summaryid={this.SummaryId}
+            summaryvalue={this.flow.Name}
+          />
+        </gxg-spacer-layout>
+
         <gxcf-summary-description
           descriptionid={this.DescriptionId}
           descriptionvalue={this.GetSummaryTriggerMessage()}
-          onTitleMouseDown={() => this.switchDraggable(false)}
-          onTitleMouseLeave={() => this.switchDraggable(true)}
         />
-      </div>
+      </gxg-spacer-layout>
     );
   }
 }

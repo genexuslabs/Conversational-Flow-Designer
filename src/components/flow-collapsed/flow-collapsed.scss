@@ -1,14 +1,21 @@
 .FlowSummary {
   border-radius: 1px;
   display: block;
-  padding: 8px 12px 8px 12px;
   margin: auto;
-  margin-top: 8px;
-  margin-bottom: 8px;
+  margin-top: 2px;
+  margin-bottom: 2px;
   overflow: hidden;
   -webkit-animation: var(--animation-time);
   animation: var(--animation-time);
   z-index: 1;
+  display:block;
+  clear: both;
+  float: left;
+  background-color: var(--color-background);
+  border-left: 1px solid var(--gray-02);
+  border-right: 1px solid var(--gray-02);
+  border-bottom: 1px solid var(--gray-02);
+  padding: var(--spacing-comp-01);
 }
 
 .FlowSummary:hover {
@@ -16,23 +23,13 @@
 }
 
 .ActiveContent {
-  background-color: var(--color-background);
   border-top: 3px solid var(--color-primary-active)
 }
 
 .NoActiveContent {
-  background-color: var(--gray-01);
-  border-top: 3px solid var(--gray-01)
+  border-top: 3px solid var(--gray-02)
 }
 
-.SelectBoxing
-{
-  display: block;
-  float: right;
-  margin-right: 5%;
-  
-}
-
-.NotEmptySelectBoxing{
-  width: 32%;
+.Dot{
+  margin-top: var(--small-icon-height);
 }

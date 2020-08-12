@@ -1,4 +1,4 @@
-import { Component, h } from "@stencil/core";
+import { Component, h, Prop } from "@stencil/core";
 
 @Component({
   tag: "gxcf-dot",
@@ -6,7 +6,9 @@ import { Component, h } from "@stencil/core";
   shadow: true
 })
 export class Dot {
+  @Prop() on = true;
+
   render() {
-    return <div class="Dot" />;
+    return <div class={this.on ? "Dot DotOn" : "Dot DotOff"} />;
   }
 }

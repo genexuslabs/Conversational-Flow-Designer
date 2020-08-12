@@ -25,6 +25,10 @@ export class EventsHelper {
     return null;
   }
 
+  public static GetConditionValue(customEvent: CustomEvent): string {
+    return customEvent.detail;
+  }
+
   public static GetValueFromDetail(customEvent: CustomEvent): string {
     customEvent.preventDefault;
     customEvent = customEvent.detail;

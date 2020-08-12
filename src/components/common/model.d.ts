@@ -15,6 +15,7 @@ declare namespace GXCFModel {
     Fields: UserInputElement[];
     View: ViewElement;
     ConversationalObjectType: string;
+    Category: string;
   }
 
   export interface RedirectionProperty {

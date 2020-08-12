@@ -95,67 +95,57 @@ export class HintId {
 export class PropertiesDefinition {
   //For Test
   public static readonly ResponseMessageTitle: string = "Response Messages";
-  public static readonly ResponseMessageLabel: string =
-    "What's a Response Message?";
+  public static readonly ResponseMessageLabel: string = " ?";
 
   public static readonly ResponseConditionTitle: string = "Response Condition";
-  public static readonly ResponseConditionLabel: string =
-    "What's a Response Condition?";
+  public static readonly ResponseConditionLabel: string = " ?";
 
   public static readonly ResponseStyleTitle: string = "Response Style";
-  public static readonly ResponseStyleLabel: string =
-    "What's a Response Style?";
+  public static readonly ResponseStyleLabel: string = " ?";
 
   public static readonly TriggerMessagesTitle: string = "Trigger Messages";
-  public static readonly TriggerMessagesLabel: string =
-    "What's a Trigger Message?";
+  public static readonly TriggerMessagesLabel: string = " ?";
 
   public static readonly ResponseTitle: string = "Response";
   public static readonly ResponseDescription: string =
     "Any Flow of a Conversational instance has a Response. In the Response node, you can model the behavior after the Flow finishes its execution. \n The Response node can be left empty (which means that the Flow doesn't give any feedback to the end user after it finishes), or it can have Response Parameters and/or Messages children nodes.";
-  public static readonly ResponseLabel: string = "What's a Response?";
+  public static readonly ResponseLabel: string = " ?";
 
   public static readonly UserInputTitle: string = "User Input";
   public static readonly UserInputDescription: string =
     "The User Input represents the input parameters of the Flow of a Conversational instance. \n That is, the different parameters that the chatbot will ask the user when it detects the intent related to the flow.";
-  public static readonly UserInputLabel: string = "What's a User Input?";
+  public static readonly UserInputLabel: string = " ?";
 
   public static readonly ConversationalObjectTitle: string =
     "Conversational Object";
-  public static readonly UConversationalObjectLabel: string =
-    "What's a Conversational Object?";
+  public static readonly UConversationalObjectLabel: string = " ?";
 
   public static readonly RequiredTitle: string = "Required";
-  public static readonly RequiredLabel: string =
-    "What's the condition to be required?";
+  public static readonly RequiredLabel: string = " ?";
 
   public static readonly AskMessagesTitle: string = "Ask Messages";
-  public static readonly AskMessagesLabel: string = "What're the ask messages?";
+  public static readonly AskMessagesLabel: string = " ?";
 
   public static readonly ValidateUserInputTitle: string = "Validate User Input";
-  public static readonly ValidateUserInputLabel: string =
-    "What's validate user input?";
+  public static readonly ValidateUserInputLabel: string = " ?";
 
   public static readonly RedirectionTitle: string = "Redirection";
-  public static readonly RedirectionLabel: string = "What's a redirection?";
+  public static readonly RedirectionLabel: string = " ?";
 
   public static readonly ErrorMessagesTitle: string = "On Error Messages";
-  public static readonly ErrorMessagesLabel: string =
-    "What're the On Error Messages?";
+  public static readonly ErrorMessagesLabel: string = " ?";
 
   public static readonly TryLimitTitle: string = "Try Limit";
-  public static readonly TryLimitLabel: string = "What's the Try Limit?";
+  public static readonly TryLimitLabel: string = " ?";
 
   public static readonly ShowResponseAsTitle: string = "Show Response As";
-  public static readonly ShowResponseAsLabel: string =
-    "What's Show Response As?";
+  public static readonly ShowResponseAsLabel: string = " ?";
 
   public static readonly WebComponentTitle: string = "Web Compoennt";
-  public static readonly WebComponentLabel: string =
-    "What's the Web Component?";
+  public static readonly WebComponentLabel: string = " ?";
 
   public static readonly SDComponentTitle: string = "SD Compoennt";
-  public static readonly SDComponentLabel: string = "What's the SD Component?";
+  public static readonly SDComponentLabel: string = " ?";
 
   public static GetTitle(hintId: HintId): string {
     if (hintId == HintId.TriggerMessages) return this.TriggerMessagesTitle;

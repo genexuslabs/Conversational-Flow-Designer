@@ -1,23 +1,20 @@
 body {
-  background-color: var(--gray-02);
-  font-size: var(--normal-font-size);
+  font-size: var(--small-font-size);
   overflow-y: hidden;
+  background-color: var(--color-background);
 }
-.MainTable {
-  width: 95%;
-  margin: auto;
-}
+
 .AddFlow {
   display: block;
   margin-top: var(--spacing-comp-01);
-  width: 34%;
+  //width: 34%;
   bottom: var(--spacing-comp-01);
   position: sticky;
 }
 
 .LeftHeader
 {
-  width: 34%;
+ // width: 34%;
   margin-bottom: 5px;
   float:left; 
 }
@@ -40,14 +37,12 @@ body {
 .FlowsContainer {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 85vh;
-  width: 34%;
-  left: 0;
-  clear: left;
+  max-height: 82vh;
 }
 
 .FlowsContainer::-webkit-scrollbar {
-  width: 5px;
+  width: 4px;
+  margin-left: 2px;
 }
 
 .FlowsContainer::-webkit-scrollbar-track {
