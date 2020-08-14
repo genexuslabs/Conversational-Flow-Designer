@@ -8,6 +8,7 @@ import {
   Method
 } from "@stencil/core";
 import { RenderingOptions, SelectTypes } from "../common/helpers";
+import { EventsHelper } from "../common/events-helper";
 
 @Component({
   tag: "gxcf-flow-collapsed",
@@ -27,6 +28,14 @@ export class FlowCollapsed {
       .querySelector("gxg-spacer-layout")
       .querySelector("gxcf-summary-title");
     summary.setInputFocus();
+  }
+
+  @Event() modifyFlowName: EventEmitter;
+  triggerChangeFlowName(event) {
+    this.modifyFlowName.emit.call(this, {
+      currentFlowName: this.flow.Name,
+      newFlowName: event.detail
+    });
   }
 
   get SummaryId(): string {
@@ -82,6 +91,7 @@ export class FlowCollapsed {
           <gxcf-summary-title
             summaryid={this.SummaryId}
             summaryvalue={this.flow.Name}
+            onChangingValue={event => this.triggerChangeFlowName(event)}
           />
         </gxg-spacer-layout>
 
