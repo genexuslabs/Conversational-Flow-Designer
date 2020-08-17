@@ -172,15 +172,19 @@ export class FlowFull {
   }
 
   getPill(flowElement: GXCFModel.FlowElement) {
-    return (
-      <gxg-pill
-        onClick={() => this.triggerSetSelectedFlow(flowElement.Name)}
-        icon={flowElement.Triggers.length > 0 ? "pill-filled" : "pill-outlined"}
-        type="button"
-      >
-        {flowElement.Name}
-      </gxg-pill>
-    );
+    if (flowElement) {
+      return (
+        <gxg-pill
+          onClick={() => this.triggerSetSelectedFlow(flowElement.Name)}
+          icon={
+            flowElement.Triggers.length > 0 ? "pill-filled" : "pill-outlined"
+          }
+          type="button"
+        >
+          {flowElement.Name}
+        </gxg-pill>
+      );
+    }
   }
 
   getPillsForFlow(flow: GXCFModel.FlowElement, from: boolean) {
