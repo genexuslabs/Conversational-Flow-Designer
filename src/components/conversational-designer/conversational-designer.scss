@@ -7,14 +7,12 @@ body {
 .AddFlow {
   display: block;
   margin-top: var(--spacing-comp-01);
-  //width: 34%;
   bottom: var(--spacing-comp-01);
   position: sticky;
 }
 
 .LeftHeader
 {
- // width: 34%;
   margin-bottom: 5px;
   float:left; 
 }
@@ -34,24 +32,24 @@ body {
   vertical-align: middle;
 }
 
-.FlowsContainer {
+.CollapsedFlowsContainer {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 82vh;
+  max-height: 90vh;
 }
 
-.FlowsContainer::-webkit-scrollbar {
+.CollapsedFlowsContainer::-webkit-scrollbar {
   width: 4px;
   margin-left: 2px;
 }
 
-.FlowsContainer::-webkit-scrollbar-track {
+.CollapsedFlowsContainer::-webkit-scrollbar-track {
   -webkit-box-shadow: inset 0 0 6px var(--gray-01);
   box-shadow: inset 0 0 6px var(--gray-01);
   border-radius: 5px;
 }
 
-.FlowsContainer::-webkit-scrollbar-thumb {
+.CollapsedFlowsContainer::-webkit-scrollbar-thumb {
   border-radius: 10px;
   -webkit-box-shadow: inset 0 0 6px var(--color-on-secondary);
   box-shadow: inset 0 0 6px var(--color-on-secondary);
