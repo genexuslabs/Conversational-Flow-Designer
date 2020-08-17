@@ -136,6 +136,14 @@ export class Response {
     });
   }
 
+  @Event() selectResponse: EventEmitter;
+  triggerSelectResponse(responseIndex: number): void {
+    this.selectResponse.emit.call(this, {
+      flowName: this.flow.Name,
+      index: responseIndex
+    });
+  }
+
   handleEditResponseMessage(
     event: CustomEvent,
     response: GXCFModel.ResponseElement
@@ -326,6 +334,7 @@ export class Response {
           mode="boxed"
           padding="xs"
           itemId={response.Index + ""}
+          onClick={() => this.triggerSelectResponse(response.Index)}
         >
           <div slot="subtitle">{this.renderResponseSubtitle(response)}</div>
           <gxcf-button-delete
