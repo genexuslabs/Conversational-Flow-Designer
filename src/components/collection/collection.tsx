@@ -1,4 +1,4 @@
-import { Component, Prop, h, State, Event, Element } from "@stencil/core";
+import { Component, Prop, h, Event, Element } from "@stencil/core";
 import { EventEmitter } from "events";
 import { Locale } from "../common/locale";
 
@@ -15,7 +15,6 @@ export class Collection {
   @Prop() collectionAddText: string;
   @Prop() collectionHintId: string;
   @Prop() defaultNewItemValue: string;
-  @State() collectionLength: number;
 
   @Event() deleteItem: EventEmitter;
   @Event() editItem: EventEmitter;
@@ -23,6 +22,7 @@ export class Collection {
   @Element() element: HTMLElement;
 
   private componentLocale: any;
+  private collectionLength: number;
 
   public static readonly DataItemIndex = "data-item-index";
 
@@ -30,7 +30,10 @@ export class Collection {
     if (!this.defaultNewItemValue)
       this.defaultNewItemValue = this.componentLocale.sampleMessage;
     this.collection.push(this.defaultNewItemValue);
-    this.collectionLength = this.collection.length;
+    this.editItem.emit.call(this, {
+      index: this.collection.length - 1,
+      value: this.defaultNewItemValue
+    });
   }
 
   handleClearButton(index) {
@@ -75,21 +78,24 @@ export class Collection {
     return renderedItems;
   }
 
+  scrollDown() {
+    const domRect = this.element.getBoundingClientRect();
+    this.element.shadowRoot.querySelector("gxg-spacer-layout").scrollTo({
+      top: domRect.bottom + domRect.height,
+      behavior: "smooth"
+    });
+  }
+
   async componentWillLoad(): Promise<void> {
-    this.collectionLength = this.collection.length;
     this.componentLocale = await Locale.getComponentStrings(this.element);
   }
 
-  componentDidRender(): void {
-    const inputs = this.element.shadowRoot.querySelectorAll("input");
-    if (inputs.length > 0) {
-      inputs.item(inputs.length - 1).select();
-      const scrollTo = inputs.item(inputs.length - 1).offsetTop;
-      const itemsRender: HTMLElement = this.element.shadowRoot.querySelector(
-        "#ItemsRender"
-      ) as HTMLElement;
-      itemsRender.scrollTop = scrollTo;
-    }
+  componentWillRender() {
+    this.collectionLength = this.collection.length;
+  }
+
+  componentDidUpdate() {
+    this.scrollDown();
   }
 
   render() {

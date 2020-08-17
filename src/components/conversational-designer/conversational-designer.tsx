@@ -276,7 +276,6 @@ export class ConversationalDesginer {
     else if (event.key === "ArrowDown") moveType = MoveType.Down;
     else if (event.ctrlKey && event.key === "f") this.setFocusOnSearch();
     else if (event.key === "Delete") this.askForDeleteElement(event);
-    else if (event.key === "Enter") this.handleEnterKey(event);
 
     if (moveType != null) {
       console.log(this.instance.CurrentFlowName);
