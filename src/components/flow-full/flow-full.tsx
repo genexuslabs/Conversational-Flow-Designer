@@ -45,6 +45,14 @@ export class FlowFull {
     });
   }
 
+  @Event() modifyFlowName: EventEmitter;
+  triggerChangeFlowName(event) {
+    this.modifyFlowName.emit.call(this, {
+      currentFlowName: this.flow.Name,
+      newFlowName: event.detail
+    });
+  }
+
   get SummaryId(): string {
     return `GXCFSum_${this.flow.Id}`;
   }
@@ -164,15 +172,19 @@ export class FlowFull {
   }
 
   getPill(flowElement: GXCFModel.FlowElement) {
-    return (
-      <gxg-pill
-        onClick={() => this.triggerSetSelectedFlow(flowElement.Name)}
-        icon={flowElement.Triggers.length > 0 ? "pill-filled" : "pill-outlined"}
-        type="button"
-      >
-        {flowElement.Name}
-      </gxg-pill>
-    );
+    if (flowElement) {
+      return (
+        <gxg-pill
+          onClick={() => this.triggerSetSelectedFlow(flowElement.Name)}
+          icon={
+            flowElement.Triggers.length > 0 ? "pill-filled" : "pill-outlined"
+          }
+          type="button"
+        >
+          {flowElement.Name}
+        </gxg-pill>
+      );
+    }
   }
 
   getPillsForFlow(flow: GXCFModel.FlowElement, from: boolean) {
@@ -259,6 +271,7 @@ export class FlowFull {
             summaryid={this.SummaryId}
             summaryvalue={this.flow.Name}
             fullWidth={true}
+            onChangingValue={event => this.triggerChangeFlowName(event)}
           />
           <div class="CommandsContainer">
             <gxcf-button-delete

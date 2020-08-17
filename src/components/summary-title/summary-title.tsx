@@ -7,6 +7,7 @@ import {
   Method,
   Element
 } from "@stencil/core";
+import { EventsHelper } from "../common/events-helper";
 
 @Component({
   tag: "gxcf-summary-title",
@@ -20,9 +21,10 @@ export class SummaryTitle {
 
   @Element() element: HTMLElement;
 
-  @Event() changingFlowName: EventEmitter;
-  ChangingFlowName(event): void {
-    this.changingFlowName.emit(event);
+  @Event() changingValue: EventEmitter;
+  triggerChangingValue(event): void {
+    const value = EventsHelper.GetValueFromInput(event);
+    this.changingValue.emit(value);
   }
 
   @Event() titleMouseDown: EventEmitter;
@@ -61,7 +63,7 @@ export class SummaryTitle {
         type="text"
         class={this.getClass()}
         value={this.summaryvalue}
-        onChange={event => this.ChangingFlowName(event)}
+        onChange={event => this.triggerChangingValue(event)}
         onMouseDown={() => this.TriggerMouseDown()}
         onMouseLeave={() => this.TriggerMouseLeave()}
         onClick={event => this.TriggerOnClickTitleInputValue(event)}
