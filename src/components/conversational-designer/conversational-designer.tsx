@@ -182,7 +182,6 @@ export class ConversationalDesginer {
             onDragOver={event => this.allowDropOverAccordion(event)}
           >
             <gxg-drag-container
-              class="FlowsContainer"
               onItemDrop={event => this.handleDropFlow(event)}
             >
               {innerFlows}
@@ -193,10 +192,7 @@ export class ConversationalDesginer {
     }
     this.flows = this.flows.concat(woCategoryFlows);
     const woCategoryFlowsElements = (
-      <gxg-drag-container
-        class="FlowsContainer"
-        onItemDrop={event => this.handleDropFlow(event)}
-      >
+      <gxg-drag-container onItemDrop={event => this.handleDropFlow(event)}>
         {this.renderizeFlowsFromArray(woCategoryFlows)}
       </gxg-drag-container>
     );
@@ -280,7 +276,6 @@ export class ConversationalDesginer {
     else if (event.key === "ArrowDown") moveType = MoveType.Down;
     else if (event.ctrlKey && event.key === "f") this.setFocusOnSearch();
     else if (event.key === "Delete") this.askForDeleteElement(event);
-    else if (event.key === "Enter") this.handleEnterKey(event);
 
     if (moveType != null) {
       console.log(this.instance.CurrentFlowName);
@@ -571,8 +566,10 @@ export class ConversationalDesginer {
                     </gxg-button-group>
                   </gxg-column>
                 </gxg-columns>
-                {this.RenderizeFlows()}
-                {this.setAddFlow()}
+                <div class="CollapsedFlowsContainer">
+                  {this.RenderizeFlows()}
+                  {this.setAddFlow()}
+                </div>
               </gxg-spacer-layout>
             </gxg-column>
             <gxg-column>{this.renderizeActiveFlow()}</gxg-column>
