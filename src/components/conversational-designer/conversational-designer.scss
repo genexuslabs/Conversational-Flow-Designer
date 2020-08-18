@@ -33,26 +33,20 @@ body {
 }
 
 .CollapsedFlowsContainer {
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-height: 90vh;
+  @include vertical-overflow-element(80vh);
+  height: auto;
 }
 
 .CollapsedFlowsContainer::-webkit-scrollbar {
-  width: 4px;
-  margin-left: 2px;
+  @include gxcf-scrollbar;
 }
 
 .CollapsedFlowsContainer::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px var(--gray-01);
-  box-shadow: inset 0 0 6px var(--gray-01);
-  border-radius: 5px;
+  @include gxcf-scrollbar-track;
 }
 
 .CollapsedFlowsContainer::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px var(--color-on-secondary);
-  box-shadow: inset 0 0 6px var(--color-on-secondary);
+  @include gxcf-scrollbar-thumb;
 }
 
 .svgIcon{

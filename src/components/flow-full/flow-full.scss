@@ -1,110 +1,16 @@
 .FlowFull {
   border-top: 3px solid var(--color-primary-active);
-  overflow-y: auto;
-  overflow-x: hidden;
-  max-height: 90vh;
+  @include vertical-overflow-element (90vh);
 }
 
 .FlowFull::-webkit-scrollbar {
-  width: 4px;
-  margin-left: 2px;
+  @include gxcf-scrollbar;
 }
 
 .FlowFull::-webkit-scrollbar-track {
-  -webkit-box-shadow: inset 0 0 6px var(--gray-01);
-  box-shadow: inset 0 0 6px var(--gray-01);
-  border-radius: 5px;
+  @include gxcf-scrollbar-track;
 }
 
 .FlowFull::-webkit-scrollbar-thumb {
-  border-radius: 10px;
-  -webkit-box-shadow: inset 0 0 6px var(--color-on-secondary);
-  box-shadow: inset 0 0 6px var(--color-on-secondary);
-}
-
-.Content
-{
-  padding-bottom: var(--small-margin);  
-  margin-right: var(--small-margin);  
-  padding-top: var(--small-margin);  
-}
-
-.TabFullFlowContent {
-  margin-left: var(--medium-margin);
-}
-
-.FullFlowContent {
-  background-color: var(--color-background);
-}
-
-.FullFlowContentUserInputs {
-  margin-left: var(--medium-margin);
-}
-
-.FlowUpArrow {
-  float: right;
-  position: relative;
-}
-
-.Hint {
-  display:inline-block;
-}
-
-.ElementsHeader {
-  clear: both;
-  font-weight: 400;
-  margin-bottom: var(--small-margin);
-}
-
-.LeftTab {
-  margin-left: var(--medium-margin);
-}
-
-.MinLeftTab{
-  margin-left: 10px;
-}
-
-
-.CommandsContainer
-{
-  float: right;
-  width: 38%;
-}
-
-.CommandPosition
-{
-  float: right;
-}
-
-.CustomSelectBoxing
-{
-  margin-right: 16px;
-  margin-bottom: 5px;
-}
-
-.TriggersArrow
-{
-  float: right;
-  cursor: pointer;
-}
-
-.TriggersContainer
-{
-  clear:both;  
-}
-
-.TriggersContainerBody
-{
-  background-color: var(--gray-01);
-  padding: var(--spacing-comp-01);
-  border-color: var(--gray-04);
-}
-
-
-.DotPosition{
-  float: left;
-}
-
-.SmallSize{
-  font-size: var(--small2-font-size);
+  @include gxcf-scrollbar-thumb;
 }
