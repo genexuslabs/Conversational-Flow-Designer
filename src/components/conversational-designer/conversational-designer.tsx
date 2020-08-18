@@ -568,8 +568,8 @@ export class ConversationalDesginer {
                 </gxg-columns>
                 <div class="CollapsedFlowsContainer">
                   {this.RenderizeFlows()}
-                  {this.setAddFlow()}
                 </div>
+                {this.setAddFlow()}
               </gxg-spacer-layout>
             </gxg-column>
             <gxg-column>{this.renderizeActiveFlow()}</gxg-column>

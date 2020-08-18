@@ -35,7 +35,8 @@ body {
 .CollapsedFlowsContainer {
   overflow-y: auto;
   overflow-x: hidden;
-  max-height: 90vh;
+  max-height: 80vh;
+  height: auto;
 }
 
 .CollapsedFlowsContainer::-webkit-scrollbar {
