@@ -1,20 +1,15 @@
 .ScrollableMediumHeight {
-    overflow-y: auto;
-    max-height: 20vh;
+    @include vertical-overflow-element(20vh);
 }
   
 .ScrollableMediumHeight::-webkit-scrollbar {
-    width: 5px;
+    @include gxcf-scrollbar;
 }
   
 .ScrollableMediumHeight::-webkit-scrollbar-track {
-    -webkit-box-shadow: inset 0 0 6px var(--gray-01);
-    box-shadow: inset 0 0 6px var(--gray-01);
-    border-radius: 5px;
+    @include gxcf-scrollbar-track;
 }
   
 .ScrollableMediumHeight::-webkit-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: inset 0 0 6px var(--color-on-secondary);
-    box-shadow: inset 0 0 6px var(--color-on-secondary);
+    @include gxcf-scrollbar-thumb;
 }

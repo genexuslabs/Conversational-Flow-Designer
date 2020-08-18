@@ -1,2 +1,25 @@
 @import "../../node_modules/@genexus/gemini/dist/gemini/gemini";
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+
+@mixin vertical-overflow-element ($max-height){
+    overflow-y: auto;
+    overflow-x: hidden;
+    max-height: $max-height;
+}
+  
+@mixin gxcf-scrollbar{
+    width: var(--border-width-lg);
+    margin-left: var(--spacing-comp-01);
+}
+  
+@mixin gxcf-scrollbar-track{
+    -webkit-box-shadow: var(--box-shadow-values) var(--gray-01);
+    box-shadow: var(--box-shadow-values) var(--gray-01);
+    border-radius: var(--border-radius-md);
+}
+  
+@mixin gxcf-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: var(--box-shadow-values) var(--gray-08);
+    box-shadow: var(--box-shadow-values) var(--gray-08);
+}
