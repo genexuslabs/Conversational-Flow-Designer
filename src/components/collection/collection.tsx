@@ -105,7 +105,7 @@ export class Collection {
           mode="boxed"
           itemTitle={`${this.collectionHeader} (${this.collectionLength})`}
           itemId="triggers"
-          padding="xs"
+          padding="m"
         >
           <gxg-text slot="subtitle">{this.collectionSummary}</gxg-text>
           <gxg-spacer-layout
