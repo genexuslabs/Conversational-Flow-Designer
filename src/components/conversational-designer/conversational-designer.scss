@@ -4,34 +4,6 @@ body {
   background-color: var(--color-background);
 }
 
-.AddFlow {
-  display: block;
-  margin-top: var(--spacing-comp-01);
-  bottom: var(--spacing-comp-01);
-  position: sticky;
-}
-
-.LeftHeader
-{
-  margin-bottom: 5px;
-  float:left; 
-}
-
-.SearchBar{
-  width: 90%;
-  display: inline-block;
-}
-
-.SettingsButton{
-  width: 10%;
-  display: inline-block;
-  text-align: center;
-}
-
-.SettingsIcon{
-  vertical-align: middle;
-}
-
 .CollapsedFlowsContainer {
   @include vertical-overflow-element(80vh);
   height: auto;
@@ -47,8 +19,4 @@ body {
 
 .CollapsedFlowsContainer::-webkit-scrollbar-thumb {
   @include gxcf-scrollbar-thumb;
-}
-
-.svgIcon{
-  cursor: pointer;
 }

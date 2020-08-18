@@ -9,7 +9,7 @@ import {
   EventEmitter,
   getAssetPath
 } from "@stencil/core";
-import { RenderingOptions, MoveType } from "../common/helpers";
+import { MoveType } from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
 import { Position, PositionElement } from "../common/position";
 import { Locale } from "../common/locale";
@@ -94,6 +94,7 @@ export class ConversationalDesginer {
         type="secondary-text-icon"
         icon="add"
         onClick={event => this.TriggerAddFlow(event)}
+        style={{ position: "sticky" }}
       >
         {this.componentLocale.addFlow}
       </gxg-button>
@@ -127,9 +128,6 @@ export class ConversationalDesginer {
           id={flowId}
           data-flowid={flowElement.Id}
           flow={flowElement}
-          renderingType={
-            active ? RenderingOptions.Full : RenderingOptions.Collapsed
-          }
         />
       </gxg-drag-box>
     );

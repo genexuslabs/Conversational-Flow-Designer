@@ -7,27 +7,23 @@ import {
   Element,
   Method
 } from "@stencil/core";
-import { RenderingOptions, SelectTypes } from "../common/helpers";
-import { EventsHelper } from "../common/events-helper";
 
 @Component({
   tag: "gxcf-flow-collapsed",
-  styleUrl: "flow-collapsed.scss",
   shadow: true
 })
 export class FlowCollapsed {
   @Prop() flow: GXCFModel.FlowElement;
-  @Prop() renderingType: RenderingOptions;
 
   @Element() element: HTMLElement;
 
   @Method()
   async setTitleFocus() {
-    const summary: any = this.element
+    this.element
       .querySelector("gxg-box")
       .querySelector("gxg-spacer-layout")
-      .querySelector("gxcf-summary-title");
-    summary.setInputFocus();
+      .querySelector("gxcf-summary-title")
+      .setInputFocus();
   }
 
   @Event() modifyFlowName: EventEmitter;
@@ -66,16 +62,6 @@ export class FlowCollapsed {
   }
 
   render() {
-    let classProp = "";
-    if (this.renderingType == RenderingOptions.Collapsed) {
-      classProp = "FlowSummary NoActiveContent";
-    } else {
-      classProp = "FlowSummary ActiveContent";
-    }
-
-    let selectType: SelectTypes = SelectTypes.Compact;
-    if (!this.flow.ConversationalObjectName) selectType = SelectTypes.Full;
-
     return (
       <gxg-spacer-layout
         space="xs"
@@ -87,7 +73,10 @@ export class FlowCollapsed {
           orientation="horizontal"
           justify-content="flex-start"
         >
-          <gxcf-dot on={this.flow.Triggers.length > 0} class="Dot" />
+          <gxcf-dot
+            on={this.flow.Triggers.length > 0}
+            style={{ marginTop: "var(--small-icon-height)" }}
+          />
           <gxcf-summary-title
             summaryid={this.SummaryId}
             summaryvalue={this.flow.Name}
