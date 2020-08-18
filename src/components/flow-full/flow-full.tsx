@@ -149,18 +149,16 @@ export class FlowFull {
 
   private GetTriggers(): HTMLElement {
     return (
-      <div class="TriggersContainer TriggersContainerBody">
-        <gxcf-collection
-          collection={this.flow.Triggers}
-          collectionHeader={this.CollectionHeader}
-          collectionHintId={HintId.TriggerMessages}
-          collectionAddText={this.componentLocale.addTriggerMessage}
-          collectionSummary={this.GetSummaryTriggerMessage()}
-          onEditItem={event => this.HandleEditTriggerMessage(event)}
-          onDeleteItem={event => this.HandleDeleteTriggerMessage(event)}
-          defaultNewItemValue={this.flow.Name}
-        />
-      </div>
+      <gxcf-collection
+        collection={this.flow.Triggers}
+        collectionHeader={this.CollectionHeader}
+        collectionHintId={HintId.TriggerMessages}
+        collectionAddText={this.componentLocale.addTriggerMessage}
+        collectionSummary={this.GetSummaryTriggerMessage()}
+        onEditItem={event => this.HandleEditTriggerMessage(event)}
+        onDeleteItem={event => this.HandleDeleteTriggerMessage(event)}
+        defaultNewItemValue={this.flow.Name}
+      />
     );
   }
 
@@ -267,32 +265,38 @@ export class FlowFull {
           {this.redirectionsFromOtherFlows()}
         </gxg-spacer-layout>
         <gxg-box class="FlowFull" border="gray-03">
-          <gxcf-summary-title
-            summaryid={this.SummaryId}
-            summaryvalue={this.flow.Name}
-            fullWidth={true}
-            onChangingValue={event => this.triggerChangeFlowName(event)}
-          />
-          <div class="CommandsContainer">
-            <gxcf-button-delete
-              class="CommandPosition"
-              onConfirmDelete={event => this.TriggerDeleteFlow(event)}
-              confirmationTitle={this.componentLocale.deleteFlow}
-              confirmationMessage={Locale.format(
-                this.componentLocale.deleteFlowConfirmation,
-                [this.flow.Name]
-              )}
-            />
-            <gxcf-select
-              class="CustomSelectBoxing CommandPosition"
-              selectid={this.SelectId}
-              selectcaption={this.GetSummaryConversationalObject()}
-              selectIconType={this.flow.ConversationalObjectType}
-              selectType={selectType}
-              onClick={event => this.TriggerSelectConversationalObject(event)}
-            />
-          </div>
-          {this.GetTriggers()}
+          <gxg-columns alignY="center">
+            <gxg-column width="fluid">
+              <gxcf-summary-title
+                summaryid={this.SummaryId}
+                summaryvalue={this.flow.Name}
+                fullWidth={true}
+                onChangingValue={event => this.triggerChangeFlowName(event)}
+              />
+            </gxg-column>
+            <gxg-column width="content">
+              <gxcf-select
+                selectid={this.SelectId}
+                selectcaption={this.GetSummaryConversationalObject()}
+                selectIconType={this.flow.ConversationalObjectType}
+                selectType={selectType}
+                onClick={event => this.TriggerSelectConversationalObject(event)}
+              />
+            </gxg-column>
+            <gxg-column width="content">
+              <gxcf-button-delete
+                onConfirmDelete={event => this.TriggerDeleteFlow(event)}
+                confirmationTitle={this.componentLocale.deleteFlow}
+                confirmationMessage={Locale.format(
+                  this.componentLocale.deleteFlowConfirmation,
+                  [this.flow.Name]
+                )}
+              />
+            </gxg-column>
+          </gxg-columns>
+
+          <div>{this.GetTriggers()}</div>
+
           <gxg-separator margin="xs" type="dashed" />
           <gxg-spacer-layout
             space="xs"
@@ -305,7 +309,7 @@ export class FlowFull {
                   this.flow.Fields.length + ""
                 ])}
               </span>
-              <gxcf-hint hintId={HintId.UserInput} class="Hint" />
+              <gxcf-hint hintId={HintId.UserInput} />
             </div>
             <gxcf-user-input flow={this.flow} instance={this.instance} />
             <gxg-button
@@ -322,7 +326,7 @@ export class FlowFull {
                   this.flow.View.Templates.length + ""
                 ])}
               </span>
-              <gxcf-hint hintId={HintId.Responses} class="Hint" />
+              <gxcf-hint hintId={HintId.Responses} />
             </div>
             <gxcf-response flow={this.flow} instance={this.instance} />
             <gxg-button
