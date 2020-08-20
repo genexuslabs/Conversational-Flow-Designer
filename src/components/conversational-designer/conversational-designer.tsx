@@ -37,6 +37,7 @@ export class ConversationalDesginer {
   private flows: GXCFModel.FlowElement[];
   private popUp: HTMLElement;
   private componentLocale: any;
+  private newCategory = "New Category";
 
   private enableShowPublic() {
     this.showPublic = true;
@@ -88,6 +89,13 @@ export class ConversationalDesginer {
     this.triggerSelectCurrentFlow(flowName);
   }
 
+  triggerSetFlowCategory(flow: GXCFModel.FlowElement, category: string): void {
+    this.setFlowCategory.emit.call(this, {
+      flowName: flow.Name,
+      category: category
+    });
+  }
+
   private setAddFlow() {
     return (
       <gxg-button
@@ -98,6 +106,18 @@ export class ConversationalDesginer {
       >
         {this.componentLocale.addFlow}
       </gxg-button>
+    );
+  }
+
+  private setAddCategory() {
+    const flow = this.getActiveFlow();
+    const category = !flow.Category ? this.newCategory : "";
+    return (
+      <gxg-button
+        type="secondary-icon-only"
+        icon="folder"
+        onClick={() => this.triggerSetFlowCategory(flow, category)}
+      />
     );
   }
 
@@ -567,7 +587,12 @@ export class ConversationalDesginer {
                 <div class="CollapsedFlowsContainer">
                   {this.RenderizeFlows()}
                 </div>
-                {this.setAddFlow()}
+                <gxg-columns padding="l">
+                  <gxg-column width="fluid">{this.setAddFlow()}</gxg-column>
+                  <gxg-column width="content">
+                    {this.setAddCategory()}
+                  </gxg-column>
+                </gxg-columns>
               </gxg-spacer-layout>
             </gxg-column>
             <gxg-column>{this.renderizeActiveFlow()}</gxg-column>
