@@ -587,7 +587,7 @@ export class ConversationalDesginer {
                 <div class="CollapsedFlowsContainer">
                   {this.RenderizeFlows()}
                 </div>
-                <gxg-columns padding="l">
+                <gxg-columns padding="l" alignY="bottom">
                   <gxg-column width="fluid">{this.setAddFlow()}</gxg-column>
                   <gxg-column width="content">
                     {this.setAddCategory()}
