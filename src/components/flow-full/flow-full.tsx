@@ -222,13 +222,13 @@ export class FlowFull {
 
   formatPillElements(elements: HTMLElement[], text: string) {
     if (elements.length > 0) {
-      return (
-        <gxg-spacer-layout orientation="horizontal" space="xs">
-          <gxg-icon size="small" type="chevron-right" color="onbackground" />
-          <gxg-text>{text}</gxg-text>
+      return [
+        <gxg-spacer-layout space="s" orientation="horizontal">
+          <gxg-icon size="small" type="arrow-right"></gxg-icon>
+          <gxg-title type="title-01">{text}</gxg-title>
           {elements}
         </gxg-spacer-layout>
-      );
+      ];
     }
     return elements;
   }
