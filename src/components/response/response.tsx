@@ -330,11 +330,16 @@ export class Response {
     this.flow.View.Templates.forEach(function(response) {
       elements.push(
         <gxg-accordion-item
-          item-title={response.ResponseName}
+          item-title={
+            response.ResponseName
+              ? response.ResponseName
+              : "Response " + (response.Index + 1)
+          }
           mode="boxed"
           padding="xs"
           itemId={response.Index + ""}
           onClick={() => this.triggerSelectResponse(response.Index)}
+          editableTitle
         >
           <div slot="subtitle">{this.renderResponseSubtitle(response)}</div>
           <gxcf-button-delete
