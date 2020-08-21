@@ -1,6 +1,5 @@
 import { Component, h, Prop, Event, Element } from "@stencil/core";
 import { EventEmitter } from "events";
-import "@genexus/gemini";
 import { Locale } from "../common/locale";
 
 @Component({

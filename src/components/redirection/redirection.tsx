@@ -1,5 +1,7 @@
 import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 import { EventsHelper } from "../common/events-helper";
+import { Hint } from "../hint/hint";
+import { HintId } from "../common/helpers";
 
 @Component({
   tag: "gxcf-redirection",
@@ -52,6 +54,8 @@ export class Redirection {
         onConditionChange={event =>
           this.TriggerOnChangeRedirectCondition(event)
         }
+        label="Condition"
+        hintId={HintId.Redirection}
       />
     );
   }
@@ -60,16 +64,25 @@ export class Redirection {
     const elements: Array<HTMLElement> = new Array<HTMLElement>();
 
     if (this.requireCondition) elements.push(this.RenderCondition());
-
+    elements.push(<gxg-gxg-spacer-one />);
+    if (!this.requireCondition) {
+      elements.push(
+        <gxg-columns alignY="center">
+          <gxg-text>{this.label}</gxg-text>
+          <gxcf-hint hintId={HintId.Redirection} />
+        </gxg-columns>
+      );
+    }
+    const label = this.requireCondition ? this.label : "";
     elements.push(
       <gxg-select
-        required
         onChange={event => this.TriggerOnChangeRedirectTo(event)}
-        label={this.label}
+        label={label}
       >
         {this.LoadFlowsCombo()}
       </gxg-select>
     );
+    elements.push(<gxg-separator />);
 
     return elements;
   }

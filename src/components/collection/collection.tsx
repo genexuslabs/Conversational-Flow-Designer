@@ -1,11 +1,11 @@
 import { Component, Prop, h, Event, Element } from "@stencil/core";
 import { EventEmitter } from "events";
 import { Locale } from "../common/locale";
+import { mode } from "@genexus/gemini/dist/types/components/accordion/accordion";
 
 @Component({
   tag: "gxcf-collection",
   shadow: true,
-  styleUrl: "collection.scss",
   assetsDirs: ["assets/gxcf-collection-lang"]
 })
 export class Collection {
@@ -15,6 +15,7 @@ export class Collection {
   @Prop() collectionAddText: string;
   @Prop() collectionHintId: string;
   @Prop() defaultNewItemValue: string;
+  @Prop() mode: mode = "minimal";
 
   @Event() deleteItem: EventEmitter;
   @Event() editItem: EventEmitter;
@@ -100,20 +101,20 @@ export class Collection {
 
   render() {
     return (
-      <gxg-accordion mode="boxed">
+      <gxg-accordion
+        mode={this.mode}
+        padding={this.mode == "minimal" ? "xs" : "m"}
+      >
         <gxg-accordion-item
-          mode="boxed"
+          mode={this.mode}
           itemTitle={`${this.collectionHeader} (${this.collectionLength})`}
           itemId="triggers"
-          padding="m"
         >
           <gxg-text slot="subtitle">{this.collectionSummary}</gxg-text>
-          <gxg-spacer-layout
-            orientation="vertical"
-            space="xs"
-            class="ScrollableMediumHeight"
-          >
-            {this.renderizeItems(this.collection)}
+          <gxg-spacer-layout orientation="vertical" space="xs">
+            <gxg-scroll maxHeight="20vh">
+              {this.renderizeItems(this.collection)}
+            </gxg-scroll>
           </gxg-spacer-layout>
           {this.addItemElement}
         </gxg-accordion-item>

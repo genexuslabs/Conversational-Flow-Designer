@@ -1,22 +1,22 @@
-@mixin vertical-overflow-element ($max-height){
+@mixin gxcf-scrollbar {
+    ::-webkit-scrollbar {
+      width: 6px;
+    }
+    ::-webkit-scrollbar-track {
+      background-color: var(--gray-02);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb {
+      background: var(--gray-05);
+      border-radius: 10px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: var(--gray-04);
+      cursor: pointer;
+    }
+}
+
+@mixin gxcf-scrollbar-container($maxHeight){
     overflow-y: auto;
-    overflow-x: hidden;
-    max-height: $max-height;
-}
-  
-@mixin gxcf-scrollbar{
-    width: var(--border-width-lg);
-    margin-left: var(--spacing-comp-01);
-}
-  
-@mixin gxcf-scrollbar-track{
-    -webkit-box-shadow: var(--box-shadow-values) var(--gray-01);
-    box-shadow: var(--box-shadow-values) var(--gray-01);
-    border-radius: var(--border-radius-md);
-}
-  
-@mixin gxcf-scrollbar-thumb {
-    border-radius: 10px;
-    -webkit-box-shadow: var(--box-shadow-values) var(--gray-08);
-    box-shadow: var(--box-shadow-values) var(--gray-08);
+    max-height: $maxHeight;
 }

@@ -166,7 +166,7 @@ export class Response {
   renderStyleSelector(response: GXCFModel.ResponseElement): HTMLElement {
     return (
       <gxg-select
-        label={this.componentLocale.responseStyleLabel}
+        label=""
         onChange={event => this.triggerChangeResponseStyle(event, response)}
         style={{ width: "100%" }}
       >
@@ -198,7 +198,7 @@ export class Response {
         onChange={(event: CustomEvent) =>
           this.triggerChangeComponentType(event, response)
         }
-        label={this.componentLocale.showResponseLabel}
+        label=""
         style={{ width: "100%" }}
       >
         <gxg-option
@@ -221,11 +221,12 @@ export class Response {
     const elements: Array<HTMLElement> = new Array<HTMLElement>();
     if (response.Style == ResponseStyles.ComponentView) {
       elements.push(
-        <gxg-spacer-layout orientation="horizontal" space="xs">
-          {this.renderizeComponentType(response)}
+        <gxg-columns alignY="center">
+          <gxg-text>{this.componentLocale.showResponseLabel}</gxg-text>
           <gxcf-hint class="HintBlock" hintId={HintId.ShowResponseAs} />
-        </gxg-spacer-layout>
+        </gxg-columns>
       );
+      elements.push(this.renderizeComponentType(response));
       elements.push(
         <gxg-spacer-layout orientation="vertical" space="xs">
           <span>{this.componentLocale.sdComponent}</span>
@@ -256,23 +257,20 @@ export class Response {
       );
     } else if (response.Style == ResponseStyles.RedirectTo) {
       elements.push(
-        <gxg-spacer-layout orientation="horizontal" space="xs">
-          <gxcf-redirection
-            requireCondition={false}
-            redirectionProperty={{
-              RedirectCondition: "",
-              RedirectTo: response.RedirectTo,
-              Index: 0
-            }}
-            flows={this.instance.Flows}
-            onChangeRedirectTo={event =>
-              this.triggerChangeResponseRedirectTo(event, response)
-            }
-            label={this.componentLocale.redirectTo}
-            style={{ width: "100%" }}
-          />
-          <gxcf-hint class="HintBlock" hintId={HintId.Redirection} />
-        </gxg-spacer-layout>
+        <gxcf-redirection
+          requireCondition={false}
+          redirectionProperty={{
+            RedirectCondition: "",
+            RedirectTo: response.RedirectTo,
+            Index: 0
+          }}
+          flows={this.instance.Flows}
+          onChangeRedirectTo={event =>
+            this.triggerChangeResponseRedirectTo(event, response)
+          }
+          label={this.componentLocale.redirectTo}
+          style={{ width: "100%" }}
+        />
       );
     }
 
@@ -282,8 +280,10 @@ export class Response {
   renderResponseParameters(): HTMLElement[] {
     const elements: Array<HTMLElement> = new Array<HTMLElement>();
     if (this.flow.View.Attributes) {
-      if (this.flow.View.Attributes.length > 0)
+      if (this.flow.View.Attributes.length > 0) {
+        elements.push(<gxg-separator type="dashed" margin="m" />);
         elements.push(<span>{this.componentLocale.responseParameters}</span>);
+      }
 
       this.flow.View.Attributes.forEach(variable => {
         elements.push(
@@ -368,21 +368,21 @@ export class Response {
               this.handleDeleteResponseMessage(event, response);
             }}
           />
-          <span class="gxg-title-03">{this.componentLocale.condition}</span>
-          <gxcf-hint hintId={HintId.ResponseCondition} />
           <gxcf-condition
             currentCondition={response.Condition}
             onConditionChange={event =>
               this.triggerChangeResponseCondition(event, response)
             }
+            label="Condition"
+            hintId={HintId.ResponseCondition}
           />
           <gxg-separator type="dashed" margin="m" />
-          <gxg-spacer-layout orientation="horizontal">
-            {this.renderStyleSelector(response)}
+          <gxg-columns alignY="center">
+            <gxg-text>{this.componentLocale.responseStyleLabel}</gxg-text>
             <gxcf-hint class="HintBlock" hintId={HintId.ResponseStyle} />
-          </gxg-spacer-layout>
+          </gxg-columns>
+          {this.renderStyleSelector(response)}
           {this.renderStyleContent(response)}
-          <gxg-separator type="dashed" margin="m" />
           {this.renderResponseParameters()}
         </gxg-accordion-item>
       );

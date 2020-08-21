@@ -13,7 +13,6 @@ import { MoveType } from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
 import { Position, PositionElement } from "../common/position";
 import { Locale } from "../common/locale";
-import "@genexus/gemini";
 
 @Component({
   tag: "gxcf-conversational-designer",
@@ -198,6 +197,7 @@ export class ConversationalDesginer {
             itemTitle={key}
             padding="l"
             onDragOver={event => this.allowDropOverAccordion(event)}
+            editableTitle
           >
             <gxg-drag-container
               onItemDrop={event => this.handleDropFlow(event)}
@@ -584,9 +584,9 @@ export class ConversationalDesginer {
                     </gxg-button-group>
                   </gxg-column>
                 </gxg-columns>
-                <div class="CollapsedFlowsContainer">
+                <gxg-scroll maxHeight="80vh">
                   {this.RenderizeFlows()}
-                </div>
+                </gxg-scroll>
                 <gxg-columns padding="l" alignY="bottom">
                   <gxg-column width="fluid">{this.setAddFlow()}</gxg-column>
                   <gxg-column width="content">
