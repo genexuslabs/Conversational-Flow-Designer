@@ -11,6 +11,7 @@ import { Locale } from "../common/locale";
 import { EventsHelper } from "../common/events-helper";
 import { HintId, SelectTypes } from "../common/helpers";
 import { StringCollectionHelper } from "../common/string-collection-helper";
+import { Hint } from "../hint/hint";
 
 @Component({
   tag: "gxcf-user-input",
@@ -249,13 +250,16 @@ export class UserInput {
       }, this);
     }
     redirs.push(
-      <gxg-button
-        type="secondary-text-icon"
-        icon="add"
-        onClick={() => this.triggerAddRedirection(userInput)}
-      >
-        {this.componentLocale.addRedirection}
-      </gxg-button>
+      <gxg-columns alignY="center">
+        <gxg-button
+          type="secondary-text-icon"
+          icon="add"
+          onClick={() => this.triggerAddRedirection(userInput)}
+        >
+          {this.componentLocale.addRedirection}
+        </gxg-button>
+        <gxcf-hint hintId={HintId.Redirection} />
+      </gxg-columns>
     );
     return redirs;
   }
@@ -282,7 +286,10 @@ export class UserInput {
           onConditionChange={event =>
             this.triggerChangeCondition(event, userInput)
           }
+          label="Condition"
+          hintId={HintId.Required}
         />
+        <gxg-spacer-one space="s" />
         <gxg-spacer-layout orientation="horizontal" space="xs">
           <gxg-toggle
             label="Clean Context Value"
@@ -290,7 +297,7 @@ export class UserInput {
             size="small"
             class="CleanContextToggle"
           />
-          <gxcf-hint hintId={HintId.Required} class="UserInputHints" />
+          <gxcf-hint hintId={HintId.Required} />
         </gxg-spacer-layout>
       </gxg-accordion-item>
     );
@@ -362,7 +369,7 @@ export class UserInput {
               }
               label="Try Limit"
             />
-            <gxcf-hint hintId={HintId.TryLimit} class="UserInputHints" />
+            <gxcf-hint hintId={HintId.TryLimit} />
           </gxg-spacer-layout>
 
           <gxg-separator type="dashed" margin="s" />
@@ -387,10 +394,7 @@ export class UserInput {
                 this.triggerOnChangeValidationProcedure(event, userInput)
               }
             />
-            <gxcf-hint
-              hintId={HintId.ValidateUserInput}
-              class="UserInputHints"
-            />
+            <gxcf-hint hintId={HintId.ValidateUserInput} />
           </gxg-spacer-layout>
         </gxg-spacer-layout>
       </gxg-accordion-item>
@@ -409,7 +413,6 @@ export class UserInput {
           this.cancelBubble(event)
         }
       >
-        <gxcf-hint hintId={HintId.Redirection} class="UserInputHints" />
         {this.renderRedirections(userInput)}
       </gxg-accordion-item>
     );

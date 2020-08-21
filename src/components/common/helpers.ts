@@ -46,12 +46,6 @@ export class MoveType {
   public static readonly Down: string = "Down";
 }
 
-export enum RenderingOptions {
-  Collapsed,
-  Tall,
-  Full
-}
-
 export enum SelectTypes {
   Compact,
   Full,

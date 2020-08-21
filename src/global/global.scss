@@ -1,2 +1,6 @@
 @import "../../node_modules/@genexus/gemini/dist/gemini/gemini";
 @import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,700&display=swap");
+
+body {
+    background-color: var(--color-background);
+}

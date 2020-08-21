@@ -9,11 +9,10 @@ import {
   EventEmitter,
   getAssetPath
 } from "@stencil/core";
-import { RenderingOptions, MoveType } from "../common/helpers";
+import { MoveType } from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
 import { Position, PositionElement } from "../common/position";
 import { Locale } from "../common/locale";
-import "@genexus/gemini";
 
 @Component({
   tag: "gxcf-conversational-designer",
@@ -37,6 +36,7 @@ export class ConversationalDesginer {
   private flows: GXCFModel.FlowElement[];
   private popUp: HTMLElement;
   private componentLocale: any;
+  private newCategory = "New Category";
 
   private enableShowPublic() {
     this.showPublic = true;
@@ -88,15 +88,35 @@ export class ConversationalDesginer {
     this.triggerSelectCurrentFlow(flowName);
   }
 
+  triggerSetFlowCategory(flow: GXCFModel.FlowElement, category: string): void {
+    this.setFlowCategory.emit.call(this, {
+      flowName: flow.Name,
+      category: category
+    });
+  }
+
   private setAddFlow() {
     return (
       <gxg-button
         type="secondary-text-icon"
         icon="add"
         onClick={event => this.TriggerAddFlow(event)}
+        style={{ position: "sticky" }}
       >
         {this.componentLocale.addFlow}
       </gxg-button>
+    );
+  }
+
+  private setAddCategory() {
+    const flow = this.getActiveFlow();
+    const category = !flow.Category ? this.newCategory : "";
+    return (
+      <gxg-button
+        type="secondary-icon-only"
+        icon="folder"
+        onClick={() => this.triggerSetFlowCategory(flow, category)}
+      />
     );
   }
 
@@ -127,9 +147,6 @@ export class ConversationalDesginer {
           id={flowId}
           data-flowid={flowElement.Id}
           flow={flowElement}
-          renderingType={
-            active ? RenderingOptions.Full : RenderingOptions.Collapsed
-          }
         />
       </gxg-drag-box>
     );
@@ -180,6 +197,7 @@ export class ConversationalDesginer {
             itemTitle={key}
             padding="l"
             onDragOver={event => this.allowDropOverAccordion(event)}
+            editableTitle
           >
             <gxg-drag-container
               onItemDrop={event => this.handleDropFlow(event)}
@@ -566,10 +584,15 @@ export class ConversationalDesginer {
                     </gxg-button-group>
                   </gxg-column>
                 </gxg-columns>
-                <div class="CollapsedFlowsContainer">
+                <gxg-scroll maxHeight="80vh">
                   {this.RenderizeFlows()}
-                </div>
-                {this.setAddFlow()}
+                </gxg-scroll>
+                <gxg-columns padding="l" alignY="bottom">
+                  <gxg-column width="fluid">{this.setAddFlow()}</gxg-column>
+                  <gxg-column width="content">
+                    {this.setAddCategory()}
+                  </gxg-column>
+                </gxg-columns>
               </gxg-spacer-layout>
             </gxg-column>
             <gxg-column>{this.renderizeActiveFlow()}</gxg-column>

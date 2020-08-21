@@ -6,6 +6,8 @@ import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 })
 export class Condition {
   @Prop() currentCondition: string;
+  @Prop() label: string;
+  @Prop() hintId: string;
 
   @Event() conditionChange: EventEmitter;
   triggerOnConditionChange(event): void {
@@ -13,14 +15,19 @@ export class Condition {
   }
 
   render() {
-    return (
+    return [
+      <gxg-columns alignY="center">
+        <gxg-text>{this.label}</gxg-text>
+        <gxcf-hint hintId={this.hintId} />
+      </gxg-columns>,
+
       <gxg-form-text
         clearButton
         value={this.currentCondition}
         onChange={event => this.triggerOnConditionChange(event)}
         placeholder="always"
-        label="If..."
+        label=""
       />
-    );
+    ];
   }
 }
