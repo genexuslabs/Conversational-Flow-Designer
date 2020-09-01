@@ -18,7 +18,7 @@ import { Locale } from "../common/locale";
   tag: "gxcf-conversational-designer",
   styleUrl: "conversational-designer.scss",
   shadow: false,
-  assetsDirs: ["assets/gxcf-conversational-designer-lang"]
+  assetsDirs: ["assets/root-lang"]
 })
 export class ConversationalDesginer {
   @State() search: string;
@@ -276,7 +276,10 @@ export class ConversationalDesginer {
 
   async componentWillLoad(): Promise<void> {
     Locale.commonAssetsPath = getAssetPath("");
-    this.componentLocale = await Locale.getComponentStrings(this.element);
+    this.componentLocale = await Locale.getComponentStrings(
+      this.element,
+      "root"
+    );
     this.dragDropHandler = new ConversationalDesignerDragDrop(
       this.element as HTMLGxcfConversationalDesignerElement,
       this.moveFlow,

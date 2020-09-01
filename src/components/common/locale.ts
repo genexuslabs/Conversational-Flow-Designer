@@ -15,12 +15,17 @@ export class Locale {
       .valueOf();
   }
 
-  private static getStrings(component: string, lang: string): Promise<any> {
+  private static getStrings(
+    component: string,
+    lang: string,
+    folder: string
+  ): Promise<any> {
+    if (folder === "") folder = component;
     return new Promise((resolve, reject): void => {
       fetch(
         Locale.commonAssetsPath +
           Locale.folder +
-          component +
+          folder +
           Locale.folderSuffix +
           component +
           Locale.langPrefix +
@@ -36,14 +41,21 @@ export class Locale {
     });
   }
 
-  public static async getComponentStrings(element: HTMLElement): Promise<any> {
+  public static async getComponentStrings(
+    element: HTMLElement,
+    folder = ""
+  ): Promise<any> {
     const component = element.tagName.toLowerCase();
     const lang = Locale.getLang();
     let strings;
     try {
-      strings = await Locale.getStrings(component, lang);
+      strings = await Locale.getStrings(component, lang, folder);
     } catch (e) {
-      strings = await Locale.getStrings(component, Locale.defaultLanguage);
+      strings = await Locale.getStrings(
+        component,
+        Locale.defaultLanguage,
+        folder
+      );
     }
     return strings;
   }
