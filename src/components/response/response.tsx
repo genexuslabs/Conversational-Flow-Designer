@@ -144,6 +144,15 @@ export class Response {
     });
   }
 
+  @Event() changeResponseName: EventEmitter;
+  triggerTitleChanged(event: CustomEvent, responseIndex: number): void {
+    this.changeResponseName.emit.call(this, {
+      flowName: this.flow.Name,
+      index: responseIndex,
+      value: event.detail
+    });
+  }
+
   handleEditResponseMessage(
     event: CustomEvent,
     response: GXCFModel.ResponseElement
@@ -340,6 +349,9 @@ export class Response {
           itemId={response.Index + ""}
           onClick={() => this.triggerSelectResponse(response.Index)}
           editableTitle
+          onTitleChanged={event =>
+            this.triggerTitleChanged(event, response.Index)
+          }
         >
           <div slot="subtitle">{this.renderResponseSubtitle(response)}</div>
           <gxcf-button-delete
