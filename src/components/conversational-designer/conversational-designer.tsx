@@ -590,7 +590,7 @@ export class ConversationalDesginer {
                 <gxg-scroll maxHeight="80vh">
                   {this.RenderizeFlows()}
                 </gxg-scroll>
-                <gxg-columns padding="l" alignY="bottom">
+                <gxg-columns alignY="bottom">
                   <gxg-column width="fluid">{this.setAddFlow()}</gxg-column>
                   <gxg-column width="content">
                     {this.setAddCategory()}
