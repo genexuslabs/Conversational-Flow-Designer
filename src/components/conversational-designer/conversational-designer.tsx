@@ -81,6 +81,14 @@ export class ConversationalDesginer {
     this.addFlow.emit(event);
   }
 
+  @Event() changeCategoryName: EventEmitter;
+  triggerChangeCategoryName(event: CustomEvent, oldCategoryName: string): void {
+    this.changeCategoryName.emit.call(this, {
+      oldCategoryName: oldCategoryName,
+      newCategoryName: event.detail
+    });
+  }
+
   handleClickFlowCollapsed(flowName): void {
     this.instance.CurrentFlowName = flowName;
     this.renderFull = flowName;
@@ -198,6 +206,7 @@ export class ConversationalDesginer {
             padding="l"
             onDragOver={event => this.allowDropOverAccordion(event)}
             editableTitle
+            onTitleChanged={event => this.triggerChangeCategoryName(event, key)}
           >
             <gxg-drag-container
               onItemDrop={event => this.handleDropFlow(event)}
