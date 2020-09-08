@@ -34,6 +34,14 @@ jobs:
     - name: Run Validate Script
       run: npm run validate
     - name: publish
-      run: npm publish
+      run: |
+        $CommitNumber = git rev-list --no-merges --count HEAD
+        $packageJSONVersion = (Get-Content package.json) -join "`n" | ConvertFrom-Json | Select -ExpandProperty "version"
+        $versionParts = $packageJSONVersion.split(".")
+        $major = $versionParts[0]
+        $minor = $versionParts[1]
+        $version = "$major.$minor.$CommitNumber"
+        npm version $version --no-git-tag-version
+        npm publish
     - name: Build extension
       run: cmd /c curl --request POST --url ${{ secrets.WEBHOOK_URL }} --header 'authorization:token ${{ secrets.TOKEN }}' -H 'content-type:application/json' -H 'Accept:application/vnd.github.v3+json' -d '{\"ref\":\"refs/heads/beta\"}'
