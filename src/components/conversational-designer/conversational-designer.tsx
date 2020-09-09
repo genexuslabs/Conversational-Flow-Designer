@@ -110,7 +110,7 @@ export class ConversationalDesginer {
 
   private setAddCategory() {
     const flow = this.getActiveFlow();
-    const category = !flow.Category ? this.newCategory : "";
+    const category = !flow?.Category ? this.newCategory : "";
     return (
       <gxg-button
         type="secondary-icon-only"
