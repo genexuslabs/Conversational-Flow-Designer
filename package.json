@@ -19,7 +19,7 @@
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
     "validate": "npm run lint && npm run build --prod",
-    "patch": "npm verion patch",
+    "patch": "npm version patch",
     "pushWithTags": "git push --follow-tags"
   },
   "devDependencies": {
