@@ -556,8 +556,8 @@ export class ConversationalDesginer {
                     <gxg-form-text
                       placeholder={this.componentLocale.searchPlaceHolder}
                       icon="search"
-                      icon-position="left"
                       onInput={event => this.handleSearch(event)}
+                      iconPosition="start"
                     />
                   </gxg-column>
                   <gxg-column width="content">
