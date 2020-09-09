@@ -23,8 +23,8 @@ export class FlowCollapsed {
     this.element
       .querySelector("gxg-box")
       .querySelector("gxg-spacer-layout")
-      .querySelector("gxcf-summary-title")
-      .setInputFocus();
+      .querySelector("gxg-form-text")
+      .focus();
   }
 
   @Event() modifyFlowName: EventEmitter;
@@ -91,10 +91,11 @@ export class FlowCollapsed {
             on={this.flow.Triggers.length > 0}
             style={{ marginTop: "var(--small-icon-height)" }}
           />
-          <gxcf-summary-title
-            summaryid={this.SummaryId}
-            summaryvalue={this.flow.Name}
-            onChangingValue={event => this.triggerChangeFlowName(event)}
+          <gxg-form-text
+            value={this.flow.Name}
+            onChange={event => this.triggerChangeFlowName(event)}
+            textStyle="title-01"
+            minimal
           />
         </gxg-spacer-layout>
         <gxg-form-text
