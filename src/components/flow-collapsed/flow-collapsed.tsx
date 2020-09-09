@@ -7,6 +7,7 @@ import {
   Element,
   Method
 } from "@stencil/core";
+import { StringCollectionHelper } from "../common/string-collection-helper";
 
 @Component({
   tag: "gxcf-flow-collapsed",
@@ -31,6 +32,19 @@ export class FlowCollapsed {
     this.modifyFlowName.emit.call(this, {
       currentFlowName: this.flow.Name,
       newFlowName: event.detail
+    });
+  }
+
+  @Event() setTriggers: EventEmitter;
+  triggerSetTriggers(index: number, value: string, remove: boolean): void {
+    this.setTriggers.emit.call(this, {
+      flowName: this.flow.Name,
+      triggerMessages: StringCollectionHelper.FormatCollection(
+        this.flow.Triggers,
+        index,
+        value,
+        remove
+      )
     });
   }
 
@@ -83,10 +97,11 @@ export class FlowCollapsed {
             onChangingValue={event => this.triggerChangeFlowName(event)}
           />
         </gxg-spacer-layout>
-
-        <gxcf-summary-description
-          descriptionid={this.DescriptionId}
-          descriptionvalue={this.GetSummaryTriggerMessage()}
+        <gxg-form-text
+          value={this.GetSummaryTriggerMessage()}
+          onChange={event => this.triggerSetTriggers(0, event.detail, false)}
+          textStyle="quote"
+          minimal
         />
       </gxg-spacer-layout>
     );
