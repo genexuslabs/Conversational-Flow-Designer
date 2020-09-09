@@ -18,7 +18,9 @@
     "start": "stencil build --dev --watch --serve",
     "test": "stencil test --spec --e2e",
     "test.watch": "stencil test --spec --e2e --watchAll",
-    "validate": "npm run lint && npm run build --prod"
+    "validate": "npm run lint && npm run build --prod",
+    "patch": "npm verion patch",
+    "pushWithTags": "git push --follow-tags"
   },
   "devDependencies": {
     "@genexus/gemini": "0.1.134",
