@@ -557,7 +557,6 @@ export class ConversationalDesginer {
                       placeholder={this.componentLocale.searchPlaceHolder}
                       icon="search"
                       icon-position="left"
-                      role="textbox"
                       onInput={event => this.handleSearch(event)}
                     />
                   </gxg-column>
@@ -590,7 +589,7 @@ export class ConversationalDesginer {
                 <gxg-scroll maxHeight="80vh">
                   {this.RenderizeFlows()}
                 </gxg-scroll>
-                <gxg-columns padding="l" alignY="bottom">
+                <gxg-columns alignY="bottom">
                   <gxg-column width="fluid">{this.setAddFlow()}</gxg-column>
                   <gxg-column width="content">
                     {this.setAddCategory()}
