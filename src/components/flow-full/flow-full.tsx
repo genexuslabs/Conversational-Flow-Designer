@@ -268,11 +268,11 @@ export class FlowFull {
           <gxg-box border="gray-03">
             <gxg-columns alignY="center">
               <gxg-column width="fluid">
-                <gxcf-summary-title
-                  summaryid={this.SummaryId}
-                  summaryvalue={this.flow.Name}
-                  fullWidth={true}
-                  onChangingValue={event => this.triggerChangeFlowName(event)}
+                <gxg-form-text
+                  value={this.flow.Name}
+                  onChange={event => this.triggerChangeFlowName(event)}
+                  minimal
+                  textStyle="title-01"
                 />
               </gxg-column>
               <gxg-column width="content">
