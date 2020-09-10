@@ -189,9 +189,32 @@ export class PropertiesDefinition {
     return "";
   }
 
+  public static GetHelpPage(hintId: HintId): number {
+    if (hintId == HintId.TriggerMessages) return 39067;
+    if (hintId == HintId.Responses) return 39781;
+    if (hintId == HintId.UserInput) return 38959;
+    if (hintId == HintId.ConversationalObject) return 38189;
+    if (hintId == HintId.Required) return 43692;
+    if (hintId == HintId.AskMessages) return 40217;
+    if (hintId == HintId.ValidateUserInput) return 42594;
+    if (hintId == HintId.Redirection) return 39003;
+    if (hintId == HintId.ErrorMessages) return 38958;
+    if (hintId == HintId.TryLimit) return 40216;
+    if (hintId == HintId.ResponseMessage) return 39033;
+    if (hintId == HintId.ResponseCondition) return 39491;
+    if (hintId == HintId.ResponseStyle) return 39492;
+    if (hintId == HintId.ShowResponseAs) return 39494;
+    if (hintId == HintId.WebComponent) return 39885;
+    if (hintId == HintId.SDComponent) return 39878;
+    return 37102;
+  }
+
   static GetURL(hintId: string): string {
     if (hintId) {
-      return "https://wiki.genexus.com/commwiki/servlet/wiki?37102";
+      return (
+        "https://wiki.genexus.com/commwiki/servlet/wiki?" +
+        this.GetHelpPage(hintId)
+      );
     }
   }
 }
