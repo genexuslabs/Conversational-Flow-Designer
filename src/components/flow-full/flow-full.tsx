@@ -170,15 +170,15 @@ export class FlowFull {
   }
 
   getPill(flowElement: GXCFModel.FlowElement) {
-    let slot = flowElement.Name;
-    const maxLength = 20;
-    if (flowElement.Name.length > maxLength)
-      slot = (
-        <gxg-tooltip label={flowElement.Name} position="bottom">
-          {flowElement.Name.substring(0, maxLength - 1)}
-        </gxg-tooltip>
-      );
     if (flowElement) {
+      let slot = flowElement.Name;
+      const maxLength = 20;
+      if (flowElement.Name.length > maxLength)
+        slot = (
+          <gxg-tooltip label={flowElement.Name} position="bottom">
+            {flowElement.Name.substring(0, maxLength - 1)}
+          </gxg-tooltip>
+        );
       return (
         <gxg-pill
           onClick={() => this.triggerSetSelectedFlow(flowElement.Name)}
