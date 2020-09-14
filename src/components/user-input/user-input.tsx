@@ -230,7 +230,7 @@ export class UserInput {
     const redirs: HTMLElement[] = new Array<HTMLElement>();
     if (userInput.Redirections.length > 0) {
       let index = 0;
-      userInput.Redirections.forEach(function(redir, userInput) {
+      userInput.Redirections.forEach(function(redir) {
         redirs.push(
           <gxcf-redirection
             redirectionProperty={redir}
