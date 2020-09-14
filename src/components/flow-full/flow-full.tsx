@@ -204,9 +204,13 @@ export class FlowFull {
             return elements.push(this.getPill(flow));
           }
           if (!from && !flowPills.includes(redirection.RedirectTo)) {
-            const rFlow = this.getFlow(redirection.RedirectTo);
-            elements.push(this.getPill(rFlow, false));
-            flowPills.push(redirection.RedirectTo);
+            const rFlow: GXCFModel.FlowElement = this.getFlow(
+              redirection.RedirectTo
+            );
+            if (rFlow != null) {
+              elements.push(this.getPill(rFlow, false));
+              flowPills.push(redirection.RedirectTo);
+            }
           }
         }
       }, this);
