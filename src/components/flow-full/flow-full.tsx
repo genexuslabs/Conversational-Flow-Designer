@@ -7,7 +7,7 @@ import {
   State,
   Element
 } from "@stencil/core";
-import { HintId, SelectTypes } from "../common/helpers";
+import { HintId, ResponseStyles, SelectTypes } from "../common/helpers";
 import { StringCollectionHelper } from "../common/string-collection-helper";
 import { Position } from "../common/position";
 import { Locale } from "../common/locale";
@@ -213,7 +213,10 @@ export class FlowFull {
     }, this);
 
     flow.View.Templates.forEach(function(response) {
-      if (response.RedirectTo != "") {
+      if (
+        response.RedirectTo != "" &&
+        response.Style == ResponseStyles.RedirectTo
+      ) {
         if (from && response.RedirectTo == this.flow.Name) {
           return elements.push(this.getPill(flow));
         }
