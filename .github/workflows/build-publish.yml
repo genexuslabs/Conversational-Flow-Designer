@@ -36,4 +36,8 @@ jobs:
     - name: publish
       run: npm publish
     - name: Build extension
-      run: cmd /c curl --request POST --url ${{ secrets.WEBHOOK_URL }} --header 'authorization:token ${{ secrets.TOKEN }}' -H 'content-type:application/json' -H 'Accept:application/vnd.github.v3+json' -d '{\"ref\":\"refs/heads/beta\"}'
+      run: |
+        $commitMessage = git log -1 --pretty=%B
+        $commitMessage = $Test = "Worflow dispatch from Conversational-Flows-Designer: - " + $commitMessage
+        $dispatchData = '{\"ref\":\"refs/heads/beta\", \"inputs\": {\"commitMessage\":\"'+$CommitMessage+'\"}}'
+        cmd /c curl --request POST --url ${{ secrets.WEBHOOK_URL }} --header 'authorization:token ${{ secrets.TOKEN }}' -H 'content-type:application/json' -H 'Accept:application/vnd.github.v3+json' -d $dispatchData
