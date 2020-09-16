@@ -12,7 +12,7 @@ export class Collection {
   @Prop() collection: string[];
   @Prop() collectionHeader: string;
   @Prop() collectionSummary: string;
-  @Prop() collectionAddText: string;
+  @Prop() collectionAddText = "";
   @Prop() collectionHintId: string;
   @Prop() defaultNewItemValue: string;
   @Prop() mode: mode = "minimal";
@@ -55,7 +55,7 @@ export class Collection {
   addItemElement = (
     <gxg-button
       type="secondary-text-icon"
-      icon="add"
+      icon="general/add"
       onClick={() => this.addItem()}
     >
       {this.collectionAddText}

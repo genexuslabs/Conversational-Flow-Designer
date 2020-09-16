@@ -253,7 +253,7 @@ export class UserInput {
       <gxg-columns alignY="center">
         <gxg-button
           type="secondary-text-icon"
-          icon="add"
+          icon="general/add"
           onClick={() => this.triggerAddRedirection(userInput)}
         >
           {this.componentLocale.addRedirection}

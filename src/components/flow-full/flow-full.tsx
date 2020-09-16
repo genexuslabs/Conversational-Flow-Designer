@@ -183,7 +183,9 @@ export class FlowFull {
         <gxg-pill
           onClick={() => this.triggerSetSelectedFlow(flowElement.Name)}
           icon={
-            flowElement.Triggers.length > 0 ? "pill-filled" : "pill-outlined"
+            flowElement.Triggers.length > 0
+              ? "general/pill-filled"
+              : "general/pill-outlined"
           }
           type="button"
         >
@@ -332,7 +334,7 @@ export class FlowFull {
               <gxcf-user-input flow={this.flow} instance={this.instance} />
               <gxg-button
                 type="secondary-text-icon"
-                icon="add"
+                icon="general/add"
                 onClick={() => this.TriggerOnAddUserInput()}
               >
                 {this.componentLocale.addUserInput}
@@ -349,7 +351,7 @@ export class FlowFull {
               <gxcf-response flow={this.flow} instance={this.instance} />
               <gxg-button
                 type="secondary-text-icon"
-                icon="add"
+                icon="general/add"
                 onClick={() => this.TriggerOnAddResponse()}
               >
                 {this.componentLocale.addResponse}

@@ -99,7 +99,7 @@ export class ConversationalDesginer {
     return (
       <gxg-button
         type="secondary-text-icon"
-        icon="add"
+        icon="general/add"
         onClick={event => this.TriggerAddFlow(event)}
         style={{ position: "sticky" }}
       >
@@ -114,7 +114,7 @@ export class ConversationalDesginer {
     return (
       <gxg-button
         type="secondary-icon-only"
-        icon="folder"
+        icon="general/folder"
         onClick={() => this.triggerSetFlowCategory(flow, category)}
       />
     );
@@ -131,7 +131,10 @@ export class ConversationalDesginer {
     this.askForDeleteElement(event);
   }
 
-  private renderizeFlow(flowElement: GXCFModel.FlowElement): HTMLElement {
+  private renderizeFlow(
+    flowElement: GXCFModel.FlowElement,
+    indent: boolean
+  ): HTMLElement {
     const active: boolean = this.instance.CurrentFlowName === flowElement.Name;
     const flowId = flowElement.Name.replace(/\s/g, "");
     return (
@@ -142,6 +145,14 @@ export class ConversationalDesginer {
         active={active}
         onClick={() => this.handleClickFlowCollapsed(flowElement.Name)}
         onDeleted={event => this.askForDeleteFlow(event, flowElement)}
+        style={
+          indent
+            ? {
+                marginLeft: "var(--spacing-lay-m)",
+                width: "calc(100% - var(--spacing-lay-m))"
+              }
+            : {}
+        }
       >
         <gxcf-flow-collapsed
           id={flowId}
@@ -153,7 +164,8 @@ export class ConversationalDesginer {
   }
 
   private renderizeFlowsFromArray(
-    flows: Array<GXCFModel.FlowElement>
+    flows: Array<GXCFModel.FlowElement>,
+    indent: boolean
   ): HTMLElement[] {
     const flowsHTML: HTMLElement[] = [];
     flows.forEach(function(flowElement) {
@@ -161,7 +173,7 @@ export class ConversationalDesginer {
         (flowElement.Triggers.length == 0 && this.showPrivate) ||
         (flowElement.Triggers.length > 0 && this.showPublic)
       )
-        flowsHTML.push(this.renderizeFlow(flowElement));
+        flowsHTML.push(this.renderizeFlow(flowElement, indent));
     }, this);
     return flowsHTML;
   }
@@ -188,7 +200,8 @@ export class ConversationalDesginer {
     for (const key in categorizedFlows) {
       this.flows = this.flows.concat(categorizedFlows[key]);
       const innerFlows: HTMLElement[] = this.renderizeFlowsFromArray(
-        categorizedFlows[key]
+        categorizedFlows[key],
+        true
       );
       if (innerFlows.length > 0) {
         elements.push(
@@ -211,7 +224,7 @@ export class ConversationalDesginer {
     this.flows = this.flows.concat(woCategoryFlows);
     const woCategoryFlowsElements = (
       <gxg-drag-container onItemDrop={event => this.handleDropFlow(event)}>
-        {this.renderizeFlowsFromArray(woCategoryFlows)}
+        {this.renderizeFlowsFromArray(woCategoryFlows, false)}
       </gxg-drag-container>
     );
     elements = elements.concat(woCategoryFlowsElements);
@@ -551,41 +564,43 @@ export class ConversationalDesginer {
                   </gxg-column>
                 </gxg-columns>
 
-                <gxg-columns space="s" alignY="center">
-                  <gxg-column width="fluid">
-                    <gxg-form-text
-                      placeholder={this.componentLocale.searchPlaceHolder}
-                      icon="search"
-                      onInput={event => this.handleSearch(event)}
-                      iconPosition="start"
-                    />
-                  </gxg-column>
-                  <gxg-column width="content">
-                    <gxg-button-group default-selected-btn-id="all" outlined>
-                      <button
-                        id="all"
-                        value="all"
-                        onClick={() => this.enableShowAll()}
-                      >
-                        {this.componentLocale.all}
-                      </button>
-                      <button
-                        id="public"
-                        value="public"
-                        onClick={() => this.enableShowPublic()}
-                      >
-                        {this.componentLocale.public}
-                      </button>
-                      <button
-                        id="private"
-                        value="private"
-                        onClick={() => this.enableShowPrivate()}
-                      >
-                        {this.componentLocale.private}
-                      </button>
-                    </gxg-button-group>
-                  </gxg-column>
-                </gxg-columns>
+                <gxg-column width="fluid">
+                  <gxg-form-text
+                    placeholder={this.componentLocale.searchPlaceHolder}
+                    icon="general/search"
+                    onInput={event => this.handleSearch(event)}
+                    iconPosition="start"
+                  />
+                </gxg-column>
+                <gxg-column width="content">
+                  <gxg-button-group
+                    default-selected-btn-id="all"
+                    outlined
+                    fullWidth
+                  >
+                    <button
+                      id="all"
+                      value="all"
+                      onClick={() => this.enableShowAll()}
+                    >
+                      {this.componentLocale.all}
+                    </button>
+                    <button
+                      id="wTriggers"
+                      value="wTriggers"
+                      onClick={() => this.enableShowPublic()}
+                    >
+                      {this.componentLocale.wTriggers}
+                    </button>
+                    <button
+                      id="woTriggers"
+                      value="woTriggers"
+                      onClick={() => this.enableShowPrivate()}
+                    >
+                      {this.componentLocale.woTriggers}
+                    </button>
+                  </gxg-button-group>
+                </gxg-column>
                 <gxg-scroll maxHeight="80vh">
                   {this.RenderizeFlows()}
                 </gxg-scroll>

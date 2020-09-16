@@ -8,8 +8,8 @@
   "deleteResponseConfirmation": "Do you want to delete the response '{0}'?",
   "searchPlaceHolder": "Search",
   "all": "All",
-  "public": "Public",
-  "private": "Private",
+  "wTriggers": "With Triggers",
+  "woTriggers": "Without Triggers",
   "variables": "Variables",
   "entities": "Entities",
   "properties": "Properties"
