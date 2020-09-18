@@ -75,7 +75,6 @@
 
       function changeMode(mode){
         document.cookie = themeMode+"="+mode;
-        console.log("mode: "+document.cookie)
         document.querySelector("html").setAttribute("class", "hydrated "+mode);        
       }
 
