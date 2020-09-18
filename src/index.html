@@ -30,7 +30,6 @@
       const themeMode = "mode";
 
       if (document.cookie){
-        console.log(document.cookie);
         var langValue = getCookieValue(langParam);
         if (langValue !== ""){
           document.querySelector("html").setAttribute(langParam, langValue);
@@ -75,8 +74,8 @@
       });
 
       function changeMode(mode){
-        document.getElementsByTagName("html")[0].setAttribute("class", "hydrated "+mode);
         document.cookie = themeMode+"="+mode;
+        document.getElementsByTagName("html")[0].setAttribute("class", "hydrated "+mode);        
       }
 
       function changeLanguage(lang){
