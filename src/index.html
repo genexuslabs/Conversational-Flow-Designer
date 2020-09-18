@@ -30,6 +30,7 @@
       const themeMode = "mode";
 
       if (document.cookie){
+        console.log(document.cookie);
         var langValue = getCookieValue(langParam);
         if (langValue !== ""){
           document.querySelector("html").setAttribute(langParam, langValue);
