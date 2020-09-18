@@ -75,11 +75,12 @@
 
       function changeMode(mode){
         document.cookie = themeMode+"="+mode;
-        document.getElementsByTagName("html")[0].setAttribute("class", "hydrated "+mode);        
+        console.log("mode: "+document.cookie)
+        document.querySelector("html").setAttribute("class", "hydrated "+mode);        
       }
 
       function changeLanguage(lang){
-        document.getElementsByTagName("html")[0].setAttribute(langParam, lang);
+        document.querySelector("html").setAttribute(langParam, lang);
         document.cookie = langParam+"="+lang;
         reload();
       }
