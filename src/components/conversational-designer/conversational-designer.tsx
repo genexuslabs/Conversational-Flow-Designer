@@ -548,7 +548,7 @@ export class ConversationalDesginer {
           <gxg-columns space="m" alignY="top">
             <gxg-column width="1/3">
               <gxg-spacer-layout
-                space="xs"
+                space="s"
                 orientation="vertical"
                 justify-content="flex-start"
               >
@@ -564,43 +564,40 @@ export class ConversationalDesginer {
                   </gxg-column>
                 </gxg-columns>
 
-                <gxg-column width="fluid">
-                  <gxg-form-text
-                    placeholder={this.componentLocale.searchPlaceHolder}
-                    icon="general/search"
-                    onInput={event => this.handleSearch(event)}
-                    iconPosition="start"
-                  />
-                </gxg-column>
-                <gxg-column width="content">
-                  <gxg-button-group
-                    default-selected-btn-id="all"
-                    outlined
-                    fullWidth
+                <gxg-form-text
+                  placeholder={this.componentLocale.searchPlaceHolder}
+                  icon="general/search"
+                  onInput={event => this.handleSearch(event)}
+                  iconPosition="start"
+                />
+                <gxg-button-group
+                  default-selected-btn-id="all"
+                  outlined
+                  fullWidth
+                >
+                  <button
+                    id="all"
+                    value="all"
+                    onClick={() => this.enableShowAll()}
                   >
-                    <button
-                      id="all"
-                      value="all"
-                      onClick={() => this.enableShowAll()}
-                    >
-                      {this.componentLocale.all}
-                    </button>
-                    <button
-                      id="wTriggers"
-                      value="wTriggers"
-                      onClick={() => this.enableShowPublic()}
-                    >
-                      {this.componentLocale.wTriggers}
-                    </button>
-                    <button
-                      id="woTriggers"
-                      value="woTriggers"
-                      onClick={() => this.enableShowPrivate()}
-                    >
-                      {this.componentLocale.woTriggers}
-                    </button>
-                  </gxg-button-group>
-                </gxg-column>
+                    {this.componentLocale.all}
+                  </button>
+                  <button
+                    id="wTriggers"
+                    value="wTriggers"
+                    onClick={() => this.enableShowPublic()}
+                  >
+                    {this.componentLocale.wTriggers}
+                  </button>
+                  <button
+                    id="woTriggers"
+                    value="woTriggers"
+                    onClick={() => this.enableShowPrivate()}
+                  >
+                    {this.componentLocale.woTriggers}
+                  </button>
+                </gxg-button-group>
+
                 <gxg-scroll maxHeight="80vh">
                   {this.RenderizeFlows()}
                 </gxg-scroll>
