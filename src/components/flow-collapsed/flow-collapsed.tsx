@@ -70,7 +70,10 @@ export class FlowCollapsed {
         >
           <gxcf-dot
             on={this.flow.Triggers.length > 0}
-            style={{ marginTop: "var(--small-icon-height)" }}
+            style={{
+              marginTop:
+                "calc(var(--small-icon-height) + (var(--small-icon-height)/2)"
+            }}
           />
           <gxg-form-text
             value={this.flow.Name}
