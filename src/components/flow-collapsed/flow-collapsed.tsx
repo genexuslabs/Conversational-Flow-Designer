@@ -76,35 +76,29 @@ export class FlowCollapsed {
   }
 
   render() {
-    return (
+    return [
       <gxg-spacer-layout
         space="xs"
-        orientation="vertical"
+        orientation="horizontal"
         justify-content="flex-start"
       >
-        <gxg-spacer-layout
-          space="xs"
-          orientation="horizontal"
-          justify-content="flex-start"
-        >
-          <gxcf-dot
-            on={this.flow.Triggers.length > 0}
-            style={{ marginTop: "var(--small-icon-height)" }}
-          />
-          <gxg-form-text
-            value={this.flow.Name}
-            onChange={event => this.triggerChangeFlowName(event)}
-            textStyle="title-01"
-            minimal
-          />
-        </gxg-spacer-layout>
+        <gxcf-dot
+          on={this.flow.Triggers.length > 0}
+          style={{ marginTop: "var(--small-icon-height)" }}
+        />
         <gxg-form-text
-          value={this.GetSummaryTriggerMessage()}
-          onChange={event => this.triggerSetTriggers(0, event.detail, false)}
-          textStyle="quote"
+          value={this.flow.Name}
+          onChange={event => this.triggerChangeFlowName(event)}
+          textStyle="title-01"
           minimal
         />
-      </gxg-spacer-layout>
-    );
+      </gxg-spacer-layout>,
+      <gxg-form-text
+        value={this.GetSummaryTriggerMessage()}
+        onChange={event => this.triggerSetTriggers(0, event.detail, false)}
+        textStyle="quote"
+        minimal
+      />
+    ];
   }
 }
