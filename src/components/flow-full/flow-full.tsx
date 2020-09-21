@@ -317,7 +317,7 @@ export class FlowFull {
 
             <div>{this.GetTriggers()}</div>
 
-            <gxg-separator margin="xs" type="dashed" />
+            <gxg-separator margin="s" type="dashed" />
             <gxg-spacer-layout
               space="xs"
               orientation="vertical"
@@ -339,7 +339,7 @@ export class FlowFull {
               >
                 {this.componentLocale.addUserInput}
               </gxg-button>
-              <gxg-separator margin="xs" type="dashed" />
+              <gxg-separator margin="s" type="dashed" />
               <div>
                 <span class="ElementsHeaderText gxg-title-03">
                   {Locale.format(this.componentLocale.responsesCount, [
