@@ -113,7 +113,11 @@ export class Collection {
           <gxg-text slot="subtitle">{this.collectionSummary}</gxg-text>
           <gxg-spacer-layout orientation="vertical" space="xs">
             <gxg-scroll maxHeight="20vh">
-              <gxg-spacer-layout orientation="vertical" space="xs">
+              <gxg-spacer-layout
+                orientation="vertical"
+                space="xs"
+                style={{ paddingRight: "var(--spacing-lay-xs)" }}
+              >
                 {this.renderizeItems(this.collection)}
               </gxg-spacer-layout>
             </gxg-scroll>
