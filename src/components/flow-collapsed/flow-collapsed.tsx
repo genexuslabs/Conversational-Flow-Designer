@@ -48,57 +48,39 @@ export class FlowCollapsed {
     });
   }
 
-  get SummaryId(): string {
-    return `GXCFSum_${this.flow.Id}`;
-  }
-
-  get ArrowId(): string {
-    return `GXCFArrow_${this.flow.Id}`;
-  }
-
-  get SelectId(): string {
-    return `GXCFSelectId_${this.flow.Id}`;
-  }
-
-  get DescriptionId(): string {
-    return `GXCFDescriptionId_${this.flow.Id}`;
-  }
-
-  private GetSummaryTriggerMessage(): string {
-    if (this.flow.Triggers[0] != null) {
-      return this.flow.Triggers[0];
-    }
-    return "";
-  }
-
-  hasTriggers(): boolean {
-    return this.flow.Triggers.length > 0;
+  getFirstTrigger() {
+    if (this.flow.Triggers.length > 0 && this.flow.Triggers[0] !== "")
+      return (
+        <gxg-form-text
+          value={this.flow.Triggers[0]}
+          onChange={event => this.triggerSetTriggers(0, event.detail, false)}
+          textStyle="quote"
+          minimal
+        />
+      );
   }
 
   render() {
-    return [
-      <gxg-spacer-layout
-        space="xs"
-        orientation="horizontal"
-        justify-content="flex-start"
-      >
-        <gxcf-dot
-          on={this.flow.Triggers.length > 0}
-          style={{ marginTop: "var(--small-icon-height)" }}
-        />
-        <gxg-form-text
-          value={this.flow.Name}
-          onChange={event => this.triggerChangeFlowName(event)}
-          textStyle="title-01"
-          minimal
-        />
-      </gxg-spacer-layout>,
-      <gxg-form-text
-        value={this.GetSummaryTriggerMessage()}
-        onChange={event => this.triggerSetTriggers(0, event.detail, false)}
-        textStyle="quote"
-        minimal
-      />
-    ];
+    return (
+      <div>
+        <gxg-spacer-layout
+          space="xs"
+          orientation="horizontal"
+          justify-content="flex-start"
+        >
+          <gxcf-dot
+            on={this.flow.Triggers.length > 0}
+            style={{ marginTop: "var(--small-icon-height)" }}
+          />
+          <gxg-form-text
+            value={this.flow.Name}
+            onChange={event => this.triggerChangeFlowName(event)}
+            textStyle="title-01"
+            minimal
+          />
+        </gxg-spacer-layout>
+        {this.getFirstTrigger()}
+      </div>
+    );
   }
 }
