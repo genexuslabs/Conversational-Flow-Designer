@@ -601,13 +601,11 @@ export class ConversationalDesginer {
                 <gxg-scroll maxHeight="80vh">
                   {this.RenderizeFlows()}
                 </gxg-scroll>
-                <gxg-columns alignY="bottom">
-                  <gxg-column width="fluid">{this.setAddFlow()}</gxg-column>
-                  <gxg-column width="content">
-                    {this.setAddCategory()}
-                  </gxg-column>
-                </gxg-columns>
               </gxg-spacer-layout>
+              <gxg-columns alignY="bottom">
+                <gxg-column width="fluid">{this.setAddFlow()}</gxg-column>
+                <gxg-column width="content">{this.setAddCategory()}</gxg-column>
+              </gxg-columns>
             </gxg-column>
             <gxg-column>{this.renderizeActiveFlow()}</gxg-column>
           </gxg-columns>
