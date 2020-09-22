@@ -176,7 +176,7 @@ export class FlowFull {
       if (flowElement.Name.length > maxLength)
         slot = (
           <gxg-tooltip label={flowElement.Name} position="bottom">
-            {flowElement.Name.substring(0, maxLength - 1)}
+            {flowElement.Name.substring(0, maxLength - 4) + "..."}
           </gxg-tooltip>
         );
       return (
