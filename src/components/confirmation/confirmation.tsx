@@ -55,6 +55,7 @@ export class Confirmation {
           type="outlined"
           slot="footer"
           onClick={event => this.TriggerUserConfirmation(event)}
+          style={{ marginLeft: "var(--spacing-comp-01)" }}
         >
           {this.componentLocale.delete}
         </gxg-button>
