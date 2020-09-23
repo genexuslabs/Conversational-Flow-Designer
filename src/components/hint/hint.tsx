@@ -28,7 +28,7 @@ export class Hint {
     return (
       <gxg-icon
         size="small"
-        type="notice"
+        type="gemini-tools/notice"
         color="primary"
         onClick={() => this.handleShowHint()}
         style={{ verticalAlign: "middle", display: "inline-block" }}
