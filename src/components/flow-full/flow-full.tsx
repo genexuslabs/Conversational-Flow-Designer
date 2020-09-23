@@ -184,8 +184,8 @@ export class FlowFull {
           onClick={() => this.triggerSetSelectedFlow(flowElement.Name)}
           icon={
             flowElement.Triggers.length > 0
-              ? "general/pill-filled"
-              : "general/pill-outlined"
+              ? "gemini-tools/pill-filled"
+              : "gemini-tools/pill-outlined"
           }
           type="button"
         >
