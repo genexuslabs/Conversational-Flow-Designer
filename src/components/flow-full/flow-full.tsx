@@ -241,7 +241,7 @@ export class FlowFull {
     if (elements.length > 0) {
       return [
         <gxg-spacer-layout space="s" orientation="horizontal">
-          <gxg-icon size="small" type="arrow-right"></gxg-icon>
+          <gxg-icon size="small" type="navigation/flow-arrow"></gxg-icon>
           <gxg-title type="title-01">{text}</gxg-title>
           {elements}
         </gxg-spacer-layout>
