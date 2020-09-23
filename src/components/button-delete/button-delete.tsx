@@ -47,7 +47,7 @@ export class ButtonDelete {
   render() {
     return (
       <gxg-button
-        icon="general/deleted"
+        icon="general/delete"
         type="secondary-icon-only"
         onClick={event => this.handleDeleteIntention(event)}
       />
