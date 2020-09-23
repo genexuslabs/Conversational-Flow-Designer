@@ -240,11 +240,22 @@ export class FlowFull {
   formatPillElements(elements: HTMLElement[], text: string) {
     if (elements.length > 0) {
       return [
-        <gxg-spacer-layout space="s" orientation="horizontal">
-          <gxg-icon size="small" type="navigation/flow-arrow"></gxg-icon>
-          <gxg-title type="title-01">{text}</gxg-title>
-          {elements}
-        </gxg-spacer-layout>
+        <gxg-columns alignY="center" space="xs">
+          <gxg-column width="content">
+            <gxg-icon size="small" type="navigation/flow-arrow" />
+          </gxg-column>
+          <gxg-column width="content">
+            <gxg-title type="title-01">{text}</gxg-title>
+          </gxg-column>
+          <gxg-column
+            width="fluid"
+            style={{ paddingTop: "var(--spacing-comp-02)" }}
+          >
+            <gxg-spacer-layout orientation="horizontal" space="s">
+              {elements}
+            </gxg-spacer-layout>
+          </gxg-column>
+        </gxg-columns>
       ];
     }
     return elements;
