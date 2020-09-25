@@ -114,7 +114,7 @@ export class ConversationalDesginer {
     return (
       <gxg-button
         type="secondary-icon-only"
-        icon="general/folder"
+        icon="gemini-tools/folder"
         onClick={() => this.triggerSetFlowCategory(flow, category)}
       />
     );
