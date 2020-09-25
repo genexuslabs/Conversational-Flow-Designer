@@ -345,7 +345,7 @@ export class FlowFull {
               <gxcf-user-input flow={this.flow} instance={this.instance} />
               <gxg-button
                 type="secondary-text-icon"
-                icon="general/add"
+                icon="gemini-tools/add"
                 onClick={() => this.TriggerOnAddUserInput()}
               >
                 {this.componentLocale.addUserInput}
@@ -362,7 +362,7 @@ export class FlowFull {
               <gxcf-response flow={this.flow} instance={this.instance} />
               <gxg-button
                 type="secondary-text-icon"
-                icon="general/add"
+                icon="gemini-tools/add"
                 onClick={() => this.TriggerOnAddResponse()}
               >
                 {this.componentLocale.addResponse}

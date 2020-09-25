@@ -55,7 +55,7 @@ export class Collection {
   addItemElement = (
     <gxg-button
       type="secondary-text-icon"
-      icon="general/add"
+      icon="gemini-tools/add"
       onClick={() => this.addItem()}
     >
       {this.collectionAddText}

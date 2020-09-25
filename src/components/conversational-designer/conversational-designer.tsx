@@ -99,7 +99,7 @@ export class ConversationalDesginer {
     return (
       <gxg-button
         type="secondary-text-icon"
-        icon="general/add"
+        icon="gemini-tools/add"
         onClick={event => this.TriggerAddFlow(event)}
         style={{ position: "sticky" }}
       >

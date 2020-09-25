@@ -69,7 +69,7 @@ export class Select {
       );
     else
       return (
-        <gxg-button type="secondary-text-icon" icon="general/add">
+        <gxg-button type="secondary-text-icon" icon="gemini-tools/add">
           {this.selectcaption}
         </gxg-button>
       );
