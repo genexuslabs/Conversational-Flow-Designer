@@ -47,7 +47,7 @@ export class ButtonDelete {
   render() {
     return (
       <gxg-button
-        icon="general/delete"
+        icon="gemini-tools/delete"
         type="secondary-icon-only"
         onClick={event => this.handleDeleteIntention(event)}
       />

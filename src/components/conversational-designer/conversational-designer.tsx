@@ -566,7 +566,7 @@ export class ConversationalDesginer {
 
                 <gxg-form-text
                   placeholder={this.componentLocale.searchPlaceHolder}
-                  icon="general/search"
+                  icon="gemini-tools/search"
                   onInput={event => this.handleSearch(event)}
                   iconPosition="start"
                 />
