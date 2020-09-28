@@ -233,7 +233,6 @@ declare namespace LocalJSX {
     onAddResponse?: (event: CustomEvent<any>) => void;
     onAddUserInput?: (event: CustomEvent<any>) => void;
     onCollapseFlow?: (event: CustomEvent<any>) => void;
-    onDeleteFullFlow?: (event: CustomEvent<any>) => void;
     onModifyFlowName?: (event: CustomEvent<any>) => void;
     onSelectConversationalObject?: (event: CustomEvent<any>) => void;
     onSetSelectedFlow?: (event: CustomEvent<any>) => void;

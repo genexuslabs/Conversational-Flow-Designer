@@ -109,11 +109,6 @@ export class FlowFull {
     });
   }
 
-  @Event() deleteFullFlow: EventEmitter;
-  TriggerDeleteFlow(event): void {
-    this.deleteFullFlow.emit(event);
-  }
-
   @Event() setSelectedFlow: EventEmitter;
   triggerSetSelectedFlow(flowName: string) {
     this.setSelectedFlow.emit(flowName);
@@ -312,16 +307,6 @@ export class FlowFull {
                   onClick={event =>
                     this.TriggerSelectConversationalObject(event)
                   }
-                />
-              </gxg-column>
-              <gxg-column width="content">
-                <gxcf-button-delete
-                  onConfirmDelete={event => this.TriggerDeleteFlow(event)}
-                  confirmationTitle={this.componentLocale.deleteFlow}
-                  confirmationMessage={Locale.format(
-                    this.componentLocale.deleteFlowConfirmation,
-                    [this.flow.Name]
-                  )}
                 />
               </gxg-column>
             </gxg-columns>

@@ -246,7 +246,6 @@ export class ConversationalDesginer {
           data-flowid={activeFlow.Id}
           flow={activeFlow}
           instance={this.instance}
-          onDeleteFullFlow={() => this.triggerDeleteFlow(activeFlow.Name)}
         />
       );
     }
