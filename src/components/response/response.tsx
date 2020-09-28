@@ -286,41 +286,6 @@ export class Response {
     return elements;
   }
 
-  renderResponseParameters(): HTMLElement[] {
-    const elements: Array<HTMLElement> = new Array<HTMLElement>();
-    if (this.flow.View.Attributes) {
-      if (this.flow.View.Attributes.length > 0) {
-        elements.push(<gxg-separator type="dashed" margin="m" />);
-        elements.push(<span>{this.componentLocale.responseParameters}</span>);
-      }
-
-      this.flow.View.Attributes.forEach(variable => {
-        elements.push(
-          <gxg-spacer-layout orientation="vertical" space="xs">
-            <gxg-columns>
-              <gxg-column width="fluid">
-                <gxg-text>{variable.Variable}</gxg-text>
-              </gxg-column>
-              <gxg-column width="content">
-                <gxg-toggle
-                  label=""
-                  size="small"
-                  on={true}
-                  onClick={() =>
-                    this.triggerSwitchResponseParameter(variable.Variable)
-                  }
-                />
-              </gxg-column>
-            </gxg-columns>
-            <gxg-separator />
-          </gxg-spacer-layout>
-        );
-      });
-    }
-
-    return elements;
-  }
-
   renderResponseSubtitle(response: GXCFModel.ResponseElement) {
     const elements: HTMLElement[] = [];
     const showMsg = response.Format.length > 0 ? response.Format[0] : "";
@@ -395,7 +360,6 @@ export class Response {
           </gxg-columns>
           {this.renderStyleSelector(response)}
           {this.renderStyleContent(response)}
-          {this.renderResponseParameters()}
         </gxg-accordion-item>
       );
     }, this);
