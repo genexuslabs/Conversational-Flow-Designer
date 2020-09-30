@@ -1,7 +1,7 @@
 {
   "responseStyleLabel": "Response Style:",
-  "showResponseLabel": "Show Response as (SD Only)",
-  "sdComponent": "SD Component",
+  "showResponseLabel": "Show Response as",
+  "sdComponent": "Component",
   "webComponent": "Web Component",
   "redirectTo": "Redirect To",
   "responseName": "Response name...",
