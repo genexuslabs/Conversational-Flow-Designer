@@ -34,7 +34,10 @@ export class UserInput {
   }
 
   @Event() setUserInputEntity: EventEmitter;
-  private triggerSetUserInputEntity(event: CustomEvent, userInput): void {
+  private triggerSetUserInputEntity(
+    event: CustomEvent,
+    userInput: GXCFModel.UserInputElement
+  ): void {
     console.log(event);
     this.setUserInputEntity.emit.call(this, {
       flowName: this.flow.Name,
@@ -468,9 +471,20 @@ export class UserInput {
             orientation="vertical"
             justify-content="flex-start"
           >
-            <span class="gxg-title-03">
-              {this.componentLocale.entity + " " + userInput.Entity}
-            </span>
+            <gxg-columns alignY="center">
+              <gxg-column width="content">
+                <span class="gxg-title-03">{this.componentLocale.entity}</span>
+              </gxg-column>
+              <gxg-column width="fluid">
+                <gxg-form-text
+                  value={userInput.Entity}
+                  minimal
+                  onChange={event =>
+                    this.triggerSetUserInputEntity(event, userInput)
+                  }
+                />
+              </gxg-column>
+            </gxg-columns>
             <gxg-toggle
               size="small"
               label={
