@@ -14,8 +14,12 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
+      
+      - run:
+          name: Remove npmrc config
+          command: rm -f ./.npmrc
 
-      - run: npm install --globalconfig
+      - run: npm install
 
       - run:
           name: Run validate
@@ -39,8 +43,12 @@ jobs:
       - restore_cache:
           keys:
           - v1-dependencies-{{ checksum "package.json" }}
+      
+      - run:
+          name: Remove npmrc config
+          command: rm -f ./.npmrc
 
-      - run: npm install --globalconfig
+      - run: npm install
 
       - save_cache:
           paths:
