@@ -6,6 +6,8 @@ on:
 
 jobs:
   build:
+    env:
+      NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
     runs-on: windows-latest
 
@@ -34,7 +36,7 @@ jobs:
     - name: Run Validate Script
       run: npm run validate
     - name: publish
-      run: npm publish --registry=https://npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
+      run: npm publish
     - name: Build extension
       run: |
         $commitMessage = git log -1 --pretty=%B
