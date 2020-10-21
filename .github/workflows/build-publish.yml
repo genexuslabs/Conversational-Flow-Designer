@@ -34,7 +34,7 @@ jobs:
     - name: Run Validate Script
       run: npm run validate
     - name: publish
-      run: npm publish --registry=https://registry.npmjs.org/:_authToken=${{ secrets.GITHUB_TOKEN }}
+      run: npm publish --registry=https://npm.pkg.github.com/:_authToken=${{ secrets.GITHUB_TOKEN }}
     - name: Build extension
       run: |
         $commitMessage = git log -1 --pretty=%B
