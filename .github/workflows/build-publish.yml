@@ -6,8 +6,10 @@ on:
 
 jobs:
   build:
+    env:
+      NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    runs-on: self-hosted
+    runs-on: windows-latest
 
     steps:
     - name: Clean previous build #Cleaning dist, www, node_modules, .stencil

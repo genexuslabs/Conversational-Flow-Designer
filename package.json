@@ -1,5 +1,5 @@
 {
-  "name": "@genexus/conversational-flows-designer",
+  "name": "@genexuslabs/conversational-flows-designer",
   "version": "17.0.30",
   "description": "Conversational Flows Designer",
   "module": "dist/index.mjs",
@@ -10,7 +10,7 @@
     "dist/"
   ],
   "publishConfig": {
-    "registry": "http://nexus.genexus.com/repository/npm-prereleases/"
+    "registry": "https://npm.pkg.github.com"
   },
   "scripts": {
     "build": "stencil build",
