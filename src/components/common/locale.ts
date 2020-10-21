@@ -43,9 +43,10 @@ export class Locale {
 
   public static async getComponentStrings(
     element: HTMLElement,
-    folder = ""
+    folder = "",
+    component = ""
   ): Promise<any> {
-    const component = element.tagName.toLowerCase();
+    if (component == "") component = element.tagName.toLowerCase();
     const lang = Locale.getLang();
     let strings;
     try {

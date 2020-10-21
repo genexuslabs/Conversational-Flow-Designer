@@ -290,6 +290,7 @@ export class ConversationalDesginer {
     Locale.commonAssetsPath = getAssetPath("");
     this.componentLocale = await Locale.getComponentStrings(
       this.element,
+      "root",
       "root"
     );
     this.dragDropHandler = new ConversationalDesignerDragDrop(
