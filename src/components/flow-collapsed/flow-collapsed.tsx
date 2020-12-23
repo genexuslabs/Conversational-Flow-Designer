@@ -8,6 +8,7 @@ import {
   Method
 } from "@stencil/core";
 import { StringCollectionHelper } from "../common/string-collection-helper";
+import { GXCFModel } from "../common/model";
 
 @Component({
   tag: "gxcf-flow-collapsed",

@@ -11,6 +11,7 @@ import { HintId, ResponseStyles, SelectTypes } from "../common/helpers";
 import { StringCollectionHelper } from "../common/string-collection-helper";
 import { Position } from "../common/position";
 import { Locale } from "../common/locale";
+import { GXCFModel } from "../common/model";
 
 @Component({
   tag: "gxcf-flow-full",

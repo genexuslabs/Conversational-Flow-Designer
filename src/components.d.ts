@@ -6,6 +6,7 @@
  */
 import { HTMLStencilElement, JSXBase } from "@stencil/core/internal";
 import { mode } from "@genexus/gemini/dist/types/components/accordion/accordion";
+import { GXCFModel } from "./components/common/model";
 import { SelectTypes } from "./components/common/helpers";
 export namespace Components {
   interface GxcfButtonDelete {

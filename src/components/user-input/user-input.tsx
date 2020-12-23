@@ -12,6 +12,7 @@ import { EventsHelper } from "../common/events-helper";
 import { HintId, SelectTypes } from "../common/helpers";
 import { StringCollectionHelper } from "../common/string-collection-helper";
 import { Hint } from "../hint/hint";
+import { GXCFModel } from "../common/model";
 
 @Component({
   tag: "gxcf-user-input",

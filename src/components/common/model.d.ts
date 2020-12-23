@@ -1,4 +1,4 @@
-declare namespace GXCFModel {
+export namespace GXCFModel {
   export interface Instance {
     Flows: FlowElement[];
     SourceFlow: FlowElement;

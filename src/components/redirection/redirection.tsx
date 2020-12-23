@@ -2,6 +2,7 @@ import { Component, Prop, h, Event, EventEmitter } from "@stencil/core";
 import { EventsHelper } from "../common/events-helper";
 import { Hint } from "../hint/hint";
 import { HintId } from "../common/helpers";
+import { GXCFModel } from "../common/model";
 
 @Component({
   tag: "gxcf-redirection",

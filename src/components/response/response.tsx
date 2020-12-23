@@ -15,6 +15,7 @@ import {
 import { EventsHelper } from "../common/events-helper";
 import { Locale } from "../common/locale";
 import { StringCollectionHelper } from "../common/string-collection-helper";
+import { GXCFModel } from "../common/model";
 
 @Component({
   tag: "gxcf-response",

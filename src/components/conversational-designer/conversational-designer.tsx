@@ -13,6 +13,7 @@ import { MoveType } from "../common/helpers";
 import { ConversationalDesignerDragDrop } from "./conversational-designer-drag-drop";
 import { Position, PositionElement } from "../common/position";
 import { Locale } from "../common/locale";
+import { GXCFModel } from "../common/model";
 
 @Component({
   tag: "gxcf-conversational-designer",
