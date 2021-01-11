@@ -7,7 +7,7 @@ on:
 jobs:
   build:
     env:
-      NPM_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      NPM_TOKEN: ${{ secrets.NPMJS_TOKEN }}
 
     runs-on: windows-latest
 
