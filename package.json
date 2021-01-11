@@ -9,9 +9,6 @@
   "files": [
     "dist/"
   ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "scripts": {
     "build": "stencil build",
     "lint": "eslint ./src/**/*.ts ./src/**/*.tsx",
