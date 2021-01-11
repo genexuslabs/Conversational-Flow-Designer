@@ -36,7 +36,7 @@ jobs:
     - name: Run Validate Script
       run: npm run validate
     - name: publish
-      run: npm publish
+      run: npm publish --access=public
     - name: Build extension
       run: |
         $commitMessage = git log -1 --pretty=%B
