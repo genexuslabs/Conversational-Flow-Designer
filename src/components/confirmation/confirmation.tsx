@@ -42,7 +42,11 @@ export class Confirmation {
 
   render() {
     return (
-      <gxg-modal modalTitle={this.confirmationTitle} visible={this.visible}>
+      <gxg-modal
+        modalTitle={this.confirmationTitle}
+        visible={this.visible}
+        style={this.visible ? { display: "block" } : { display: "none" }}
+      >
         {this.confirmationMessage}
         <gxg-button
           type="outlined"

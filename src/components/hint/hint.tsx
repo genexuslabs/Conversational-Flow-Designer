@@ -17,6 +17,7 @@ export class Hint {
     console.log(this.element);
     const modal = this.element.shadowRoot.querySelector("gxg-modal");
     modal.setAttribute("visible", "true");
+    modal.style.display = "block";
   }
 
   async componentWillLoad(): Promise<void> {
@@ -39,7 +40,10 @@ export class Hint {
   render() {
     return [
       this.hintIcon(),
-      <gxg-modal modalTitle={PropertiesDefinition.GetTitle(this.hintId)}>
+      <gxg-modal
+        modalTitle={PropertiesDefinition.GetTitle(this.hintId)}
+        style={{ display: "none" }}
+      >
         <gxg-text>{this.hintDescription}</gxg-text>
         <gxg-text
           type="text-link"
