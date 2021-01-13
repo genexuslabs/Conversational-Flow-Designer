@@ -69,12 +69,14 @@ export class FlowCollapsed {
           orientation="horizontal"
           justify-content="flex-start"
         >
-          <gxcf-dot
-            on={this.flow.Triggers.length > 0}
-            style={{
-              marginTop:
-                "calc(var(--small-icon-height) + (var(--small-icon-height)/2)"
-            }}
+          <gxg-icon
+            size="small"
+            color="success"
+            type={
+              this.flow.Triggers.length > 0
+                ? "gemini-tools/pill-filled"
+                : "gemini-tools/pill-outlined"
+            }
           />
           <gxg-form-text
             value={this.flow.Name}
