@@ -18,22 +18,33 @@ export class Confirmation {
   @Event() userConfirmation: EventEmitter;
   TriggerUserConfirmation(event): void {
     this.userConfirmation.emit(event);
+    this.setDisplayNone();
   }
 
   @Event() userCancellation: EventEmitter;
   TriggerUserCancellation(event): void {
     this.userCancellation.emit(event);
+    this.setDisplayNone();
   }
 
   handleKeyDown(event): void {
     console.log(event.keyCode);
     if (event.key === "Escape") {
       this.userCancellation.emit(event);
+      this.setDisplayNone();
     }
   }
 
   componentDidRender(): void {
     document.onkeydown = (event: KeyboardEvent) => this.handleKeyDown(event);
+    this.setDisplayNone();
+  }
+
+  setDisplayNone() {
+    this.element.shadowRoot.querySelector("gxg-modal").style.display = this
+      .visible
+      ? "block"
+      : "none";
   }
 
   async componentWillLoad(): Promise<void> {
@@ -42,11 +53,7 @@ export class Confirmation {
 
   render() {
     return (
-      <gxg-modal
-        modalTitle={this.confirmationTitle}
-        visible={this.visible}
-        style={this.visible ? { display: "block" } : { display: "none" }}
-      >
+      <gxg-modal modalTitle={this.confirmationTitle} visible={this.visible}>
         {this.confirmationMessage}
         <gxg-button
           type="outlined"
