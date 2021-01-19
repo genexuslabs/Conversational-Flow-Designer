@@ -12,25 +12,6 @@ export class Select {
   @Prop() selectIconType: string;
   @Prop() selectType: SelectTypes;
 
-  private readonly compactClass: string = "CompactSelect";
-  private readonly fullClass: string = "FullSelect";
-  private readonly extendedClass: string = "ExtendedSelect";
-
-  private GetIconClass(): string {
-    let iconClass = "";
-    if (this.selectIconType && this.selectIconType != "")
-      iconClass = `${this.selectIconType} SelectIcon`;
-    else iconClass = `SelectIconHidden`;
-    return iconClass;
-  }
-
-  private GetSelectClass(): string {
-    if (this.selectType == SelectTypes.Full) return `${this.fullClass} Select`;
-    if (this.selectType == SelectTypes.Extended)
-      return `${this.extendedClass} Select`;
-    return `${this.compactClass} Select`;
-  }
-
   @Event() titleMouseDown: EventEmitter;
   TriggerMouseDown(): void {
     this.titleMouseDown.emit();
@@ -41,35 +22,34 @@ export class Select {
     this.titleMouseLeave.emit();
   }
 
-  private renderIcon(): HTMLElement {
-    if (this.selectType == SelectTypes.Full)
-      return <gxg-icon size="small" type="add" color="onbackground" />;
-    return <div class={this.GetIconClass()} />;
+  private getIconName(icon: string): string {
+    if (icon == "") return "gemini-tools/add";
+
+    if (icon == "DataProvider") icon = "data-provider";
+    else if (icon == "SDPanel") icon = "panel-for-sd";
+    else if (icon == "WebComponent") icon = "web-component";
+
+    return `objects/${icon.toLowerCase()}`;
   }
 
   render() {
     if (this.selectType == SelectTypes.Compact)
       return (
-        <gxg-box
-          id={this.selectid}
-          class={this.GetSelectClass()}
-          title={this.selectcaption}
+        <gxg-pill
+          icon={this.getIconName(this.selectIconType)}
           onMouseDown={() => this.TriggerMouseDown()}
           onMouseLeave={() => this.TriggerMouseLeave()}
+          class="Select"
         >
-          <gxg-spacer-layout
-            space="xs"
-            orientation="horizontal"
-            justify-content="flex-start"
-          >
-            {this.renderIcon()}
-            <span class="SelectText">{this.selectcaption}</span>
-          </gxg-spacer-layout>
-        </gxg-box>
+          {this.selectcaption}
+        </gxg-pill>
       );
     else
       return (
-        <gxg-button type="secondary-text-icon" icon="gemini-tools/add">
+        <gxg-button
+          type="secondary-text-icon"
+          icon={this.getIconName(this.selectIconType)}
+        >
           {this.selectcaption}
         </gxg-button>
       );
