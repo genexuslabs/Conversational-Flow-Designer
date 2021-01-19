@@ -23,7 +23,7 @@ export class Select {
   }
 
   private getIconName(icon: string): string {
-    if (icon == "") return "gemini-tools/add";
+    if (!icon) return "gemini-tools/add";
 
     if (icon == "DataProvider") icon = "data-provider";
     else if (icon == "SDPanel") icon = "panel-for-sd";
