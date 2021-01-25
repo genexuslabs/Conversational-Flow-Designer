@@ -209,7 +209,6 @@ export class ConversationalDesginer {
           <gxg-accordion-item
             itemId={key}
             itemTitle={key}
-            padding="l"
             onDragOver={event => this.allowDropOverAccordion(event)}
             editableTitle
           >

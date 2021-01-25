@@ -311,15 +311,14 @@ export class Response {
               : "Response " + (response.Index + 1)
           }
           mode="boxed"
-          padding="xs"
           itemId={response.Index + ""}
           onClick={() => this.triggerSelectResponse(response.Index)}
           onTitleChanged={event =>
             this.triggerChangeResponseName(event, response.Index)
           }
           editableTitle
+          itemSubtitle={this.renderResponseSubtitle(response)}
         >
-          <div slot="subtitle">{this.renderResponseSubtitle(response)}</div>
           <gxcf-button-delete
             onConfirmDelete={() => this.triggerDeleteResponse(response.Index)}
             confirmationTitle={this.componentLocale.deleteResponse}
@@ -369,7 +368,7 @@ export class Response {
 
   render() {
     return (
-      <gxg-accordion single-item-open mode="boxed" padding="m">
+      <gxg-accordion single-item-open mode="boxed">
         {this.renderResponses()}
       </gxg-accordion>
     );

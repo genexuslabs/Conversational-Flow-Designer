@@ -280,7 +280,6 @@ export class UserInput {
         mode="slim"
         itemTitle={this.componentLocale.conditionRequired}
         itemId={this.componentLocale.conditionRequired}
-        padding="xs"
         onAccordionTitleClicked={(event: CustomEvent) =>
           this.cancelBubble(event)
         }
@@ -298,7 +297,6 @@ export class UserInput {
           <gxg-toggle
             label="Clean Context Value"
             onClick={() => this.triggerCleantContextChangeValue(userInput)}
-            size="small"
             class="CleanContextToggle"
           />
           <gxcf-hint hintId={HintId.Required} />
@@ -446,18 +444,17 @@ export class UserInput {
         <gxg-accordion-item
           item-title={userInput.Variable}
           mode="boxed"
-          padding="xs"
           itemId={userInput.Variable}
           onAccordionTitleClicked={() =>
             this.triggerClickOnUserInputName(userInput)
           }
           onClick={() => this.triggerSelectUserInput(userInput)}
-        >
-          <div slot="subtitle">
-            {userInput.RequiredMessages.length > 0
+          itemSubtitle={
+            userInput.RequiredMessages.length > 0
               ? userInput.RequiredMessages[0]
-              : ""}
-          </div>
+              : ""
+          }
+        >
           <gxcf-button-delete
             onConfirmDelete={() => this.triggerDeleteUserInput(userInput)}
             confirmationTitle={this.componentLocale.deleteUserInput}
@@ -487,7 +484,6 @@ export class UserInput {
               </gxg-column>
             </gxg-columns>
             <gxg-toggle
-              size="small"
               label={
                 this.advanced
                   ? this.componentLocale.advancedModeOn
@@ -497,7 +493,7 @@ export class UserInput {
               on={this.advanced}
               class="ToggleColor"
             />
-            <gxg-accordion mode="slim" padding="s">
+            <gxg-accordion mode="slim">
               {this.advanced
                 ? this.renderAdvancedMode(userInput)
                 : this.renderBasicMode(userInput)}
@@ -511,23 +507,9 @@ export class UserInput {
 
   render() {
     return (
-      <gxg-accordion single-item-open mode="boxed" padding="m">
+      <gxg-accordion single-item-open mode="boxed">
         {this.renderUserInputs()}
       </gxg-accordion>
     );
   }
 }
-/*
-<div class="Entity">
-            <span class="gxg-title-03">Entity: </span>
-            <input
-              type="text"
-              placeholder={this.componentLocale.noneEntity}
-              class="EntityInput gxg-text"
-              onChange={event =>
-                this.triggerSetUserInputEntity(event, userInput)
-              }
-              value={userInput.Entity}
-            />
-          </div>
-*/

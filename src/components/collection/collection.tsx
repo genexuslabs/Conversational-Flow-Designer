@@ -101,16 +101,13 @@ export class Collection {
 
   render() {
     return (
-      <gxg-accordion
-        mode={this.mode}
-        padding={this.mode == "minimal" ? "xs" : "m"}
-      >
+      <gxg-accordion mode={this.mode}>
         <gxg-accordion-item
           mode={this.mode}
           itemTitle={`${this.collectionHeader} (${this.collectionLength})`}
           itemId="triggers"
+          itemSubtitle={this.collectionSummary}
         >
-          <gxg-text slot="subtitle">{this.collectionSummary}</gxg-text>
           <gxg-spacer-layout orientation="vertical" space="xs">
             <gxg-scroll maxHeight="20vh">
               <gxg-spacer-layout
