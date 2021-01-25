@@ -25,14 +25,6 @@ export class Hint {
     this.hintDescription = await Locale.getHint(this.hintId);
   }
 
-  componentDidRender() {
-    this.setDisplayNone();
-  }
-
-  setDisplayNone() {
-    this.element.shadowRoot.querySelector("gxg-modal").style.display = "none";
-  }
-
   hintIcon(): HTMLElement {
     return (
       <gxg-icon
