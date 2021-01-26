@@ -20,7 +20,7 @@
     "pushWithTags": "git push --follow-tags"
   },
   "devDependencies": {
-    "@genexus/gemini": "0.1.198",
+    "@genexus/gemini": "0.1.200",
     "@stencil/core": "^1.17.4",
     "@stencil/router": "^1.0.1",
     "@stencil/sass": "^1.4.1",
