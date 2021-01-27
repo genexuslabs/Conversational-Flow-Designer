@@ -1,5 +1,4 @@
 import { Component, h, Prop, Event, EventEmitter } from "@stencil/core";
-import "@genexus/gemini";
 
 @Component({
   tag: "gxcf-button-delete",
