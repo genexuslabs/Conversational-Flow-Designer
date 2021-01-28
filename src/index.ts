@@ -1,3 +1,3 @@
 import "@genexus/gemini";
-export { Components } from "./components";
-export { GXCFModel } from "./components/common/model";
+export type { Components, JSX } from "./components";
+export type { GXCFModel } from "./components/common/model";

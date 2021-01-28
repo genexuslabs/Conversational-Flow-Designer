@@ -20,13 +20,13 @@
     "pushWithTags": "git push --follow-tags"
   },
   "peerDependencies": {
-    "@genexus/gemini": "^0.1.200"
+    "@genexus/gemini": "0.1.201"
   },
   "devDependencies": {
-    "@genexus/gemini": "^0.1.200",
-    "@stencil/core": "1.8.8",
+    "@genexus/gemini": "^0.1.201",
+    "@stencil/core": "1.17.4",
     "@stencil/router": "^1.0.1",
-    "@stencil/sass": "1.1.1",
+    "@stencil/sass": "1.4.1",
     "@types/jest": "^24.9.1",
     "@typescript-eslint/eslint-plugin": "^2.34.0",
     "@typescript-eslint/parser": "^2.34.0",
@@ -36,7 +36,7 @@
     "eslint-plugin-prettier": "^3.3.1",
     "husky": "^3.1.0",
     "lint-staged": "^9.5.0",
-    "prettier": "^1.19.1",
+    "prettier": "^2.2.1",
     "workbox-build": "4.3.1"
   },
   "repository": {
