@@ -1,6 +1,6 @@
 {
   "name": "@genexus/conversational-flows-designer",
-  "version": "17.0.60",
+  "version": "17.0.61",
   "description": "Conversational Flows Designer",
   "module": "dist/index.mjs",
   "main": "dist/index.js",
