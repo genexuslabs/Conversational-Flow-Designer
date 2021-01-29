@@ -9,7 +9,10 @@ export const config: Config = {
     },
     {
       type: "www",
-      serviceWorker: null
+      serviceWorker: null,
+      copy: [
+        { src: "../node_modules/@genexus/gemini/dist/gemini", dest: "build" }
+      ]
     }
   ],
   plugins: [
