@@ -25,30 +25,14 @@ export class Hint {
     this.hintDescription = await Locale.getHint(this.hintId);
   }
 
-  hintIcon(): HTMLElement {
+  render() {
     return (
-      <gxg-icon
-        size="small"
-        type="gemini-tools/notice"
-        color="primary"
-        onClick={() => this.handleShowHint()}
-        style={{ verticalAlign: "middle", display: "inline-block" }}
+      <gxg-moder-info
+        more-info-label={this.componentLocale.more}
+        target="_blank"
+        url={PropertiesDefinition.GetURL(this.hintId)}
+        label={this.hintDescription}
       />
     );
-  }
-
-  render() {
-    return [
-      this.hintIcon(),
-      <gxg-modal modalTitle={PropertiesDefinition.GetTitle(this.hintId)}>
-        <gxg-text>{this.hintDescription}</gxg-text>
-        <gxg-text
-          type="text-link"
-          href={PropertiesDefinition.GetURL(this.hintId)}
-        >
-          {this.componentLocale.more}
-        </gxg-text>
-      </gxg-modal>
-    ];
   }
 }
