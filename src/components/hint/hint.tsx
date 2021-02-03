@@ -27,11 +27,12 @@ export class Hint {
 
   render() {
     return (
-      <gxg-moder-info
+      <gxg-more-info
         more-info-label={this.componentLocale.more}
         target="_blank"
         url={PropertiesDefinition.GetURL(this.hintId)}
         label={this.hintDescription}
+        position="right"
       />
     );
   }
