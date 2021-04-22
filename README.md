@@ -1,12 +1,10 @@
 # Conversational-Flows-Designer
 
-[![Conversational Flows Designer - Build and publish](https://github.com/genexuslabs/Conversational-Flow-Designer/workflows/Conversational%20Flows%20Designer%20-%20Build%20and%20publish/badge.svg)](https://github.com/genexuslabs/Conversational-Flow-Designer/actions?query=workflow%3A%22Conversational+Flows+Designer+-+Build+and+publish%22)
+:warning: This repo is not longer under development. This code is part of the conversational editor developed for first upgrades of GeneXus 17 version.
 
-[![CircleCI](https://circleci.com/gh/genexuslabs/Conversational-Flow-Designer.svg?style=svg&circle-token=452462b95f2bb84d7362b23443524c8cefb978d5)](https://circleci.com/gh/genexuslabs/Conversational-Flow-Designer)
+## Description
 
-A conversational flows designer for GeneXus IDEs (GeneXus M and GeneXus for Windows).
-
-A preview is available here: https://gx-chatbot-editor.netlify.com/
+A conversational flows designer for GeneXus development environments, used to define a Chatbot object.
 
 ## Getting Started
 
